@@ -25,7 +25,7 @@
     <script>
         //btn_login click
         $("#btn_login").click(function () {
-            let url = '';
+            let url = '{{route('post_login_data')}}';
             let username = $("#username").val();
             let password = $("#password").val();
             $.ajax({
@@ -37,26 +37,40 @@
                     password: password,
                 },
                 success: function (res) {
-                    if (res === 'wrong') {
-                        Swal.fire({
-                            icon: 'error',
-                            title: '帳號或密碼錯誤',
-                            text: '請重新輸入帳密',
-                            confirmButtonColor: '#8CD4F5'
-                        })
-                    }
+                    if (res === 'wrong') wrong();
+                    if (res === 'success') success();
                 },
                 error: function (res) {
                     console.log(res);
-                    Swal.fire({
-                        icon: 'warning',
-                        title: '連線失敗!!',
-                        text: '若仍無法連線請聯絡系統管理員',
-                        confirmButtonColor: '#8CD4F5'
-                    })
+                    failed();
                 }
             })
         })
+        function success(){
+            Swal.fire({
+                icon: 'success',
+                title: '登入成功',
+                text: '按下按鈕跳轉頁面',
+                confirmButtonColor: '#8CD4F5'
+            })
+        }
 
+        function wrong() {
+            Swal.fire({
+                icon: 'error',
+                title: '帳號或密碼錯誤',
+                text: '請重新輸入帳密',
+                confirmButtonColor: '#8CD4F5'
+            })
+        }
+
+        function failed() {
+            Swal.fire({
+                icon: 'warning',
+                title: '連線失敗!!',
+                text: '若仍無法連線請聯絡系統管理員',
+                confirmButtonColor: '#8CD4F5'
+            })
+        }
     </script>
 @endsection
