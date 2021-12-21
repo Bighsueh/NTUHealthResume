@@ -14,7 +14,7 @@ class CreatePatitentsTable extends Migration
     public function up()
     {
         Schema::create('patitents', function (Blueprint $table) {
-            $table->id();
+            $table->id('patitents_id');
             $table->string('patitents_name');
             $table->string('patitents_access_token');
             $table->timestamps();
