@@ -50,9 +50,10 @@
             Swal.fire({
                 icon: 'success',
                 title: '登入成功',
-                text: '按下按鈕跳轉頁面',
+                text: '即將跳轉頁面',
                 confirmButtonColor: '#8CD4F5'
             })
+            window.location.replace("{{route('menu')}}");
         }
 
         function wrong() {
