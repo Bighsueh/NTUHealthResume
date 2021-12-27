@@ -17,7 +17,6 @@
     <link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet" type="text/css">
 
 </head>
-<body class="bg-gradient-to-r from-blue-300 to-green-300">
+
     @yield('content')
-</body>
 </html>
