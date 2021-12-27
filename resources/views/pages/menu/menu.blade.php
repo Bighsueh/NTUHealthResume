@@ -19,7 +19,8 @@
             </a>
         </div>
         <div class="w-full overflow-x-auto flex-1">
-            <a class="group block  max-w-xs mr-6 ml-6 rounded-lg p-6 bg-whitering-1 ring-gray-900/5 shadow-lg space-y-3 hover:bg-sky-500 hover:ring-sky-500">
+            <a class="group block  max-w-xs mr-6 ml-6 rounded-lg p-6 bg-whitering-1 ring-gray-900/5 shadow-lg space-y-3 hover:bg-sky-500 hover:ring-sky-500"
+               href="{{Route('get_setting_patitent')}}">
                 <div class="flex items-center space-x-3">
                     <h3 class="text-gray-900 group-hover:text-white text-sm font-semibold text-3xl">病患管理</h3>
                 </div>
@@ -27,7 +28,8 @@
             </a>
         </div>
         <div class="w-full overflow-x-auto flex-1">
-            <a class="group block  max-w-xs mr-6 ml-6 rounded-lg p-6 bg-whitering-1 ring-gray-900/5 shadow-lg space-y-3 hover:bg-sky-500 hover:ring-sky-500">
+            <a class="group block  max-w-xs mr-6 ml-6 rounded-lg p-6 bg-whitering-1 ring-gray-900/5 shadow-lg space-y-3 hover:bg-sky-500 hover:ring-sky-500"
+               href="{{Route('get_setting_employee')}}">
                 <div class="flex items-center space-x-3">
                     <h3 class="text-gray-900 group-hover:text-white text-sm font-semibold text-3xl">員工管理</h3>
                 </div>
