@@ -1,5 +1,4 @@
 @extends('layouts.main.login')
-@include('layouts.navbar.drive')
 @section('content')
     <body class="bg-gray-300">
 
