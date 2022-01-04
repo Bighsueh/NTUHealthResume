@@ -20,7 +20,10 @@
 
 </head>
 <body class="">
-@include('layouts.navbar.menu')
-@yield('content')
+
+<div class="relative min-h-screen md:flex">
+    @include('layouts.navbar.sidebar')
+    @yield('content')
+</div>
 </body>
 </html>
