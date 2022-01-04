@@ -35,11 +35,22 @@
     * patitent_replies_text 回饋單內容  
     * patitent_replies_title 回饋單標題  
 
- 4.  doctor_replies 醫師回饋單  
+ 4. doctor_replies 醫師回饋單  
     * doctor_replies_id 醫師回饋單id    
     * doctor_replies_employee_id 醫師回饋單員工id  
     * doctor_replies_medicine_description 藥物詳述  
     * doctor_replies_pharmacist_reply 藥師回覆內容  
+    
+ 5. task_schedule 任務排成
+    * schedule_id 任務id
+    * patitent_id 病患id
+    * submit_by 上傳者id
+    * task_content 任務內容
+    
+ 6. task_list 任務類型列表
+    * task_id 任務id
+    * task_content 任務內容
+    * task_order 任務順序
 
 ## Controller
 1. LoginController 登入相關功能
