@@ -1,9 +1,9 @@
 @extends('layouts.main.menu')
 @section('content')
-{{--    @include('layouts.main.toolbar')--}}
     <!-- content -->
     <div class="flex-1 p-10 text-2xl font-bold">
-        main page
+        @include('pages.menu.statusBar')
+{{--        main page--}}
         <section class="container mx-auto p-6 font-mono">
             <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
                 <div class="w-full overflow-x-auto">
