@@ -15,7 +15,9 @@
     1. employees 員工列表   
     2. patitents 病患列表   
     3. patitent_replies 病患回饋單   
-    4. doctor_replies 醫師回饋單   
+    4. doctor_replies 醫師回饋單
+    5. task_schedule 任務排程
+    6. task_list 任務類型列表   
  
  1. employees 員工列表  
     * employees_id 員工id  
@@ -41,7 +43,7 @@
     * doctor_replies_medicine_description 藥物詳述  
     * doctor_replies_pharmacist_reply 藥師回覆內容  
     
- 5. task_schedule 任務排成
+ 5. task_schedule 任務排程
     * schedule_id 任務id
     * patitent_id 病患id
     * submit_by 上傳者id
