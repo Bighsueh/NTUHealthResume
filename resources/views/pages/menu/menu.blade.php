@@ -1,40 +1,44 @@
 @extends('layouts.main.menu')
 @section('content')
     <!-- content -->
-    <div class="flex-1 p-10 text-2xl font-bold">
-        @include('pages.menu.statusBar')
-{{--        main page--}}
-        <section class="container mx-auto p-6 font-mono">
-            <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
-                <div class="w-full overflow-x-auto">
-                    <table class="w-full">
-                        <thead>
-                        <tr class="text-md font-semibold tracking-wide text-left bg-gray-800 uppercase border-b border-gray-600">
-                            <th class="px-4 py-3 text-gray-100">姓名</th>
-                            <th class="px-4 py-3 text-gray-100">年齡</th>
-                            <th class="px-4 py-3 text-gray-100">住址</th>
-                            <th class="px-4 py-3 text-gray-100">功能</th>
-                        </tr>
-                        </thead>
-                        <tbody class="bg-white">
-                        <tr class="text-gray-700 items-center">
-                            <td class="px-4 py-3 border text-2xl">
-                                王小明
-                            </td>
-                            <td class="px-4 py-3 text-ms font-semi border text-2xl">22</td>
-                            <td class="px-4 py-3 border text-2xl">
-                                雲林
-                            </td>
-                            <td class="px-4 py-3 text-xs border">
-                                <button class="btn btn-outline-dark">123</button>
-                            </td>
-                        </tr>
-
-                        </tbody>
-                    </table>
-                </div>
+    <div class="w-screen flex-1">
+        <div class="h-32 p-4 bg-Slate-50 text-center">
+            <!-- <div class="bg-red-500 h-full"> -->
+            <div class="h-full">
+                <form class="w-full">
+                    <div class="flex items-center border-b border-teal-700 py-2 mx-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-3 h-6 w-6 text-gray-7700" fill="none" viewBox="0 0 24 24"
+                             stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                        <input
+                            class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                            type="text" placeholder="請輸入欲查詢資料" >
+                        <button
+                            class="mx-4 flex-shrink-0 bg-teal-700 hover:bg-teal-500 border-teal-700 hover:border-teal-500 text-sm border-4 text-white py-1 px-2 rounded"
+                            type="button">
+                            <p class="mx-4">
+                                搜尋
+                            </p>
+                        </button>
+                        <!-- <button
+                            class="flex-shrink-0 border-transparent border-4 text-teal-500 hover:text-teal-800 text-sm py-1 px-2 rounded"
+                            type="button">
+                            Cancel
+                        </button> -->
+                    </div>
+                </form>
             </div>
-        </section>
+        </div>
+        <div class="max-h-screen h-screen  bg-gray-200 text-center">
+            <div class="p-2">
+                空白區域
+            </div>
+
+        </div>
+    </div>
+
     </div>
 
 
