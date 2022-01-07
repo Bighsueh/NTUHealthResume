@@ -16,17 +16,17 @@
 
 <!-- side bar -->
 
-<div class="sidebar bg-teal-900 text-blue-100 w-3/5 md:w-1/5 space-y-6 md:px-1 px-2  md:px-10 py-7 absolute inset-y-0 left-0 transform
+<div class="sidebar bg-teal-900 text-blue-100 w-3/5 md:w-1/5 space-y-6 md:px-1 px-2 md:px-10 py-7 absolute inset-y-0 left-0 transform
             -translate-x-full transition duration-200 ease-in-out md:relative md:translate-x-0">
     <!-- logo -->
-    <a class="text-white flex items-center space-x-2">
-                <span class="2xl:text-3xl lg:text-xl md:text-base sm:text-sm font-extrabold mx-2">
+    <a class="text-white flex items-center space-x-2 ml-6 md:ml-4">
+                <span class="2xl:text-3xl lg:text-xl md:text-base sm:text-sm font-extrabold">
                     台大健康履歷網
                 </span>
     </a>
 
     <!-- nav -->
-    <nav class="lg:ml-3 md:ml-">
+    <nav class="lg:ml-3 md:ml-0">
         <a href=""
            class="mb-3 flex block py-2 px-3 rounded lg:text-xl md:text-sm hover:bg-teal-700 hover:text-white">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 lg:mr-2 " fill="none" viewBox="0 0 24 24"
@@ -62,6 +62,13 @@
                       d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
             </svg>
             員工管理
+        </a>
+        <a href=""
+           class="mt-8 mb-3 flex block py-2 px-3 rounded lg:text-xl md:text-base hover:bg-teal-700 hover:text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            </svg>
+            登出
         </a>
     </nav>
 </div>
