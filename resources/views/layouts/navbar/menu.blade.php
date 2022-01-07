@@ -1,75 +1,41 @@
-<!-- This example requires Tailwind CSS v2.0+ -->
-<nav class="bg-gray-800">
-    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-        <div class="relative flex items-center justify-between h-16">
-            <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                <!-- Mobile menu button-->
-                <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
-                    <span class="sr-only">Open main menu</span>
-                    <!--
-                      Icon when menu is closed.
-
-                      Heroicon name: outline/menu
-
-                      Menu open: "hidden", Menu closed: "block"
-                    -->
-                    <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+<!-- content -->
+@include('layouts.navbar.sidebar')
+<div class="w-screen flex-1">
+    <div class="h-32 p-4 bg-Slate-50 text-center">
+        <!-- <div class="bg-red-500 h-full"> -->
+        <div class="h-full">
+            <form class="w-full">
+                <div class="flex items-center border-b border-teal-700 py-2 mx-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="ml-3 h-6 w-6 text-gray-7700" fill="none" viewBox="0 0 24 24"
+                         stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
-                    <!--
-                      Icon when menu is open.
-
-                      Heroicon name: outline/x
-
-                      Menu open: "block", Menu closed: "hidden"
-                    -->
-                    <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
-            <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-                <div class="flex-shrink-0 flex items-center text-gray-100 text-2xl ml-6">
-                    <i class="fas fa-address-card"></i>
+                    <input
+                        class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                        type="text" placeholder="請輸入欲查詢資料" >
+                    <button
+                        class="mx-4 flex-shrink-0 bg-teal-700 hover:bg-teal-500 border-teal-700 hover:border-teal-500 text-sm border-4 text-white py-1 px-2 rounded"
+                        type="button">
+                        <p class="mx-4">
+                            搜尋
+                        </p>
+                    </button>
+                    <!-- <button
+                        class="flex-shrink-0 border-transparent border-4 text-teal-500 hover:text-teal-800 text-sm py-1 px-2 rounded"
+                        type="button">
+                        Cancel
+                    </button> -->
                 </div>
-                <div class="hidden sm:block sm:ml-6 sm:items-center">
-                    <div class="flex space-x-4">
-                        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-{{--                        <a href="#" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page"></a>--}}
-
-{{--                        <p class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-3 rounded-md text-sm font-medium text-2xl">病患列表</p>--}}
-
-{{--                        <p class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-3 rounded-md text-sm font-medium text-2xl">新增病患</p>--}}
-
-{{--                        <p class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-3 rounded-md text-sm font-medium text-2xl">員工管理</p>--}}
-                    </div>
-                </div>
-            </div>
-            <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-{{--                <button type="button" class="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">--}}
-{{--                    <span class="sr-only">View notifications</span>--}}
-{{--                    <!-- Heroicon name: outline/bell -->--}}
-{{--                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">--}}
-{{--                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />--}}
-{{--                    </svg>--}}
-{{--                </button>--}}
-
-                </div>
-            </div>
+            </form>
         </div>
     </div>
+    <div class="max-h-screen h-screen  bg-gray-200 text-center">
+        <div class="p-2">
+            空白區域
+        </div>
 
-    <!-- Mobile menu, show/hide based on menu state. -->
-{{--    <div class="sm:hidden" id="mobile-menu">--}}
-{{--        <div class="px-2 pt-2 pb-3 space-y-1">--}}
-{{--            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->--}}
-{{--            <a href="#" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Dashboard</a>--}}
+    </div>
+</div>
 
-{{--            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Team</a>--}}
-
-{{--            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Projects</a>--}}
-
-{{--            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Calendar</a>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-</nav>
+</div>
