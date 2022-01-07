@@ -1,14 +1,14 @@
-
+<div class="relative min-h-screen md:flex">
     <!-- mobile menu bar -->
     <div class="bg-gray-800 text-gray-100 flex justify-between md:hidden">
         <!-- logo -->
-        <a href="" class="block p-4 text-white font-bold">better Dev</a>
+        <a href="" class="block p-4 text-white font-bold">台大健康履歷網</a>
 
         <!-- mobile menu button -->
         <button class="mobile-menu-button p-4 focus:outilne-none focus:bg-gray-700">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                  stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
             </svg>
         </button>
 
@@ -17,36 +17,56 @@
 
     <!-- side bar -->
 
-    <div class="sidebar bg-gradient-to-r from-zinc-700 to-zinc-800 text-blue-100 w-64 space-y-6 px-2 py-7 absolute inset-y-0 left-0 transform
-         -translate-x-full transition duration-200 ease-in-out md:relative md:translate-x-0">
+    <div class="sidebar bg-teal-900 text-blue-100 w-3/5 md:w-1/5 space-y-6 md:px-1 px-2  md:px-10 py-7 absolute inset-y-0 left-0 transform
+            -translate-x-full transition duration-200 ease-in-out md:relative md:translate-x-0">
         <!-- logo -->
-        <a class="text-white flex items-center space-x-2 py-2 px-2">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
-            </svg>
-            <span class="text-2xl font-extrabold">
+        <a class="text-white flex items-center space-x-2">
+                <span class="2xl:text-3xl lg:text-xl md:text-base sm:text-sm font-extrabold">
                     台大健康履歷網
                 </span>
         </a>
 
         <!-- nav -->
-        <nav>
-            <a href="" class="block py-2 px-4 rounded hover:bg-blue-700 hover:text-white">
-                連結1
+        <nav class="lg:ml-3 md:m-">
+            <a href=""
+               class="mb-3 flex block py-2 px-3 rounded lg:text-xl md:text-sm hover:bg-teal-700 hover:text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 lg:mr-2 " fill="none" viewBox="0 0 24 24"
+                     stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M9 13h6m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                新增病患回饋函
             </a>
-            <a href="" class="block py-2 px-4 rounded hover:bg-blue-700 hover:text-white">
-                連結2
+            <a href=""
+               class="mb-3 flex block py-2 px-3 rounded lg:text-xl md:text-sm hover:bg-teal-700 hover:text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 lg:mr-2 " fill="none" viewBox="0 0 24 24"
+                     stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                新增藥師回饋函
             </a>
-            <a href="" class="block py-2 px-4 rounded hover:bg-blue-700 hover:text-white">
-                連結3
+            <a href=""
+               class="mb-3 flex block py-2 px-3 rounded lg:text-xl md:text-sm hover:bg-teal-700 hover:text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 lg:mr-2 " fill="none" viewBox="0 0 24 24"
+                     stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+                病患管理
             </a>
-            <a href="" class="block py-2 px-4 rounded hover:bg-blue-700 hover:text-white">
-                連結4
+            <a href=""
+               class="mb-3 flex block py-2 px-3 rounded lg:text-xl md:text-base hover:bg-teal-700 hover:text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24"
+                     stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+                員工管理
             </a>
         </nav>
     </div>
-
-
+</div>
 <script>
     //grab everything we need
     const btn = document.querySelector('.mobile-menu-button');
