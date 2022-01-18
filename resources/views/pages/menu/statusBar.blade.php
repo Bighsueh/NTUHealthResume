@@ -1,38 +1,66 @@
-<section class="container mx-auto p-6 font-mono flex">
-    {{--        <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">--}}
-    <div class="w-full overflow-x-auto flex-1">
-        <a class="group block  max-w-xs mr-6 ml-6 rounded-lg p-6 bg-whitering-1 ring-gray-900/5 shadow-lg space-y-3 hover:bg-sky-500 hover:ring-sky-500">
-            <div class="flex items-center space-x-3">
-                <h3 class="text-gray-900 group-hover:text-white text-sm font-semibold text-3xl">新增病患回饋函</h3>
+<!--數據統計-->
+<div class="grid">
+    <p class="mx-4 my-2 justify-self-start font-bold text-xl">數據統計</p>
+    <div class="flex">
+        <!--數據欄位-->
+        <div class="rounded m-2 flex-1 bg-gray-50 p-4">
+            <div class="flex items-center mx-4 px-5 my-2">
+                <div class="flex grid">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="h-8 w-8 justify-self-end text-gray-600" fill="none" viewBox="0 0 24 24"
+                         stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
+                    </svg>
+                </div>
+                <div class="mx-4 px-5">
+                    <p class="text-xl text-gray-600">標題</p>
+                    <p class="text-2xl text-gray-900">數據</p>
+                </div>
             </div>
-            <p class="text-gray-500 group-hover:text-white text-sm">點擊此處新增</p>
-        </a>
-    </div>
-    <div class="w-full overflow-x-auto flex-1">
-        <a class="group block  max-w-xs mr-6 ml-6 rounded-lg p-6 bg-whitering-1 ring-gray-900/5 shadow-lg space-y-3 hover:bg-sky-500 hover:ring-sky-500">
-            <div class="flex items-center space-x-3">
-                <h3 class="text-gray-900 group-hover:text-white text-sm font-semibold text-3xl">新增藥師回饋函</h3>
+            <div class="mx-4 my-2 px-5">
+                <a href="" class="mt-2 text-green-700">查看資訊</a>
             </div>
-            <p class="text-gray-500 group-hover:text-white text-sm">點擊此處新增</p>
-        </a>
-    </div>
-    <div class="w-full overflow-x-auto flex-1">
-        <a class="group block  max-w-xs mr-6 ml-6 rounded-lg p-6 bg-whitering-1 ring-gray-900/5 shadow-lg space-y-3 hover:bg-sky-500 hover:ring-sky-500"
-           href="{{Route('get_setting_patitent')}}">
-            <div class="flex items-center space-x-3">
-                <h3 class="text-gray-900 group-hover:text-white text-sm font-semibold text-3xl">病患管理</h3>
+        </div>
+        <!--數據欄位-->
+        <div class="rounded m-2 flex-1 bg-gray-50 p-4">
+            <div class="flex items-center mx-4 px-5 my-2">
+                <div class="flex grid">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="h-8 w-8 justify-self-end text-gray-600" fill="none" viewBox="0 0 24 24"
+                         stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
+                    </svg>
+                </div>
+                <div class="mx-4 px-5">
+                    <p class="text-xl text-gray-600">標題</p>
+                    <p class="text-2xl text-gray-900">數據</p>
+                </div>
             </div>
-            <p class="text-gray-500 group-hover:text-white text-sm">點擊此處新增</p>
-        </a>
-    </div>
-    <div class="w-full overflow-x-auto flex-1">
-        <a class="group block  max-w-xs mr-6 ml-6 rounded-lg p-6 bg-whitering-1 ring-gray-900/5 shadow-lg space-y-3 hover:bg-sky-500 hover:ring-sky-500"
-           href="{{Route('get_setting_employee')}}">
-            <div class="flex items-center space-x-3">
-                <h3 class="text-gray-900 group-hover:text-white text-sm font-semibold text-3xl">員工管理</h3>
+            <div class="mx-4 my-2 px-5">
+                <a href="" class="mt-2 text-green-700">查看資訊</a>
             </div>
-            <p class="text-gray-500 group-hover:text-white text-sm">點擊此處新增</p>
-        </a>
+        </div>
+        <!--數據欄位-->
+        <div class="rounded m-2 flex-1 bg-gray-50 p-4">
+            <div class="flex items-center mx-4 px-5 my-2">
+                <div class="flex grid">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="h-8 w-8 justify-self-end text-gray-600" fill="none" viewBox="0 0 24 24"
+                         stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
+                    </svg>
+                </div>
+                <div class="mx-4 px-5">
+                    <p class="text-xl text-gray-600">標題</p>
+                    <p class="text-2xl text-gray-900">數據</p>
+                </div>
+            </div>
+            <div class="mx-4 my-2 px-5">
+                <a href="" class="mt-2 text-green-700">查看資訊</a>
+            </div>
+        </div>
     </div>
-    {{--        </div>--}}
-</section>
+</div>
