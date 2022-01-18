@@ -109,13 +109,13 @@
                                 A12345XXXX
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <a href="#"
+                                <a href="{{route('detail')}}"
                                    class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
                                     病患回饋單
                                 </a>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <a href="#"
+                                <a href="{{route('detail')}}"
                                    class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
                                     藥師回饋單
                                 </a>
@@ -135,13 +135,13 @@
                                 A22345XXXX
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <a href="#"
+                                <a href="{{route('detail')}}"
                                    class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
                                     病患回饋單
                                 </a>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <a href="#"
+                                <a href="{{route('detail')}}"
                                    class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
                                     藥師回饋單
                                 </a>
