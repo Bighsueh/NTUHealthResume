@@ -1,7 +1,7 @@
 <!-- mobile menu bar -->
 <div class="bg-gray-800 text-gray-100 flex justify-between md:hidden">
     <!-- logo -->
-    <a href="" class="block p-4 text-white font-bold">台大健康履歷網</a>
+    <a href="{{route('menu')}}" class="block p-4 text-white font-bold">台大健康履歷網</a>
 
     <!-- mobile menu button -->
     <button class="mobile-menu-button p-4 focus:outilne-none focus:bg-gray-700">
@@ -19,31 +19,31 @@
 <div class="sidebar bg-teal-900 text-blue-100 w-3/5 md:w-1/5 space-y-6 md:px-1 px-2 md:px-10 py-7 absolute inset-y-0 left-0 transform
             -translate-x-full transition duration-200 ease-in-out md:relative md:translate-x-0">
     <!-- logo -->
-    <a class="text-white flex items-center space-x-2 ml-6 md:ml-4">
+    <a class="text-white flex items-center space-x-2 ml-6 md:ml-4" href="{{route('menu')}}">
                 <span class="2xl:text-3xl lg:text-xl md:text-base sm:text-sm font-extrabold">
                     台大健康履歷網
                 </span>
     </a>
 
     <!-- nav -->
-    <nav class="lg:ml-3 md:ml-0">
-        <a href=""
-           class="mb-3 flex block py-2 px-3 rounded lg:text-xl md:text-sm hover:bg-teal-700 hover:text-white">
+    <nav class="lg:ml-3 md:ml-0 grid">
+        <!-- <a href=""
+            class="mb-3 flex block py-2 px-3 rounded lg:text-xl md:text-sm hover:bg-teal-700 hover:text-white">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 lg:mr-2 " fill="none" viewBox="0 0 24 24"
-                 stroke="currentColor">
+                stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M9 13h6m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    d="M9 13h6m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
             新增病患回饋函
-        </a>
-        <a href=""
+        </a> -->
+        <a href="{{route('feeback')}}"
            class="mb-3 flex block py-2 px-3 rounded lg:text-xl md:text-sm hover:bg-teal-700 hover:text-white">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 lg:mr-2 " fill="none" viewBox="0 0 24 24"
                  stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                       d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
-            新增藥師回饋函
+            回饋函管理
         </a>
         <a href=""
            class="mb-3 flex block py-2 px-3 rounded lg:text-xl md:text-sm hover:bg-teal-700 hover:text-white">
@@ -65,8 +65,10 @@
         </a>
         <a href=""
            class="mt-8 mb-3 flex block py-2 px-3 rounded lg:text-xl md:text-base hover:bg-teal-700 hover:text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24"
+                 stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
             </svg>
             登出
         </a>

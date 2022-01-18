@@ -28,6 +28,9 @@ Route::get('/setting/employee',[\App\Http\Controllers\EmployeeController::class,
 
 Route::get('/setting/patitent',[\App\Http\Controllers\PatitentController::class,'get_setting_patitent'])->name('get_setting_patitent');
 
+Route::get('/feeback', function () {
+    return view('pages.feeback.feeback');
+})->name('feeback');
 Route::get('/menu', function () {
     return view('pages.menu.menu');
 })->name('menu');
