@@ -144,6 +144,10 @@
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                    建立者
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
                                     查看內容
                                 </th>
                                 <th scope="col"
@@ -159,6 +163,9 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     2022/01/14 23:59
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    孔乙己
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <a href="#"
@@ -179,6 +186,9 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     2022/01/15 23:59
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    孔乙己
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <a href="#"
