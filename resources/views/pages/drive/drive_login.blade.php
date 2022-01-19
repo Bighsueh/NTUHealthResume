@@ -7,9 +7,9 @@
                 <h1 class="text-center font-mono text-gray-700 font-semibold">病患雲端系統</h1>
                 <form class="flex flex-col">
                     <input type="text" id="username" class="p-2 my-2 rounded
-                    border border-2 border-black" placeholder="帳號"/>
+                    border border-2" placeholder="帳號"/>
                     <input type="text" id="password" class="p-2 my-2 rounded
-                     border border-2 border-black" placeholder="密碼" required/>
+                     border border-2" placeholder="密碼" required/>
                     <button type="button" id="btn_login" class="outline outline-1
                      my-2 rounded bg-green-500 p-1 text-white">登入</button>
                 </form>
