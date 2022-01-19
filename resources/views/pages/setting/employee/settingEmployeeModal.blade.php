@@ -1,7 +1,7 @@
 
 
 <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
-     id="settingEmployeeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     id="settingEmployeeModal" tabindex="-1" aria-labelledby="settingEmployeeModal" aria-hidden="true">
     <div class="modal-dialog relative w-auto pointer-events-none">
         <div
             class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
@@ -68,13 +68,22 @@
                             <input value="藥師" class="border-teal-700 border-b py-1 px-2">
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                            <lable class="mx-2">
+                                部門
+                            </lable>
+                        </td>
+                        <td>
+                            <input value="神經部" class="border-teal-700 border-b py-1 px-2">
+                        </td>
+                    </tr>
                 </table>
             </div>
 
             <div
-                class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-center  border-t border-gray-200 rounded-b-md">
+                class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-center p-4 border-t border-gray-200 rounded-b-md">
                 <button class="mx-4 flex-shrink-0 bg-teal-700 hover:bg-blue-500 border-teal-700 hover:border-blue-500 text-sm border-4 text-white py-1 px-10 rounded" >修改</button>
-{{--                <button class="mx-4 flex-shrink-0 bg-teal-700 hover:bg-red-500 border-teal-700 hover:border-red-500 text-sm border-4 text-white py-1 px-6 rounded " data-bs-dismiss="modal">關閉</button>--}}
 
             </div>
         </div>
@@ -85,5 +94,4 @@
     function open_settingEmployeeModal(){
         $('#settingEmployeeModal').modal('show');
     }
-
 </script>
