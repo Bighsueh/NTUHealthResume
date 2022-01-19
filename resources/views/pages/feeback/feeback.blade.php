@@ -32,25 +32,25 @@
             <div class="flex justify-start">
                 <div class="flex">
                     <div class="mx-6 mt-4 flex items-end">
-                        <p class="text-3xl mb-2 font-bold" id="text-congratulations">早安，孔乙己 先生/女士</p>
-                        <div class="flex item-end mx-4 text-gray-400">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-4" fill="none"
-                                 viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                            </svg>
-                            <p id="text-department" class="mx-2">
-                                工作部門
-                            </p>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-4" fill="none"
-                                 viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
-                            <p id="text-position" class="mx-2">
-                                職稱
-                            </p>
-                        </div>
+                        <p class="text-3xl mb-2 font-bold">回饋單及用藥紀錄管理</p>
+{{--                        <div class="flex item-end mx-4 text-gray-400">--}}
+{{--                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-4" fill="none"--}}
+{{--                                 viewBox="0 0 24 24" stroke="currentColor">--}}
+{{--                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"--}}
+{{--                                      d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />--}}
+{{--                            </svg>--}}
+{{--                            <p id="text-department" class="mx-2">--}}
+{{--                                工作部門--}}
+{{--                            </p>--}}
+{{--                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-4" fill="none"--}}
+{{--                                 viewBox="0 0 24 24" stroke="currentColor">--}}
+{{--                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"--}}
+{{--                                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />--}}
+{{--                            </svg>--}}
+{{--                            <p id="text-position" class="mx-2">--}}
+{{--                                職稱--}}
+{{--                            </p>--}}
+{{--                        </div>--}}
                     </div>
                 </div>
             </div> <!-- search bar-->
@@ -100,6 +100,10 @@
                             </th>
                             <th scope="col"
                                 class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                用藥紀錄
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
                                 病患回饋單
                             </th>
                             <th scope="col"
@@ -121,6 +125,12 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 A12345XXXX
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <a href="{{route('detail')}}"
+                                   class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
+                                    用藥紀錄
+                                </a>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <a href="{{route('detail')}}"
@@ -147,6 +157,12 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 A22345XXXX
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <a href="{{route('detail')}}"
+                                   class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
+                                    用藥紀錄
+                                </a>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <a href="{{route('detail')}}"
