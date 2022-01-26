@@ -107,7 +107,7 @@
                     <!--功能欄位-->
                     <div class="rounded m-2 flex-1 bg-gray-50 p-4">
                         <div class="flex h-full items-center justify-center">
-                            <p class="text-xl mx-2">新增病患回饋函</p>
+                            <p class="text-xl mx-2">新增藥物資訊</p>
                             <a href="#"
                                class="mx-2 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
                                 點擊新增
@@ -121,7 +121,7 @@
 
             <div class="grid">
                 <div class="flex mx-2">
-                    <p id="" class="my-2 justify-self-start font-bold text-xl">病患回饋單</p>
+                    <p id="" class="my-2 justify-self-start font-bold text-xl">藥物資訊</p>
                     <p id="patitent_name" class="mx-2 my-2 justify-self-start font-bold text-xl">
                         病患A
                     </p>
@@ -130,7 +130,7 @@
 
                 <div class="flex">
                     <!--數據欄位-->
-                    <div class="rounded m-2 flex-1 bg-gray-50 p-4">
+                    <div class="rounded m-2 flex-1 bg-gray-50 p-4 overflow-auto overflow-scroll w-2">
                         <table class="divide-y divide-gray-200 min-w-full">
                             <thead class="bg-gray-50">
                             <tr>
@@ -140,19 +140,43 @@
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    建立時間
+                                    開方日期
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    建立者
+                                    處方醫院
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    查看內容
+                                    調劑醫院
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    下載/列印回饋單
+                                    適應症
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                    藥物總類
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                    藥品商品名稱
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                    藥品成分名稱
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                    詳細內容
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                    修改內容
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                    刪除內容
                                 </th>
                             </tr>
                             </thead>
@@ -165,18 +189,39 @@
                                     2022/01/14 23:59
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    孔乙己
+                                    台大
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    台大
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    適應症
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    藥物總類
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    藥品商品名稱
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    藥品成分名稱
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <a href="#"
                                        class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
-                                        查看內容
+                                        查看
                                     </a>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <a href="#"
                                        class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
-                                        下載/列印回饋單
+                                        修改
+                                    </a>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <a href="#"
+                                       class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
+                                        刪除
                                     </a>
                                 </td>
                             </tr>
@@ -185,21 +230,42 @@
                                     2
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    2022/01/15 23:59
+                                    2022/01/14 23:59
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    孔乙己
+                                    台大
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    台大
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    適應症
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    藥物總類
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    藥品商品名稱
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    藥品成分名稱
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <a href="#"
                                        class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
-                                        查看內容
+                                        查看
                                     </a>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <a href="#"
                                        class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
-                                        下載/列印回饋單
+                                        修改
+                                    </a>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <a href="#"
+                                       class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
+                                        刪除
                                     </a>
                                 </td>
                             </tr>
