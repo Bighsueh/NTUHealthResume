@@ -1,6 +1,7 @@
-<div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
+
+<div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto "
      id="settingPatitentModal" tabindex="-1" aria-labelledby="settingPatitentModal" aria-hidden="true">
-    <div class="modal-dialog relative w-auto pointer-events-none">
+    <div class="modal-dialog relative w-full pointer-events-none max-w-6xl">
         <div
             class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
             <div
@@ -15,78 +16,251 @@
                 </button>
             </div>
             <div class="px-12">
-                <table class="modal-body relative m-3 w-full">
-                    {{--                    <tr>--}}
-                    {{--                        <td>--}}
-                    {{--                            <lable class="mx-2">--}}
-                    {{--                                ID--}}
-                    {{--                            </lable>--}}
-                    {{--                        </td>--}}
-                    {{--                        <td>--}}
-                    {{--                            <input value="1" class="border-teal-700 border-b py-1 px-2">--}}
-                    {{--                        </td>--}}
-                    {{--                    </tr>--}}
-                    <tr>
-                        <td>
-                            <lable class="mx-2">
-                                姓名
-                            </lable>
-                        </td>
-                        <td>
-                            <input value="幼幼" class="border-teal-700 border-b py-1 px-2">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <lable class="mx-2">
-                                性別
-                            </lable>
-                        </td>
-                        <td>
-                            <input value="123" class="border-teal-700 border-b py-1 px-2">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <lable class="mx-2">
-                                電話
-                            </lable>
-                        </td>
-                        <td>
-                            <input value="0912345678" class="border-teal-700 border-b py-1 px-2">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <lable class="mx-2">
-                                身分證字號
-                            </lable>
-                        </td>
-                        <td>
-                            <input value="C123456789" class="border-teal-700 border-b py-1 px-2">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <lable class="mx-2">
-                                生日
-                            </lable>
-                        </td>
-                        <td>
-                            <input value="111-01-20" class="border-teal-700 border-b py-1 px-2">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <lable class="mx-2">
-                                地址
-                            </lable>
-                        </td>
-                        <td>
-                            <input value="雲林縣虎尾鎮長春路123巷86號" class="border-teal-700 border-b py-1 px-2">
-                        </td>
-                    </tr>
-                </table>
+                <div class="modal-body relative m-3 w-full ">
+
+                    <div class="flex px-1 py-1">
+                            <p class="mx-4 my-2 justify-self-start font-bold text-xl">基本資訊</p>
+                        <div class="flex-1">
+                            <div class="flex">
+                                <div class="flex-1 flex justify-between">
+                                    <div>
+                                        <label class="mx-6">姓名</label>
+                                    </div>
+                                    <div>
+                                        <input value="幼幼" class="border-teal-700 border-b py-1 px-20">
+                                    </div>
+                                </div>
+                                <div class="flex-1 flex justify-between">
+                                    <div>
+                                        <label class="mx-6">性別</label>
+                                    </div>
+                                    <div>
+                                        <input value="男" class="border-teal-700 border-b py-1 px-20">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex ">
+                                <div class="flex-1 flex justify-between">
+                                    <div>
+                                        <label class="mx-6">電話</label>
+                                    </div>
+                                    <div>
+                                        <input value="0912345678" class="border-teal-700 border-b py-1 px-20">
+                                    </div>
+                                </div>
+                                <div class="flex-1 flex justify-between">
+                                    <div>
+                                        <label class="mx-6">身分證字號</label>
+                                    </div>
+                                    <div>
+                                        <input value="C123456789" class=" border-teal-700 border-b py-1 px-20">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="flex-1 flex justify-between">
+                                    <div>
+                                        <label class="mx-6">生日</label>
+                                    </div>
+                                    <div>
+                                        <input value="110-01-20" class="border-teal-700 border-b py-1 px-20">
+                                    </div>
+                                </div>
+                                <div class="flex-1 flex justify-between">
+                                    <div>
+                                        <label class="mx-6">地址</label>
+                                    </div>
+                                    <div>
+                                        <input value="雲林縣虎尾鎮長春路123巷86號" class=" border-teal-700 border-b py-1 px-20">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+{{--                            <table class="">--}}
+{{--                                <tr>--}}
+{{--                                    <td>--}}
+{{--                                        <lable class="mx-2">--}}
+{{--                                            姓名--}}
+{{--                                        </lable>--}}
+{{--                                    </td>--}}
+{{--                                    <td>--}}
+{{--                                        <input value="幼幼" class="border-teal-700 border-b py-1 px-16">--}}
+{{--                                    </td>--}}
+{{--                                </tr>--}}
+{{--                                <tr>--}}
+{{--                                    <td>--}}
+{{--                                        <lable class="mx-2">--}}
+{{--                                            性別--}}
+{{--                                        </lable>--}}
+{{--                                    </td>--}}
+{{--                                    <td>--}}
+{{--                                        <input value="123" class="border-teal-700 border-b py-1 px-16">--}}
+{{--                                    </td>--}}
+{{--                                </tr>--}}
+{{--                                <tr>--}}
+{{--                                    <td>--}}
+{{--                                        <lable class="mx-2">--}}
+{{--                                            電話--}}
+{{--                                        </lable>--}}
+{{--                                    </td>--}}
+{{--                                    <td>--}}
+{{--                                        <input value="0912345678" class="border-teal-700 border-b py-1 px-16">--}}
+{{--                                    </td>--}}
+{{--                                </tr>--}}
+{{--                                <tr>--}}
+{{--                                    <td>--}}
+{{--                                        <lable class="mx-2">--}}
+{{--                                            身分證字號--}}
+{{--                                        </lable>--}}
+{{--                                    </td>--}}
+{{--                                    <td>--}}
+{{--                                        <input value="C123456789" class="border-teal-700 border-b py-1 px-16">--}}
+{{--                                    </td>--}}
+{{--                                </tr>--}}
+{{--                                <tr>--}}
+{{--                                    <td>--}}
+{{--                                        <lable class="mx-2">--}}
+{{--                                            生日--}}
+{{--                                        </lable>--}}
+{{--                                    </td>--}}
+{{--                                    <td>--}}
+{{--                                        <input value="111-01-20" class="border-teal-700 border-b py-1 px-16">--}}
+{{--                                    </td>--}}
+{{--                                </tr>--}}
+{{--                                <tr>--}}
+{{--                                    <td>--}}
+{{--                                        <lable class="mx-2">--}}
+{{--                                            地址--}}
+{{--                                        </lable>--}}
+{{--                                    </td>--}}
+{{--                                    <td>--}}
+{{--                                        <input value="雲林縣虎尾鎮長春路123巷86號" class="border-teal-700 border-b py-1 px-16">--}}
+{{--                                    </td>--}}
+{{--                                </tr>--}}
+{{--                            </table>--}}
+
+
+                    </div>
+                    <div class="flex px-1 py-1">
+                            <p class="mx-4 my-2 justify-self-start font-bold text-xl">社篩資訊</p>
+                            <table class="">
+                                <tr>
+                                    <td>
+                                        <lable class="mx-2">
+                                            社篩診斷
+                                        </lable>
+                                    </td>
+                                    <td>
+                                        <input value="" class="border-teal-700 border-b py-1 px-20">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <lable class="mx-2">
+                                            手術史
+                                        </lable>
+                                    </td>
+                                    <td>
+                                        <input value="" class="border-teal-700 border-b py-1 px-20">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <lable class="mx-2">
+                                            血紅素
+                                        </lable>
+                                    </td>
+                                    <td>
+                                        <input value="" class="border-teal-700 border-b py-1 px-20">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <lable class="mx-2">
+                                            白蛋白
+                                        </lable>
+                                    </td>
+                                    <td>
+                                        <input value="" class="border-teal-700 border-b py-1 px-20">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <lable class="mx-2">
+                                            肝功能指數
+                                        </lable>
+                                    </td>
+                                    <td>
+                                        <input value="" class="border-teal-700 border-b py-1 px-20">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <lable class="mx-2">
+                                            腎功能指數
+                                        </lable>
+                                    </td>
+                                    <td>
+                                        <input value="" class="border-teal-700 border-b py-1 px-20">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <lable class="mx-2">
+                                            血糖
+                                        </lable>
+                                    </td>
+                                    <td>
+                                        <input value="" class="border-teal-700 border-b py-1 px-20">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <lable class="mx-2">
+                                            總膽固醇
+                                        </lable>
+                                    </td>
+                                    <td>
+                                        <input value="" class="border-teal-700 border-b py-1 px-20">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <lable class="mx-2">
+                                            低密度膽固醇
+                                        </lable>
+                                    </td>
+                                    <td>
+                                        <input value="" class="border-teal-700 border-b py-1 px-20">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <lable class="mx-2">
+                                            尿酸
+                                        </lable>
+                                    </td>
+                                    <td>
+                                        <input value="" class="border-teal-700 border-b py-1 px-20">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <lable class="mx-2">
+                                            跌倒史
+                                        </lable>
+                                    </td>
+                                    <td>
+                                        <input value="" class="border-teal-700 border-b py-1 px-20">
+                                    </td>
+                                </tr>
+                            </table>
+                    </div>
+
+                </div>
+
             </div>
 
             <div class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-center p-4 border-t border-gray-200 rounded-b-md">
