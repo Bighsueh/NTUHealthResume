@@ -36,7 +36,9 @@ Route::get('/setting/patient',[\App\Http\Controllers\PatientController::class,'g
 
 Route::get('/setting/nutritionManagement',[\App\Http\Controllers\NutritionManagementController::class,'get_setting_nutritionManagement'])->name('get_setting_nutritionManagement');
 
-Route::get('/dietRecord',[\App\Http\Controllers\NutritionManagementController::class,'get_setting_nutritionManagement'])->name('dietRecord');
+Route::get('/dietRecord',function (){
+    return view('pages.setting.nutritionManagement.dietRecord');
+})->name('dietRecord');
 
 Route::get('/nutritionistComment',[\App\Http\Controllers\NutritionManagementController::class,'get_setting_nutritionManagement'])->name('nutritionistComment');
 
