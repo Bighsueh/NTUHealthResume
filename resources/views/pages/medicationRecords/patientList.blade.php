@@ -102,23 +102,17 @@
                                 class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
                                 用藥紀錄
                             </th>
-                            <th scope="col"
-                                class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                病患回饋單
-                            </th>
-                            <th scope="col"
-                                class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                藥師回饋單
-                            </th>
+
                         </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200">
+                        @foreach($patient_list as $row)
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                1
+                                {{$row->patients_id}}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                病患A
+                                {{$row->patients_name}}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 男生
@@ -127,56 +121,14 @@
                                 A12345XXXX
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <a href="{{route('detail')}}"
+                                <a href="{{route('get_medication_record_and_reply_management_patient_detail_page',['patient_id' => $row->patients_id])}}"
                                    class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
                                     用藥紀錄
                                 </a>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <a href="{{route('detail')}}"
-                                   class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
-                                    病患回饋單
-                                </a>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <a href="{{route('detail')}}"
-                                   class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
-                                    藥師回饋單
-                                </a>
-                            </td>
+
                         </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                2
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                病患B
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                女生
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                A22345XXXX
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <a href="{{route('detail')}}"
-                                   class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
-                                    用藥紀錄
-                                </a>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <a href="{{route('detail')}}"
-                                   class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
-                                    病患回饋單
-                                </a>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <a href="{{route('detail')}}"
-                                   class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
-                                    藥師回饋單
-                                </a>
-                            </td>
-                        </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
