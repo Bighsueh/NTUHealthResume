@@ -28,6 +28,12 @@ Route::get('/setting/employee',[\App\Http\Controllers\EmployeeController::class,
 
 Route::get('/setting/patient',[\App\Http\Controllers\PatientController::class,'get_setting_patient'])->name('get_setting_patient');
 
+Route::get('/setting/nutritionManagement',[\App\Http\Controllers\NutritionManagementController::class,'get_setting_nutritionManagement'])->name('get_setting_nutritionManagement');
+
+Route::get('/dietRecord',[\App\Http\Controllers\NutritionManagementController::class,'get_setting_nutritionManagement'])->name('dietRecord');
+
+Route::get('/nutritionistComment',[\App\Http\Controllers\NutritionManagementController::class,'get_setting_nutritionManagement'])->name('nutritionistComment');
+
 Route::get('/feeback_detail', function () {
     return view('pages.feeback.detail');
 })->name('detail');
