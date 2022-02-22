@@ -1,6 +1,6 @@
 
 <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto "
-     id="settingPatitentModal" tabindex="-1" aria-labelledby="settingPatitentModal" aria-hidden="true">
+     id="settingPatientModal" tabindex="-1" aria-labelledby="settingPatientModal" aria-hidden="true">
     <div class="modal-dialog relative w-full pointer-events-none max-w-6xl">
         <div
             class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
@@ -273,8 +273,8 @@
 </div>
 
 <script>
-    function open_settingPatitentModal(){
-        $('#settingPatitentModal').modal('show');
+    function open_settingPatientModal(){
+        $('#settingPatientModal').modal('show');
     }
 
 </script>

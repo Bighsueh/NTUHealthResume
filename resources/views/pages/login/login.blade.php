@@ -3,7 +3,7 @@
     <body class="bg-gradient-to-r from-blue-300 to-green-300">
     <div class="flex flex-col items-center justify-center min-h-screen">
         <div class="bg-gradient-to-r from-green-300 to-blue-300 w-full sm:w-3/4 max-w-lg p-12 pb-6 shadow-2xl rounded">
-            <div class="text-white pb-4 text-3xl font-semibold">台大健康履歷網</div>
+            <div class="text-white pb-4 text-3xl font-semibold">台大履歷網</div>
             <input
                 class="block text-gray-700 p-1 m-4 ml-0 w-11/12 rounded text-lg font-normal placeholder-gray-500"
                 id="username"

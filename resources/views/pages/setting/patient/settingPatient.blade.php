@@ -105,7 +105,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <button type="button" class="bg-teal-700
                                      hover:bg-teal-500 border-teal-700 hover:border-teal-500 text-sm
-                                     border-4 text-white py-1 px-3 rounded" id="btn_employee" data-bs-toggle="modal" data-bs-target="#settingPatitentModal">修改</button>                                </td>
+                                     border-4 text-white py-1 px-3 rounded" id="btn_employee" data-bs-toggle="modal" data-bs-target="#settingPatientModal">修改</button>                                </td>
                             </tr>
 
                             </tbody>
@@ -120,7 +120,7 @@
     </div>
 
 
-    @include('pages.setting.patitent.settingPatitentModal')
+    @include('pages.setting.patient.settingPatientModal')
 
     <script>
 

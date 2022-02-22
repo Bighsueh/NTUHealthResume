@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class PatitentController extends Controller
 {
-    function get_setting_patitent(){
-        return view('pages.setting.patitent.settingPatitent');
+    function get_setting_patient(){
+        return view('pages.setting.patient.settingPatient');
     }
 }

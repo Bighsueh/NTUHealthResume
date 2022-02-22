@@ -26,7 +26,7 @@ Route::get('drive', [DriveController::class, 'get_drive_page'])->name('get_drive
 
 Route::get('/setting/employee',[\App\Http\Controllers\EmployeeController::class,'get_setting_employee'])->name('get_setting_employee');
 
-Route::get('/setting/patitent',[\App\Http\Controllers\PatitentController::class,'get_setting_patitent'])->name('get_setting_patitent');
+Route::get('/setting/patient',[\App\Http\Controllers\PatientController::class,'get_setting_patient'])->name('get_setting_patient');
 
 Route::get('/feeback_detail', function () {
     return view('pages.feeback.detail');

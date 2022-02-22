@@ -1,7 +1,7 @@
 <!-- mobile menu bar -->
 <div class="bg-gray-800 text-gray-100 flex justify-between md:hidden">
     <!-- logo -->
-    <a href="{{route('menu')}}" class="block p-4 text-white font-bold">台大健康履歷網</a>
+    <a href="{{route('menu')}}" class="block p-4 text-white font-bold">台大履歷網</a>
 
     <!-- mobile menu button -->
     <button class="mobile-menu-button p-4 focus:outilne-none focus:bg-gray-700">
@@ -21,7 +21,7 @@
     <!-- logo -->
     <a class="text-white flex items-center space-x-2 ml-6 md:ml-4" href="{{route('menu')}}">
                 <span class="2xl:text-3xl lg:text-xl md:text-base sm:text-sm font-extrabold">
-                    台大健康履歷網
+                    台大履歷網
                 </span>
     </a>
 
@@ -52,7 +52,7 @@
             </svg>
             回饋函及用藥紀錄
         </a>
-        <a href="{{route('get_setting_patitent')}}"
+        <a href="{{route('get_setting_patient')}}"
            class="mb-3 flex block py-2 px-3 rounded lg:text-xl md:text-sm hover:bg-teal-700 hover:text-white">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 lg:mr-2 " fill="none" viewBox="0 0 24 24"
                  stroke="currentColor">
