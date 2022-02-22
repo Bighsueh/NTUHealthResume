@@ -24,6 +24,10 @@ Route::get('/drive/login', [DriveController::class,'get_drive_login_page'])->nam
 Route::post('/drive/login', [DriveController::class,'post_drive_login_data'])->name('post_drive_login_data');
 Route::get('drive', [DriveController::class, 'get_drive_page'])->name('get_drive_page');
 
+//藥物紀錄及回饋函
+Route::get('/medication_record', [MedicationRecordController::class, 'get_medication_record_page'])->name('get_medication_record_page');
+
+
 Route::get('/setting/employee',[\App\Http\Controllers\EmployeeController::class,'get_setting_employee'])->name('get_setting_employee');
 
 Route::get('/setting/patient',[\App\Http\Controllers\PatientController::class,'get_setting_patient'])->name('get_setting_patient');
