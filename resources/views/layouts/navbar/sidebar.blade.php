@@ -36,14 +36,14 @@
             </svg>
             新增病患回饋函
         </a> -->
-        {{--        <a href="{{route('feeback')}}"--}}
+        {{--        <a href="{{route('medicationRecords')}}"--}}
         {{--           class="mb-3 flex block py-2 px-3 rounded lg:text-xl md:text-sm hover:bg-teal-700 hover:text-white">--}}
         {{--            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 lg:mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">--}}
         {{--                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z" />--}}
         {{--            </svg>--}}
         {{--            病患用藥紀錄管理--}}
         {{--        </a>--}}
-        <a href="{{route('get_medication_record_page')}}"
+        <a href="{{route('get_medication_record_and_reply_management_page')}}"
            class="mb-3 flex block py-2 px-3 rounded lg:text-xl md:text-sm hover:bg-teal-700 hover:text-white">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 lg:mr-2 " fill="none" viewBox="0 0 24 24"
                  stroke="currentColor">
