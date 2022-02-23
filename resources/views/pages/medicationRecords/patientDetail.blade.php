@@ -122,7 +122,7 @@
 
             <div class="grid">
                 <div class="flex mx-2">
-                    <p id="" class="my-2 justify-self-start font-bold text-xl">藥物資訊</p>
+                    <p id="" class="my-2 justify-self-start font-bold text-xl">藥歷紀錄</p>
                     <p id="patitent_name" class="mx-2 my-2 justify-self-start font-bold text-xl">
                         {{$patient_name}}
                     </p>
@@ -157,7 +157,15 @@
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    詳細內容
+                                    藥歷資訊
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                    醫師回饋單
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                    藥師回饋單
                                 </th>
                             </tr>
                             </thead>
@@ -186,6 +194,20 @@
                                         查看
                                     </a>
                                 </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <a href="#"
+                                       class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded"
+                                       data-bs-toggle="modal" data-bs-target="#doctorFeedbackModal">
+                                        查看
+                                    </a>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <a href="#"
+                                       class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded"
+                                       data-bs-toggle="modal" data-bs-target="#medicationModal">
+                                        查看
+                                    </a>
+                                </td>
                             </tr>
                             @endforeach
                             </tbody>
@@ -197,4 +219,5 @@
 
     </div>
     @include('pages.medicationRecords.medicationRecordModal')
+    @include('pages.medicationRecords.doctorFeedbackModal')
 @endsection
