@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\DriveController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\PatitentController;
+use App\Http\Controllers\PatientController;
 use App\Http\Controllers\MedicationRecordController;
 use Illuminate\Support\Facades\Route;
 
