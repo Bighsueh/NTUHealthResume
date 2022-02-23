@@ -1,5 +1,6 @@
 @extends('layouts.main.menu')
 @section('content')
+    <p hidden>{{$thread = 0}}</p>
     <!-- content -->
     <div class="w-screen flex-1">
         <div class="p-4 bg-Slate-50 text-center">
@@ -123,20 +124,24 @@
                 <div class="flex mx-2">
                     <p id="" class="my-2 justify-self-start font-bold text-xl">藥物資訊</p>
                     <p id="patitent_name" class="mx-2 my-2 justify-self-start font-bold text-xl">
-                        病患A
+                        {{$patient_name}}
                     </p>
                     <p class="my-2 justify-self-start font-bold text-xl">先生/女士</p>
                 </div>
 
                 <div class="flex">
                     <!--數據欄位-->
-                    <div class="rounded m-2 flex-1 bg-gray-50 p-4 overflow-auto overflow-scroll w-2">
+                    <div class="rounded m-2 flex-1 bg-gray-50 p-4 overflow-auto w-2">
                         <table class="divide-y divide-gray-200 min-w-full">
                             <thead class="bg-gray-50">
                             <tr>
                                 <th scope="col"
                                     class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
                                     #
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                    就醫日期
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
@@ -152,59 +157,27 @@
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    適應症
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    藥物總類
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    藥品商品名稱
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    藥品成分名稱
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
                                     詳細內容
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    修改內容
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    刪除內容
                                 </th>
                             </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200">
+                            @foreach($medication_record as $row)
                             <tr>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    1
+                                    {{$thread+=1}}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    2022/01/14 23:59
+                                    {{$row->date_of_examination}}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    台大
+                                    {{$row->redate}}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    台大
+                                    {{$row->pres_hosp}}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    適應症
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    藥物總類
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    藥品商品名稱
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    藥品成分名稱
+                                    {{$row->disp_hosp}}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <a href="#"
@@ -212,63 +185,8 @@
                                         查看
                                     </a>
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <a href="#"
-                                       class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
-                                        修改
-                                    </a>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <a href="#"
-                                       class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
-                                        刪除
-                                    </a>
-                                </td>
                             </tr>
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    2
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    2022/01/14 23:59
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    台大
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    台大
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    適應症
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    藥物總類
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    藥品商品名稱
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    藥品成分名稱
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <a href="#"
-                                       class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
-                                        查看
-                                    </a>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <a href="#"
-                                       class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
-                                        修改
-                                    </a>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <a href="#"
-                                       class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
-                                        刪除
-                                    </a>
-                                </td>
-                            </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>

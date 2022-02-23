@@ -43,7 +43,7 @@
         {{--            </svg>--}}
         {{--            病患用藥紀錄管理--}}
         {{--        </a>--}}
-        <a href="{{route('get_medication_record_and_reply_management_page')}}"
+        <a href="{{route('get_medication_record_and_feedback_management_page')}}"
            class="mb-3 flex block py-2 px-3 rounded lg:text-xl md:text-sm hover:bg-teal-700 hover:text-white">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 lg:mr-2 " fill="none" viewBox="0 0 24 24"
                  stroke="currentColor">
