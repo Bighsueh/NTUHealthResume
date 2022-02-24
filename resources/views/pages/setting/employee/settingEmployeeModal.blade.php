@@ -25,7 +25,7 @@
 {{--                            </lable>--}}
 {{--                        </td>--}}
 {{--                        <td>--}}
-{{--                            <input value="1" class="border-teal-700 border-b py-1 px-2">--}}
+{{--                            <input id="edit_employee_id"  class="border-teal-700 border-b py-1 px-2">--}}
 {{--                        </td>--}}
 {{--                    </tr>--}}
                     <tr>
@@ -35,7 +35,7 @@
                             </lable>
                         </td>
                         <td>
-                            <input value="幼幼" class="border-teal-700 border-b py-1 px-2">
+                            <input  id="edit_employee_name" class="border-teal-700 border-b py-1 px-2">
                         </td>
                     </tr>
                     <tr>
@@ -45,7 +45,7 @@
                             </lable>
                         </td>
                         <td>
-                            <input value="123" class="border-teal-700 border-b py-1 px-2">
+                            <input id="edit_employee_account" class="border-teal-700 border-b py-1 px-2">
                         </td>
                     </tr>
                     <tr>
@@ -55,7 +55,7 @@
                             </lable>
                         </td>
                         <td>
-                            <input value="456" class="border-teal-700 border-b py-1 px-2">
+                            <input id="edit_employee_password" class="border-teal-700 border-b py-1 px-2">
                         </td>
                     </tr>
                     <tr>
@@ -65,7 +65,7 @@
                             </lable>
                         </td>
                         <td>
-                            <input value="藥師" class="border-teal-700 border-b py-1 px-2">
+                            <input id="edit_job_title" class="border-teal-700 border-b py-1 px-2">
                         </td>
                     </tr>
                     <tr>
@@ -75,15 +75,60 @@
                             </lable>
                         </td>
                         <td>
-                            <input value="神經部" class="border-teal-700 border-b py-1 px-2">
+                            <input id="edit_department" class="border-teal-700 border-b py-1 px-2">
                         </td>
                     </tr>
                 </table>
+
+                <p>
+                    <input type="checkbox" id="edit_open_main_task" >
+                    <label for="open_main_task">新增任務</label>
+                </p>
+                <p>
+                    <input type="checkbox" id="edit_add_doctor_reply" >
+                    <label for="add_doctor_reply">填寫醫師回饋單</label>
+                </p>
+                <p>
+                    <input type="checkbox" id="edit_add_pharmacist_reply" >
+                    <label for="add_pharmacist_reply">填寫藥師回饋單</label>
+                </p>
+                <p>
+                    <input type="checkbox" id="edit_close_main_task" >
+                    <label for="close_main_task">任務結案</label>
+                </p>
+                <p>
+                    <input type="checkbox" id="edit_open_main_task" >
+                    <label for="open_main_task">新增任務</label>
+                </p>
+                <p>
+                    <input type="checkbox" id="edit_add_diet_log" >
+                    <label for="add_diet_log">填寫飲食紀錄</label>
+                </p>
+                <p>
+                    <input type="checkbox" id="edit_add_nutritionist" >
+                    <label for="add_nutritionist">營養師評論</label>
+                </p>
+                <p>
+                    <input type="checkbox" id="edit_manage_employee" >
+                    <label for="manage_employee">營養師評論</label>
+                </p>
+                <p>
+                    <input type="checkbox" id="edit_manage_patient" >
+                    <label for="manage_patient">病患資訊管理</label>
+                </p>
+
             </div>
 
-            <div
-                class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-center p-4 border-t border-gray-200 rounded-b-md">
-                <button class="mx-4 flex-shrink-0 bg-teal-700 hover:bg-blue-500 border-teal-700 hover:border-blue-500 text-sm border-4 text-white py-1 px-10 rounded" >修改</button>
+
+            <div class="modal-footer flex flex-shrink-0 flex-wrap items-center
+                justify-center p-4 border-t border-gray-200 rounded-b-md">
+                <button class="mx-4 flex-shrink-0 bg-teal-700 hover:bg-blue-500
+                border-teal-700 hover:border-blue-500 text-sm
+                -4 text-white py-1 px-10 rounded btn_store_edit" id="btn_store_edit">修改</button>
+
+                <button class="mx-4 flex-shrink-0 bg-teal-700 hover:bg-red-500
+                border-teal-700 hover:border-blue-500 text-sm
+                -4 text-white py-1 px-10 rounded btn_delete" id="btn_delete">刪除</button>
 
             </div>
         </div>
@@ -91,7 +136,70 @@
 </div>
 
 <script>
-    function open_settingEmployeeModal(){
+    let id;
+
+    function open_settingEmployeeModal(employee_id){
+        id = employee_id;
+        $.ajax({
+            url:'{{route('get_edit_employee')}}',
+            method:'get',
+            data:{
+                employee_id:employee_id,
+            },
+            success:function (res){
+                // $('#edit_employee_id').val(res[0]['employee_id']);
+                $('#edit_employee_name').val(res[0]['employee_name']);
+                $('#edit_employee_account').val(res[0]['employee_account']);
+                $('#edit_employee_password').val(res[0]['employee_password']);
+                $('#edit_job_title').val(res[0]['job_title']);
+                $('#edit_department').val(res[0]['department']);
+                $('#edit_open_main_task').prop('checked',res[0]['open_main_task']);
+                $('#edit_add_doctor_reply').prop('checked',res[0]['add_doctor_reply']);
+                $('#edit_add_pharmacist_reply').prop('checked',res[0]['add_pharmacist_reply']);
+                $('#edit_close_main_task').prop('checked',res[0]['close_main_task']);
+                $('#edit_add_diet_log').prop('checked',res[0]['add_diet_log']);
+                $('#edit_add_nutritionist').prop('checked',res[0]['add_nutritionist']);
+                $('#edit_manage_employee').prop('checked',res[0]['manage_employee']);
+                $('#edit_manage_patient').prop('checked',res[0]['manage_patient']);
+
+            },
+        });
         $('#settingEmployeeModal').modal('show');
+    }
+
+    $('#btn_store_edit').click(function (){
+        store_edit_employee();
+        // $('#settingEmployeeModal').modal('hide');
+    })
+
+    function store_edit_employee(){
+        $.ajax({
+            url:'{{route('store_edit_employee')}}',
+            method:'get',
+            data:{
+                employee_id:id,
+                employee_name:$('#edit_employee_name').val(),
+                employee_account:$('#edit_employee_account').val(),
+                employee_password:$('#edit_employee_password').val(),
+                job_title:$('#edit_job_title').val(),
+                department:$('#edit_department').val(),
+                open_main_task:$('#edit_open_main_task').val(),
+                add_doctor_reply:$('#edit_add_doctor_reply').val(),
+                add_pharmacist_reply:$('#edit_add_pharmacist_reply').val(),
+                close_main_task:$('#edit_close_main_task').val(),
+                add_diet_log:$('#edit_add_diet_log').val(),
+                add_nutritionist:$('#edit_add_nutritionist').val(),
+                manage_employee:$('#edit_manage_employee').val(),
+                manage_patient:$('#edit_manage_patient').val()
+            },
+            success:function (res){
+                window.alert(res)
+                window.location.reload();
+            }
+        })
+    }
+
+    function delete_employee(){
+
     }
 </script>

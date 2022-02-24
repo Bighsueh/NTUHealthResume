@@ -15,11 +15,11 @@ class CreateEmployeesTable extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id('employee_id');
-            $table->string('employees_name');
-            $table->string('employees_account');
-            $table->string('employees_password');
+            $table->string('employee_name');
+            $table->string('employee_account');
+            $table->string('employee_password');
             $table->string('job_title');
-            $table->string('departmant');
+            $table->string('department');
             $table->boolean('open_main_task');
             $table->boolean('add_doctor_reply');
             $table->boolean('add_pharmacist_reply');

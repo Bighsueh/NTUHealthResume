@@ -21,7 +21,9 @@
                             <option value="3">帳號</option>
                         </select>
 
-                        <button type="button" class="mx-4 flex-shrink-0 bg-teal-700 hover:bg-teal-500 border-teal-700 hover:border-teal-500 text-sm border-4 text-white py-1 px-3 rounded"
+                        <button type="button" class="mx-4 flex-shrink-0 bg-teal-700 hover:bg-teal-500
+                        border-teal-700 hover:border-teal-500 text-sm border-4 text-white py-1 px-3 rounded btn_search"
+                        id="btn_search"
                         >查詢</button>
                     </div>
 
@@ -44,10 +46,15 @@
                                 <p id="text-position" class="mx-2">
                                     職稱
                                 </p>
+
+
+
                             </div>
                         </div>
                     </div>
                 </div>
+
+
 
             </div>
 
@@ -67,61 +74,47 @@
                                 <th class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">密碼</th>
                                 <th class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">職位</th>
                                 <th class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">部門</th>
-                                <th class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider"></th>
+                                <th class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                    <button type="button" class="bg-teal-700
+                                     hover:bg-teal-500 border-teal-700 hover:border-teal-500 text-sm
+                                     border-4 text-white py-1 px-3 rounded btn_create_employee"
+                                            id="btn_create_employee"
+                                            value=''>新增</button>
+                                </th>
+
                             </tr>
                             </thead>
-                            <tbody class="divide-y divide-gray-200">
-                            <tr class="text-gray-700 items-center">
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    1
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    藥師A
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    123
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    456
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    藥師
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    神經部
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <button type="button" class="bg-teal-700
-                                     hover:bg-teal-500 border-teal-700 hover:border-teal-500 text-sm
-                                     border-4 text-white py-1 px-3 rounded" id="btn_employee" data-bs-toggle="modal" data-bs-target="#settingEmployeeModal">修改</button>
-                                </td>
-                            </tr>
-                            <tr class="text-gray-700 items-center">
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    2
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    醫師A
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    456
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    789
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    藥師
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    神經部
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <button type="button" class="bg-teal-700
-                                     hover:bg-teal-500 border-teal-700 hover:border-teal-500 text-sm
-                                     border-4 text-white py-1 px-3 rounded" id="btn_employee" data-bs-toggle="modal" data-bs-target="#settingEmployeeModal">修改</button>
-                                </td>
-                            </tr>
+                            <tbody class="divide-y divide-gray-200" id="tbody">
 
+                            @foreach($employees as $employees)
+                            <tr class="text-gray-700 items-center">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    {{$employees->employee_id}}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    {{$employees->employee_name}}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    {{$employees->employee_account}}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    {{$employees->employee_password}}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    {{$employees->job_title}}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    {{$employees->department}}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <button type="button" class="bg-teal-700
+                                     hover:bg-teal-500 border-teal-700 hover:border-teal-500 text-sm
+                                     border-4 text-white py-1 px-3 rounded btn_employee"
+                                            id="btn_employee"
+                                    value='{{$employees->employee_id}}'>修改</button>
+                                </td>
+                            </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -133,10 +126,28 @@
 
     </div>
     @include('pages.setting.employee.settingEmployeeModal')
+    @include('pages.setting.employee.createEmployeeModal')
     </div>
     <script>
+
+        $('#btn_search').click(function (searchfor = null){
+
+        })
+        function update() {
+            $.ajax()
+
+        }
+
+
+        $('.btn_create_employee').click(function (){
+
+            open_createEmployeeModal();
+        })
+
+
         $('.btn_employee').click(function (){
-            open_settingEmployeeModal();
+
+            open_settingEmployeeModal($(this).attr("value"));
         })
     </script>
 

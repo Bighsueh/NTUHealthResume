@@ -70,11 +70,12 @@
                                 <th class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">身分證字號</th>
                                 <th class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">生日</th>
                                 <th class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">地址</th>
-                                <th class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">QRCode</th>
+{{--                                <th class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">QRCode</th>--}}
                                 <th class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider"></th>
                             </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200">
+{{--                            @foreach($patient as $patient)--}}
                             <tr class="text-gray-700 items-center">
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     1
@@ -97,20 +98,21 @@
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     雲林縣虎...
                                 </td>
-                                <td class="px-10 py-2 whitespace-nowrap">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
-                                    </svg>
-                                </td>
+{{--                                <td class="px-10 py-2 whitespace-nowrap">--}}
+{{--                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">--}}
+{{--                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />--}}
+{{--                                    </svg>--}}
+{{--                                </td>--}}
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <button type="button" class="bg-teal-700
                                      hover:bg-teal-500 border-teal-700 hover:border-teal-500 text-sm
-                                     border-4 text-white py-1 px-3 rounded" id="btn_employee" data-bs-toggle="modal" data-bs-target="#settingPatientModal">修改</button>                                </td>
+                                     border-4 text-white py-1 px-3 rounded" id="btn_employee"
+                                    >修改</button>
+                                </td>
                             </tr>
-
+{{--                            @endforeach--}}
                             </tbody>
                         </table>
-
                     </div>
 
 
