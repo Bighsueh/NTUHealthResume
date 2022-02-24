@@ -33,6 +33,25 @@
                     <div class="flex">
                         <div class="mx-6 mt-4 flex items-end">
                             <p class="text-3xl mb-2 font-bold" id="text-congratulations">營養管理系統</p>
+                            <p class="text-3xl mb-2 font-bold" id="text-congratulations">早安，{{$user_name}}先生/女士</p>
+                            <div class="flex item-end mx-4 text-gray-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-4" fill="none"
+                                     viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                                </svg>
+                                <p id="text-department" class="mx-2">
+                                    工作部門
+                                </p>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-4" fill="none"
+                                     viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                </svg>
+                                <p id="text-position" class="mx-2">
+                                    職稱
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div> <!-- search bar-->
@@ -93,7 +112,7 @@
                             <button type="button"
                                     class="bg-transparent border border-teal-700 text-teal-700
                                             hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded"
-                                    id="btn_create_dietLog" data-bs-toggle="modal" data-bs-target="#dietLogModal">飲食紀錄
+                                    id="btn_dietLog" data-bs-toggle="modal" data-bs-target="#dietLogModal">飲食紀錄
                             </button>
                         </div>
 
@@ -106,7 +125,7 @@
                 <div class="flex mx-2">
                     <p id="" class="my-2 justify-self-start font-bold text-xl">飲食紀錄</p>
                     <p id="patitent_name" class="mx-2 my-2 justify-self-start font-bold text-xl">
-                        {{$patient_data['patient_name']}}
+                        病患A
                     </p>
                     <p class="my-2 justify-self-start font-bold text-xl">先生/女士</p>
                 </div>
@@ -152,10 +171,8 @@
                                             {{$query->quantity}}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <a href="" value="{{$query->id}}"
-                                               class="bg-transparent border border-teal-700 text-teal-700
-                                               hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded btn-patch"
-                                               data-bs-target="#exampleModalLg" data-bs-toggle="modal">
+                                            <a href="#"
+                                               class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
                                                 修改
                                             </a>
                                         </td>
@@ -173,12 +190,11 @@
                 </div>
             </div>
         </div>
+        @include('pages.setting.nutritionManagement.dietLogModal')
     </div>
-    @include('pages.setting.nutritionManagement.patchDietLogModal')
-    @include('pages.setting.nutritionManagement.createDietLogModal')
     <script>
-        $('#btn_create_dietLog').click(function (){
-            create_dietLog();
+        $('#btn_dietLog').click(function (){
+            open_dietRecordModal();
         })
     </script>
 @endsection

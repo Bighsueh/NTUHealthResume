@@ -11,8 +11,8 @@ class PatientController extends Controller
     function get_setting_patient(){
 
         $patients = DB::table('patients')->get();
-
-        return view('pages.setting.patient.settingPatient',compact('patients'));
+        $user_name = Session::get('user_name');
+        return view('pages.setting.patient.settingPatient',compact('patients','user_name'));
     }
 
     function get_patient_data(Request $request){

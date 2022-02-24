@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use mysql_xdevapi\Exception;
 
 class MedicationRecordController extends Controller
@@ -25,8 +26,8 @@ class MedicationRecordController extends Controller
         $patient_data = DB::table('patients')->where('patient_id', $patient_id)->first();
         $medication_record = DB::table('medication_records')->get();
         $result = ['medication_record' => $medication_record, 'patient_name' => $patient_data->patient_name];
-
-        return view('pages.medicationRecords.patientDetail', $result);
+        $user_name = Session::get('user_name');
+        return view('pages.medicationRecords.patientDetail', compact($result,'user_name'));
     }
 
     //依record_id取得藥物子項目

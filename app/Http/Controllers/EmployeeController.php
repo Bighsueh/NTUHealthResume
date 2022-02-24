@@ -13,8 +13,8 @@ class EmployeeController extends Controller
         $employees = DB::table('employees')
             ->get();
 //        dd($employees);
-
-        return view('pages.setting.employee.settingEmployee',compact('employees'));
+        $user_name = Session::get('user_name');
+        return view('pages.setting.employee.settingEmployee',compact('employees','user_name'));
     }
 
     function get_edit_employee(Request $request){

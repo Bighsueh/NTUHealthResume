@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\MedicationRecordController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,5 +65,6 @@ Route::post('/dietLog/patch', [\App\Http\Controllers\NutritionManagementControll
 Route::get('/nutritionistComment',[\App\Http\Controllers\NutritionManagementController::class,'get_setting_nutritionManagement'])->name('nutritionistComment');
 
 Route::get('/menu', function () {
-    return view('pages.menu.menu');
+    $user_name = Session::get('user_name');
+    return view('pages.menu.menu',compact('user_name'));
 })->name('menu');
