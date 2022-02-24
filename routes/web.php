@@ -31,6 +31,8 @@ Route::get('/get_medication_record_page', [MedicationRecordController::class, 'g
 Route::post('/get_medication_record_detail', [MedicationRecordController::class, 'get_medication_record_detail'])->name('get_medication_record_detail');
 Route::post('/get_doctor_feedback', [MedicationRecordController::class, 'get_doctor_feedback'])->name('get_doctor_feedback');
 Route::post('/store_doctor_feedback', [MedicationRecordController::class, 'store_doctor_feedback'])->name('store_doctor_feedback');
+Route::post('/get_pharmacist_feedback', [MedicationRecordController::class, 'get_pharmacist_feedback'])->name('get_pharmacist_feedback');
+Route::post('/store_pharmacist_feedback', [MedicationRecordController::class, 'store_pharmacist_feedback'])->name('store_pharmacist_feedback');
 
 
 Route::get('/setting/employee',[\App\Http\Controllers\EmployeeController::class,'get_setting_employee'])->name('get_setting_employee');
@@ -51,13 +53,6 @@ Route::get('/dietLog/{id}', [\App\Http\Controllers\NutritionManagementController
 
 Route::get('/nutritionistComment',[\App\Http\Controllers\NutritionManagementController::class,'get_setting_nutritionManagement'])->name('nutritionistComment');
 
-Route::get('/feeback_detail', function () {
-    return view('pages.feeback.detail');
-})->name('detail');
-
-Route::get('/feeback', function () {
-    return view('pages.feeback.feeback');
-})->name('feeback');
 Route::get('/menu', function () {
     return view('pages.menu.menu');
 })->name('menu');

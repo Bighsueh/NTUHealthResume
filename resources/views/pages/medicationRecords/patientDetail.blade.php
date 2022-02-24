@@ -222,4 +222,6 @@
     </div>
     @include('pages.medicationRecords.medicationRecordModal')
     @include('pages.medicationRecords.doctorFeedbackModal')
+    @include('pages.medicationRecords.pharmacistFeedbackModal')
+
 @endsection
