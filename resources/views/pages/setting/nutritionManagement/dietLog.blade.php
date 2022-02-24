@@ -158,52 +158,31 @@
                             </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200">
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    1
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    早餐
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    5
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <a href="#"
-                                       class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
-                                        修改
-                                    </a>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <a href="#"
-                                       class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
-                                        刪除
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    2
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    晚餐
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    3
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <a href="#"
-                                       class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
-                                        修改
-                                    </a>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <a href="#"
-                                       class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
-                                        刪除
-                                    </a>
-                                </td>
-                            </tr>
+                                @foreach($queries as $query)
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            {{$query->id}}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            {{$query->meal_order}}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            {{$query->quantity}}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <a href="#"
+                                               class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
+                                                修改
+                                            </a>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <a href="{{route('delete_dietLog',['id' => $query->id])}}"
+                                               class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
+                                                刪除
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

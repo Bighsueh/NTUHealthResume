@@ -41,9 +41,8 @@ Route::get('/setting/patient',[\App\Http\Controllers\PatientController::class,'g
 
 Route::get('/setting/nutritionManagement',[\App\Http\Controllers\NutritionManagementController::class,'get_setting_nutritionManagement'])->name('get_setting_nutritionManagement');
 
-Route::get('/dietLog',function (){
-    return view('pages.setting.nutritionManagement.dietLog');
-})->name('dietLog');
+Route::get('/dietLog',[\App\Http\Controllers\NutritionManagementController::class,'get_dietLog'])->name('get_dietLog');
+Route::get('/dietLog/{id}', [\App\Http\Controllers\NutritionManagementController::class, 'delete_dietLog'])->name('delete_dietLog');
 
 Route::get('/nutritionistComment',[\App\Http\Controllers\NutritionManagementController::class,'get_setting_nutritionManagement'])->name('nutritionistComment');
 
