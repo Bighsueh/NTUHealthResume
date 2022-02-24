@@ -81,39 +81,35 @@
                 </table>
 
                 <p>
-                    <input type="checkbox" id="edit_open_main_task" >
+                    <input type="checkbox" class="btn_check" id="edit_open_main_task" >
                     <label for="open_main_task">新增任務</label>
                 </p>
                 <p>
-                    <input type="checkbox" id="edit_add_doctor_reply" >
+                    <input type="checkbox" class="btn_check" id="edit_add_doctor_reply" >
                     <label for="add_doctor_reply">填寫醫師回饋單</label>
                 </p>
                 <p>
-                    <input type="checkbox" id="edit_add_pharmacist_reply" >
+                    <input type="checkbox" class="btn_check" id="edit_add_pharmacist_reply" >
                     <label for="add_pharmacist_reply">填寫藥師回饋單</label>
                 </p>
                 <p>
-                    <input type="checkbox" id="edit_close_main_task" >
+                    <input type="checkbox" class="btn_check" id="edit_close_main_task" >
                     <label for="close_main_task">任務結案</label>
                 </p>
                 <p>
-                    <input type="checkbox" id="edit_open_main_task" >
-                    <label for="open_main_task">新增任務</label>
-                </p>
-                <p>
-                    <input type="checkbox" id="edit_add_diet_log" >
+                    <input type="checkbox" class="btn_check" id="edit_add_diet_log" >
                     <label for="add_diet_log">填寫飲食紀錄</label>
                 </p>
                 <p>
-                    <input type="checkbox" id="edit_add_nutritionist" >
+                    <input type="checkbox" class="btn_check" id="edit_add_nutritionist" >
                     <label for="add_nutritionist">營養師評論</label>
                 </p>
                 <p>
-                    <input type="checkbox" id="edit_manage_employee" >
-                    <label for="manage_employee">營養師評論</label>
+                    <input type="checkbox" class="btn_check" id="edit_manage_employee" >
+                    <label for="manage_employee">員工資訊管理</label>
                 </p>
                 <p>
-                    <input type="checkbox" id="edit_manage_patient" >
+                    <input type="checkbox" class="btn_check" id="edit_manage_patient" >
                     <label for="manage_patient">病患資訊管理</label>
                 </p>
 
@@ -153,14 +149,30 @@
                 $('#edit_employee_password').val(res[0]['employee_password']);
                 $('#edit_job_title').val(res[0]['job_title']);
                 $('#edit_department').val(res[0]['department']);
+
                 $('#edit_open_main_task').prop('checked',res[0]['open_main_task']);
+                $('#edit_open_main_task').val(res[0]['open_main_task']);
+
                 $('#edit_add_doctor_reply').prop('checked',res[0]['add_doctor_reply']);
+                $('#edit_add_doctor_reply').val(res[0]['add_doctor_reply']);
+
                 $('#edit_add_pharmacist_reply').prop('checked',res[0]['add_pharmacist_reply']);
+                $('#edit_add_pharmacist_reply').val(res[0]['add_pharmacist_reply']);
+
                 $('#edit_close_main_task').prop('checked',res[0]['close_main_task']);
+                $('#edit_close_main_task').val(res[0]['close_main_task']);
+
                 $('#edit_add_diet_log').prop('checked',res[0]['add_diet_log']);
+                $('#edit_add_diet_log').val(res[0]['add_diet_log']);
+
                 $('#edit_add_nutritionist').prop('checked',res[0]['add_nutritionist']);
+                $('#edit_add_nutritionist').val(res[0]['add_nutritionist']);
+
                 $('#edit_manage_employee').prop('checked',res[0]['manage_employee']);
+                $('#edit_manage_employee').val(res[0]['manage_employee']);
+
                 $('#edit_manage_patient').prop('checked',res[0]['manage_patient']);
+                $('#edit_manage_patient').val(res[0]['manage_patient']);
 
             },
         });
@@ -174,7 +186,7 @@
 
     function store_edit_employee(){
         $.ajax({
-            url:'{{route('store_edit_employee')}}',
+            url:"{{route('store_edit_employee')}}",
             method:'get',
             data:{
                 employee_id:id,
@@ -199,7 +211,27 @@
         })
     }
 
+    $('#btn_delete').click(function () {
+        if(window.confirm('確定要刪除')){
+            delete_employee()
+        }
+    })
     function delete_employee(){
+        $.ajax({
+            url:"{{route('delete_employee')}}",
+            method:'get',
+            data:{
+                employee_id:id
+            },
+            success:function (res) {
+                window.alert(res);
 
+                update_data();
+            }
+        });
+        $('#settingEmployeeModal').modal('hide');
     }
+    $('.btn_check').change(function () {
+        this.value = (Number(this.checked));
+    })
 </script>

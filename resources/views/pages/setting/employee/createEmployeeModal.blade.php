@@ -79,39 +79,36 @@
                 </table>
 
                 <p>
-                    <input type="checkbox" id="create_open_main_task" >
+                    <input type="checkbox" class="btn_check" id="create_open_main_task" value="0">
                     <label for="open_main_task">新增任務</label>
                 </p>
                 <p>
-                    <input type="checkbox" id="create_add_doctor_reply" >
+                    <input type="checkbox" class="btn_check" id="create_add_doctor_reply" value="0">
                     <label for="add_doctor_reply">填寫醫師回饋單</label>
                 </p>
                 <p>
-                    <input type="checkbox" id="create_add_pharmacist_reply" >
+                    <input type="checkbox" class="btn_check" id="create_add_pharmacist_reply" value="0">
                     <label for="add_pharmacist_reply">填寫藥師回饋單</label>
                 </p>
                 <p>
-                    <input type="checkbox" id="create_close_main_task" >
+                    <input type="checkbox" class="btn_check" id="create_close_main_task" value="0">
                     <label for="close_main_task">任務結案</label>
                 </p>
+
                 <p>
-                    <input type="checkbox" id="create_open_main_task" >
-                    <label for="open_main_task">新增任務</label>
-                </p>
-                <p>
-                    <input type="checkbox" id="create_add_diet_log" >
+                    <input type="checkbox" class="btn_check" id="create_add_diet_log" value="0">
                     <label for="add_diet_log">填寫飲食紀錄</label>
                 </p>
                 <p>
-                    <input type="checkbox" id="create_add_nutritionist" >
+                    <input type="checkbox" class="btn_check" id="create_add_nutritionist" value="0">
                     <label for="add_nutritionist">營養師評論</label>
                 </p>
                 <p>
-                    <input type="checkbox" id="create_manage_employee" >
-                    <label for="manage_employee">營養師評論</label>
+                    <input type="checkbox" class="btn_check" id="create_manage_employee" value="0">
+                    <label for="manage_employee">員工資訊管理</label>
                 </p>
                 <p>
-                    <input type="checkbox" id="create_manage_patient" >
+                    <input type="checkbox" class="btn_check" id="create_manage_patient" value="0">
                     <label for="manage_patient">病患資訊管理</label>
                 </p>
 
@@ -153,14 +150,14 @@
                 employee_password:$('#create_employee_password').val(),
                 job_title:$('#create_job_title').val(),
                 department:$('#create_department').val(),
-                // open_main_task:$('#create_open_main_task'),
-                // add_doctor_reply:$('#create_add_doctor_reply').check,
-                // add_pharmacist_reply:$('#create_add_pharmacist_reply').check,
-                // close_main_task:$('#create_close_main_task').check,
-                // add_diet_log:$('#create_add_diet_log').check,
-                // add_nutritionist:$('#create_add_nutritionist').check,
-                // manage_employee:$('#create_manage_employee').check,
-                // manage_patient:$('#create_manage_patient').check
+                open_main_task:$('#create_open_main_task').val(),
+                add_doctor_reply:$('#create_add_doctor_reply').val(),
+                add_pharmacist_reply:$('#create_add_pharmacist_reply').val(),
+                close_main_task:$('#create_close_main_task').val(),
+                add_diet_log:$('#create_add_diet_log').val(),
+                add_nutritionist:$('#create_add_nutritionist').val(),
+                manage_employee:$('#create_manage_employee').val(),
+                manage_patient:$('#create_manage_patient').val()
             },
             success:function (res){
                 window.alert(res)
@@ -168,5 +165,8 @@
             }
         })
     }
+    $('.btn_check').change(function () {
+        this.value = (Number(this.checked));
+    })
 
 </script>

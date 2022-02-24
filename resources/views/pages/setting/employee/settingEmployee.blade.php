@@ -16,12 +16,13 @@
                                id="input_search"
                                placeholder="查詢">
 
-                        <select class=" bg-transparent  border-none w-1/6 text-gray-700 mr-3 py-1 px-2  leading-tight focus:outline-none ">
-                            <option value="1">ID</option>
-                            <option value="2">姓名</option>
-                            <option value="3">帳號</option>
-                            <option value="3">職位</option>
-                            <option value="3"></option>
+                        <select class=" bg-transparent  border-none w-1/6 text-gray-700 mr-3 py-1 px-2  leading-tight focus:outline-none "
+                        id="search_from">
+                            <option value="employee_id">ID</option>
+                            <option value="employee_name">姓名</option>
+                            <option value="employee_account">帳號</option>
+                            <option value="job_title">職位</option>
+                            <option value="department">部門</option>
                         </select>
 
                         <button type="button" class="mx-4 flex-shrink-0 bg-teal-700 hover:bg-teal-500
@@ -141,8 +142,44 @@
             }
         })
         function update_data() {
+
             $.ajax({
-               url:{{route('get_employee_data')}}
+               url:"{{route('get_employee_data')}}",
+                method:'get',
+                data:{
+                   search_data :$('#input_search').val() ,
+                    search_from:$('#search_from').val()
+                },
+                success:function (res) {
+                    $('#tbody tr').remove();
+                    if(res.length > 0){
+                        res.forEach(function (row) {
+                            let employee_id = '<td class="px-6 py-4 whitespace-nowrap">' + row['employee_id'] + '</td>';
+                            let employee_name = '<td class="px-6 py-4 whitespace-nowrap">' + row['employee_name'] + '</td>';
+                            let employee_account = '<td class="px-6 py-4 whitespace-nowrap">' + row['employee_account'] + '</td>';
+                            let employee_password = '<td class="px-6 py-4 whitespace-nowrap">' + row['employee_password'] + '</td>';
+                            let job_title = '<td class="px-6 py-4 whitespace-nowrap">' + row['job_title'] + '</td>';
+                            let department = '<td class="px-6 py-4 whitespace-nowrap">' + row['department'] + '</td>';
+                            let setting_btn = '<td class="px-6 py-4 whitespace-nowrap">'+
+                                `<button type='button' class='bg-teal-700
+                                     hover:bg-teal-500 border-teal-700 hover:border-teal-500 text-sm
+                                     border-4 text-white py-1 px-3 rounded btn_employee'
+                                    value="`+row['employee_id'] + `">修改</button>
+                                </td>`  +  '</td>';
+                            $('#tbody').append(
+                                '<tr class="text-gray-700 items-center">' +employee_id+employee_name+employee_account+employee_password+job_title+department+setting_btn+'</tr>'
+                            )
+
+                        })
+
+
+                    }
+                    $('.btn_employee').click(function (){
+
+                        open_settingEmployeeModal($(this).attr("value"));
+                    })
+
+                }
             });
 
         }

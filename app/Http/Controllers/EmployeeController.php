@@ -42,7 +42,14 @@ class EmployeeController extends Controller
                     'employee_password' => $request->employee_password,
                     'job_title' => $request->job_title,
                     'department' => $request->department,
-
+                    'open_main_task' => $request->open_main_task,
+                    'add_doctor_reply' => $request->add_doctor_reply,
+                    'add_pharmacist_reply' => $request->add_pharmacist_reply,
+                    'close_main_task' => $request->close_main_task,
+                    'add_diet_log' => $request->add_diet_log,
+                    'add_nutritionist' => $request->add_nutritionist,
+                    'manage_employee' => $request->manage_employee,
+                    'manage_patient' => $request->manage_patient
 
                 ]);
 
@@ -65,14 +72,14 @@ class EmployeeController extends Controller
                     'employee_password' => $request->employee_password,
                     'job_title' => $request->job_title,
                     'department' => $request->department,
-                    'open_main_task' => 1,
-                    'add_doctor_reply' => 1,
-                    'add_pharmacist_reply' => 1,
-                    'close_main_task' => 1,
-                    'add_diet_log' => 1,
-                    'add_nutritionist' => 1,
-                    'manage_employee' => 1,
-                    'manage_patient' => 1
+                    'open_main_task' => $request->open_main_task,
+                    'add_doctor_reply' => $request->add_doctor_reply,
+                    'add_pharmacist_reply' => $request->add_pharmacist_reply,
+                    'close_main_task' => $request->close_main_task,
+                    'add_diet_log' => $request->add_diet_log,
+                    'add_nutritionist' => $request->add_nutritionist,
+                    'manage_employee' => $request->manage_employee,
+                    'manage_patient' => $request->manage_patient
 
                 ]);
 
@@ -86,10 +93,22 @@ class EmployeeController extends Controller
 
     function get_employee_data(Request $request){
        try{
-
+            $data = DB::table('employees')
+                ->where($request->search_from,'like','%'.$request->search_data.'%')
+                ->get();
+            return $data;
        }catch (Exception $exception){
            return $exception;
        }
+    }
+
+    function delete_employee(Request $request){
+        try{
+            DB::table('employees')->where('employee_id',$request->employee_id)->delete();
+            return '刪除成功';
+        }catch (Exception $exception){
+
+        }
     }
 
 
