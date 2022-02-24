@@ -110,7 +110,9 @@
                         <div class="flex h-full items-center justify-center">
                             <p class="text-xl mx-2">新增藥物資訊</p>
                             <a href="#"
-                               class="mx-2 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
+                               id="btn-create-medication-detail-modal"
+                               class="mx-2 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded"
+                               data-bs-toggle="modal" data-bs-target="#createMedicationDetailModel">
                                 點擊新增
                             </a>
                         </div>
@@ -127,6 +129,7 @@
                         {{$patient_name}}
                     </p>
                     <p class="my-2 justify-self-start font-bold text-xl">先生/女士</p>
+                    <p id="patient_id" hidden>{{$patient_id}}</p>
                 </div>
 
                 <div class="flex">
@@ -220,6 +223,7 @@
         </div>
 
     </div>
+    @include('pages.medicationRecords.createMedicationDetailModal')
     @include('pages.medicationRecords.medicationRecordModal')
     @include('pages.medicationRecords.doctorFeedbackModal')
     @include('pages.medicationRecords.pharmacistFeedbackModal')

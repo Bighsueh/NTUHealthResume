@@ -34,6 +34,8 @@ Route::post('/get_doctor_feedback', [MedicationRecordController::class, 'get_doc
 Route::post('/store_doctor_feedback', [MedicationRecordController::class, 'store_doctor_feedback'])->name('store_doctor_feedback');
 Route::post('/get_pharmacist_feedback', [MedicationRecordController::class, 'get_pharmacist_feedback'])->name('get_pharmacist_feedback');
 Route::post('/store_pharmacist_feedback', [MedicationRecordController::class, 'store_pharmacist_feedback'])->name('store_pharmacist_feedback');
+Route::post('/store_medication_record_detail', [MedicationRecordController::class, 'store_medication_record_detail'])->name('store_medication_record_detail');
+Route::post('/update_medication_record_detail', [MedicationRecordController::class, 'update_medication_record_detail'])->name('update_medication_record_detail');
 
 
 Route::get('/setting/employee',[\App\Http\Controllers\EmployeeController::class,'get_setting_employee'])->name('get_setting_employee');

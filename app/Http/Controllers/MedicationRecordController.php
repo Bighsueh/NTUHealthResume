@@ -184,4 +184,54 @@ class MedicationRecordController extends Controller
         }
     }
 
+//    儲存藥物明細資訊
+    public function store_medication_record_detail(Request $request)
+    {
+        try {
+            $date_of_examination = $request->date_of_examination;
+            $redate = $request->redate;
+            $pres_hosp = $request->pres_hosp;
+            $disp_hosp = $request->disp_hosp;
+            $patient_id = $request->patient_id;
+
+            DB::table('medication_records')
+                ->insert([
+                    'date_of_examination' => $date_of_examination,
+                    'redate' => $redate,
+                    'pres_hosp' => $pres_hosp,
+                    'disp_hosp' => $disp_hosp,
+                    'patient_id' => $patient_id,
+                    'created_at' => Carbon::now(),
+                ]);
+            return 'success';
+        } catch (\Exception $exception) {
+            return $exception;
+        }
+    }
+
+    //儲存藥物明細修改資料
+    public function update_medication_record_detail(Request $request)
+    {
+        try {
+            $date_of_examination = $request->date_of_examination;
+            $redate = $request->redate;
+            $pres_hosp = $request->pres_hosp;
+            $disp_hosp = $request->disp_hosp;
+            $record_id = $request->record_id;
+            $patient_id = $request->patient_id;
+
+            DB::table('medication_records')
+                ->where('record_id',$record_id)
+                ->update([
+                    'date_of_examination' => $date_of_examination,
+                    'redate' => $redate,
+                    'pres_hosp' => $pres_hosp,
+                    'disp_hosp' => $disp_hosp,
+                    'updated_at' => Carbon::now(),
+                ]);
+            return 'success';
+        } catch (\Exception $exception) {
+            return $exception;
+        }
+    }
 }

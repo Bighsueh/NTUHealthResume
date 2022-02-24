@@ -168,7 +168,6 @@
                         Swal.fire({
                             icon: 'success',
                             title: '儲存成功',
-                            text: '即將跳轉頁面',
                             confirmButtonColor: '#8CD4F5'
                         })
                     }
