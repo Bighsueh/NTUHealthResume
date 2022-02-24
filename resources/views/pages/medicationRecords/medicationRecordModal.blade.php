@@ -136,11 +136,55 @@
             },
             success:function(res){
                 // console.log(res);
+                let main_record = res['main_record'];
+                let record_list = res['record_list'];
+
                 //寫入資料 就醫日、處方醫院、調劑醫院、保險類型
-                $("#medication_record_modal_redate").text(res['redate']);
-                $("#medication_record_modal_pres_hosp").text(res['pres_hosp']);
-                $("#medication_record_modal_disp_hosp").text(res['disp_hosp']);
-                $("#medication_record_modal_insurance_type").text(res['insurance_type']);
+                $("#medication_record_modal_redate").text(main_record['redate']);
+                $("#medication_record_modal_pres_hosp").text(main_record['pres_hosp']);
+                $("#medication_record_modal_disp_hosp").text(main_record['disp_hosp']);
+                $("#medication_record_modal_insurance_type").text(main_record['insurance_type']);
+
+                $.each(record_list,function(index,value){
+                    console.log(value);
+                    $("#medication_record_modal_tbody").append(
+                        `<tr class="bg-white border-b">
+                            <td class="px-6 py-2 whitespace-nowrap text-sm font-medium text-gray-900">
+                                <a>${index+1}</a>
+                            </td>
+                            <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
+                                <a>${value['indication']}</a>
+                            </td>
+                            <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
+                                <a>${value['category']}</a>
+                            </td>
+                            <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
+                                <a>${value['trade_name']}</a>
+                            </td>
+                            <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
+                                <a>${value['generic_name']}</a>
+                            </td>
+                            <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
+                                <a>${value['dose']}</a>
+                            </td>
+                            <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
+                                <a>${value['routes']}</a>
+                            </td>
+                            <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
+                                <a>${value['freq']}</a>
+                            </td>
+                            <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
+                                <a>${value['pres_day']}</a>
+                            </td>
+                            <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
+                                <a>${value['total_amount']}</a>
+                            </td>
+                             <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
+                                <a>${value['note']}</a>
+                            </td>
+                        </tr>`
+                    )
+                })
             }
         })
     })

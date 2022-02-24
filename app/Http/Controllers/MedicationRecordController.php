@@ -32,8 +32,11 @@ class MedicationRecordController extends Controller
         //record_id
         $record_id = $request->record_id;
 
-        $record_detail = DB::table('medication_records')->where('record_id',$record_id)->first();
-        return $record_detail;
+        $main_record = DB::table('medication_records')->where('record_id',$record_id)->first();
+        $record_list = DB::table('medication_record_detail')->where('record_id',$record_id)->get();
+
+        $result = ['main_record'=>$main_record,'record_list'=>$record_list];
+        return $result;
     }
 
 }

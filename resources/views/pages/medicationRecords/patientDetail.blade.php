@@ -191,7 +191,7 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <a href="#"
-                                       class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded"
+                                       class="btn-medication-detail bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded"
                                        data-bs-toggle="modal" data-bs-target="#medicationModal">
                                         查看
                                     </a>
