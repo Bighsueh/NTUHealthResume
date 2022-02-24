@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\MedicationRecordController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,8 @@ Route::post('/get_doctor_feedback', [MedicationRecordController::class, 'get_doc
 Route::post('/store_doctor_feedback', [MedicationRecordController::class, 'store_doctor_feedback'])->name('store_doctor_feedback');
 Route::post('/get_pharmacist_feedback', [MedicationRecordController::class, 'get_pharmacist_feedback'])->name('get_pharmacist_feedback');
 Route::post('/store_pharmacist_feedback', [MedicationRecordController::class, 'store_pharmacist_feedback'])->name('store_pharmacist_feedback');
+Route::post('/store_medication_record_detail', [MedicationRecordController::class, 'store_medication_record_detail'])->name('store_medication_record_detail');
+Route::post('/update_medication_record_detail', [MedicationRecordController::class, 'update_medication_record_detail'])->name('update_medication_record_detail');
 
 
 Route::get('/setting/employee',[\App\Http\Controllers\EmployeeController::class,'get_setting_employee'])->name('get_setting_employee');
@@ -64,5 +67,6 @@ Route::post('/dietLog/patch', [\App\Http\Controllers\NutritionManagementControll
 Route::get('/nutritionistComment',[\App\Http\Controllers\NutritionManagementController::class,'get_setting_nutritionManagement'])->name('nutritionistComment');
 
 Route::get('/menu', function () {
-    return view('pages.menu.menu');
+    $user_name = Session::get('user_name');
+    return view('pages.menu.menu',compact('user_name'));
 })->name('menu');

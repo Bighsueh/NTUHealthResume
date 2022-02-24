@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use mysql_xdevapi\Exception;
 
 class MedicationRecordController extends Controller
@@ -20,11 +21,20 @@ class MedicationRecordController extends Controller
     //開啟回饋函及藥物紀錄-個別病患紀錄頁面
     public function get_medication_record_and_feedback_management_patient_detail_page(Request $request)
     {
+//        $doctor_feedback = DB::table('doctor_feedback')->where('record_id', 1)->first();
+//        dd($doctor_feedback->content);
 
         $patient_id = $request->get('patient_id');
         $patient_data = DB::table('patients')->where('patient_id', $patient_id)->first();
         $medication_record = DB::table('medication_records')->get();
-        $result = ['medication_record' => $medication_record, 'patient_name' => $patient_data->patient_name];
+        $user_name = Session::get('user_name');
+
+        $result = [
+            'medication_record' => $medication_record,
+            'patient_name' => $patient_data->patient_name,
+            'patient_id' => $patient_data->patient_id,
+            'user_name' => $user_name,
+        ];
 
         return view('pages.medicationRecords.patientDetail', $result);
     }
@@ -66,7 +76,7 @@ class MedicationRecordController extends Controller
         }
     }
 
-    //儲存醫師回饋單,醫師回饋內容
+    //儲存醫師回饋單,醫師回饋及醫師發問內容
     public function store_doctor_feedback(Request $request)
     {
         try {
@@ -74,15 +84,19 @@ class MedicationRecordController extends Controller
             $record_id = $request->record_id;
             //醫師回覆內容
             $doctor_reply = $request->doctor_reply;
+            //提師提問內容
+            $doctor_ask = $request->doctor_ask;
 
             //先取得病患的資料
             $patient_data = DB::table('medication_records')->where('record_id', $record_id)->first();
 
-            //先確認資料是否存在
-            $if_exist = DB::table('doctor_feedback')->where('record_id', $record_id)->count();
+            //確認醫師回饋資料是否存在
+            $if_exist_doctor_feedback = DB::table('doctor_feedback')->where('record_id', $record_id)->count();
+            //確認藥師資料是否存在
+            $if_exist_pharmacist_feedback = DB::table('pharmacist_feedback')->where('record_id', $record_id)->count();
 
             //若以存在資料則導向修改資料
-            if ($if_exist > 0) {
+            if ($if_exist_doctor_feedback > 0) {
                 //修改資料
                 DB::table('doctor_feedback')
                     ->where('record_id', $record_id)
@@ -96,7 +110,7 @@ class MedicationRecordController extends Controller
             }
 //
             //若不存在資料則導向則新增資料
-            if ($if_exist === 0) {
+            if ($if_exist_doctor_feedback === 0) {
                 //新增資料
                 DB::table('doctor_feedback')->insert([
                     'patient_id' => $patient_data->patient_id,
@@ -106,6 +120,34 @@ class MedicationRecordController extends Controller
                     'created_at' => Carbon::now(),
                 ]);
             }
+
+            //若以存在資料則導向修改資料
+            if ($if_exist_pharmacist_feedback > 0) {
+                //修改資料
+                DB::table('pharmacist_feedback')
+                    ->where('record_id', $record_id)
+                    ->update([
+                        'patient_id' => $patient_data->patient_id,
+                        'record_id' => $record_id,
+                        'pharmacist_id' => 1,
+                        'doctor_ask' => $doctor_ask,
+                        'updated_at' => Carbon::now(),
+                    ]);
+            }
+//
+            //若不存在資料則導向則新增資料
+            if ($if_exist_pharmacist_feedback === 0) {
+                //新增資料
+                DB::table('pharmacist_feedback')->insert([
+                    'patient_id' => $patient_data->patient_id,
+                    'record_id' => $record_id,
+                    'pharmacist_id' => 1,
+                    'doctor_ask' => $doctor_ask,
+                    'created_at' => Carbon::now(),
+                ]);
+            }
+
+
             return 'success';
         } catch (Exception $exception) {
             return $exception;
@@ -124,7 +166,7 @@ class MedicationRecordController extends Controller
 
             //若存在藥師回饋單則取出回覆內容
             if($pharmacist_feedback){
-                return $pharmacist_feedback->content;
+                return $pharmacist_feedback;
             }
 
             //若不存在藥師回饋單則回傳空字串
@@ -183,4 +225,53 @@ class MedicationRecordController extends Controller
         }
     }
 
+//    儲存藥物明細資訊
+    public function store_medication_record_detail(Request $request)
+    {
+        try {
+            $date_of_examination = $request->date_of_examination;
+            $redate = $request->redate;
+            $pres_hosp = $request->pres_hosp;
+            $disp_hosp = $request->disp_hosp;
+            $patient_id = $request->patient_id;
+
+            DB::table('medication_records')
+                ->insert([
+                    'date_of_examination' => $date_of_examination,
+                    'redate' => $redate,
+                    'pres_hosp' => $pres_hosp,
+                    'disp_hosp' => $disp_hosp,
+                    'patient_id' => $patient_id,
+                    'created_at' => Carbon::now(),
+                ]);
+            return 'success';
+        } catch (\Exception $exception) {
+            return $exception;
+        }
+    }
+
+    //儲存藥物明細修改資料
+    public function update_medication_record_detail(Request $request)
+    {
+        try {
+            $date_of_examination = $request->date_of_examination;
+            $redate = $request->redate;
+            $pres_hosp = $request->pres_hosp;
+            $disp_hosp = $request->disp_hosp;
+            $record_id = $request->record_id;
+
+            DB::table('medication_records')
+                ->where('record_id',$record_id)
+                ->update([
+                    'date_of_examination' => $date_of_examination,
+                    'redate' => $redate,
+                    'pres_hosp' => $pres_hosp,
+                    'disp_hosp' => $disp_hosp,
+                    'updated_at' => Carbon::now(),
+                ]);
+            return 'success';
+        } catch (\Exception $exception) {
+            return $exception;
+        }
+    }
 }

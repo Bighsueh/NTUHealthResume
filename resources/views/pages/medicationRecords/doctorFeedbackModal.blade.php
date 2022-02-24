@@ -152,6 +152,7 @@
         //儲存醫師回覆
         $(".btn-doctor-feedback-save").click(function () {
             let doctor_reply = $("#doctor_feedback_modal_doctor_reply").val();
+            let doctor_ask = $("#doctor_feedback_modal_send_to_pharmacist").val();
             let url = "{{route('store_doctor_feedback')}}";
 
             $.ajax({
@@ -161,6 +162,7 @@
                     "_token": "{{csrf_token()}}",
                     "record_id": record_id,
                     "doctor_reply": doctor_reply,
+                    "doctor_ask" : doctor_ask,
                 },
                 success: function (res) {
                     //sweetalert
@@ -168,13 +170,14 @@
                         Swal.fire({
                             icon: 'success',
                             title: '儲存成功',
-                            text: '即將跳轉頁面',
                             confirmButtonColor: '#8CD4F5'
                         })
                     }
                 }
             })
         })
+
+
 
         //開啟醫師回饋單
         $(".btn-doctor-feedback").click(function () {

@@ -20,6 +20,9 @@ class NutritionManagementController extends Controller
         $queries = DB::table('diet_log')->where('patient_id',$request->id)->get();
         $patient_data = ['patient_id' => $request->id, 'patient_name' => $request->name];
         return view('pages.setting.nutritionManagement.dietLog',compact('queries','patient_data'));
+        $user_name = Session::get('user_name');
+        $queries = DB::table('diet_log')->get();
+        return view('pages.setting.nutritionManagement.dietLog',compact('queries',$user_name));
     }
     // 刪除一筆飲食紀錄
     public function delete_dietLog($id)

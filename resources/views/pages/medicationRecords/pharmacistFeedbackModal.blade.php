@@ -122,12 +122,11 @@
             //清空醫師回覆欄位
             $("#pharmacist_feedback_modal_doctor_reply").val("");
 
-            update_doctor_reply_textarea()
-            update_pharmacist_reply_textarea();
+            update_textarea();
         });
 
-        //更新藥師回覆欄位
-        function update_pharmacist_reply_textarea(){
+        //更新藥師回覆及醫師提問欄位
+        function update_textarea(){
             let url = "{{route('get_pharmacist_feedback')}}";
 
             $.ajax({
@@ -138,28 +137,10 @@
                     "record_id":record_id,
                 },
                 success:function(res){
-                    $("#pharmacist_feedback_modal_reply_text").val(res);
-                }
-            })
-        }
+                    $("#pharmacist_feedback_modal_doctor_reply").val(res['doctor_ask']);
+                    $("#pharmacist_feedback_modal_reply_text").val(res['content']);
 
-        //更新要回覆病患內容欄位的資料
-        function update_doctor_reply_textarea() {
-            let url = "{{route('get_doctor_feedback')}}";
 
-            //清空回覆病患內容的欄位
-            $("#pharmacist_feedback_modal_doctor_reply").val('');
-
-            $.ajax({
-                url: url,
-                method: "post",
-                data: {
-                    "_token": "{{csrf_token()}}",
-                    "record_id": record_id,
-                },
-                success: function (res) {
-                    //將資料寫入欄位
-                    $("#pharmacist_feedback_modal_doctor_reply").val(res);
                 }
             })
         }

@@ -37,7 +37,7 @@
                 <div class="flex justify-start">
                     <div class="flex">
                         <div class="mx-6 mt-4 flex items-end">
-                            <p class="text-3xl mb-2 font-bold" id="text-congratulations">孔乙己 先生/女士</p>
+                            <p class="text-3xl mb-2 font-bold" id="text-congratulations">{{$user_name}} 先生/女士</p>
                             <div class="flex item-end mx-4 text-gray-400">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>

@@ -10,11 +10,16 @@ class LoginController extends Controller
 {
     public function get_login_page()
     {
+
         return view('pages.login.login');
     }
 
     public function post_login_data(Request $request)
     {
+        //Session flush
+        Session::flush();
+        //重新產生Session ID
+        $request->session()->regenerate();
         try {
             $username = $request->get('username');
             $password = $request->get('password');
@@ -32,6 +37,7 @@ class LoginController extends Controller
 
             //員工存在
             if ($check_employee !== null) {
+                Session::put('user_name',$check_employee->employee_name);
                 return 'success';
             }
 
