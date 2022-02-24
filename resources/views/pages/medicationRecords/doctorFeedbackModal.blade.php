@@ -127,6 +127,35 @@
                         ></textarea>
                     </div>
                 </div>
+
+                <!--醫師向藥師提問-->
+                <div class="flex justify-center">
+                    <div class="mb-3 xl:w-full">
+                        <b class="mx-2">發出藥師回饋函</b>
+                        <textarea
+                            class="
+                            form-control
+                            block
+                            w-full
+                            px-3
+                            py-1.5
+                            text-base
+                            font-normal
+                            text-gray-700
+                            bg-white bg-clip-padding
+                            border border-solid border-gray-300
+                            rounded
+                            transition
+                            ease-in-out
+                            m-0
+                            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                            id="doctor_feedback_modal_send_to_pharmacist"
+                            rows="5"
+                            placeholder="請在此處填寫內容...  (Shift + Enter可以換行)"
+                        ></textarea>
+                    </div>
+                </div>
+
             </div>
             <div
                 class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
