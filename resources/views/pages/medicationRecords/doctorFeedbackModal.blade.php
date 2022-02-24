@@ -146,97 +146,96 @@
     </div>
 </div>
 <script>
-    let record_id;
+    $(function () {
+        let record_id;
 
-    //儲存醫師回覆
-    $(".btn-doctor-feedback-save").click(function () {
-        let doctor_reply = $("#doctor_feedback_modal_doctor_reply").val();
-        let url = "{{route('store_doctor_feedback')}}";
+        //儲存醫師回覆
+        $(".btn-doctor-feedback-save").click(function () {
+            let doctor_reply = $("#doctor_feedback_modal_doctor_reply").val();
+            let url = "{{route('store_doctor_feedback')}}";
 
-        $.ajax({
-            url: url,
-            method: "post",
-            data: {
-                "_token": "{{csrf_token()}}",
-                "record_id": record_id,
-                "doctor_reply": doctor_reply,
-            },
-            success: function (res) {
-                //sweetalert
-                if (res === 'success') {
-                    Swal.fire({
-                        icon: 'success',
-                        title: '儲存成功',
-                        text: '即將跳轉頁面',
-                        confirmButtonColor: '#8CD4F5'
-                    })
+            $.ajax({
+                url: url,
+                method: "post",
+                data: {
+                    "_token": "{{csrf_token()}}",
+                    "record_id": record_id,
+                    "doctor_reply": doctor_reply,
+                },
+                success: function (res) {
+                    //sweetalert
+                    if (res === 'success') {
+                        Swal.fire({
+                            icon: 'success',
+                            title: '儲存成功',
+                            text: '即將跳轉頁面',
+                            confirmButtonColor: '#8CD4F5'
+                        })
+                    }
                 }
-            }
+            })
         })
-    })
 
-    //刪除醫師回覆
+        //開啟醫師回饋單
+        $(".btn-doctor-feedback").click(function () {
+            //取得藥物id
+            record_id = $(this).parent().parent().find('.medication_record_id').text();
 
-    //開啟醫師回饋單
-    $(".btn-doctor-feedback").click(function () {
-        //取得藥物id
-        record_id = $(this).parent().parent().find('.medication_record_id').text();
-
-        update_doctor_reply_textarea();
-        update_medication_record_detail();
-    })
-
-    //更新要回覆病患內容欄位的資料
-    function update_doctor_reply_textarea() {
-        let url = "{{route('get_doctor_feedback')}}";
-
-        //清空回覆病患內容的欄位
-        $("#doctor_feedback_modal_doctor_reply").val('');
-
-        $.ajax({
-            url: url,
-            method: "post",
-            data: {
-                "_token": "{{csrf_token()}}",
-                "record_id": record_id,
-            },
-            success: function (res) {
-                //將資料寫入欄位
-                $("#doctor_feedback_modal_doctor_reply").val(res);
-            }
+            update_doctor_reply_textarea();
+            update_medication_record_detail();
         })
-    }
 
-    //更新病患用藥紀錄
-    function update_medication_record_detail() {
-        let url = "{{route('get_medication_record_detail')}}";
+        //更新要回覆病患內容欄位的資料
+        function update_doctor_reply_textarea() {
+            let url = "{{route('get_doctor_feedback')}}";
+
+            //清空回覆病患內容的欄位
+            $("#doctor_feedback_modal_doctor_reply").val('');
+
+            $.ajax({
+                url: url,
+                method: "post",
+                data: {
+                    "_token": "{{csrf_token()}}",
+                    "record_id": record_id,
+                },
+                success: function (res) {
+                    //將資料寫入欄位
+                    $("#doctor_feedback_modal_doctor_reply").val(res);
+                }
+            })
+        }
+
+        //更新病患用藥紀錄
+        function update_medication_record_detail() {
+            let url = "{{route('get_medication_record_detail')}}";
 
 
-        $.ajax({
-            url: url,
-            method: "post",
-            data: {
-                "_token": "{{csrf_token()}}",
-                "record_id": record_id,
-            },
-            success: function (res) {
-                // console.log(res);
-                let main_record = res['main_record'];
-                let record_list = res['record_list'];
+            $.ajax({
+                url: url,
+                method: "post",
+                data: {
+                    "_token": "{{csrf_token()}}",
+                    "record_id": record_id,
+                },
+                success: function (res) {
+                    // console.log(res);
+                    let main_record = res['main_record'];
+                    let record_list = res['record_list'];
 
-                //寫入資料 就醫日、處方醫院、調劑醫院、保險類型
-                $("#medication_record_modal_redate").text(main_record['redate']);
-                $("#medication_record_modal_pres_hosp").text(main_record['pres_hosp']);
-                $("#medication_record_modal_disp_hosp").text(main_record['disp_hosp']);
-                $("#medication_record_modal_insurance_type").text(main_record['insurance_type']);
+                    //寫入資料 就醫日、處方醫院、調劑醫院、保險類型
+                    $("#medication_record_modal_redate").text(main_record['redate']);
+                    $("#medication_record_modal_pres_hosp").text(main_record['pres_hosp']);
+                    $("#medication_record_modal_disp_hosp").text(main_record['disp_hosp']);
+                    $("#medication_record_modal_insurance_type").text(main_record['insurance_type']);
 
 
-                $("#doctor_feedback_modal_tbody tr").remove();
-                //寫入病患用藥紀錄
-                $.each(record_list, function (index, value) {
-                    // console.log(value);
-                    $("#doctor_feedback_modal_tbody").append(
-                        `<tr class="bg-white border-b">
+                    $("#doctor_feedback_modal_tbody tr").remove();
+                    //寫入病患用藥紀錄
+                    $.each(record_list, function (index, value) {
+                        // console.log(value);
+                        $("#doctor_feedback_modal_tbody").append(
+                            `<tr class="bg-white border-b">
                             <td class="px-6 py-2 whitespace-nowrap text-sm font-medium text-gray-900">
                                 <a>${index + 1}</a>
                             </td>
@@ -271,10 +270,11 @@
                                 <a>${value['note']}</a>
                             </td>
                         </tr>`
-                    )
-                })
-            }
-        })
+                        )
+                    })
+                }
+            })
 
-    }
+        }
+    })
 </script>
