@@ -135,7 +135,7 @@
                                         </a>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <a href="{{route('nutritionistComment')}}"
+                                        <a href="{{route('get_nutritionistComment',['id' => $query->patient_id,'name'=>$query->patient_name])}}"
                                            class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
                                             營養師評論
                                         </a>

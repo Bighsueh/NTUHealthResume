@@ -56,15 +56,17 @@ Route::get('/setting/patient/delete_patient',[\App\Http\Controllers\PatientContr
 
 Route::get('/setting/nutritionManagement',[\App\Http\Controllers\NutritionManagementController::class,'get_setting_nutritionManagement'])->name('get_setting_nutritionManagement');
 
+// 飲食紀錄
 Route::get('/dietLog',[\App\Http\Controllers\NutritionManagementController::class,'get_dietLog'])->name('get_dietLog');
 Route::post('/dietLog', [\App\Http\Controllers\NutritionManagementController::class, 'store_dietLog'])->name('store_dietLog');
 Route::get('/dietLog/{id}', [\App\Http\Controllers\NutritionManagementController::class, 'delete_dietLog'])->name('delete_dietLog');
 // 進入修改頁面並且帶值
 Route::post('/dietLog/patch/page', [\App\Http\Controllers\NutritionManagementController::class, 'post_dietLog_patch_page'])->name('post_dietLog_patch_page');
 Route::post('/dietLog/patch', [\App\Http\Controllers\NutritionManagementController::class, 'patch_dietLog'])->name('patch_dietLog');
-
-
-Route::get('/nutritionistComment',[\App\Http\Controllers\NutritionManagementController::class,'get_setting_nutritionManagement'])->name('nutritionistComment');
+// 營養師評論
+Route::get('/nutritionistComment',[\App\Http\Controllers\NutritionManagementController::class,'get_nutritionistComment'])->name('get_nutritionistComment');
+Route::post('/nutritionistComment', [\App\Http\Controllers\NutritionManagementController::class, 'store_nutritionistComment'])->name('store_nutritionistComment');
+Route::get('/nutritionistComment/{id}', [\App\Http\Controllers\NutritionManagementController::class, 'delete_nutritionistComment'])->name('delete_nutritionistComment');
 
 Route::get('/menu', function () {
     $user_name = Session::get('user_name');

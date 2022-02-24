@@ -77,4 +77,52 @@ class NutritionManagementController extends Controller
             report($e);
         }
     }
+
+    public function get_nutritionistComment(Request $request)
+    {
+//        diet_log_id
+        $queries = DB::table('nutrition_ingredient')->where('diet_log_id',$request->id)->get();
+        $name = $request->name;
+        return view('pages.setting.nutritionManagement.nutritionistComment',compact('queries','name'));
+    }
+    // 新增一筆飲食評論
+    public function store_nutritionistComment(Request $request)
+    {
+        $query = $request->except('_token');
+        try{
+            DB::table('nutrition_ingredient')
+                ->insert([
+//                    diet_log_id要改
+                    'diet_log_id'=>1,
+                    'carbohydrate'=>$request->carbohydrate,
+                    'protein'=>$request->protein,
+                    'fat'=>$request->fat,
+                    'cal'=>$request->cal,
+                    'na'=>$request->na,
+                    'k'=>$request->k,
+                    'ca'=>$request->ca,
+                    'mg'=>$request->mg,
+                    'vit_b12'=>$request->vit_b12,
+                    'vit_d'=>$request->vit_d,
+                    'vit_e'=>$request->vit_e,
+                ]);
+        }catch (\Throwable $e)
+        {
+            report($e);
+            return $e;
+        }
+        return redirect()->back();
+    }
+
+    public function delete_nutritionistComment($id)
+    {
+        try {
+            DB::table('nutrition_ingredient')
+                ->where('id', $id)->delete();
+            return redirect()->back();
+        }catch (\Throwable $e)
+        {
+            report($e);
+        }
+    }
 }
