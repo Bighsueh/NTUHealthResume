@@ -111,7 +111,7 @@
                             <button type="button"
                                     class="bg-transparent border border-teal-700 text-teal-700
                                             hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded"
-                                    id="btn_dietRecord" data-bs-toggle="modal" data-bs-target="#dietRecordModal">飲食紀錄
+                                    id="btn_dietLog" data-bs-toggle="modal" data-bs-target="#dietLogModal">飲食紀錄
                             </button>
                         </div>
 
@@ -122,7 +122,7 @@
 
             <div class="grid">
                 <div class="flex mx-2">
-                    <p id="" class="my-2 justify-self-start font-bold text-xl">藥物資訊</p>
+                    <p id="" class="my-2 justify-self-start font-bold text-xl">飲食紀錄</p>
                     <p id="patitent_name" class="mx-2 my-2 justify-self-start font-bold text-xl">
                         病患A
                     </p>
@@ -141,35 +141,11 @@
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    開方日期
+                                    餐序
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    處方醫院
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    調劑醫院
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    適應症
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    藥物總類
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    藥品商品名稱
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    藥品成分名稱
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    詳細內容
+                                    份量
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
@@ -187,31 +163,10 @@
                                     1
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    2022/01/14 23:59
+                                    早餐
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    台大
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    台大
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    適應症
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    藥物總類
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    藥品商品名稱
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    藥品成分名稱
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <a href="#"
-                                       class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
-                                        查看
-                                    </a>
+                                    5
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <a href="#"
@@ -231,31 +186,10 @@
                                     2
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    2022/01/14 23:59
+                                    晚餐
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    台大
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    台大
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    適應症
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    藥物總類
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    藥品商品名稱
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    藥品成分名稱
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <a href="#"
-                                       class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
-                                        查看
-                                    </a>
+                                    3
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <a href="#"
@@ -276,10 +210,10 @@
                 </div>
             </div>
         </div>
-        @include('pages.setting.nutritionManagement.dietRecordModal')
+        @include('pages.setting.nutritionManagement.dietLogModal')
     </div>
     <script>
-        $('.btn_dietRecord').click(function (){
+        $('#btn_dietLog').click(function (){
             open_dietRecordModal();
         })
     </script>
