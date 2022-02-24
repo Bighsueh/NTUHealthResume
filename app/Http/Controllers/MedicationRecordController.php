@@ -21,13 +21,22 @@ class MedicationRecordController extends Controller
     //開啟回饋函及藥物紀錄-個別病患紀錄頁面
     public function get_medication_record_and_feedback_management_patient_detail_page(Request $request)
     {
+//        $doctor_feedback = DB::table('doctor_feedback')->where('record_id', 1)->first();
+//        dd($doctor_feedback->content);
 
         $patient_id = $request->get('patient_id');
         $patient_data = DB::table('patients')->where('patient_id', $patient_id)->first();
         $medication_record = DB::table('medication_records')->get();
-        $result = ['medication_record' => $medication_record, 'patient_name' => $patient_data->patient_name];
         $user_name = Session::get('user_name');
-        return view('pages.medicationRecords.patientDetail', compact($result,'user_name'));
+
+        $result = [
+            'medication_record' => $medication_record,
+            'patient_name' => $patient_data->patient_name,
+            'patient_id' => $patient_data->patient_id,
+            'user_name' => $user_name,
+        ];
+
+        return view('pages.medicationRecords.patientDetail', $result);
     }
 
     //依record_id取得藥物子項目
@@ -218,7 +227,6 @@ class MedicationRecordController extends Controller
             $pres_hosp = $request->pres_hosp;
             $disp_hosp = $request->disp_hosp;
             $record_id = $request->record_id;
-            $patient_id = $request->patient_id;
 
             DB::table('medication_records')
                 ->where('record_id',$record_id)
