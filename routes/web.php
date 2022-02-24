@@ -29,6 +29,8 @@ Route::get('drive', [DriveController::class, 'get_drive_page'])->name('get_drive
 Route::get('/medication_record', [MedicationRecordController::class, 'get_medication_record_and_feedback_management_page'])->name('get_medication_record_and_feedback_management_page');
 Route::get('/get_medication_record_page', [MedicationRecordController::class, 'get_medication_record_and_feedback_management_patient_detail_page'])->name('get_medication_record_and_reply_management_patient_detail_page');
 Route::post('/get_medication_record_detail', [MedicationRecordController::class, 'get_medication_record_detail'])->name('get_medication_record_detail');
+Route::post('/get_doctor_feedback', [MedicationRecordController::class, 'get_doctor_feedback'])->name('get_doctor_feedback');
+Route::post('/store_doctor_feedback', [MedicationRecordController::class, 'store_doctor_feedback'])->name('store_doctor_feedback');
 
 
 Route::get('/setting/employee',[\App\Http\Controllers\EmployeeController::class,'get_setting_employee'])->name('get_setting_employee');

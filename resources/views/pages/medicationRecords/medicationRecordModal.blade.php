@@ -114,6 +114,7 @@
                 $("#medication_record_modal_disp_hosp").text(main_record['disp_hosp']);
                 $("#medication_record_modal_insurance_type").text(main_record['insurance_type']);
 
+                $("#medication_record_modal_tbody tr").remove();
                 $.each(record_list,function(index,value){
                     console.log(value);
                     $("#medication_record_modal_tbody").append(

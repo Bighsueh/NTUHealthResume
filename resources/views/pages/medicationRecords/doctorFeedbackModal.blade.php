@@ -128,9 +128,14 @@
             <div
                 class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
                 <button type="button"
-                        class="mx-2 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded"
+                        class="btn-doctor-feedback-save mx-2 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded"
                         data-bs-dismiss="modal">
-                    關閉
+                    儲存並關閉
+                </button>
+                <button type="button"
+                        class="btn-doctor-feedback-cancel mx-2 bg-transparent border border-red-700 text-red-700 hover:bg-red-700 hover:text-white text-center py-2 px-4 rounded"
+                        data-bs-dismiss="modal">
+                    不儲存並關閉
                 </button>
                 {{--                <button type="button"--}}
                 {{--                        class="mx-2 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">--}}
@@ -140,13 +145,72 @@
         </div>
     </div>
 </div>
+<script>
+    let record_id;
+
+    //儲存醫師回覆
+    $(".btn-doctor-feedback-save").click(function () {
+        let doctor_reply = $("#doctor_feedback_modal_doctor_reply").val();
+        let url = "{{route('store_doctor_feedback')}}";
+
+        $.ajax({
+            url: url,
+            method: "post",
+            data: {
+                "_token": "{{csrf_token()}}",
+                "record_id": record_id,
+                "doctor_reply": doctor_reply,
+            },
+            success: function (res) {
+                //sweetalert
+                if (res === 'success') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: '儲存成功',
+                        text: '即將跳轉頁面',
+                        confirmButtonColor: '#8CD4F5'
+                    })
+                }
+            }
+        })
+    })
+
+    //刪除醫師回覆
 
     //開啟醫師回饋單
     $(".btn-doctor-feedback").click(function () {
         //取得藥物id
         record_id = $(this).parent().parent().find('.medication_record_id').text();
 
+        update_doctor_reply_textarea();
+        update_medication_record_detail();
+    })
+
+    //更新要回覆病患內容欄位的資料
+    function update_doctor_reply_textarea() {
+        let url = "{{route('get_doctor_feedback')}}";
+
+        //清空回覆病患內容的欄位
+        $("#doctor_feedback_modal_doctor_reply").val('');
+
+        $.ajax({
+            url: url,
+            method: "post",
+            data: {
+                "_token": "{{csrf_token()}}",
+                "record_id": record_id,
+            },
+            success: function (res) {
+                //將資料寫入欄位
+                $("#doctor_feedback_modal_doctor_reply").val(res);
+            }
+        })
+    }
+
+    //更新病患用藥紀錄
+    function update_medication_record_detail() {
         let url = "{{route('get_medication_record_detail')}}";
+
 
         $.ajax({
             url: url,
@@ -166,7 +230,9 @@
                 $("#medication_record_modal_disp_hosp").text(main_record['disp_hosp']);
                 $("#medication_record_modal_insurance_type").text(main_record['insurance_type']);
 
+
                 $("#doctor_feedback_modal_tbody tr").remove();
+                //寫入病患用藥紀錄
                 $.each(record_list, function (index, value) {
                     // console.log(value);
                     $("#doctor_feedback_modal_tbody").append(
@@ -209,5 +275,6 @@
                 })
             }
         })
-    })
+
+    }
 </script>

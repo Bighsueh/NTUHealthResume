@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use mysql_xdevapi\Exception;
 
 class MedicationRecordController extends Controller
 {
@@ -38,6 +40,78 @@ class MedicationRecordController extends Controller
 
         $result = ['main_record' => $main_record, 'record_list' => $record_list];
         return $result;
+    }
+
+    public function get_doctor_feedback(Request $request)
+    {
+        try{
+            //藥歷id
+            $record_id = $request->record_id;
+            //查詢醫師回饋單
+            $doctor_feedback = DB::table('doctor_feedback')->where('record_id', $record_id)->first();
+
+            //若存在醫師回饋單則取出回覆內容
+            if($doctor_feedback){
+                return $doctor_feedback->content;
+            }
+
+            //若不存在醫師回饋單則回傳空字串
+            if($doctor_feedback){
+                return "";
+            }
+
+        }catch (Exception $exception){
+            return $exception;
+        }
+    }
+
+    //儲存醫師回饋單,醫師回饋內容
+    public function store_doctor_feedback(Request $request)
+    {
+        try {
+            //藥歷id
+            $record_id = $request->record_id;
+            //醫師回覆內容
+            $doctor_reply = $request->doctor_reply;
+
+            //先取得病患的資料
+            $patient_data = DB::table('medication_records')->where('record_id', $record_id)->first();
+
+            //先確認資料是否存在
+            $if_exist = DB::table('doctor_feedback')->where('record_id', $record_id)->count();
+
+            //若以存在資料則導向修改資料
+            if ($if_exist > 0) {
+                //修改資料
+                DB::table('doctor_feedback')
+                    ->where('record_id', $record_id)
+                    ->update([
+                        'patient_id' => $patient_data->patient_id,
+                        'record_id' => $record_id,
+                        'doctor_id' => 1,
+                        'content' => $doctor_reply,
+                        'updated_at' => Carbon::now(),
+                    ]);
+            }
+//
+            //若不存在資料則導向則新增資料
+            if ($if_exist === 0) {
+                //新增資料
+                DB::table('doctor_feedback')->insert([
+                    'patient_id' => $patient_data->patient_id,
+                    'record_id' => $record_id,
+                    'doctor_id' => 1,
+                    'content' => $doctor_reply,
+                    'created_at' => Carbon::now(),
+                ]);
+            }
+
+
+            return 'success';
+        } catch (Exception $exception) {
+            return $exception;
+        }
+
     }
 
 }
