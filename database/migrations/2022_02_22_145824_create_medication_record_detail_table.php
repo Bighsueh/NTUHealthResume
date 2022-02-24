@@ -16,16 +16,16 @@ class CreateMedicationRecordDetailTable extends Migration
         Schema::create('medication_record_detail', function (Blueprint $table) {
             $table->id('detail_id')->autoIncrement();
             $table->integer('record_id');
-            $table->string('indication');
-            $table->string('category');
-            $table->string('trade_name');
-            $table->string('generic_name');
-            $table->float('dose');
-            $table->string('routes');
-            $table->string('freq');
-            $table->float('pres_day');
-            $table->float('total_amount');
-            $table->string('note');
+            $table->string('indication')->nullable();
+            $table->string('category')->nullable();
+            $table->string('trade_name')->nullable();
+            $table->string('generic_name')->nullable();
+            $table->float('dose')->nullable();
+            $table->string('routes')->nullable();
+            $table->string('freq')->nullable();
+            $table->float('pres_day')->nullable();
+            $table->float('total_amount')->nullable();
+            $table->string('note')->nullable();
             $table->timestamps();
         });
     }
