@@ -14,7 +14,7 @@ class CreateMedicationRecordsTable extends Migration
     public function up()
     {
         Schema::create('medication_records', function (Blueprint $table) {
-            $table->id('record_id');
+            $table->id('record_id')->autoIncrement();
             $table->integer('patient_id');
             $table->time('date_of_examination');
             $table->integer('medical_history_no');
