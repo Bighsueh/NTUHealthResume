@@ -172,8 +172,10 @@
                             <tbody class="divide-y divide-gray-200">
                             @foreach($medication_record as $row)
                             <tr>
+                                <td hidden class="medication_record_id">{{$row->record_id}}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     {{$thread+=1}}
+
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     {{$row->date_of_examination}}
@@ -204,7 +206,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <a href="#"
                                        class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded"
-                                       data-bs-toggle="modal" data-bs-target="#medicationModal">
+                                       data-bs-toggle="modal" data-bs-target="#pharmacistModal">
                                         查看
                                     </a>
                                 </td>

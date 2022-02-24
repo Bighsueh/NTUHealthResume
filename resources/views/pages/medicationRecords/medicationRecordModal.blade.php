@@ -120,4 +120,29 @@
         </div>
     </div>
 </div>
+<script>
+    $(".btn-medication-detail").click(function(){
+        //取得藥物id
+        let record_id = $(this).parent().parent().find('.medication_record_id').text();
+
+        let url = "{{route('get_medication_record_detail')}}";
+
+        $.ajax({
+            url : url,
+            method : "post",
+            data:{
+                "_token":"{{csrf_token()}}",
+                "record_id":record_id,
+            },
+            success:function(res){
+                // console.log(res);
+                //寫入資料 就醫日、處方醫院、調劑醫院、保險類型
+                $("#medication_record_modal_redate").text(res['redate']);
+                $("#medication_record_modal_pres_hosp").text(res['pres_hosp']);
+                $("#medication_record_modal_disp_hosp").text(res['disp_hosp']);
+                $("#medication_record_modal_insurance_type").text(res['insurance_type']);
+            }
+        })
+    })
+</script>
 

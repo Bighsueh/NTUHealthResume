@@ -27,5 +27,13 @@ class MedicationRecordController extends Controller
         return view('pages.medicationRecords.patientDetail', $result);
     }
 
+    //依record_id取得藥物子項目
+    public function get_medication_record_detail(Request $request){
+        //record_id
+        $record_id = $request->record_id;
+
+        $record_detail = DB::table('medication_records')->where('record_id',$record_id)->first();
+        return $record_detail;
+    }
 
 }
