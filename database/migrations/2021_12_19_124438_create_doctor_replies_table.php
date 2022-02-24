@@ -14,7 +14,7 @@ class CreateDoctorRepliesTable extends Migration
     public function up()
     {
         Schema::create('doctor_replies', function (Blueprint $table) {
-            $table->id('doctor_replies_id');
+            $table->id('doctor_replies_id')->autoIncrement();
             $table->string('doctor_replies_employee_id');
             $table->string('doctor_replies_medicine_description');
             $table->string('doctor_replies_pharmacist_reply');

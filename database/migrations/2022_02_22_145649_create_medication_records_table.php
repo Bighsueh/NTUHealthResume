@@ -14,14 +14,14 @@ class CreateMedicationRecordsTable extends Migration
     public function up()
     {
         Schema::create('medication_records', function (Blueprint $table) {
-            $table->id('record_id');
+            $table->id('record_id')->autoIncrement();
             $table->integer('patient_id');
-            $table->time('date_of_examination');
-            $table->integer('medical_history_no');
-            $table->string('insurance_type');
-            $table->time('redate');
-            $table->string('pres_hosp');
-            $table->string('disp_hosp');
+            $table->time('date_of_examination')->nullable();
+            $table->integer('medical_history_no')->nullable();
+            $table->string('insurance_type')->nullable();
+            $table->date('redate')->nullable();
+            $table->string('pres_hosp')->nullable();
+            $table->string('disp_hosp')->nullable();
             $table->timestamps();
         });
     }

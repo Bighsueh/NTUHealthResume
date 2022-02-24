@@ -109,10 +109,10 @@
                         @foreach($patient_list as $row)
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                {{$row->patients_id}}
+                                {{$row->patient_id}}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                {{$row->patients_name}}
+                                {{$row->patient_name}}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 男生
@@ -121,7 +121,7 @@
                                 A12345XXXX
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <a href="{{route('get_medication_record_and_reply_management_patient_detail_page',['patient_id' => $row->patients_id])}}"
+                                <a href="{{route('get_medication_record_and_reply_management_patient_detail_page',['patient_id' => $row->patient_id])}}"
                                    class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
                                     用藥紀錄
                                 </a>

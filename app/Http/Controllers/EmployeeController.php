@@ -84,5 +84,13 @@ class EmployeeController extends Controller
 
     }
 
+    function get_employee_data(Request $request){
+       try{
+
+       }catch (Exception $exception){
+           return $exception;
+       }
+    }
+
 
 }
