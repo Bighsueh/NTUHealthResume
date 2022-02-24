@@ -45,6 +45,11 @@ Route::get('/setting/employee/delete_employee',[\App\Http\Controllers\EmployeeCo
 
 
 Route::get('/setting/patient',[\App\Http\Controllers\PatientController::class,'get_setting_patient'])->name('get_setting_patient');
+Route::get('/setting/patient/get_patient_data',[\App\Http\Controllers\PatientController::class,'get_patient_data'])->name('get_patient_data');
+Route::get('/setting/patient/get_edit_patient',[\App\Http\Controllers\PatientController::class,'get_edit_patient'])->name('get_edit_patient');
+Route::get('/setting/patient/store_create_patient',[\App\Http\Controllers\PatientController::class,'store_create_patient'])->name('store_create_patient');
+Route::get('/setting/patient/store_edit_patient',[\App\Http\Controllers\PatientController::class,'store_edit_patient'])->name('store_edit_patient');
+Route::get('/setting/patient/delete_patient',[\App\Http\Controllers\PatientController::class,'delete_patient'])->name('delete_patient');
 
 Route::get('/setting/nutritionManagement',[\App\Http\Controllers\NutritionManagementController::class,'get_setting_nutritionManagement'])->name('get_setting_nutritionManagement');
 

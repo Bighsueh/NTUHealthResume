@@ -21,8 +21,8 @@ class LoginController extends Controller
 
             //檢查是否存在於 員工表中
             $check_employee = DB::table('employees')
-                ->where('employees_account', $username)
-                ->where('employees_password', $password)
+                ->where('employee_account', $username)
+                ->where('employee_password', $password)
                 ->first();
 
             //員工不存在

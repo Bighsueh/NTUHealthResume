@@ -12,15 +12,20 @@
                                   d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
                         <input type="text" class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
-                               placeholder="查詢">
+                               placeholder="查詢"
+                        id="input_search">
 
-                        <select class=" bg-transparent  border-none w-1/6 text-gray-700 mr-3 py-1 px-2  leading-tight focus:outline-none ">
-                            <option value="1">ID</option>
-                            <option value="2">姓名</option>
+                        <select class=" bg-transparent  border-none w-1/6 text-gray-700 mr-3 py-1 px-2  leading-tight focus:outline-none "
+                        id="search_from">
+                            <option value="patient_id">ID</option>
+                            <option value="patient_no">病患編號</option>
+                            <option value="patient_name">姓名</option>
+                            <option value="place">所屬據點</option>
+                            <option value="id_number">身分證字號</option>
                         </select>
 
                         <button type="button" class="mx-4 flex-shrink-0 bg-teal-700 hover:bg-teal-500 border-teal-700 hover:border-teal-500 text-sm border-4 text-white py-1 px-3 rounded"
-                        >查詢</button>
+                        id="btn_search">查詢</button>
 
                             <button type="button" class="mx-4 flex-shrink-0 bg-teal-700 hover:bg-teal-500 border-teal-700 hover:border-teal-500 text-sm border-4 text-white py-1 px-3 rounded"
                             >顯示資訊</button>
@@ -64,39 +69,45 @@
                             <thead class="bg-gray-50">
                             <tr>
                                 <th class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">#</th>
+                                <th class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">病患編號</th>
                                 <th class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">姓名</th>
-                                <th class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">性別</th>
-                                <th class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">電話</th>
+                                <th class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">所屬據點</th>
                                 <th class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">身分證字號</th>
                                 <th class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">生日</th>
-                                <th class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">地址</th>
+                                <th class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">收案日期</th>
 {{--                                <th class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">QRCode</th>--}}
-                                <th class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider"></th>
+                                <th class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                    <button type="button" class="bg-teal-700
+                                     hover:bg-teal-500 border-teal-700 hover:border-teal-500 text-sm
+                                     border-4 text-white py-1 px-3 rounded btn_create_patient" value=""
+                                    >新增</button>
+
+                                </th>
                             </tr>
                             </thead>
-                            <tbody class="divide-y divide-gray-200">
-{{--                            @foreach($patient as $patient)--}}
+                            <tbody class="divide-y divide-gray-200" id="tbody">
+                            @foreach($patients as $patient)
                             <tr class="text-gray-700 items-center">
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    1
+                                    {{$patient->patient_id}}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    幼幼
+                                    {{$patient->patient_no}}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    男
+                                    {{$patient->patient_name}}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    0912345601
+                                    {{$patient->place}}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    C12345****
+                                    {{$patient->id_number}}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    111-01-20
+                                    {{$patient->patient_bd}}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    雲林縣虎...
+                                    {{$patient->close_date}}
                                 </td>
 {{--                                <td class="px-10 py-2 whitespace-nowrap">--}}
 {{--                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">--}}
@@ -106,11 +117,11 @@
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <button type="button" class="bg-teal-700
                                      hover:bg-teal-500 border-teal-700 hover:border-teal-500 text-sm
-                                     border-4 text-white py-1 px-3 rounded" id="btn_employee"
+                                     border-4 text-white py-1 px-3 rounded btn_patient" value="{{$patient->patient_id}}"
                                     >修改</button>
                                 </td>
                             </tr>
-{{--                            @endforeach--}}
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -123,9 +134,63 @@
 
 
     @include('pages.setting.patient.settingPatientModal')
-
+    @include('pages.setting.patient.createPatientModal')
     <script>
+        $('#btn_search').click(function () {
+            if($('#input_search').val() == ''){
+                window.location.reload();
+            }else{
+                update_patient_data();
+            }
+        })
 
+        function update_patient_data(){
+            $.ajax({
+                url:"{{route('get_patient_data')}}",
+                method:'get',
+                data:{
+                    search_data :$('#input_search').val() ,
+                    search_from:$('#search_from').val()
+                },
+                success:function (res) {
+                    $('#tbody tr').remove();
+                    if(res.length > 0){
+                        res.forEach(function (row) {
+                            let patient_id = '<td class="px-6 py-4 whitespace-nowrap">'+row['patient_id']+'</td>';
+                            let patient_no = '<td class="px-6 py-4 whitespace-nowrap">'+row['patient_no']+'</td>';
+                            let patient_name = '<td class="px-6 py-4 whitespace-nowrap">'+row['patient_name']+'</td>';
+                            let place = '<td class="px-6 py-4 whitespace-nowrap">'+row['place']+'</td>';
+                            let id_number = '<td class="px-6 py-4 whitespace-nowrap">'+row['id_number']+'</td>';
+                            let patient_bd = '<td class="px-6 py-4 whitespace-nowrap">'+row['patient_bd']+'</td>';
+                            let close_date = '<td class="px-6 py-4 whitespace-nowrap">'+row['close_date']+'</td>';
+                            let setting_btn = `<td class="px-6 py-4 whitespace-nowrap">
+                                    <button type="button" class="bg-teal-700
+                                     hover:bg-teal-500 border-teal-700 hover:border-teal-500 text-sm
+                                     border-4 text-white py-1 px-3 rounded btn_patient" value="`+row['patient_id']+`"
+                                    >修改</button>`+
+                                '</td>';
+                            $('#tbody').append(
+                                '<tr>'+patient_id+patient_no+patient_name+place+id_number+patient_bd+close_date+setting_btn+'</tr>'
+                            )
+                        })
+
+                        $('.btn_patient').click(function () {
+                            open_settingPatientModal($(this).attr('value'));
+                        })
+                    }
+                }
+
+
+            });
+        }
+
+    $('.btn_patient').click(function () {
+        open_settingPatientModal($(this).attr('value'));
+    })
+
+    $('.btn_create_patient').click(function () {
+        open_createPatientModal();
+    })
 
     </script>
 @endsection

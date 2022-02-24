@@ -24,36 +24,54 @@
                             <div class="flex">
                                 <div class="flex-1 flex justify-between">
                                     <div>
-                                        <label class="mx-6">姓名</label>
+                                        <label class="mx-6">#</label>
                                     </div>
                                     <div>
-                                        <input value="幼幼" class="border-teal-700 border-b py-1 px-20">
+                                        <input value="" class="border-teal-700 border-b py-1 px-20" id="edit_patient_id">
                                     </div>
                                 </div>
                                 <div class="flex-1 flex justify-between">
                                     <div>
-                                        <label class="mx-6">性別</label>
+                                        <label class="mx-6">病患編號</label>
                                     </div>
                                     <div>
-                                        <input value="男" class="border-teal-700 border-b py-1 px-20">
+                                        <input  class="border-teal-700 border-b py-1 px-20" id="edit_patient_no">
                                     </div>
                                 </div>
                             </div>
                             <div class="flex ">
                                 <div class="flex-1 flex justify-between">
                                     <div>
-                                        <label class="mx-6">電話</label>
+                                        <label class="mx-6">結案日期</label>
                                     </div>
                                     <div>
-                                        <input value="0912345678" class="border-teal-700 border-b py-1 px-20">
+                                        <input  class="border-teal-700 border-b py-1 px-20" id="edit_close_date">
                                     </div>
                                 </div>
+                                <div class="flex-1 flex justify-between">
+                                    <div>
+                                        <label class="mx-6">所述據點</label>
+                                    </div>
+                                    <div>
+                                        <input  class=" border-teal-700 border-b py-1 px-20" id="edit_place">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex">
                                 <div class="flex-1 flex justify-between">
                                     <div>
                                         <label class="mx-6">身分證字號</label>
                                     </div>
                                     <div>
-                                        <input value="C123456789" class=" border-teal-700 border-b py-1 px-20">
+                                        <input  class="border-teal-700 border-b py-1 px-20" id="edit_id_number">
+                                    </div>
+                                </div>
+                                <div class="flex-1 flex justify-between">
+                                    <div>
+                                        <label class="mx-6">姓名</label>
+                                    </div>
+                                    <div>
+                                        <input  class=" border-teal-700 border-b py-1 px-20" id="edit_patient_name">
                                     </div>
                                 </div>
                             </div>
@@ -63,84 +81,37 @@
                                         <label class="mx-6">生日</label>
                                     </div>
                                     <div>
-                                        <input value="110-01-20" class="border-teal-700 border-b py-1 px-20">
+                                        <input  class="border-teal-700 border-b py-1 px-20" id="edit_patient_bd">
                                     </div>
                                 </div>
                                 <div class="flex-1 flex justify-between">
                                     <div>
-                                        <label class="mx-6">地址</label>
+                                        <label class="mx-6">年齡</label>
                                     </div>
                                     <div>
-                                        <input value="雲林縣虎尾鎮長春路123巷86號" class=" border-teal-700 border-b py-1 px-20">
+                                        <input  class=" border-teal-700 border-b py-1 px-20"  id="edit_age">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="flex-1 flex justify-between">
+                                    <div>
+                                        <label class="mx-6">體重</label>
+                                    </div>
+                                    <div>
+                                        <input  class="border-teal-700 border-b py-1 px-20" id="edit_weight">
+                                    </div>
+                                </div>
+                                <div class="flex-1 flex justify-between">
+                                    <div>
+                                        <label class="mx-6">身高</label>
+                                    </div>
+                                    <div>
+                                        <input  class=" border-teal-700 border-b py-1 px-20" id="edit_height">
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-
-{{--                            <table class="">--}}
-{{--                                <tr>--}}
-{{--                                    <td>--}}
-{{--                                        <lable class="mx-2">--}}
-{{--                                            姓名--}}
-{{--                                        </lable>--}}
-{{--                                    </td>--}}
-{{--                                    <td>--}}
-{{--                                        <input value="幼幼" class="border-teal-700 border-b py-1 px-16">--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                                <tr>--}}
-{{--                                    <td>--}}
-{{--                                        <lable class="mx-2">--}}
-{{--                                            性別--}}
-{{--                                        </lable>--}}
-{{--                                    </td>--}}
-{{--                                    <td>--}}
-{{--                                        <input value="123" class="border-teal-700 border-b py-1 px-16">--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                                <tr>--}}
-{{--                                    <td>--}}
-{{--                                        <lable class="mx-2">--}}
-{{--                                            電話--}}
-{{--                                        </lable>--}}
-{{--                                    </td>--}}
-{{--                                    <td>--}}
-{{--                                        <input value="0912345678" class="border-teal-700 border-b py-1 px-16">--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                                <tr>--}}
-{{--                                    <td>--}}
-{{--                                        <lable class="mx-2">--}}
-{{--                                            身分證字號--}}
-{{--                                        </lable>--}}
-{{--                                    </td>--}}
-{{--                                    <td>--}}
-{{--                                        <input value="C123456789" class="border-teal-700 border-b py-1 px-16">--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                                <tr>--}}
-{{--                                    <td>--}}
-{{--                                        <lable class="mx-2">--}}
-{{--                                            生日--}}
-{{--                                        </lable>--}}
-{{--                                    </td>--}}
-{{--                                    <td>--}}
-{{--                                        <input value="111-01-20" class="border-teal-700 border-b py-1 px-16">--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                                <tr>--}}
-{{--                                    <td>--}}
-{{--                                        <lable class="mx-2">--}}
-{{--                                            地址--}}
-{{--                                        </lable>--}}
-{{--                                    </td>--}}
-{{--                                    <td>--}}
-{{--                                        <input value="雲林縣虎尾鎮長春路123巷86號" class="border-teal-700 border-b py-1 px-16">--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                            </table>--}}
-
 
                     </div>
                     <div class="flex px-1 py-1">
@@ -264,8 +235,14 @@
             </div>
 
             <div class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-center p-4 border-t border-gray-200 rounded-b-md">
-                <button class="mx-4 flex-shrink-0 bg-teal-700 hover:bg-blue-500 border-teal-700 hover:border-blue-500 text-sm border-4 text-white py-1 px-10 rounded" >修改</button>
-                {{--                <button class="mx-4 flex-shrink-0 bg-teal-700 hover:bg-red-500 border-teal-700 hover:border-red-500 text-sm border-4 text-white py-1 px-6 rounded " data-bs-dismiss="modal">關閉</button>--}}
+                <button class="mx-4 flex-shrink-0 bg-teal-700
+                hover:bg-blue-500 border-teal-700
+                hover:border-blue-500 text-sm border-4 text-white py-1 px-10 rounded " id="btn_store_edit_patient">修改</button>
+
+                <button class="mx-4 flex-shrink-0 bg-teal-700
+                hover:bg-red-500 border-teal-700
+                hover:border-red-500 text-sm border-4 text-white py-1 px-10 rounded btn_delete_patient" id="btn_delete_patient" >刪除</button>
+
 
             </div>
         </div>
@@ -273,8 +250,78 @@
 </div>
 
 <script>
-    function open_settingPatientModal(){
+    let patient_id;
+    function open_settingPatientModal(id){
+        patient_id = id;
+        // window.alert(id);
+        $.ajax({
+            url:"{{route('get_edit_patient')}}",
+            method:'get',
+            data:{
+                patient_id:patient_id,
+            },
+            success:function (res) {
+                // window.alert(res[0]['patient_id']);
+                $('#edit_patient_id').val(res[0]['patient_id']);
+                $('#edit_patient_no').val(res[0]['patient_no']);
+                $('#edit_close_date').val(res[0]['close_date']);
+                $('#edit_place').val(res[0]['place']);
+                $('#edit_id_number').val(res[0]['id_number']);
+                $('#edit_patient_name').val(res[0]['patient_name']);
+                $('#edit_patient_bd').val(res[0]['patient_bd']);
+                $('#edit_age').val(res[0]['age']);
+                $('#edit_weight').val(res[0]['weight']);
+                $('#edit_height').val(res[0]['height']);
+
+            }
+        });
         $('#settingPatientModal').modal('show');
+    }
+
+    $('#btn_store_edit_patient').click(function () {
+        store_edit_patient();
+    })
+    function store_edit_patient() {
+       $.ajax({
+           url:"{{route('store_edit_patient')}}",
+           mothed:'get',
+           data:{
+               patient_id:patient_id,
+               patient_no:$('#edit_patient_no').val(),
+               close_date:$('#edit_close_date').val(),
+               place:$('#edit_place').val(),
+               id_number:$('#edit_id_number').val(),
+               patient_name:$('#edit_patient_name').val(),
+               patient_bd:$('#edit_patient_bd').val(),
+               age:$('#edit_age').val(),
+               weight:$('#edit_weight').val(),
+               height:$('#edit_height').val()
+           },
+           success:function (res) {
+               window.alert(res);
+               update_patient_data();
+           }
+       });
+       $('#settingPatientModal').modal('hide');
+    }
+    $('#btn_delete_patient').click(function () {
+        if(window.confirm('確定要刪除')){
+            delete_patient();
+        }
+    })
+    function delete_patient(){
+        $.ajax({
+            url:"{{route('delete_patient')}}",
+            method:'get',
+            data:{
+                patient_id:patient_id
+            },
+            success:function (res) {
+                window.alert(res);
+                update_patient_data();
+            }
+        });
+        $('#settingPatientModal').modal('hide');
     }
 
 </script>
