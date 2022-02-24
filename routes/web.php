@@ -36,6 +36,7 @@ Route::get('/setting/employee',[\App\Http\Controllers\EmployeeController::class,
 Route::get('/setting/employee/get_edit_employee',[\App\Http\Controllers\EmployeeController::class,'get_edit_employee'])->name('get_edit_employee');
 Route::get('/setting/employee/store_edit_employee',[\App\Http\Controllers\EmployeeController::class,'store_edit_employee'])->name('store_edit_employee');
 Route::get('/setting/employee/store_create_employee',[\App\Http\Controllers\EmployeeController::class,'store_create_employee'])->name('store_create_employee');
+Route::get('/setting/employee/get_employee_data',[\App\Http\Controllers\EmployeeController::class,'get_employee_data'])->name('get_employee_data');
 
 Route::get('/setting/patient',[\App\Http\Controllers\PatientController::class,'get_setting_patient'])->name('get_setting_patient');
 
