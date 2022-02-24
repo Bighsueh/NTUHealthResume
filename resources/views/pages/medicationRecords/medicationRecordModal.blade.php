@@ -64,39 +64,8 @@
 
                                         </tr>
                                         </thead>
-                                        <tbody>
-                                        <tr class="bg-white border-b">
-                                            <td class="px-6 py-2 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                <a id="medication_record_modal_indication"></a>
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
-                                                <a id="medication_record_modal_category"></a>
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
-                                                <a id="medication_record_modal_trade_name"></a>
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
-                                                <a id="medication_record_modal_generic_name"></a>
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
-                                                <a id="medication_record_modal_dose"></a>
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
-                                                <a id="medication_record_modal_routes"></a>
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
-                                                <a id="medication_record_modal_freq"></a>
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
-                                                <a id="medication_record_modal_pres_day"></a>
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
-                                                <a id="medication_record_modal_total_amount"></a>
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
-                                                <a id="medication_record_modal_note"></a>
-                                            </td>
-                                        </tr>
+                                        <tbody id="medication_record_modal_tbody">
+
                                         </tbody>
                                     </table>
                                 </div>

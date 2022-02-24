@@ -28,14 +28,15 @@ class MedicationRecordController extends Controller
     }
 
     //依record_id取得藥物子項目
-    public function get_medication_record_detail(Request $request){
+    public function get_medication_record_detail(Request $request)
+    {
         //record_id
         $record_id = $request->record_id;
 
-        $main_record = DB::table('medication_records')->where('record_id',$record_id)->first();
-        $record_list = DB::table('medication_record_detail')->where('record_id',$record_id)->get();
+        $main_record = DB::table('medication_records')->where('record_id', $record_id)->first();
+        $record_list = DB::table('medication_record_detail')->where('record_id', $record_id)->get();
 
-        $result = ['main_record'=>$main_record,'record_list'=>$record_list];
+        $result = ['main_record' => $main_record, 'record_list' => $record_list];
         return $result;
     }
 

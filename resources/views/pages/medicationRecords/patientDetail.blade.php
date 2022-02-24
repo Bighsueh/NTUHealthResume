@@ -198,14 +198,14 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <a href="#"
-                                       class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded"
+                                       class="btn-doctor-feedback bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded"
                                        data-bs-toggle="modal" data-bs-target="#doctorFeedbackModal">
                                         查看
                                     </a>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <a href="#"
-                                       class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded"
+                                       class="btn-pharmacist-feedback bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded"
                                        data-bs-toggle="modal" data-bs-target="#pharmacistModal">
                                         查看
                                     </a>

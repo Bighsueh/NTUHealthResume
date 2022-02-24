@@ -59,39 +59,7 @@
 
                                         </tr>
                                         </thead>
-                                        <tbody>
-                                        <tr class="bg-white border-b">
-                                            <td class="px-6 py-2 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                <a id="doctor_feedback_modal_indication"></a>
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
-                                                <a id="doctor_feedback_modal_category"></a>
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
-                                                <a id="doctor_feedback_modal_trade_name"></a>
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
-                                                <a id="doctor_feedback_modal_generic_name"></a>
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
-                                                <a id="doctor_feedback_modal_dose"></a>
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
-                                                <a id="doctor_feedback_modal_routes"></a>
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
-                                                <a id="doctor_feedback_modal_freq"></a>
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
-                                                <a id="doctor_feedback_modal_pres_day"></a>
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
-                                                <a id="doctor_feedback_modal_total_amount"></a>
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
-                                                <a id="doctor_feedback_modal_note"></a>
-                                            </td>
-                                        </tr>
+                                        <tbody id="doctor_feedback_modal_tbody">
                                         </tbody>
                                     </table>
                                 </div>
@@ -103,7 +71,7 @@
                 <!--醫師回饋內容-->
                 <div class="flex justify-center">
                     <div class="mb-3 xl:w-full">
-                        <b class="mx-2">病患用藥紀錄</b>
+                        <b class="mx-2">要回覆病患的內容</b>
                         <textarea
                             class="
                             form-control
@@ -173,3 +141,73 @@
     </div>
 </div>
 
+    //開啟醫師回饋單
+    $(".btn-doctor-feedback").click(function () {
+        //取得藥物id
+        record_id = $(this).parent().parent().find('.medication_record_id').text();
+
+        let url = "{{route('get_medication_record_detail')}}";
+
+        $.ajax({
+            url: url,
+            method: "post",
+            data: {
+                "_token": "{{csrf_token()}}",
+                "record_id": record_id,
+            },
+            success: function (res) {
+                // console.log(res);
+                let main_record = res['main_record'];
+                let record_list = res['record_list'];
+
+                //寫入資料 就醫日、處方醫院、調劑醫院、保險類型
+                $("#medication_record_modal_redate").text(main_record['redate']);
+                $("#medication_record_modal_pres_hosp").text(main_record['pres_hosp']);
+                $("#medication_record_modal_disp_hosp").text(main_record['disp_hosp']);
+                $("#medication_record_modal_insurance_type").text(main_record['insurance_type']);
+
+                $("#doctor_feedback_modal_tbody tr").remove();
+                $.each(record_list, function (index, value) {
+                    // console.log(value);
+                    $("#doctor_feedback_modal_tbody").append(
+                        `<tr class="bg-white border-b">
+                            <td class="px-6 py-2 whitespace-nowrap text-sm font-medium text-gray-900">
+                                <a>${index + 1}</a>
+                            </td>
+                            <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
+                                <a>${value['indication']}</a>
+                            </td>
+                            <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
+                                <a>${value['category']}</a>
+                            </td>
+                            <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
+                                <a>${value['trade_name']}</a>
+                            </td>
+                            <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
+                                <a>${value['generic_name']}</a>
+                            </td>
+                            <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
+                                <a>${value['dose']}</a>
+                            </td>
+                            <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
+                                <a>${value['routes']}</a>
+                            </td>
+                            <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
+                                <a>${value['freq']}</a>
+                            </td>
+                            <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
+                                <a>${value['pres_day']}</a>
+                            </td>
+                            <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
+                                <a>${value['total_amount']}</a>
+                            </td>
+                             <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
+                                <a>${value['note']}</a>
+                            </td>
+                        </tr>`
+                    )
+                })
+            }
+        })
+    })
+</script>
