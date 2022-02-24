@@ -15,18 +15,18 @@ class CreateNutritionIngredientTable extends Migration
     {
         Schema::create('nutrition_ingredient', function (Blueprint $table) {
             $table->id();
-            $table->string('diet_log_id');
-            $table->double('carbohydrate');
-            $table->double('protein');
-            $table->double('fat');
-            $table->double('cal');
-            $table->double('na');
-            $table->double('k');
-            $table->double('ca');
-            $table->double('mg');
-            $table->double('vit_b12');
-            $table->double('vit_d');
-            $table->double('vit_e');
+            $table->string('diet_log_id')->nullable();
+            $table->double('carbohydrate')->nullable();
+            $table->double('protein')->nullable();
+            $table->double('fat')->nullable();
+            $table->double('cal')->nullable();
+            $table->double('na')->nullable();
+            $table->double('k')->nullable();
+            $table->double('ca')->nullable();
+            $table->double('mg')->nullable();
+            $table->double('vit_b12')->nullable();
+            $table->double('vit_d')->nullable();
+            $table->double('vit_e')->nullable();
             $table->timestamps();
         });
     }

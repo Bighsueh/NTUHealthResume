@@ -15,12 +15,12 @@ class CreateDietLogTable extends Migration
     {
         Schema::create('diet_log', function (Blueprint $table) {
             $table->id();
-            $table->string('patient_id');
-            $table->string('meal_order');
-            $table->string('meal_name');
-            $table->double('quantity');
-            $table->string('img_src');
-            $table->string('remark');
+            $table->string('patient_id')->nullable();
+            $table->string('meal_order')->nullable();
+            $table->string('meal_name')->nullable();
+            $table->double('quantity')->nullable();
+            $table->string('img_src')->nullable();
+            $table->string('remark')->nullable();
             $table->timestamps();
         });
     }
