@@ -14,9 +14,11 @@ class CreateDoctorFeedbackTable extends Migration
     public function up()
     {
         Schema::create('doctor_feedback', function (Blueprint $table) {
-            $table->id('patient_id')->autoIncrement();
-            $table->text('content');
-            $table->string('doctor');
+            $table->id('doctor_feedback_id')->autoIncrement();
+            $table->integer('patient_id');
+            $table->integer('record_id');
+            $table->integer('doctor_id');
+            $table->text('content')->nullable();
             $table->timestamps();
         });
     }
