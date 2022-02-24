@@ -76,7 +76,7 @@ class MedicationRecordController extends Controller
         }
     }
 
-    //儲存醫師回饋單,醫師回饋內容
+    //儲存醫師回饋單,醫師回饋及醫師發問內容
     public function store_doctor_feedback(Request $request)
     {
         try {
@@ -84,15 +84,19 @@ class MedicationRecordController extends Controller
             $record_id = $request->record_id;
             //醫師回覆內容
             $doctor_reply = $request->doctor_reply;
+            //提師提問內容
+            $doctor_ask = $request->doctor_ask;
 
             //先取得病患的資料
             $patient_data = DB::table('medication_records')->where('record_id', $record_id)->first();
 
-            //先確認資料是否存在
-            $if_exist = DB::table('doctor_feedback')->where('record_id', $record_id)->count();
+            //確認醫師回饋資料是否存在
+            $if_exist_doctor_feedback = DB::table('doctor_feedback')->where('record_id', $record_id)->count();
+            //確認藥師資料是否存在
+            $if_exist_pharmacist_feedback = DB::table('pharmacist_feedback')->where('record_id', $record_id)->count();
 
             //若以存在資料則導向修改資料
-            if ($if_exist > 0) {
+            if ($if_exist_doctor_feedback > 0) {
                 //修改資料
                 DB::table('doctor_feedback')
                     ->where('record_id', $record_id)
@@ -106,7 +110,7 @@ class MedicationRecordController extends Controller
             }
 //
             //若不存在資料則導向則新增資料
-            if ($if_exist === 0) {
+            if ($if_exist_doctor_feedback === 0) {
                 //新增資料
                 DB::table('doctor_feedback')->insert([
                     'patient_id' => $patient_data->patient_id,
@@ -116,6 +120,34 @@ class MedicationRecordController extends Controller
                     'created_at' => Carbon::now(),
                 ]);
             }
+
+            //若以存在資料則導向修改資料
+            if ($if_exist_pharmacist_feedback > 0) {
+                //修改資料
+                DB::table('pharmacist_feedback')
+                    ->where('record_id', $record_id)
+                    ->update([
+                        'patient_id' => $patient_data->patient_id,
+                        'record_id' => $record_id,
+                        'pharmacist_id' => 1,
+                        'doctor_ask' => $doctor_ask,
+                        'updated_at' => Carbon::now(),
+                    ]);
+            }
+//
+            //若不存在資料則導向則新增資料
+            if ($if_exist_pharmacist_feedback === 0) {
+                //新增資料
+                DB::table('pharmacist_feedback')->insert([
+                    'patient_id' => $patient_data->patient_id,
+                    'record_id' => $record_id,
+                    'pharmacist_id' => 1,
+                    'doctor_ask' => $doctor_ask,
+                    'created_at' => Carbon::now(),
+                ]);
+            }
+
+
             return 'success';
         } catch (Exception $exception) {
             return $exception;
@@ -134,7 +166,7 @@ class MedicationRecordController extends Controller
 
             //若存在藥師回饋單則取出回覆內容
             if($pharmacist_feedback){
-                return $pharmacist_feedback->content;
+                return $pharmacist_feedback;
             }
 
             //若不存在藥師回饋單則回傳空字串
