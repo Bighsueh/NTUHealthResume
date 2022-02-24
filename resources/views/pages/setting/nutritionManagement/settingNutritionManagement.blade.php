@@ -109,58 +109,39 @@
                             </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200">
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    1
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    病患A
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    男生
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    A12345XXXX
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <a href="{{route('get_dietLog')}}"
-                                       class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
-                                        飲食紀錄
-                                    </a>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <a href="{{route('nutritionistComment')}}"
-                                       class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
-                                        營養師評論
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    2
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    病患B
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    女生
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    A22345XXXX
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <a href="{{route('get_dietLog')}}"
-                                       class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
-                                        飲食紀錄
-                                    </a>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <a href="{{route('nutritionistComment')}}"
-                                       class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
-                                        營養師評論
-                                    </a>
-                                </td>
-                            </tr>
+                            @foreach($queries as $query)
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{$query->patient_id}}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{$query->patient_name}}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        @if(substr($query->id_number,1,1) ==1)
+                                            男生
+                                        @else
+                                            女生
+                                        @endif
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{$query->id_number}}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <a href="{{route('get_dietLog',['id' => $query->patient_id,'name'=>$query->patient_name])}}"
+                                           class="bg-transparent border border-teal-700 text-teal-700
+                                           hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
+                                            飲食紀錄
+                                        </a>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <a href="{{route('nutritionistComment')}}"
+                                           class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
+                                            營養師評論
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
