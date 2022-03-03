@@ -32,7 +32,6 @@
                 <div class="flex justify-start">
                     <div class="flex">
                         <div class="mx-6 mt-4 flex items-end">
-                            <p class="text-3xl mb-2 font-bold" id="text-congratulations">營養管理系統</p>
                             <p class="text-3xl mb-2 font-bold" id="text-congratulations">早安，{{$user_name}}先生/女士</p>
                             <div class="flex item-end mx-4 text-gray-400">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-4" fill="none"
@@ -125,7 +124,7 @@
                 <div class="flex mx-2">
                     <p id="" class="my-2 justify-self-start font-bold text-xl">飲食紀錄</p>
                     <p id="patitent_name" class="mx-2 my-2 justify-self-start font-bold text-xl">
-                        病患A
+                        {{$patient_data['patient_name']}}
                     </p>
                     <p class="my-2 justify-self-start font-bold text-xl">先生/女士</p>
                 </div>
@@ -172,7 +171,10 @@
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <a href="#"
-                                               class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
+                                               class="bg-transparent border border-teal-700 text-teal-700
+                                               hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded btn-patch"
+                                               value="{{$query->id}}"
+                                               data-bs-toggle="modal" data-bs-target="#dietLogPatchModal">
                                                 修改
                                             </a>
                                         </td>
@@ -190,11 +192,12 @@
                 </div>
             </div>
         </div>
-        @include('pages.setting.nutritionManagement.dietLogModal')
+        @include('pages.setting.nutritionManagement.createDietLogModal')
+        @include('pages.setting.nutritionManagement.patchDietLogModal')
     </div>
     <script>
         $('#btn_dietLog').click(function (){
-            open_dietRecordModal();
+            create_dietLog();
         })
     </script>
 @endsection
