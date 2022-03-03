@@ -144,31 +144,31 @@
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    就醫日期
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    開方日期
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    處方醫院
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    調劑醫院
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
                                     藥歷資訊
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    醫師回饋單
+                                    藥歷資訊-最後異動時間
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                    其他資訊
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                    其他資訊-最後異動時間
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
                                     藥師回饋單
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                    藥師回饋單-最後異動時間
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                    收案日期
                                 </th>
                             </tr>
                             </thead>
@@ -181,23 +181,13 @@
 
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    {{$row->date_of_examination}}
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    {{$row->redate}}
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    {{$row->pres_hosp}}
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    {{$row->disp_hosp}}
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
                                     <a href="#"
                                        class="btn-medication-detail bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded"
                                        data-bs-toggle="modal" data-bs-target="#medicationModal">
                                         查看
                                     </a>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <a href="#"
@@ -207,11 +197,17 @@
                                     </a>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
                                     <a href="#"
                                        class="btn-pharmacist-feedback bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded"
                                        data-bs-toggle="modal" data-bs-target="#pharmacistModal">
                                         查看
                                     </a>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
                                 </td>
                             </tr>
                             @endforeach
