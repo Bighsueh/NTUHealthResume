@@ -32,7 +32,7 @@
                 <div class="flex justify-start">
                     <div class="flex">
                         <div class="mx-6 mt-4 flex items-end">
-                            <p class="text-3xl mb-2 font-bold">回饋單及用藥紀錄管理</p>
+                            <p class="text-3xl mb-2 font-bold">用藥管理系統-病患列表</p>
                             {{--                        <div class="flex item-end mx-4 text-gray-400">--}}
                             {{--                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-4" fill="none"--}}
                             {{--                                 viewBox="0 0 24 24" stroke="currentColor">--}}
@@ -123,7 +123,7 @@
                                         {{$row->patient_name}}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap gender">
-
+                                        其他
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap id_number">
                                         {{$row->id_number}}
@@ -135,7 +135,7 @@
                                         {{$row->patient_bd}}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <a href=""
+                                        <a href="{{route('get_medication_management_task_list_page',['patient_id'=>$row->patient_id])}}"
                                            class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
                                             檢視任務
                                         </a>
