@@ -26,16 +26,30 @@ Route::get('/drive/login', [DriveController::class,'get_drive_login_page'])->nam
 Route::post('/drive/login', [DriveController::class,'post_drive_login_data'])->name('post_drive_login_data');
 Route::get('drive', [DriveController::class, 'get_drive_page'])->name('get_drive_page');
 
-//藥物紀錄及回饋函
-Route::get('/medication_record', [MedicationRecordController::class, 'get_medication_record_and_feedback_management_page'])->name('get_medication_record_and_feedback_management_page');
-Route::get('/get_medication_record_page', [MedicationRecordController::class, 'get_medication_record_and_feedback_management_patient_detail_page'])->name('get_medication_record_and_reply_management_patient_detail_page');
-Route::post('/get_medication_record_detail', [MedicationRecordController::class, 'get_medication_record_detail'])->name('get_medication_record_detail');
-Route::post('/get_doctor_feedback', [MedicationRecordController::class, 'get_doctor_feedback'])->name('get_doctor_feedback');
-Route::post('/store_doctor_feedback', [MedicationRecordController::class, 'store_doctor_feedback'])->name('store_doctor_feedback');
-Route::post('/get_pharmacist_feedback', [MedicationRecordController::class, 'get_pharmacist_feedback'])->name('get_pharmacist_feedback');
-Route::post('/store_pharmacist_feedback', [MedicationRecordController::class, 'store_pharmacist_feedback'])->name('store_pharmacist_feedback');
-Route::post('/store_medication_record_detail', [MedicationRecordController::class, 'store_medication_record_detail'])->name('store_medication_record_detail');
-Route::post('/update_medication_record_detail', [MedicationRecordController::class, 'update_medication_record_detail'])->name('update_medication_record_detail');
+//用藥管理系統
+Route::group(['prefix' => 'medication_management'], function () {
+    //病患列表頁面
+    Route::get('/get_patient_list_page', [MedicationRecordController::class, 'get_patient_list_page'])
+        ->name('get_medication_management_patient_list_page');
+    //個別病患任務列表頁面
+    Route::get('/get_task_list_page', [MedicationRecordController::class, 'get_task_list_page'])
+        ->name('get_medication_management_task_list_page');
+    //個別病患任務詳細資訊頁面
+    Route::get('/get_task_detail_page', [MedicationRecordController::class, 'get_task_detail_page'])
+        ->name('get_medication_management_task_detail_page');
+
+
+});
+
+//Route::get('/get_medication_record_page', [MedicationRecordController::class, 'get_medication_record_and_feedback_management_patient_detail_page'])->name('get_medication_record_and_reply_management_patient_detail_page');
+//Route::post('/get_medication_record_detail', [MedicationRecordController::class, 'get_medication_record_detail'])->name('get_medication_record_detail');
+//Route::get('/get_patient_task_page',[MedicationRecordController::class,'get_medication_record_and_feedback_management_task_list_page'])->name('get_patient_task_page');
+//Route::post('/get_doctor_feedback', [MedicationRecordController::class, 'get_doctor_feedback'])->name('get_doctor_feedback');
+//Route::post('/store_doctor_feedback', [MedicationRecordController::class, 'store_doctor_feedback'])->name('store_doctor_feedback');
+//Route::post('/get_pharmacist_feedback', [MedicationRecordController::class, 'get_pharmacist_feedback'])->name('get_pharmacist_feedback');
+//Route::post('/store_pharmacist_feedback', [MedicationRecordController::class, 'store_pharmacist_feedback'])->name('store_pharmacist_feedback');
+//Route::post('/store_medication_record_detail', [MedicationRecordController::class, 'store_medication_record_detail'])->name('store_medication_record_detail');
+//Route::post('/update_medication_record_detail', [MedicationRecordController::class, 'update_medication_record_detail'])->name('update_medication_record_detail');
 
 
 Route::get('/setting/employee',[\App\Http\Controllers\EmployeeController::class,'get_setting_employee'])->name('get_setting_employee');
