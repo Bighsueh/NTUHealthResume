@@ -30,7 +30,7 @@ class MedicationRecordController extends Controller
                 ->where('patient_id', $patient_id)
                 ->get();
 
-            $result = ['task_list'=> $task_list];
+            $result = ['task_list' => $task_list];
 
             return view('pages.medicationManagement.taskList', $result);
         } catch (\Exception $exception) {
@@ -40,7 +40,21 @@ class MedicationRecordController extends Controller
 
     public function get_task_detail_page(Request $request)
     {
-        return view('pages.medicationManagement.taskDetail');
+        try {
+            //task_id
+            $task_id = $request->get('task_id');
+
+            //藥歷列表
+            $medication_record_list = DB::table('medication_records')
+                ->where('task_id', $task_id)
+                ->get();
+
+            $result = ['task_id' => $task_id, 'medication_record_list' => $medication_record_list];
+            return view('pages.medicationManagement.taskDetail', $result);
+        } catch (\Exception $exception) {
+            return $exception;
+        }
+
     }
 
     //開啟用藥管理系統-個別病患紀錄頁面
