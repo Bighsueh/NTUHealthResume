@@ -192,8 +192,8 @@
                 </div>
             </div>
         </div>
-        @include('pages.setting.nutritionManagement.createDietLogModal')
-        @include('pages.setting.nutritionManagement.patchDietLogModal')
+        @include('pages.nutritionManagement.createDietLogModal')
+        @include('pages.nutritionManagement.patchDietLogModal')
     </div>
     <script>
         $('#btn_dietLog').click(function (){

@@ -215,10 +215,10 @@
                                             {{$query->vit_e}}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <a href="" value=""
+                                            <a href="" value="{{$query->id}}"
                                                class="bg-transparent border border-teal-700 text-teal-700
                                                hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded btn-patch"
-                                               data-bs-target="" data-bs-toggle="modal">
+                                               data-bs-target="#nutritionistCommentPatchModal" data-bs-toggle="modal">
                                                 修改
                                             </a>
                                         </td>
@@ -237,5 +237,6 @@
             </div>
         </div>
     </div>
-    @include('pages.setting.nutritionManagement.createNutritionistCommentModal')
+    @include('pages.nutritionManagement.createNutritionistCommentModal')
+    @include('pages.nutritionManagement.patchNutritionistCommentModal')
 @endsection

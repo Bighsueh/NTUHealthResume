@@ -8,8 +8,12 @@
                         營養師評論
                     </h5>
                     <button type="button"
-                            class="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
-                            data-bs-dismiss="modal" aria-label="Close"></button>
+                            class="btn-close box-content   text-black border-none rounded-none opacity-50  focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
+                            data-bs-dismiss="modal" aria-label="Close">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
                 </div>
                 <div class="modal-body w-full h-full flex p-16">
                     <div class="h-1/5 p-1 flex flex-wrap flex-col">
@@ -35,10 +39,10 @@
                     <div class="h-1/5 p-1 flex flex-wrap flex-col">
                         <label for="vit_b12">維他命B12：</label>
                         <input name="vit_b12" id="vit_b12" type="text" class="border border-black">
-                        <label for="vit_D">維他命D：</label>
-                        <input name="vit_D" id="vit_D" type="text" class="border border-black">
-                        <label for="vit_E">維他命E：</label>
-                        <input name="vit_E" id="vit_E" type="text" class="border border-black">
+                        <label for="vit_d">維他命D：</label>
+                        <input name="vit_d" id="vit_d" type="text" class="border border-black">
+                        <label for="vit_e">維他命E：</label>
+                        <input name="vit_e" id="vit_e" type="text" class="border border-black">
                     </div>
 
 

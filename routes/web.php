@@ -54,8 +54,7 @@ Route::get('/setting/patient/store_create_patient',[\App\Http\Controllers\Patien
 Route::get('/setting/patient/store_edit_patient',[\App\Http\Controllers\PatientController::class,'store_edit_patient'])->name('store_edit_patient');
 Route::get('/setting/patient/delete_patient',[\App\Http\Controllers\PatientController::class,'delete_patient'])->name('delete_patient');
 
-Route::get('/setting/nutritionManagement',[\App\Http\Controllers\NutritionManagementController::class,'get_setting_nutritionManagement'])->name('get_setting_nutritionManagement');
-
+Route::get('/nutritionManagement',[\App\Http\Controllers\NutritionManagementController::class,'get_nutritionManagement'])->name('get_nutritionManagement');
 // 飲食紀錄
 Route::get('/dietLog',[\App\Http\Controllers\NutritionManagementController::class,'get_dietLog'])->name('get_dietLog');
 Route::post('/dietLog', [\App\Http\Controllers\NutritionManagementController::class, 'store_dietLog'])->name('store_dietLog');
@@ -63,10 +62,14 @@ Route::get('/dietLog/{id}', [\App\Http\Controllers\NutritionManagementController
 // 進入修改頁面並且帶值
 Route::post('/dietLog/patch/page', [\App\Http\Controllers\NutritionManagementController::class, 'post_dietLog_patch_page'])->name('post_dietLog_patch_page');
 Route::post('/dietLog/patch', [\App\Http\Controllers\NutritionManagementController::class, 'patch_dietLog'])->name('patch_dietLog');
+
 // 營養師評論
 Route::get('/nutritionistComment',[\App\Http\Controllers\NutritionManagementController::class,'get_nutritionistComment'])->name('get_nutritionistComment');
 Route::post('/nutritionistComment', [\App\Http\Controllers\NutritionManagementController::class, 'store_nutritionistComment'])->name('store_nutritionistComment');
 Route::get('/nutritionistComment/{id}', [\App\Http\Controllers\NutritionManagementController::class, 'delete_nutritionistComment'])->name('delete_nutritionistComment');
+// 進入修改頁面並且帶值
+Route::post('/nutritionistComment/patch/page', [\App\Http\Controllers\NutritionManagementController::class, 'post_nutritionistComment_patch_page'])->name('post_nutritionistComment_patch_page');
+Route::post('/nutritionistComment/patch', [\App\Http\Controllers\NutritionManagementController::class, 'patch_nutritionistComment'])->name('patch_nutritionistComment');
 
 Route::get('/menu', function () {
     $user_name = Session::get('user_name');

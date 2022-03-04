@@ -9,10 +9,10 @@ use Illuminate\Support\Facades\Session;
 class NutritionManagementController extends Controller
 {
     // 營養管理系統首頁
-    public function get_setting_nutritionManagement()
+    public function get_nutritionManagement()
     {
         $queries = DB::table('patients')->get();
-        return view('pages.setting.nutritionManagement.settingNutritionManagement',compact('queries'));
+        return view('pages.nutritionManagement.nutritionManagement',compact('queries'));
     }
     // 飲食紀錄
     public function get_dietLog(Request $request)
@@ -20,7 +20,7 @@ class NutritionManagementController extends Controller
         $queries = DB::table('diet_log')->where('patient_id',$request->id)->get();
         $patient_data = ['patient_id' => $request->id, 'patient_name' => $request->name];
         $user_name = Session::get('user_name');
-        return view('pages.setting.nutritionManagement.dietLog',compact('queries','patient_data','user_name'));
+        return view('pages.nutritionManagement.dietLog',compact('queries','patient_data','user_name'));
     }
     // 刪除一筆飲食紀錄
     public function delete_dietLog($id)
@@ -81,7 +81,7 @@ class NutritionManagementController extends Controller
 //        diet_log_id
         $queries = DB::table('nutrition_ingredient')->where('diet_log_id',$request->id)->get();
         $name = $request->name;
-        return view('pages.setting.nutritionManagement.nutritionistComment',compact('queries','name'));
+        return view('pages.nutritionManagement.nutritionistComment',compact('queries','name'));
     }
     // 新增一筆飲食評論
     public function store_nutritionistComment(Request $request)
@@ -110,6 +110,35 @@ class NutritionManagementController extends Controller
             return $e;
         }
         return redirect()->back();
+    }
+
+    public function post_nutritionistComment_patch_page(Request $request)
+    {
+        $query = DB::table('nutrition_ingredient')->where('id',$request->id)->first();
+        return $query;
+    }
+    public function patch_nutritionistComment(Request $request)
+    {
+//        dd($request);
+        try {
+            DB::table('nutrition_ingredient')->where('id',$request->patch_id)->update([
+                'carbohydrate'=>$request->p_carbohydrate,
+                'protein'=>$request->p_protein,
+                'fat'=>$request->p_fat,
+                'cal'=>$request->p_cal,
+                'na'=>$request->p_na,
+                'k'=>$request->p_k,
+                'ca'=>$request->p_ca,
+                'mg'=>$request->p_mg,
+                'vit_b12'=>$request->p_vit_b12,
+                'vit_d'=>$request->p_vit_d,
+                'vit_e'=>$request->p_vit_e,
+            ]);
+
+            return redirect()->back();
+        }catch (\Throwable $e){
+            report($e);
+        }
     }
 
     public function delete_nutritionistComment($id)
