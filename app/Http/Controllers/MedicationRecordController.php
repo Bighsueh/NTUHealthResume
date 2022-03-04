@@ -10,15 +10,40 @@ use mysql_xdevapi\Exception;
 
 class MedicationRecordController extends Controller
 {
-    //開啟回饋函及藥物紀錄-病患列表介面
-    public function get_medication_record_and_feedback_management_page(Request $request)
+    //開啟用藥管理系統-病患列表介面
+    public function get_patient_list_page(Request $request)
     {
-        $patient_list = DB::table('patients')->select('patient_id', 'patient_name')->get();
+        $patient_list = DB::table('patients')->select('patient_id', 'patient_name', 'place', 'id_number', 'patient_bd')->get();
         $result = ['patient_list' => $patient_list];
-        return view('pages.medicationRecords.patientList', $result);
+        return view('pages.medicationManagement.patientList', $result);
     }
 
-    //開啟回饋函及藥物紀錄-個別病患紀錄頁面
+    //開啟用藥管理系統-個別病患任務列表
+    public function get_task_list_page(Request $request)
+    {
+        try {
+            //病患id
+            $patient_id = $request->get('patient_id');
+
+            //依照病患id取得patient_tasks資料
+            $task_list = DB::table('patient_tasks')
+                ->where('patient_id', $patient_id)
+                ->get();
+
+            $result = ['task_list'=> $task_list];
+
+            return view('pages.medicationManagement.taskList', $result);
+        } catch (\Exception $exception) {
+            return $exception;
+        }
+    }
+
+    public function get_task_detail_page(Request $request)
+    {
+        return view('pages.medicationManagement.taskDetail');
+    }
+
+    //開啟用藥管理系統-個別病患紀錄頁面
     public function get_medication_record_and_feedback_management_patient_detail_page(Request $request)
     {
 //        $doctor_feedback = DB::table('doctor_feedback')->where('record_id', 1)->first();
@@ -36,7 +61,7 @@ class MedicationRecordController extends Controller
             'user_name' => $user_name,
         ];
 
-        return view('pages.medicationRecords.patientDetail', $result);
+        return view('pages.medicationManagement.patientDetail', $result);
     }
 
     //依record_id取得藥物子項目
@@ -55,23 +80,23 @@ class MedicationRecordController extends Controller
     //取得醫師回覆內容
     public function get_doctor_feedback(Request $request)
     {
-        try{
+        try {
             //藥歷id
             $record_id = $request->record_id;
             //查詢醫師回饋單
             $doctor_feedback = DB::table('doctor_feedback')->where('record_id', $record_id)->first();
 
             //若存在醫師回饋單則取出回覆內容
-            if($doctor_feedback){
+            if ($doctor_feedback) {
                 return $doctor_feedback->content;
             }
 
             //若不存在醫師回饋單則回傳空字串
-            if($doctor_feedback){
+            if ($doctor_feedback) {
                 return "";
             }
 
-        }catch (Exception $exception){
+        } catch (Exception $exception) {
             return $exception;
         }
     }
@@ -165,12 +190,12 @@ class MedicationRecordController extends Controller
             $pharmacist_feedback = DB::table('pharmacist_feedback')->where('record_id', $record_id)->first();
 
             //若存在藥師回饋單則取出回覆內容
-            if($pharmacist_feedback){
+            if ($pharmacist_feedback) {
                 return $pharmacist_feedback;
             }
 
             //若不存在藥師回饋單則回傳空字串
-            if($pharmacist_feedback){
+            if ($pharmacist_feedback) {
                 return "";
             }
         } catch (\Exception $exception) {
@@ -261,7 +286,7 @@ class MedicationRecordController extends Controller
             $record_id = $request->record_id;
 
             DB::table('medication_records')
-                ->where('record_id',$record_id)
+                ->where('record_id', $record_id)
                 ->update([
                     'date_of_examination' => $date_of_examination,
                     'redate' => $redate,
