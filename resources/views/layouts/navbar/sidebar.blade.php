@@ -20,7 +20,7 @@
             -translate-x-full transition duration-200 ease-in-out md:relative md:translate-x-0">
     <!-- logo -->
     <a class="text-white flex items-center space-x-2 ml-6 md:ml-4" href="{{route('menu')}}">
-                <span class="2xl:text-3xl lg:text-xl md:text-base sm:text-sm font-extrabold">
+                <span class="3xl:text-3xl 2xl:text-2xl lg:text-lg md:text-base sm:text-sm font-extrabold">
                     台大用藥營養追蹤系統
                 </span>
     </a>
