@@ -1,7 +1,7 @@
 <!-- mobile menu bar -->
 <div class="bg-gray-800 text-gray-100 flex justify-between md:hidden">
     <!-- logo -->
-    <a href="{{route('menu')}}" class="block p-4 text-white font-bold">台大履歷網</a>
+    <a href="{{route('menu')}}" class="block p-4 text-white font-bold">台大用藥營養追蹤系統</a>
 
     <!-- mobile menu button -->
     <button class="mobile-menu-button p-4 focus:outilne-none focus:bg-gray-700">
@@ -21,7 +21,7 @@
     <!-- logo -->
     <a class="text-white flex items-center space-x-2 ml-6 md:ml-4" href="{{route('menu')}}">
                 <span class="2xl:text-3xl lg:text-xl md:text-base sm:text-sm font-extrabold">
-                    台大履歷網
+                    台大用藥營養追蹤系統
                 </span>
     </a>
 
