@@ -6,27 +6,28 @@
             <div class="h-full">
                 <form class="w-full">
                     <div class="flex items-center border-b border-teal-700 py-2 mx-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-3 h-6 w-6 text-gray-7700" fill="none"
-                             viewBox="0 0 24 24" stroke="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-3 h-6 w-6 text-gray-7700" fill="none" viewBox="0 0 24 24"
+                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                   d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
-                        <input
-                            class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
-                            type="text" placeholder="請輸入欲查詢資料">
-                        <button
-                            class="mx-4 flex-shrink-0 bg-teal-700 hover:bg-teal-500 border-teal-700 hover:border-teal-500 text-sm border-4 text-white py-1 px-2 rounded"
-                            type="button">
-                            <p class="mx-4">
-                                搜尋
-                            </p>
-                        </button>
-                        <!-- <button
-                            class="flex-shrink-0 border-transparent border-4 text-teal-500 hover:text-teal-800 text-sm py-1 px-2 rounded"
-                            type="button">
-                            Cancel
-                        </button> -->
+                        <input type="text" class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                               id="input_search"
+                               placeholder="查詢">
+
+                        <select class=" bg-transparent  border-none w-1/6 text-gray-700 mr-3 py-1 px-2  leading-tight focus:outline-none "
+                                id="search_from">
+                            <option value="patient_id">ID</option>
+                            <option value="patient_name">姓名</option>
+                            <option value="id_number">身分證字號</option>
+                        </select>
+
+                        <button type="button" class="mx-4 flex-shrink-0 bg-teal-700 hover:bg-teal-500
+                        border-teal-700 hover:border-teal-500 text-sm border-4 text-white py-1 px-3 rounded btn_search"
+                                id="btn_search"
+                        >查詢</button>
                     </div>
+
                 </form>
                 <!--search bar-->
                 <div class="flex justify-start">
@@ -108,7 +109,7 @@
                                 </th>
                             </tr>
                             </thead>
-                            <tbody class="divide-y divide-gray-200">
+                            <tbody class="divide-y divide-gray-200" id="tbody">
                             @foreach($queries as $query)
                                 <tr>
                                     <td class="px-6 py-4 whitespace-nowrap">
@@ -149,4 +150,80 @@
             </div>
         </div>
     </div>
+
+<script>
+
+    $('#btn_search').click(function (){
+        if($('#input_search').val() == ''){
+            window.location.reload();
+        }else {
+            update_data();
+        }
+    })
+    function update_data() {
+
+        $.ajax({
+            url:"{{route('get_nutritionManagement_data')}}",
+            method:'get',
+            data:{
+                search_data :$('#input_search').val() ,
+                search_from:$('#search_from').val()
+            },
+            success:function (res) {
+                $('#tbody tr').remove();
+                if(res.length > 0){
+                    console.log(res);
+                    res.forEach(function (row) {
+                        let patient_id = '<td class="px-6 py-4 whitespace-nowrap">' + row['patient_id'] + '</td>';
+                        let patient_name = '<td class="px-6 py-4 whitespace-nowrap">' + row['patient_name'] + '</td>';
+                        let id_number = '<td class="px-6 py-4 whitespace-nowrap">' + row['id_number'] + '</td>';
+                        let sex =""
+                        if(row['id_number'].substring(1,2) =='1') {
+                            sex =  '<td class="px-6 py-4 whitespace-nowrap">' + '男生' + '</td>';
+                        }
+                        else{
+                            sex = '<td class="px-6 py-4 whitespace-nowrap">' + '女生' + '</td>';
+                        }
+                        let diet_log = '<td class="px-6 py-4 whitespace-nowrap">' +
+                            `<a href="http://localhost:8080/dietLog?id=${row['patient_id']}&name=${row['patient_name']}"
+                               class="bg-transparent border border-teal-700 text-teal-700
+                                           hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
+                                飲食紀錄` +
+                            '</a>' + '</td>';
+                        let nutritionistComment = '<td class="px-6 py-4 whitespace-nowrap">' +
+                            `<a href="http://localhost:8080/nutritionistComment?id=${row['patient_id']}&name=${row['patient_name']}"
+                               class="bg-transparent border border-teal-700 text-teal-700
+                                           hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
+                                營養師評論` +
+                            '</a>' + '</td>';
+                        $('#tbody').append(
+                            '<tr class="text-gray-700 items-center">' +patient_id+patient_name+sex+id_number + diet_log + nutritionistComment +'</tr>'
+                        )
+
+                    })
+
+
+                }
+                // $('.btn_employee').click(function (){
+                //
+                //     open_settingEmployeeModal($(this).attr("value"));
+                // })
+
+            }
+        });
+
+    }
+
+
+    // $('.btn_create_employee').click(function (){
+    //
+    //     open_createEmployeeModal();
+    // })
+    //
+    //
+    // $('.btn_employee').click(function (){
+    //
+    //     open_settingEmployeeModal($(this).attr("value"));
+    // })
+</script>
 @endsection

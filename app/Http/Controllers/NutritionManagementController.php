@@ -14,6 +14,19 @@ class NutritionManagementController extends Controller
         $queries = DB::table('patients')->get();
         return view('pages.nutritionManagement.nutritionManagement',compact('queries'));
     }
+    // 取得資料查詢資料用
+    public function get_nutritionManagement_data(Request $request){
+        try{
+            $data = DB::table('patients')
+                ->where($request->search_from,'like','%'.$request->search_data.'%')
+                ->get();
+            return $data;
+        }catch (\Throwable $e){
+            report($e);
+            return false;
+        }
+    }
+
     // 飲食紀錄
     public function get_dietLog(Request $request)
     {
