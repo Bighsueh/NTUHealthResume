@@ -17,8 +17,8 @@ class CreatePharmacistFeedbackTable extends Migration
             $table->id('pharmacist_feedback_id')->autoIncrement();
             $table->integer('task_id');
             $table->integer('pharmacist_id')->nullable();
-            $table->text('doctor_ask')->nullable();
-            $table->text('content')->nullable();
+            $table->text('pharmacist_reply')->nullable();
+            $table->text('pharmacist_question')->nullable();
             $table->timestamps();
         });
     }
