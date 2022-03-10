@@ -48,43 +48,43 @@
 
                 <p>
                     <label class="inline-flex items-center mt-1">
-                        <input type="checkbox" id="create_open_main_task" class="form-checkbox h-5 w-5 text-teal-600 btn_check" checked><span class="ml-2 text-gray-700">新增任務</span>
+                        <input value="0" type="checkbox" id="create_open_main_task" class="form-checkbox h-5 w-5 text-teal-600 btn_check" ><span class="ml-2 text-gray-700">新增任務</span>
                     </label>
                 </p>
                 <p>
                     <label class="inline-flex items-center mt-1">
-                        <input type="checkbox" id="create_add_doctor_reply" class="form-checkbox h-5 w-5 text-teal-600 btn_check" checked><span class="ml-2 text-gray-700">填寫醫師回饋單</span>
+                        <input value="0" type="checkbox" id="create_add_doctor_reply" class="form-checkbox h-5 w-5 text-teal-600 btn_check" ><span class="ml-2 text-gray-700">填寫醫師回饋單</span>
                     </label>
                 </p>
                 <p>
                     <label class="inline-flex items-center mt-1">
-                        <input type="checkbox" id="create_add_pharmacist_reply" class="form-checkbox h-5 w-5 text-teal-600 btn_check" checked><span class="ml-2 text-gray-700">填寫藥師回饋單</span>
+                        <input value="0" type="checkbox" id="create_add_pharmacist_reply" class="form-checkbox h-5 w-5 text-teal-600 btn_check" ><span class="ml-2 text-gray-700">填寫藥師回饋單</span>
                     </label>
                 </p>
                 <p>
                     <label class="inline-flex items-center mt-1">
-                        <input type="checkbox" id="create_close_main_task" class="form-checkbox h-5 w-5 text-teal-600 btn_check" checked><span class="ml-2 text-gray-700">任務結案</span>
+                        <input value="0" type="checkbox" id="create_close_main_task" class="form-checkbox h-5 w-5 text-teal-600 btn_check" ><span class="ml-2 text-gray-700">任務結案</span>
                     </label>
                 </p>
 
                 <p>
                     <label class="inline-flex items-center mt-1">
-                        <input type="checkbox" id="create_add_diet_log" class="form-checkbox h-5 w-5 text-teal-600 btn_check" checked><span class="ml-2 text-gray-700">填寫飲食紀錄</span>
+                        <input value="0" type="checkbox" id="create_add_diet_log" class="form-checkbox h-5 w-5 text-teal-600 btn_check" ><span class="ml-2 text-gray-700">填寫飲食紀錄</span>
                     </label>
                 </p>
                 <p>
                     <label class="inline-flex items-center mt-1">
-                        <input type="checkbox" id="create_add_nutritionist" class="form-checkbox h-5 w-5 text-teal-600 btn_check" checked><span class="ml-2 text-gray-700">營養師評論</span>
+                        <input value="0" type="checkbox" id="create_add_nutritionist" class="form-checkbox h-5 w-5 text-teal-600 btn_check" ><span class="ml-2 text-gray-700">營養師評論</span>
                     </label>
                 </p>
                 <p>
                     <label class="inline-flex items-center mt-1">
-                        <input type="checkbox" id="create_manage_employee" class="form-checkbox h-5 w-5 text-teal-600 btn_check" checked><span class="ml-2 text-gray-700">員工資訊管理</span>
+                        <input value="0" type="checkbox" id="create_manage_employee" class="form-checkbox h-5 w-5 text-teal-600 btn_check" ><span class="ml-2 text-gray-700">員工資訊管理</span>
                     </label>
                 </p>
                 <p>
                     <label class="inline-flex items-center mt-1">
-                        <input type="checkbox" id="create_manage_patient" class="form-checkbox h-5 w-5 text-teal-600 btn_check" checked><span class="ml-2 text-gray-700">病患資訊管理</span>
+                        <input value="0" type="checkbox" id="create_manage_patient" class="form-checkbox h-5 w-5 text-teal-600 btn_check" ><span class="ml-2 text-gray-700">病患資訊管理</span>
                     </label>
                 </p>
 
