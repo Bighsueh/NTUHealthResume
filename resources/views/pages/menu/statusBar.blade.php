@@ -58,6 +58,7 @@
                     <p class="text-2xl text-gray-900">數據</p>
                 </div>
             </div>
+
             <div class="mx-4 my-2 px-5">
                 <a href="" class="mt-2 text-green-700">查看資訊</a>
             </div>

@@ -142,9 +142,9 @@
                                     2022-01-14 00:00
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <a href="#" class="bg-transparent mx-2 border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
+                                    <button class="bg-transparent mx-2 border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded btn_statusBar" id="btn_statusBar">
                                         目前進度
-                                    </a>
+                                    </button>
                                     <a href="#" class="bg-transparent mx-2 border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
                                         詳細資料
                                     </a>
@@ -157,8 +157,14 @@
             </div>
         </div>
     </div>
+    @include('pages.menu.ProgressBarModal')
 
-
-
+    <script>
+        $('#btn_statusBar').click(function () {
+            open_ProgressBarModal();
+        })
+    </script>
 
 @endsection
+
+
