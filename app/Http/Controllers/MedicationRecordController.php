@@ -38,6 +38,7 @@ class MedicationRecordController extends Controller
         }
     }
 
+    //開啟用藥管理系統-藥歷列表頁面
     public function get_task_detail_page(Request $request)
     {
         try {
@@ -45,11 +46,19 @@ class MedicationRecordController extends Controller
             $task_id = $request->get('task_id');
 
             //藥歷列表
-            $medication_record_list = DB::table('medication_records')
-                ->where('task_id', $task_id)
-                ->get();
+            $medication_records = DB::table('medication_records')->get();
 
-            $result = ['task_id' => $task_id, 'medication_record_list' => $medication_record_list];
+
+            foreach ($medication_records as $row) {
+                $record_id = $row->record_id;
+
+                $row->record_detail =
+                    DB::table('medication_record_detail')
+                        ->where('record_id', $record_id)
+                        ->get();
+            }
+
+            $result = ['task_id' => $task_id, 'medication_records' => $medication_records];
             return view('pages.medicationManagement.taskDetail', $result);
         } catch (\Exception $exception) {
             return $exception;

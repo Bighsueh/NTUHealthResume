@@ -126,75 +126,90 @@
 
             <div class="grid">
                 <div class="flex justify-between ">
-                    <p class="mx-4 my-2 justify-self-start font-bold text-xl">任務列表</p>
+                    <p class="mx-4 my-2 justify-self-start font-bold text-xl">藥歷列表</p>
                 </div>
-                <div class="flex">
-                    <!--數據欄位-->
-                    <div class="rounded m-2 flex-1 bg-gray-50 p-4">
-                        <table class="divide-y divide-gray-200 min-w-full">
-                            <thead class="bg-gray-50">
-                            <tr>
-                                <th scope="col"
-                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    #
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    就醫日期
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    開方日期
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    處方醫院
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    調劑醫院
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    資料建立時間
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    最後修改時間
-                                </th>
+                <div class="overflow-y-scroll h-2/3 ">
+                    @foreach($medication_records as $row)
+                        <div class="flex ">
+                            <!--單筆藥歷共通項目-->
+                            <div class="rounded m-2 flex-auto bg-gray-50 p-4 w-1/6">
+                                <p>就醫日期：</p>
+                                <li>{{$row->date_of_examination}}</li>
+                                <p>開方日期：</p>
+                                <li>{{$row->redate}}</li>
+                                <p>處方醫院：</p>
+                                <li>{{$row->pres_hosp}}</li>
+                                <p>調劑醫院：</p>
+                                <li>{{$row->disp_hosp}}</li>
+                            </div>
+                            <!--單筆藥歷藥品列向-->
+                            <div class="rounded m-2 flex-auto bg-gray-50 p-4">
+                                <table class="divide-y divide-gray-200 min-w-full">
+                                    <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col"
+                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                            適應症
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                            藥物種類
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                            藥品名稱
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                            藥品成分
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                            劑量(顆數)
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                            途徑
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                            頻率
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                            處方天數
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                            總數
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                            相關註記
+                                        </th>
 
-                            </tr>
-                            </thead>
-                            <tbody class="divide-y divide-gray-200">
-                            <a hidden>{{$thread = 0}}</a>
-                            @foreach($medication_record_list as $row)
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        {{$thread +=1}}
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        {{isset($row->date_of_examination) ? $row->date_of_examination : '-'}}
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        {{isset($row->redate) ? $row->redate : '-'}}
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        {{isset($row->pres_hosp) ? $row->pres_hosp : '-'}}
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        {{isset($row->disp_hosp) ? $row->disp_hosp : '-'}}
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        {{isset($row->created_at) ? $row->created_at : '-'}}
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        {{isset($row->updated_at) ? $row->updated_at : '-'}}
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-200">
+                                    @foreach($row->record_detail as $detail_row)
+                                        <tr>
+                                            <td>{{$detail_row->indication}}</td>
+                                            <td>{{$detail_row->category}}</td>
+                                            <td>{{$detail_row->trade_name}}</td>
+                                            <td>{{$detail_row->generic_name}}</td>
+                                            <td>{{$detail_row->dose}}</td>
+                                            <td>{{$detail_row->routes}}</td>
+                                            <td>{{$detail_row->freq}}</td>
+                                            <td>{{$detail_row->pres_day}}</td>
+                                            <td>{{$detail_row->total_amount}}</td>
+                                            <td>{{$detail_row->total_amount}}</td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
