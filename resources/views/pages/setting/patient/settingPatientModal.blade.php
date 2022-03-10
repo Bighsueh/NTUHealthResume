@@ -21,214 +21,183 @@
                     <div class="flex px-1 py-1">
                             <p class="mx-4 my-2 justify-self-start font-bold text-xl">基本資訊</p>
                         <div class="flex-1">
-                            <div class="flex">
-                                <div class="flex-1 flex justify-between">
-                                    <div>
-                                        <label class="mx-6">#</label>
+                            <div class="grid xl:grid-cols-2 xl:gap-6">
+                                    <div class="relative z-0 mb-4 w-full group">
+                                        <input id="edit_patient_id"
+                                               type="email" name="floating_email" class="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer" placeholder=" " required />
+                                        <label for="floating_email" class="absolute text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-teal-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">ID</label>
                                     </div>
-                                    <div>
-                                        <input value="" class="border-teal-700 border-b py-1 px-20" id="edit_patient_id">
+                                    <div class="relative z-0 mb-4 w-full group">
+                                        <input id="edit_patient_no"
+                                               type="email" name="floating_email" class="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer" placeholder=" " required />
+                                        <label for="floating_email" class="absolute text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-teal-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">病患編號</label>
                                     </div>
+                            </div>
+                            <div class="grid xl:grid-cols-2 xl:gap-6">
+                                <div class="relative z-0 mb-4 w-full group">
+                                    <input id="edit_close_date"
+                                           type="email" name="floating_email" class="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer" placeholder=" " required />
+                                    <label for="floating_email" class="absolute text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-teal-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">結案日期</label>
                                 </div>
-                                <div class="flex-1 flex justify-between">
-                                    <div>
-                                        <label class="mx-6">病患編號</label>
-                                    </div>
-                                    <div>
-                                        <input  class="border-teal-700 border-b py-1 px-20" id="edit_patient_no">
-                                    </div>
+                                <div class="relative z-0 mb-4 w-full group">
+                                    <input id="edit_place"
+                                           type="email" name="floating_email" class="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer" placeholder=" " required />
+                                    <label for="floating_email" class="absolute text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-teal-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">所述據點</label>
                                 </div>
                             </div>
-                            <div class="flex ">
-                                <div class="flex-1 flex justify-between">
-                                    <div>
-                                        <label class="mx-6">結案日期</label>
-                                    </div>
-                                    <div>
-                                        <input  class="border-teal-700 border-b py-1 px-20" id="edit_close_date">
-                                    </div>
+                            <div class="grid xl:grid-cols-2 xl:gap-6">
+                                <div class="relative z-0 mb-4 w-full group">
+                                    <input id="edit_id_number"
+                                           type="email" name="floating_email" class="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer" placeholder=" " required />
+                                    <label for="floating_email" class="absolute text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-teal-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">身分證字號</label>
                                 </div>
-                                <div class="flex-1 flex justify-between">
-                                    <div>
-                                        <label class="mx-6">所述據點</label>
-                                    </div>
-                                    <div>
-                                        <input  class=" border-teal-700 border-b py-1 px-20" id="edit_place">
-                                    </div>
+                                <div class="relative z-0 mb-4 w-full group">
+                                    <input id="edit_patient_name"
+                                           type="email" name="floating_email" class="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer" placeholder=" " required />
+                                    <label for="floating_email" class="absolute text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-teal-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">姓名</label>
                                 </div>
                             </div>
-                            <div class="flex">
-                                <div class="flex-1 flex justify-between">
-                                    <div>
-                                        <label class="mx-6">身分證字號</label>
-                                    </div>
-                                    <div>
-                                        <input  class="border-teal-700 border-b py-1 px-20" id="edit_id_number">
-                                    </div>
+                            <div class="grid xl:grid-cols-2 xl:gap-6">
+                                <div class="relative z-0 mb-4 w-full group">
+                                    <input id="edit_patient_bd"
+                                           type="email" name="floating_email" class="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer" placeholder=" " required />
+                                    <label for="floating_email" class="absolute text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-teal-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">生日</label>
                                 </div>
-                                <div class="flex-1 flex justify-between">
-                                    <div>
-                                        <label class="mx-6">姓名</label>
-                                    </div>
-                                    <div>
-                                        <input  class=" border-teal-700 border-b py-1 px-20" id="edit_patient_name">
-                                    </div>
+                                <div class="relative z-0 mb-4 w-full group">
+                                    <input id="edit_age"
+                                           type="email" name="floating_email" class="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer" placeholder=" " required />
+                                    <label for="floating_email" class="absolute text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-teal-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">年齡</label>
                                 </div>
                             </div>
-                            <div class="flex">
-                                <div class="flex-1 flex justify-between">
-                                    <div>
-                                        <label class="mx-6">生日</label>
-                                    </div>
-                                    <div>
-                                        <input  class="border-teal-700 border-b py-1 px-20" id="edit_patient_bd">
-                                    </div>
+                            <div class="grid xl:grid-cols-2 xl:gap-6">
+                                <div class="relative z-0 mb-4 w-full group">
+                                    <input id="edit_weight"
+                                           type="email" name="floating_email" class="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer" placeholder=" " required />
+                                    <label for="floating_email" class="absolute text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-teal-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">體重</label>
                                 </div>
-                                <div class="flex-1 flex justify-between">
-                                    <div>
-                                        <label class="mx-6">年齡</label>
-                                    </div>
-                                    <div>
-                                        <input  class=" border-teal-700 border-b py-1 px-20"  id="edit_age">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex">
-                                <div class="flex-1 flex justify-between">
-                                    <div>
-                                        <label class="mx-6">體重</label>
-                                    </div>
-                                    <div>
-                                        <input  class="border-teal-700 border-b py-1 px-20" id="edit_weight">
-                                    </div>
-                                </div>
-                                <div class="flex-1 flex justify-between">
-                                    <div>
-                                        <label class="mx-6">身高</label>
-                                    </div>
-                                    <div>
-                                        <input  class=" border-teal-700 border-b py-1 px-20" id="edit_height">
-                                    </div>
+                                <div class="relative z-0 mb-4 w-full group">
+                                    <input id="edit_height"
+                                           type="email" name="floating_email" class="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer" placeholder=" " required />
+                                    <label for="floating_email" class="absolute text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-teal-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">身高</label>
                                 </div>
                             </div>
                         </div>
-
                     </div>
-                    <div class="flex px-1 py-1">
-                            <p class="mx-4 my-2 justify-self-start font-bold text-xl">社篩資訊</p>
-                            <table class="">
-                                <tr>
-                                    <td>
-                                        <lable class="mx-2">
-                                            社篩診斷
-                                        </lable>
-                                    </td>
-                                    <td>
-                                        <input value="" class="border-teal-700 border-b py-1 px-20">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <lable class="mx-2">
-                                            手術史
-                                        </lable>
-                                    </td>
-                                    <td>
-                                        <input value="" class="border-teal-700 border-b py-1 px-20">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <lable class="mx-2">
-                                            血紅素
-                                        </lable>
-                                    </td>
-                                    <td>
-                                        <input value="" class="border-teal-700 border-b py-1 px-20">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <lable class="mx-2">
-                                            白蛋白
-                                        </lable>
-                                    </td>
-                                    <td>
-                                        <input value="" class="border-teal-700 border-b py-1 px-20">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <lable class="mx-2">
-                                            肝功能指數
-                                        </lable>
-                                    </td>
-                                    <td>
-                                        <input value="" class="border-teal-700 border-b py-1 px-20">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <lable class="mx-2">
-                                            腎功能指數
-                                        </lable>
-                                    </td>
-                                    <td>
-                                        <input value="" class="border-teal-700 border-b py-1 px-20">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <lable class="mx-2">
-                                            血糖
-                                        </lable>
-                                    </td>
-                                    <td>
-                                        <input value="" class="border-teal-700 border-b py-1 px-20">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <lable class="mx-2">
-                                            總膽固醇
-                                        </lable>
-                                    </td>
-                                    <td>
-                                        <input value="" class="border-teal-700 border-b py-1 px-20">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <lable class="mx-2">
-                                            低密度膽固醇
-                                        </lable>
-                                    </td>
-                                    <td>
-                                        <input value="" class="border-teal-700 border-b py-1 px-20">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <lable class="mx-2">
-                                            尿酸
-                                        </lable>
-                                    </td>
-                                    <td>
-                                        <input value="" class="border-teal-700 border-b py-1 px-20">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <lable class="mx-2">
-                                            跌倒史
-                                        </lable>
-                                    </td>
-                                    <td>
-                                        <input value="" class="border-teal-700 border-b py-1 px-20">
-                                    </td>
-                                </tr>
-                            </table>
-                    </div>
+{{--                    <div class="flex px-1 py-1">--}}
+{{--                            <p class="mx-4 my-2 justify-self-start font-bold text-xl">社篩資訊</p>--}}
+{{--                            <table class="">--}}
+{{--                                <tr>--}}
+{{--                                    <td>--}}
+{{--                                        <lable class="mx-2">--}}
+{{--                                            社篩診斷--}}
+{{--                                        </lable>--}}
+{{--                                    </td>--}}
+{{--                                    <td>--}}
+{{--                                        <input value="" class="border-teal-700 border-b py-1 px-20">--}}
+{{--                                    </td>--}}
+{{--                                </tr>--}}
+{{--                                <tr>--}}
+{{--                                    <td>--}}
+{{--                                        <lable class="mx-2">--}}
+{{--                                            手術史--}}
+{{--                                        </lable>--}}
+{{--                                    </td>--}}
+{{--                                    <td>--}}
+{{--                                        <input value="" class="border-teal-700 border-b py-1 px-20">--}}
+{{--                                    </td>--}}
+{{--                                </tr>--}}
+{{--                                <tr>--}}
+{{--                                    <td>--}}
+{{--                                        <lable class="mx-2">--}}
+{{--                                            血紅素--}}
+{{--                                        </lable>--}}
+{{--                                    </td>--}}
+{{--                                    <td>--}}
+{{--                                        <input value="" class="border-teal-700 border-b py-1 px-20">--}}
+{{--                                    </td>--}}
+{{--                                </tr>--}}
+{{--                                <tr>--}}
+{{--                                    <td>--}}
+{{--                                        <lable class="mx-2">--}}
+{{--                                            白蛋白--}}
+{{--                                        </lable>--}}
+{{--                                    </td>--}}
+{{--                                    <td>--}}
+{{--                                        <input value="" class="border-teal-700 border-b py-1 px-20">--}}
+{{--                                    </td>--}}
+{{--                                </tr>--}}
+{{--                                <tr>--}}
+{{--                                    <td>--}}
+{{--                                        <lable class="mx-2">--}}
+{{--                                            肝功能指數--}}
+{{--                                        </lable>--}}
+{{--                                    </td>--}}
+{{--                                    <td>--}}
+{{--                                        <input value="" class="border-teal-700 border-b py-1 px-20">--}}
+{{--                                    </td>--}}
+{{--                                </tr>--}}
+{{--                                <tr>--}}
+{{--                                    <td>--}}
+{{--                                        <lable class="mx-2">--}}
+{{--                                            腎功能指數--}}
+{{--                                        </lable>--}}
+{{--                                    </td>--}}
+{{--                                    <td>--}}
+{{--                                        <input value="" class="border-teal-700 border-b py-1 px-20">--}}
+{{--                                    </td>--}}
+{{--                                </tr>--}}
+{{--                                <tr>--}}
+{{--                                    <td>--}}
+{{--                                        <lable class="mx-2">--}}
+{{--                                            血糖--}}
+{{--                                        </lable>--}}
+{{--                                    </td>--}}
+{{--                                    <td>--}}
+{{--                                        <input value="" class="border-teal-700 border-b py-1 px-20">--}}
+{{--                                    </td>--}}
+{{--                                </tr>--}}
+{{--                                <tr>--}}
+{{--                                    <td>--}}
+{{--                                        <lable class="mx-2">--}}
+{{--                                            總膽固醇--}}
+{{--                                        </lable>--}}
+{{--                                    </td>--}}
+{{--                                    <td>--}}
+{{--                                        <input value="" class="border-teal-700 border-b py-1 px-20">--}}
+{{--                                    </td>--}}
+{{--                                </tr>--}}
+{{--                                <tr>--}}
+{{--                                    <td>--}}
+{{--                                        <lable class="mx-2">--}}
+{{--                                            低密度膽固醇--}}
+{{--                                        </lable>--}}
+{{--                                    </td>--}}
+{{--                                    <td>--}}
+{{--                                        <input value="" class="border-teal-700 border-b py-1 px-20">--}}
+{{--                                    </td>--}}
+{{--                                </tr>--}}
+{{--                                <tr>--}}
+{{--                                    <td>--}}
+{{--                                        <lable class="mx-2">--}}
+{{--                                            尿酸--}}
+{{--                                        </lable>--}}
+{{--                                    </td>--}}
+{{--                                    <td>--}}
+{{--                                        <input value="" class="border-teal-700 border-b py-1 px-20">--}}
+{{--                                    </td>--}}
+{{--                                </tr>--}}
+{{--                                <tr>--}}
+{{--                                    <td>--}}
+{{--                                        <lable class="mx-2">--}}
+{{--                                            跌倒史--}}
+{{--                                        </lable>--}}
+{{--                                    </td>--}}
+{{--                                    <td>--}}
+{{--                                        <input value="" class="border-teal-700 border-b py-1 px-20">--}}
+{{--                                    </td>--}}
+{{--                                </tr>--}}
+{{--                            </table>--}}
+{{--                    </div>--}}
 
                 </div>
 

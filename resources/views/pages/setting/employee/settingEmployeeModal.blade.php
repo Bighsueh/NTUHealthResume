@@ -16,101 +16,72 @@
                     </svg>
                 </button>
             </div>
-            <div class="px-12">
-                <table class="modal-body relative m-3 w-full">
-{{--                    <tr>--}}
-{{--                        <td>--}}
-{{--                            <lable class="mx-2">--}}
-{{--                                ID--}}
-{{--                            </lable>--}}
-{{--                        </td>--}}
-{{--                        <td>--}}
-{{--                            <input id="edit_employee_id"  class="border-teal-700 border-b py-1 px-2">--}}
-{{--                        </td>--}}
-{{--                    </tr>--}}
-                    <tr>
-                        <td>
-                            <lable class="mx-2">
-                                姓名
-                            </lable>
-                        </td>
-                        <td>
-                            <input  id="edit_employee_name" class="border-teal-700 border-b py-1 px-2">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <lable class="mx-2">
-                                帳號
-                            </lable>
-                        </td>
-                        <td>
-                            <input id="edit_employee_account" class="border-teal-700 border-b py-1 px-2">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <lable class="mx-2">
-                                密碼
-                            </lable>
-                        </td>
-                        <td>
-                            <input id="edit_employee_password" class="border-teal-700 border-b py-1 px-2">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <lable class="mx-2">
-                                職位
-                            </lable>
-                        </td>
-                        <td>
-                            <input id="edit_job_title" class="border-teal-700 border-b py-1 px-2">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <lable class="mx-2">
-                                部門
-                            </lable>
-                        </td>
-                        <td>
-                            <input id="edit_department" class="border-teal-700 border-b py-1 px-2">
-                        </td>
-                    </tr>
-                </table>
+            <div class="px-12 py-6">
+                        <div class="relative z-0 mb-4 w-full group">
+                            <input id="edit_employee_name"
+                                type="email" name="floating_email" class="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer" placeholder=" " required />
+                            <label for="floating_email" class="absolute text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-teal-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">姓名</label>
+                        </div>
+                        <div class="relative z-0 mb-4 w-full group">
+                            <input id="edit_employee_account"
+                                   type="email" name="floating_email" class="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer" placeholder=" " required />
+                            <label for="floating_email" class="absolute text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-teal-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">帳號</label>
+                        </div>
+                        <div class="relative z-0 mb-4 w-full group">
+                            <input id="edit_employee_password"
+                                   type="email" name="floating_email" class="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer" placeholder=" " required />
+                            <label for="floating_email" class="absolute text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-teal-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">密碼</label>
+                        </div>
+                        <div class="relative z-0 mb-4 w-full group">
+                            <input id="edit_job_title"
+                                   type="email" name="floating_email" class="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer" placeholder=" " required />
+                            <label for="floating_email" class="absolute text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-teal-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">職位</label>
+                        </div>
+                        <div class="relative z-0 mb-3 w-full group">
+                            <input id="edit_department"
+                                   type="email" name="floating_email" class="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer" placeholder=" " required />
+                            <label for="floating_email" class="absolute text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-teal-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">部門</label>
+                        </div>
 
                 <p>
-                    <input type="checkbox" class="btn_check" id="edit_open_main_task" >
-                    <label for="open_main_task">新增任務</label>
+                    <label class="inline-flex items-center mt-1">
+                        <input type="checkbox" id="edit_open_main_task" class="form-checkbox h-5 w-5 text-teal-600 btn_check" checked><span class="ml-2 text-gray-700">新增任務</span>
+                    </label>
                 </p>
                 <p>
-                    <input type="checkbox" class="btn_check" id="edit_add_doctor_reply" >
-                    <label for="add_doctor_reply">填寫醫師回饋單</label>
+                    <label class="inline-flex items-center mt-1">
+                        <input type="checkbox" id="edit_add_doctor_reply" class="form-checkbox h-5 w-5 text-teal-600 btn_check" checked><span class="ml-2 text-gray-700">填寫醫師回饋單</span>
+                    </label>
                 </p>
                 <p>
-                    <input type="checkbox" class="btn_check" id="edit_add_pharmacist_reply" >
-                    <label for="add_pharmacist_reply">填寫藥師回饋單</label>
+                    <label class="inline-flex items-center mt-1">
+                        <input type="checkbox" id="edit_add_pharmacist_reply" class="form-checkbox h-5 w-5 text-teal-600 btn_check" checked><span class="ml-2 text-gray-700">填寫藥師回饋單</span>
+                    </label>
                 </p>
                 <p>
-                    <input type="checkbox" class="btn_check" id="edit_close_main_task" >
-                    <label for="close_main_task">任務結案</label>
+                    <label class="inline-flex items-center mt-1">
+                        <input type="checkbox" id="edit_close_main_task" class="form-checkbox h-5 w-5 text-teal-600 btn_check" checked><span class="ml-2 text-gray-700">任務結案</span>
+                    </label>
                 </p>
                 <p>
-                    <input type="checkbox" class="btn_check" id="edit_add_diet_log" >
-                    <label for="add_diet_log">填寫飲食紀錄</label>
+                    <label class="inline-flex items-center mt-1">
+                        <input type="checkbox" id="edit_add_diet_log" class="form-checkbox h-5 w-5 text-teal-600 btn_check" checked><span class="ml-2 text-gray-700">填寫飲食紀錄</span>
+                    </label>
                 </p>
                 <p>
-                    <input type="checkbox" class="btn_check" id="edit_add_nutritionist" >
-                    <label for="add_nutritionist">營養師評論</label>
+                    <label class="inline-flex items-center mt-1">
+                        <input type="checkbox" id="edit_add_nutritionist" class="form-checkbox h-5 w-5 text-teal-600 btn_check" checked><span class="ml-2 text-gray-700">營養師評論</span>
+                    </label>
                 </p>
                 <p>
-                    <input type="checkbox" class="btn_check" id="edit_manage_employee" >
-                    <label for="manage_employee">員工資訊管理</label>
+                    <label class="inline-flex items-center mt-1">
+                        <input type="checkbox" id="edit_manage_employee" class="form-checkbox h-5 w-5 text-teal-600 btn_check" checked><span class="ml-2 text-gray-700">員工資訊管理</span>
+                    </label>
                 </p>
                 <p>
-                    <input type="checkbox" class="btn_check" id="edit_manage_patient" >
-                    <label for="manage_patient">病患資訊管理</label>
+                    <label class="inline-flex items-center mt-1">
+                        <input type="checkbox" id="edit_manage_patient" class="form-checkbox h-5 w-5 text-teal-600 btn_check" checked><span class="ml-2 text-gray-700">病患資訊管理</span>
+                    </label>
                 </p>
 
             </div>
