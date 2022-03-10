@@ -59,7 +59,7 @@
         </div>
         <!--content status & search bar w container-->
 
-        <div class="lg:p-8 md:p-6 sm:p-2 max-h-screen h-screen  bg-gray-200">
+        <div class="lg:p-8 md:p-6 sm:p-2 bg-gray-200">
             <!--數據統計-->
             <div class="grid">
                 <p class="mx-4 my-2 justify-self-start font-bold text-xl">功能操作</p>
@@ -82,14 +82,18 @@
                                 </a>
                             </div>
                         </div>
-
+{{--                        <div class="mx-4 my-2 px-5">--}}
+{{--                            <a href="" class="mt-2 text-green-700">查看資訊</a>--}}
+{{--                        </div>--}}
                     </div>
                     <!--數據欄位-->
                     <div class="rounded m-2 flex-1 bg-gray-50 p-4">
                         <div class="flex items-center mx-4 px-5 my-2">
                             <div class="flex grid">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 justify-self-end text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 justify-self-end text-gray-600"
+                                     fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                          d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
                                 </svg>
                             </div>
                             <div class="mx-4 px-5">
@@ -100,14 +104,18 @@
                                 </a>
                             </div>
                         </div>
-
+{{--                        <div class="mx-4 my-2 px-5">--}}
+{{--                            <a href="" class="mt-2 text-green-700">查看資訊</a>--}}
+{{--                        </div>--}}
                     </div>
                     <!--數據欄位-->
                     <div class="rounded m-2 flex-1 bg-gray-50 p-4">
                         <div class="flex items-center mx-4 px-5 my-2">
                             <div class="flex grid">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 justify-self-end text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 justify-self-end text-gray-600"
+                                     fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                          d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                 </svg>
                             </div>
                             <div class="mx-4 px-5">
