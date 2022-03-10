@@ -39,7 +39,7 @@
                             rows="5"
                             placeholder="藥師尚未填寫內容"
                             disabled
-                        >{{$pharmacist_feedback->pharmacist_question}}</textarea>
+                        >{{isset($pharmacist_feedback->pharmacist_question) ? $pharmacist_feedback->pharmacist_question : null}}</textarea>
                     </div>
                 </div>
                 <!--藥師向醫師提問-->
@@ -66,7 +66,7 @@
                             id="other_information_modal_doctor_reply"
                             rows="5"
                             placeholder="請在此處填寫內容...  (Shift + Enter可以換行)"
-                        >{{$doctor_feedback->doctor_reply}}</textarea>
+                        >{{isset($doctor_feedback->doctor_reply) ? $doctor_feedback->doctor_reply : null}}</textarea>
                     </div>
                 </div>
             </div>

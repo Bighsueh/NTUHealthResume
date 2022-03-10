@@ -38,7 +38,7 @@
                             rows="5"
                             placeholder="請在此處填寫內容...  (Shift + Enter可以換行)"
 {{--                            disabled--}}
-                        >{{$pharmacist_feedback->pharmacist_reply}}</textarea>
+                        >{{isset($pharmacist_feedback->pharmacist_reply) ? $pharmacist_feedback->pharmacist_reply : null}}</textarea>
                     </div>
                 </div>
                 <!--藥師向醫師提問-->
@@ -65,7 +65,7 @@
                             id="pharmacist_feedback_modal_ask_to_doctor"
                             rows="5"
                             placeholder="請在此處填寫內容...  (Shift + Enter可以換行)"
-                        >{{$pharmacist_feedback->pharmacist_question}}</textarea>
+                        >{{isset($pharmacist_feedback->pharmacist_question) ? $pharmacist_feedback->pharmacist_question : null}}</textarea>
                     </div>
                 </div>
             </div>
