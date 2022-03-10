@@ -101,11 +101,7 @@
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    飲食紀錄
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    營養師評論
+                                    任務紀錄
                                 </th>
                             </tr>
                             </thead>
@@ -129,18 +125,18 @@
                                         {{$query->id_number}}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <a href="{{route('get_dietLog',['id' => $query->patient_id,'name'=>$query->patient_name])}}"
+                                        <a href="{{route('get_taskList',['id' => $query->patient_id])}}"
                                            class="bg-transparent border border-teal-700 text-teal-700
                                            hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
-                                            飲食紀錄
+                                            檢視任務
                                         </a>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <a href="{{route('get_nutritionistComment',['id' => $query->patient_id,'name'=>$query->patient_name])}}"
-                                           class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
-                                            營養師評論
-                                        </a>
-                                    </td>
+{{--                                    <td class="px-6 py-4 whitespace-nowrap">--}}
+{{--                                        <a href="{{route('get_nutritionistComment',['id' => $query->patient_id,'name'=>$query->patient_name])}}"--}}
+{{--                                           class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">--}}
+{{--                                            營養師評論--}}
+{{--                                        </a>--}}
+{{--                                    </td>--}}
                                 </tr>
                             @endforeach
                             </tbody>
@@ -173,6 +169,8 @@
                 $('#tbody tr').remove();
                 if(res.length > 0){
                     console.log(res);
+                    var url = "{{route('get_taskList')}}";
+                    console.log(url);
                     res.forEach(function (row) {
                         let patient_id = '<td class="px-6 py-4 whitespace-nowrap">' + row['patient_id'] + '</td>';
                         let patient_name = '<td class="px-6 py-4 whitespace-nowrap">' + row['patient_name'] + '</td>';
@@ -184,46 +182,26 @@
                         else{
                             sex = '<td class="px-6 py-4 whitespace-nowrap">' + '女生' + '</td>';
                         }
-                        let diet_log = '<td class="px-6 py-4 whitespace-nowrap">' +
-                            `<a href="http://localhost:8080/dietLog?id=${row['patient_id']}&name=${row['patient_name']}"
+
+                        let task = '<td class="px-6 py-4 whitespace-nowrap">' +
+                            `<a href="${url}?id=${row['patient_id']}"
                                class="bg-transparent border border-teal-700 text-teal-700
                                            hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
-                                飲食紀錄` +
-                            '</a>' + '</td>';
-                        let nutritionistComment = '<td class="px-6 py-4 whitespace-nowrap">' +
-                            `<a href="http://localhost:8080/nutritionistComment?id=${row['patient_id']}&name=${row['patient_name']}"
-                               class="bg-transparent border border-teal-700 text-teal-700
-                                           hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
-                                營養師評論` +
+                                檢視任務` +
                             '</a>' + '</td>';
                         $('#tbody').append(
-                            '<tr class="text-gray-700 items-center">' +patient_id+patient_name+sex+id_number + diet_log + nutritionistComment +'</tr>'
+                            '<tr class="text-gray-700 items-center">' +patient_id+patient_name+sex+id_number + task +'</tr>'
                         )
 
                     })
 
 
                 }
-                // $('.btn_employee').click(function (){
-                //
-                //     open_settingEmployeeModal($(this).attr("value"));
-                // })
 
             }
         });
 
     }
 
-
-    // $('.btn_create_employee').click(function (){
-    //
-    //     open_createEmployeeModal();
-    // })
-    //
-    //
-    // $('.btn_employee').click(function (){
-    //
-    //     open_settingEmployeeModal($(this).attr("value"));
-    // })
 </script>
 @endsection

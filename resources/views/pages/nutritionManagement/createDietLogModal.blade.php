@@ -33,6 +33,7 @@
                             <div class="px-2 flex">
                                 <label for="size">餐點份量：</label>
                                 <input name="size" id="size" type="text" class="border border-black">
+                                <input class="hidden" id="task_id" name="task_id" value="{{$patient_data['task_id']}}">
                                 <input name="patient_id" id="patient_id" type="text" class="border border-black hidden" value="{{$patient_data['patient_id']}}">
                             </div>
                         </div>

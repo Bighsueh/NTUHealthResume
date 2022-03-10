@@ -36,16 +36,29 @@ class NutritionManagementController extends Controller
     // 飲食紀錄
     public function get_dietLog(Request $request)
     {
-        $queries = DB::table('diet_log')->where('patient_id',$request->id)->get();
-        $patient_data = ['patient_id' => $request->id, 'patient_name' => $request->name];
-        $user_name = Session::get('user_name');
-        return view('pages.nutritionManagement.dietLog',compact('queries','patient_data','user_name'));
+        $queries = DB::table('diet_log')->where('patient_id',$request->patient_id)->where('task_id',$request->task_id)->get();
+        $patient_data = ['patient_id' => $request->patient_id,'task_id'=>$request->task_id];
+        return view('pages.nutritionManagement.dietLog',compact('queries','patient_data'));
+    }
+    // 取得資料查詢資料用
+    public function get_dietLog_data(Request $request)
+    {
+        try{
+            $data = DB::table('diet_log')
+                ->where('patient_id',$request->id)
+                ->where($request->search_from,'like','%'.$request->search_data.'%')
+                ->get();
+            return $data;
+        }catch (\Throwable $e){
+            report($e);
+            return false;
+        }
     }
     // 刪除一筆飲食紀錄
-    public function delete_dietLog($id)
+    public function delete_dietLog(Request $request)
     {
         try {
-            $query = DB::table('diet_log')->where('id',$id);
+            $query = DB::table('diet_log')->where('id',$request->id);
             $query->delete();
         }catch (\Throwable $e)
         {
@@ -61,6 +74,7 @@ class NutritionManagementController extends Controller
         try{
             DB::table('diet_log')
                 ->insert([
+                'task_id' => $query['task_id'],
                 'patient_id'=>$query['patient_id'],
                 'quantity'=>$query['size'],
                 'meal_order'=>$query['order'],
@@ -101,6 +115,20 @@ class NutritionManagementController extends Controller
         $queries = DB::table('nutrition_ingredient')->where('diet_log_id',$request->id)->get();
         $name = $request->name;
         return view('pages.nutritionManagement.nutritionistComment',compact('queries','name'));
+    }
+
+    public function get_nutritionistComment_data(Request $request)
+    {
+        try{
+            $data = DB::table('diet_log')
+                ->where('diet_log_id',$request->id)
+                ->where($request->search_from,'like','%'.$request->search_data.'%')
+                ->get();
+            return $data;
+        }catch (\Throwable $e){
+            report($e);
+            return false;
+        }
     }
     // 新增一筆飲食評論
     public function store_nutritionistComment(Request $request)
@@ -160,11 +188,11 @@ class NutritionManagementController extends Controller
         }
     }
 
-    public function delete_nutritionistComment($id)
+    public function delete_nutritionistComment(Request $request)
     {
         try {
             DB::table('nutrition_ingredient')
-                ->where('id', $id)->delete();
+                ->where('id', $request->id)->delete();
             return redirect()->back();
         }catch (\Throwable $e)
         {

@@ -50,22 +50,23 @@
     </div>
 </div>
 <script>
-    $('.btn-patch').click(function (){
-        let url  = '/dietLog/patch/page'
-        // alert($(this).attr("value"))
-        $.ajax({
-            url : url,
-            method : "post",
-            data:{
-                "_token":"{{csrf_token()}}",
-                "id":$(this).attr("value"),
-            },
-            success:function(res){
-                console.log(res[1]);
-                $("#select").val(res[0]);
-                $("#patch_size").val(res[1]);
-                $("#patch_id").val(res[2]);
-            }
+        $('.btn-patch').click(function (){
+            let url  = '/dietLog/patch/page'
+            // alert($(this).attr("value"))
+            $.ajax({
+                url : url,
+                method : "post",
+                data:{
+                    "_token":"{{csrf_token()}}",
+                    "id":$(this).attr("value"),
+                },
+                success:function(res){
+                    console.log(res[1]);
+                    $("#select").val(res[0]);
+                    $("#patch_size").val(res[1]);
+                    $("#patch_id").val(res[2]);
+                }
+            })
         })
-    })
+
 </script>
