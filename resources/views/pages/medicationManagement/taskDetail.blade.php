@@ -1,5 +1,7 @@
 @extends('layouts.main.menu')
 @section('content')
+    <!-- task_id -->
+    <div hidden id="task_id">{{$task_id}}</div>
     <!-- content -->
     <div class="w-screen flex-1">
         <div class="p-4 bg-Slate-50 text-center">
@@ -76,15 +78,17 @@
                             </div>
                             <div class="mx-4 px-5">
                                 <p class="mb-4 text-xl text-gray-600">藥師回饋</p>
-                                <a href=""
+                                <a
+                                   id="btn_pharmacist_feedback"
+                                   data-bs-toggle="modal" data-bs-target="#pharmacistModal"
                                    class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
                                     查看
                                 </a>
                             </div>
                         </div>
-{{--                        <div class="mx-4 my-2 px-5">--}}
-{{--                            <a href="" class="mt-2 text-green-700">查看資訊</a>--}}
-{{--                        </div>--}}
+                        {{--                        <div class="mx-4 my-2 px-5">--}}
+                        {{--                            <a href="" class="mt-2 text-green-700">查看資訊</a>--}}
+                        {{--                        </div>--}}
                     </div>
                     <!--數據欄位-->
                     <div class="rounded m-2 flex-1 bg-gray-50 p-4">
@@ -98,15 +102,37 @@
                             </div>
                             <div class="mx-4 px-5">
                                 <p class="mb-4 text-xl text-gray-600">其他資訊</p>
-                                <a href=""
+                                <a
+                                   id="btn_other_information"
+                                   data-bs-toggle="modal" data-bs-target="#OtherInformationModal"
                                    class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
                                     查看
                                 </a>
                             </div>
                         </div>
-{{--                        <div class="mx-4 my-2 px-5">--}}
-{{--                            <a href="" class="mt-2 text-green-700">查看資訊</a>--}}
-{{--                        </div>--}}
+                        {{--                        <div class="mx-4 my-2 px-5">--}}
+                        {{--                            <a href="" class="mt-2 text-green-700">查看資訊</a>--}}
+                        {{--                        </div>--}}
+                    </div>
+                    <!--數據欄位-->
+                    <div class="rounded m-2 flex-1 bg-gray-50 p-4">
+                        <div class="flex items-center mx-4 px-5 my-2">
+                            <div class="flex grid">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 justify-self-end text-gray-600"
+                                     fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+                                </svg>
+                            </div>
+                            <div class="mx-4 px-5">
+                                <p class="mb-4 text-xl text-gray-600">新增藥歷</p>
+                                <a
+                                   id="btn-create-medication-record"
+                                   class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
+                                    查看
+                                </a>
+                            </div>
+                        </div>
+
                     </div>
                     <!--數據欄位-->
                     <div class="rounded m-2 flex-1 bg-gray-50 p-4">
@@ -120,7 +146,8 @@
                             </div>
                             <div class="mx-4 px-5">
                                 <p class="mb-4 text-xl text-gray-600">案件狀態</p>
-                                <a href=""
+                                <a
+                                   id="btn-progress-status"
                                    class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
                                     查看
                                 </a>
@@ -222,4 +249,24 @@
             </div>
         </div>
     </div>
+    @include('pages.medicationManagement.modal.pharmacistFeedbackModal')
+    @include('pages.medicationManagement.modal.OtherInformationModal')
+    <script>
+        $('#btn-create-medication-record').click(function(){
+            Swal.fire({
+                icon: 'error',
+                title: '錯誤',
+                text: '此功能尚未開放',
+                confirmButtonColor: '#8CD4F5'
+            })
+        })
+        $('#btn-progress-status').click(function(){
+            Swal.fire({
+                icon: 'error',
+                title: '錯誤',
+                text: '此功能尚未開放',
+                confirmButtonColor: '#8CD4F5'
+            })
+        })
+    </script>
 @endsection
