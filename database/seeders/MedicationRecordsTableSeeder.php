@@ -19,7 +19,6 @@ class MedicationRecordsTableSeeder extends Seeder
     {
 
         DB::table('medication_records')->insert([
-            'task_id' => '1',
             'date_of_examination' => Carbon::now(),
             'medical_history_no' => '1',
             'insurance_type' => '保險別',
@@ -30,7 +29,6 @@ class MedicationRecordsTableSeeder extends Seeder
             'updated_at'=> Carbon::now(),
         ]);
         DB::table('medication_records')->insert([
-            'task_id' => '1',
             'date_of_examination' => Carbon::now(),
             'medical_history_no' => '1',
             'insurance_type' => '保險別',
@@ -41,7 +39,6 @@ class MedicationRecordsTableSeeder extends Seeder
             'updated_at'=> Carbon::now(),
         ]);
         DB::table('medication_records')->insert([
-            'task_id' => '1',
             'date_of_examination' => Carbon::now(),
             'medical_history_no' => '1',
             'insurance_type' => '自付額',
