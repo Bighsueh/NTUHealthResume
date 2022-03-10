@@ -14,10 +14,10 @@ class CreateWorkProgressTable extends Migration
     public function up()
     {
         Schema::create('work_progress', function (Blueprint $table) {
-            $table->id('task_id');
-            $table->integer('record_id');
-            $table->integer('doctor_feedback');
-            $table->integer('pharmacist_feedback');
+            $table->id('progress_id');
+            $table->integer('record_id')->nullable();
+            $table->integer('diet_id')->nullable();
+            $table->string('content')->nullable();
             $table->timestamps();
         });
     }
