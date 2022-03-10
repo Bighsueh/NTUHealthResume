@@ -18,7 +18,7 @@ class DoctorFeedbackTableSeeder extends Seeder
             'doctor_feedback_id' => 1,
             'task_id' => 1,
             'doctor_id' => 1,
-            'content' => '小弟，我看你骨骼精奇， 是百年難得一見的練武奇才呀！',
+            'doctor_reply' => '小弟，我看你骨骼精奇， 是百年難得一見的練武奇才呀！',
         ]);
     }
 }
