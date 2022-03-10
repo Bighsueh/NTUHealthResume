@@ -65,6 +65,8 @@ Route::get('/setting/patient/delete_patient',[\App\Http\Controllers\PatientContr
 
 Route::get('/nutritionManagement',[\App\Http\Controllers\NutritionManagementController::class,'get_nutritionManagement'])->name('get_nutritionManagement');
 Route::get('/nutritionManagement/get_nutritionManagement_data',[\App\Http\Controllers\NutritionManagementController::class,'get_nutritionManagement_data'])->name('get_nutritionManagement_data');
+// 任務紀錄
+Route::get('/taskList', [\App\Http\Controllers\NutritionManagementController::class, 'get_taskList'])->name('get_taskList');
 // 飲食紀錄
 Route::get('/dietLog',[\App\Http\Controllers\NutritionManagementController::class,'get_dietLog'])->name('get_dietLog');
 Route::post('/dietLog', [\App\Http\Controllers\NutritionManagementController::class, 'store_dietLog'])->name('store_dietLog');
