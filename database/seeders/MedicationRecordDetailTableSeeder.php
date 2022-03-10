@@ -18,7 +18,7 @@ class MedicationRecordDetailTableSeeder extends Seeder
         DB::table('medication_record_detail')->insert([
             'detail_id' => 1,
             'record_id' => 1,
-            'indication' => '有病治病無病強身',
+            'indication' => '有病治病',
             'category' => '仙丹',
             'trade_name' => '萬靈丹',
             'generic_name' => '靈芝',
@@ -32,7 +32,7 @@ class MedicationRecordDetailTableSeeder extends Seeder
         DB::table('medication_record_detail')->insert([
             'detail_id' => 2,
             'record_id' => 1,
-            'indication' => '有病治病無病強身',
+            'indication' => '有病治病',
             'category' => '仙丹',
             'trade_name' => '萬靈丹',
             'generic_name' => '靈芝',
@@ -46,7 +46,7 @@ class MedicationRecordDetailTableSeeder extends Seeder
         DB::table('medication_record_detail')->insert([
         'detail_id' => 3,
         'record_id' => 1,
-        'indication' => '有病治病無病強身',
+        'indication' => '有病治病',
         'category' => '仙丹',
         'trade_name' => '萬靈丹',
         'generic_name' => '靈芝',
