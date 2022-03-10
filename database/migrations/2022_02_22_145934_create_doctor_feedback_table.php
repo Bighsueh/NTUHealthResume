@@ -17,7 +17,7 @@ class CreateDoctorFeedbackTable extends Migration
             $table->id('doctor_feedback_id')->autoIncrement();
             $table->integer('task_id');
             $table->integer('doctor_id');
-            $table->text('content')->nullable();
+            $table->text('doctor_reply')->nullable();
             $table->timestamps();
         });
     }
