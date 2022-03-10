@@ -68,7 +68,8 @@ Route::get('/nutritionManagement/get_nutritionManagement_data',[\App\Http\Contro
 // 飲食紀錄
 Route::get('/dietLog',[\App\Http\Controllers\NutritionManagementController::class,'get_dietLog'])->name('get_dietLog');
 Route::post('/dietLog', [\App\Http\Controllers\NutritionManagementController::class, 'store_dietLog'])->name('store_dietLog');
-Route::get('/dietLog/{id}', [\App\Http\Controllers\NutritionManagementController::class, 'delete_dietLog'])->name('delete_dietLog');
+Route::get('/nutritionManagement/get_dietLog_data',[\App\Http\Controllers\NutritionManagementController::class,'get_dietLog_data'])->name('get_dietLog_data');
+Route::get('/dietLog/delete', [\App\Http\Controllers\NutritionManagementController::class, 'delete_dietLog'])->name('delete_dietLog');
 // 進入修改頁面並且帶值
 Route::post('/dietLog/patch/page', [\App\Http\Controllers\NutritionManagementController::class, 'post_dietLog_patch_page'])->name('post_dietLog_patch_page');
 Route::post('/dietLog/patch', [\App\Http\Controllers\NutritionManagementController::class, 'patch_dietLog'])->name('patch_dietLog');
@@ -76,7 +77,8 @@ Route::post('/dietLog/patch', [\App\Http\Controllers\NutritionManagementControll
 // 營養師評論
 Route::get('/nutritionistComment',[\App\Http\Controllers\NutritionManagementController::class,'get_nutritionistComment'])->name('get_nutritionistComment');
 Route::post('/nutritionistComment', [\App\Http\Controllers\NutritionManagementController::class, 'store_nutritionistComment'])->name('store_nutritionistComment');
-Route::get('/nutritionistComment/{id}', [\App\Http\Controllers\NutritionManagementController::class, 'delete_nutritionistComment'])->name('delete_nutritionistComment');
+Route::get('/nutritionistComment/delete', [\App\Http\Controllers\NutritionManagementController::class, 'delete_nutritionistComment'])->name('delete_nutritionistComment');
+Route::get('/nutritionManagement/get_nutritionistComment_data',[\App\Http\Controllers\NutritionManagementController::class,'get_nutritionistComment_data'])->name('get_nutritionistComment_data');
 // 進入修改頁面並且帶值
 Route::post('/nutritionistComment/patch/page', [\App\Http\Controllers\NutritionManagementController::class, 'post_nutritionistComment_patch_page'])->name('post_nutritionistComment_patch_page');
 Route::post('/nutritionistComment/patch', [\App\Http\Controllers\NutritionManagementController::class, 'patch_nutritionistComment'])->name('patch_nutritionistComment');
