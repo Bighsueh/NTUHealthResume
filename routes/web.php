@@ -38,18 +38,13 @@ Route::group(['prefix' => 'medication_management'], function () {
     Route::get('/get_task_detail_page', [MedicationRecordController::class, 'get_task_detail_page'])
         ->name('get_medication_management_task_detail_page');
 
-
+    //儲存藥師回饋單內容
+    Route::post('/store_pharmacist_feedback_data', [MedicationRecordController::class, 'store_pharmacist_feedback_data'])
+        ->name('store_medication_management_pharmacist_feedback_data');
+    //儲存醫師回饋單內容
+    Route::post('/store_doctor_feedback_data', [MedicationRecordController::class, 'store_doctor_feedback_data'])
+        ->name('store_medication_management_doctor_feedback_data');
 });
-
-//Route::get('/get_medication_record_page', [MedicationRecordController::class, 'get_medication_record_and_feedback_management_patient_detail_page'])->name('get_medication_record_and_reply_management_patient_detail_page');
-//Route::post('/get_medication_record_detail', [MedicationRecordController::class, 'get_medication_record_detail'])->name('get_medication_record_detail');
-//Route::get('/get_patient_task_page',[MedicationRecordController::class,'get_medication_record_and_feedback_management_task_list_page'])->name('get_patient_task_page');
-//Route::post('/get_doctor_feedback', [MedicationRecordController::class, 'get_doctor_feedback'])->name('get_doctor_feedback');
-//Route::post('/store_doctor_feedback', [MedicationRecordController::class, 'store_doctor_feedback'])->name('store_doctor_feedback');
-//Route::post('/get_pharmacist_feedback', [MedicationRecordController::class, 'get_pharmacist_feedback'])->name('get_pharmacist_feedback');
-//Route::post('/store_pharmacist_feedback', [MedicationRecordController::class, 'store_pharmacist_feedback'])->name('store_pharmacist_feedback');
-//Route::post('/store_medication_record_detail', [MedicationRecordController::class, 'store_medication_record_detail'])->name('store_medication_record_detail');
-//Route::post('/update_medication_record_detail', [MedicationRecordController::class, 'update_medication_record_detail'])->name('update_medication_record_detail');
 
 
 Route::get('/setting/employee',[\App\Http\Controllers\EmployeeController::class,'get_setting_employee'])->name('get_setting_employee');
