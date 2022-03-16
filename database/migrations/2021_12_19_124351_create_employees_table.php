@@ -20,6 +20,7 @@ class CreateEmployeesTable extends Migration
             $table->string('employee_password');
             $table->string('job_title');
             $table->string('department');
+            $table->boolean('admin');
             $table->boolean('open_main_task');
             $table->boolean('add_doctor_reply');
             $table->boolean('add_pharmacist_reply');

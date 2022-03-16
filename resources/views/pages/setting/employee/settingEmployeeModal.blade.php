@@ -45,6 +45,11 @@
 
                 <p>
                     <label class="inline-flex items-center mt-1">
+                        <input value="0" type="checkbox" id="edit_admin" class="form-checkbox h-5 w-5 text-teal-600 btn_check btn_admin" ><span class="ml-2 text-gray-700">管理員權限</span>
+                    </label>
+                </p>
+                <p>
+                    <label class="inline-flex items-center mt-1">
                         <input type="checkbox" id="edit_open_main_task" class="form-checkbox h-5 w-5 text-teal-600 btn_check" checked><span class="ml-2 text-gray-700">新增任務</span>
                     </label>
                 </p>
@@ -121,6 +126,9 @@
                 $('#edit_job_title').val(res[0]['job_title']);
                 $('#edit_department').val(res[0]['department']);
 
+                $('#edit_admin').prop('checked',res[0]['admin']);
+                $('#edit_admin').val(res[0]['admin'])
+
                 $('#edit_open_main_task').prop('checked',res[0]['open_main_task']);
                 $('#edit_open_main_task').val(res[0]['open_main_task']);
 
@@ -166,6 +174,7 @@
                 employee_password:$('#edit_employee_password').val(),
                 job_title:$('#edit_job_title').val(),
                 department:$('#edit_department').val(),
+                admin:$('#edit_admin').val(),
                 open_main_task:$('#edit_open_main_task').val(),
                 add_doctor_reply:$('#edit_add_doctor_reply').val(),
                 add_pharmacist_reply:$('#edit_add_pharmacist_reply').val(),
@@ -204,5 +213,17 @@
     }
     $('.btn_check').change(function () {
         this.value = (Number(this.checked));
+        if(this.value == 0){
+            $('.btn_admin').prop('checked',false);
+            $('.btn_admin').val(0);
+        }
+    })
+
+    $('.btn_admin').change(function () {
+        if(this.value == 1){
+            $('.btn_check').prop('checked',true);
+            $('.btn_check').val(1);
+        }
+
     })
 </script>

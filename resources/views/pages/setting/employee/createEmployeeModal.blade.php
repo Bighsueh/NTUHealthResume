@@ -48,6 +48,11 @@
 
                 <p>
                     <label class="inline-flex items-center mt-1">
+                        <input value="0" type="checkbox" id="create_admin" class="form-checkbox h-5 w-5 text-teal-600 btn_check btn_admin" ><span class="ml-2 text-gray-700">管理員權限</span>
+                    </label>
+                </p>
+                <p>
+                    <label class="inline-flex items-center mt-1">
                         <input value="0" type="checkbox" id="create_open_main_task" class="form-checkbox h-5 w-5 text-teal-600 btn_check" ><span class="ml-2 text-gray-700">新增任務</span>
                     </label>
                 </p>
@@ -104,6 +109,8 @@
 <script>
 
     function open_createEmployeeModal(){
+        $('.btn_check').prop('checked',false);
+        $('.btn_check').val(0);
         $('#createEmployeeModal').modal('show');
     }
 
@@ -126,6 +133,7 @@
                 employee_password:$('#create_employee_password').val(),
                 job_title:$('#create_job_title').val(),
                 department:$('#create_department').val(),
+                admin:$('#create_admin').val(),
                 open_main_task:$('#create_open_main_task').val(),
                 add_doctor_reply:$('#create_add_doctor_reply').val(),
                 add_pharmacist_reply:$('#create_add_pharmacist_reply').val(),
@@ -143,6 +151,18 @@
     }
     $('.btn_check').change(function () {
         this.value = (Number(this.checked));
+        if(this.value == 0){
+            $('.btn_admin').prop('checked',false);
+            $('.btn_admin').val(0);
+        }
     })
+    $('.btn_admin').change(function () {
+        if(this.value == 1){
+            $('.btn_check').prop('checked',true);
+            $('.btn_check').val(1);
+        }
+
+    })
+
 
 </script>
