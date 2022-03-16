@@ -44,7 +44,7 @@
                 <!--藥師向醫師提問-->
                 <div class="flex justify-center">
                     <div class="mb-3 xl:w-full">
-                        <b class="mx-2">向醫師提問(選填)</b>
+                        <b class="mx-2">醫師回饋函(選填)</b>
                         <textarea
                             class="
                             form-control
