@@ -35,10 +35,6 @@
                     <div class="flex">
                         <div class="mx-6 mt-4 flex items-end">
                             <p class="text-3xl mb-2 font-bold">用藥管理系統</p>
-                            <p class="md:block hidden">md　</p>
-                            <p class="lg:block hidden">lg　</p>
-                            <p class="xl:block hidden">xl　</p>
-                            <p class="2xl:block hidden">2xl　</p>
                             {{--                        <div class="flex item-end mx-4 text-gray-400">--}}
                             {{--                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-4" fill="none"--}}
                             {{--                                 viewBox="0 0 24 24" stroke="currentColor">--}}
@@ -105,6 +101,7 @@
                                 <p class="col-span-1 text-xl text-gray-600">其他資訊</p>
                                 <a
                                     id="btn_other_information"
+                                    data-bs-toggle="modal" data-bs-target="#OtherInformationModal"
                                     class="col-span-1 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 x-4 rounded">
                                     查看
                                 </a>
@@ -126,6 +123,7 @@
                                 <p class="col-span-1 text-xl text-gray-600">藥師回饋</p>
                                 <a
                                     id="btn_pharmacist_feedback"
+                                    data-bs-toggle="modal" data-bs-target="#pharmacistModal"
                                     class="col-span-1 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 x-4 rounded">
                                     查看
                                 </a>
