@@ -26,12 +26,12 @@ class NutritionManagementController extends Controller
             return false;
         }
     }
-    // 任務紀錄
-    public function get_taskList(Request $request)
+    // 餐序列表
+    public function get_orderList(Request $request)
     {
         $id = $request->id;
         $queries = DB::table('work_progress')->where('diet_id',$id)->get();
-        return view('pages.nutritionManagement.taskList',compact('id','queries'));
+        return view('pages.nutritionManagement.orderList',compact('id','queries'));
     }
     // 飲食紀錄
     public function get_dietLog(Request $request)

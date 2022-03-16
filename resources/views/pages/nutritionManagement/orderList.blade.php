@@ -18,8 +18,8 @@
                         <select class=" bg-transparent  border-none w-1/6 text-gray-700 mr-3 py-1 px-2  leading-tight focus:outline-none "
                                 id="search_from">
                             <option value="progress_id">ID</option>
-                            <option value="content">任務狀態</option>
-                            <option value="created_at">任務建立日期</option>
+                            <option value="content">餐序狀態</option>
+                            <option value="created_at">餐序建立日期</option>
                             <option value="updated_at">最後異動時間</option>
                         </select>
 
@@ -90,15 +90,11 @@
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    任務狀態
+                                    餐序狀態
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    任務建立日期
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    任務結案日期
+                                    餐序建立日期
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
@@ -106,7 +102,7 @@
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    任務詳情
+                                    餐序詳情
                                 </th>
                             </tr>
                             </thead>
@@ -121,9 +117,6 @@
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             {{$query->created_at}}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            -
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             {{$query->updated_at}}

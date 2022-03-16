@@ -125,10 +125,10 @@
                                         {{$query->id_number}}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <a href="{{route('get_taskList',['id' => $query->patient_id])}}"
+                                        <a href="{{route('get_orderList',['id' => $query->patient_id])}}"
                                            class="bg-transparent border border-teal-700 text-teal-700
                                            hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
-                                            檢視任務
+                                            檢視餐序
                                         </a>
                                     </td>
 {{--                                    <td class="px-6 py-4 whitespace-nowrap">--}}
@@ -169,7 +169,7 @@
                 $('#tbody tr').remove();
                 if(res.length > 0){
                     console.log(res);
-                    var url = "{{route('get_taskList')}}";
+                    var url = "{{route('get_orderList')}}";
                     console.log(url);
                     res.forEach(function (row) {
                         let patient_id = '<td class="px-6 py-4 whitespace-nowrap">' + row['patient_id'] + '</td>';
@@ -183,14 +183,14 @@
                             sex = '<td class="px-6 py-4 whitespace-nowrap">' + '女生' + '</td>';
                         }
 
-                        let task = '<td class="px-6 py-4 whitespace-nowrap">' +
+                        let order_list = '<td class="px-6 py-4 whitespace-nowrap">' +
                             `<a href="${url}?id=${row['patient_id']}"
                                class="bg-transparent border border-teal-700 text-teal-700
                                            hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
-                                檢視任務` +
+                                檢視餐序` +
                             '</a>' + '</td>';
                         $('#tbody').append(
-                            '<tr class="text-gray-700 items-center">' +patient_id+patient_name+sex+id_number + task +'</tr>'
+                            '<tr class="text-gray-700 items-center">' +patient_id+patient_name+sex+id_number + order_list +'</tr>'
                         )
 
                     })
