@@ -60,7 +60,7 @@
         <!--content status & search bar w container-->
 
         <div class="lg:p-8 md:p-6 sm:p-2 max-h-screen h-screen  bg-gray-200">
-            @include('pages.menu.statusBar')
+            @include('pages.medicationManagement.taskStatusbar')
 
             <div class="grid">
                 <div class="flex justify-between ">
