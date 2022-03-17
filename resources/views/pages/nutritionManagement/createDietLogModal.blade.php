@@ -21,14 +21,8 @@
                 <div class="modal-body relative p-4">
                         <div class="group-input flex py-5 text-xl">
                             <div class="px-2 flex">
-                                <label for="order">餐序：</label>
-                                <select name="order" id="editable-select" class="border border-black">
-                                    <option>早餐</option>
-                                    <option>午餐</option>
-                                    <option>晚餐</option>
-                                    <option>宵夜</option>
-                                    <option>下午茶</option>
-                                </select>
+                                <label for="meal_name">菜色：</label>
+                                <input name="meal_name" id="meal_name" type="text" class="border border-black">
                             </div>
                             <div class="px-2 flex">
                                 <label for="size">餐點份量：</label>

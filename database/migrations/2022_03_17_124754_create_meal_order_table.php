@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNutritionIngredientTable extends Migration
+class CreateMealOrderTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateNutritionIngredientTable extends Migration
      */
     public function up()
     {
-        Schema::create('nutrition_ingredient', function (Blueprint $table) {
+        Schema::create('meal_order', function (Blueprint $table) {
             $table->id();
             $table->string('diet_log_id')->nullable();
             $table->double('carbohydrate')->nullable();
@@ -38,6 +38,6 @@ class CreateNutritionIngredientTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('nutrition_ingredient');
+        Schema::dropIfExists('meal_order');
     }
 }

@@ -129,7 +129,11 @@
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    餐序
+                                    建立時間
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                    菜色
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
@@ -143,6 +147,10 @@
                                     class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
                                     刪除內容
                                 </th>
+                                <th scope="col"
+                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                    菜色評論
+                                </th>
                             </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200" id="tbody">
@@ -152,7 +160,10 @@
                                             {{$query->id}}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            {{$query->meal_order}}
+                                            {{$query->created_at}}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            {{$query->meal_name}}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             {{$query->quantity}}
@@ -170,6 +181,15 @@
                                             <a href="{{route('delete_dietLog',['id' => $query->id])}}"
                                                class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
                                                 刪除
+                                            </a>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <a href="#"
+                                               class="bg-transparent border border-teal-700 text-teal-700
+                                               hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded btn-dish-patch"
+                                               value="{{$query->id}}"
+                                               data-bs-toggle="modal" data-bs-target="#dishesComment">
+                                                查看
                                             </a>
                                         </td>
                                     </tr>
@@ -196,7 +216,8 @@
                 data:{
                     search_data :$('#input_search').val() ,
                     search_from:$('#search_from').val(),
-                    id:$('#patient_id').val(),
+                    patient_id:$('#patient_id').val(),
+                    task_id:$('#task_id').val(),
                 },
                 success:function (res) {
                     $('#tbody tr').remove();
@@ -205,9 +226,9 @@
                         let delete_url = "{{route('delete_dietLog')}}";
                         res.forEach(function (row) {
                             let id = '<td class="px-6 py-4 whitespace-nowrap">' + row['id'] + '</td>';
-                            let meal_order = '<td class="px-6 py-4 whitespace-nowrap">' + row['meal_order'] + '</td>';
+                            let created_at = '<td class="px-6 py-4 whitespace-nowrap">' + row['created_at'] + '</td>';
+                            let meal_name = '<td class="px-6 py-4 whitespace-nowrap">' + row['meal_name'] + '</td>';
                             let quantity = '<td class="px-6 py-4 whitespace-nowrap">' + row['quantity'] + '</td>';
-
                             let diet_log_patch ='<td class="px-6 py-4 whitespace-nowrap">'+
                            ` <a href="#"
                                class="bg-transparent border border-teal-700 text-teal-700
@@ -222,7 +243,7 @@
                                     刪除
                                 </a>` + '</td>';
                             $('#tbody').append(
-                                '<tr class="text-gray-700 items-center">' +id+meal_order+quantity+diet_log_patch+diet_log_delete +'</tr>'
+                                '<tr class="text-gray-700 items-center">' +id+created_at+meal_name+quantity+diet_log_patch+diet_log_delete +'</tr>'
                             )
 
                         })
@@ -242,6 +263,7 @@
                                     $("#select").val(res[0]);
                                     $("#patch_size").val(res[1]);
                                     $("#patch_id").val(res[2]);
+                                    $("#patch_meal_name").val(res[3])
                                 }
                             })
                         })
@@ -258,4 +280,5 @@
     </script>
     @include('pages.nutritionManagement.createDietLogModal')
     @include('pages.nutritionManagement.patchDietLogModal')
+    @include('pages.nutritionManagement.createDishesCommentModal')
 @endsection
