@@ -38,6 +38,9 @@ Route::group(['prefix' => 'medication_management'], function () {
     Route::get('/get_task_detail_page', [MedicationRecordController::class, 'get_task_detail_page'])
         ->name('get_medication_management_task_detail_page');
 
+    Route::get('/create_medication_management_task',[MedicationRecordController::class,'create_task_data'])
+        ->name('create_medication_management_task');
+
     //儲存藥師回饋單內容
     Route::post('/store_pharmacist_feedback_data', [MedicationRecordController::class, 'store_pharmacist_feedback_data'])
         ->name('store_medication_management_pharmacist_feedback_data');

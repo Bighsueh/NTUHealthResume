@@ -186,13 +186,11 @@
 
 
         $('.btn_create_employee').click(function (){
-
             open_createEmployeeModal();
         })
 
 
         $('.btn_employee').click(function (){
-
             open_settingEmployeeModal($(this).attr("value"));
         })
     </script>

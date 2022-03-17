@@ -72,10 +72,10 @@
                 </div>
                 <div class="mx-2 px-5 grid grid-cols-1 ">
                     <p class="col-span-1 text-xl text-gray-600">新增任務</p>
-                    <a
-                        class="col-span-1 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 x-4 rounded">
+                    <button
+                        class="col-span-1 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 x-4 rounded btn_create_task">
                         操作
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>

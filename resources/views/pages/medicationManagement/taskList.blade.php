@@ -129,7 +129,7 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <a href="{{route('get_medication_management_task_detail_page',['task_id'=>$row->task_id])}}"
-                                           class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
+                                           class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded ">
                                             查看
                                         </a>
                                     </td>
@@ -143,4 +143,35 @@
             </div>
         </div>
     </div>
+    <script>
+
+        let patient_id = "{{$patient_id}}";
+        $('.btn_create_task').click(function () {
+            Swal.fire({
+                title: '確定要新增任務嗎?',
+                showDenyButton: true,
+                confirmButtonText: 'Save',
+                denyButtonText: `Don't save`,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+
+                    $.ajax({
+                        url:"{{route('create_medication_management_task')}}",
+                        method:'get',
+                        data:{
+                            patient_id:patient_id
+                        },success:function(res){
+                            if(res){
+                                Swal.fire('Saved!', '', 'success')
+                                window.location.reload();
+                            }
+                        }
+
+                    })
+                    window.location.reload();
+                }
+            })
+        })
+    </script>
 @endsection
