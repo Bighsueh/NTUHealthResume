@@ -37,7 +37,7 @@ Route::group(['prefix' => 'medication_management'], function () {
     //個別病患任務詳細資訊頁面
     Route::get('/get_task_detail_page', [MedicationRecordController::class, 'get_task_detail_page'])
         ->name('get_medication_management_task_detail_page');
-
+    //新增任務列表
     Route::get('/create_medication_management_task',[MedicationRecordController::class,'create_task_data'])
         ->name('create_medication_management_task');
 
@@ -47,6 +47,9 @@ Route::group(['prefix' => 'medication_management'], function () {
     //儲存醫師回饋單內容
     Route::post('/store_doctor_feedback_data', [MedicationRecordController::class, 'store_doctor_feedback_data'])
         ->name('store_medication_management_doctor_feedback_data');
+    //取得藥歷列表資訊(包含record及record_detail)
+    Route::post('/get_record_data', [MedicationRecordController::class, 'get_record_data'])
+        ->name('get_medication_management_record_data');
 });
 
 
