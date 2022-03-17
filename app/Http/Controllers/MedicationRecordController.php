@@ -30,7 +30,7 @@ class MedicationRecordController extends Controller
                 ->where('patient_id', $patient_id)
                 ->get();
 
-            $result = ['task_list' => $task_list];
+            $result = ['task_list' => $task_list,'patient_id' => $patient_id];
 
             return view('pages.medicationManagement.taskList', $result);
         } catch (\Exception $exception) {
@@ -175,6 +175,22 @@ class MedicationRecordController extends Controller
         } catch (\Exception $exception) {
             return $exception;
         }
+    }
+
+    function create_task_data(Request $request){
+        try{
+            DB::table('patient_tasks')
+                ->insert([
+                    'patient_id' => $request->patient_id,
+                    'status' => "未開始",
+                    'created_at' => date('Y/m/d H:i:s'),
+                    'updated_at' => date('Y/m/d H:i:s')
+                ]);
+            return true;
+        }catch (Exception $exception){
+            return $exception;
+        }
+
     }
 
 }
