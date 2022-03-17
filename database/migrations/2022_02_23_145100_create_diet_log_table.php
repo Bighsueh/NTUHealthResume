@@ -17,7 +17,6 @@ class CreateDietLogTable extends Migration
             $table->id();
             $table->string('patient_id')->nullable();
             $table->string('task_id')->nullable();
-            $table->string('meal_order')->nullable();
             $table->string('meal_name')->nullable();
             $table->double('quantity')->nullable();
             $table->string('img_src')->nullable();

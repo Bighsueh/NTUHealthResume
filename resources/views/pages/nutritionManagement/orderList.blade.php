@@ -62,11 +62,76 @@
         <!--content status & search bar w container-->
 
         <div class="lg:p-8 md:p-6 sm:p-2 max-h-screen h-screen  bg-gray-200">
-            @include('pages.menu.statusBar')
+            <!--數據統計-->
+            <div class="grid">
+                <p class="mx-4 my-2 justify-self-start font-bold text-xl">功能統計</p>
+                <div class="flex">
+                    <!--功能欄位-->
+                    <div class="rounded m-2 flex-1 bg-gray-50 p-4">
+                        <div class="flex items-center mx-4 px-5 my-2">
+                            <div class="flex grid">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                                </svg>
+                            </div>
+                            <div class="mx-4 px-5">
+                                <p class="text-xl text-gray-600 mb-3">新增餐序紀錄</p>
+                                <button
+                                    class="bg-transparent border border-teal-700 text-teal-700
+                                   hover:bg-teal-700 hover:text-white px-4 py-2 text-center rounded"
+                                    id="btn_orderList_insert" data-bs-target="#orderList" data-bs-toggle="modal">
+
+                                    新增
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!--數據欄位-->
+                    <div class="rounded m-2 flex-1 bg-gray-50 p-4">
+                        <div class="flex items-center mx-4 px-5 my-2">
+                            <div class="flex grid">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     class="h-8 w-8 justify-self-end text-gray-600" fill="none" viewBox="0 0 24 24"
+                                     stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9"/>
+                                </svg>
+                            </div>
+                            <div class="mx-4 px-5">
+                                <p class="text-xl text-gray-600">標題</p>
+                                <p class="text-2xl text-gray-900">數據</p>
+                            </div>
+                        </div>
+                        <div class="mx-4 my-2 px-5">
+                            <a href="" class="mt-2 text-green-700">查看資訊</a>
+                        </div>
+                    </div>
+                    <!--數據欄位-->
+                    <div class="rounded m-2 flex-1 bg-gray-50 p-4">
+                        <div class="flex items-center mx-4 px-5 my-2">
+                            <div class="flex grid">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     class="h-8 w-8 justify-self-end text-gray-600" fill="none" viewBox="0 0 24 24"
+                                     stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9"/>
+                                </svg>
+                            </div>
+                            <div class="mx-4 px-5">
+                                <p class="text-xl text-gray-600">標題</p>
+                                <p class="text-2xl text-gray-900">數據</p>
+                            </div>
+                        </div>
+                        <div class="mx-4 my-2 px-5">
+                            <a href="" class="mt-2 text-green-700">查看資訊</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="grid">
                 <div class="flex justify-between ">
-                    <p class="mx-4 my-2 justify-self-start font-bold text-xl">任務列表</p>
+                    <p class="mx-4 my-2 justify-self-start font-bold text-xl">餐序列表</p>
                     {{--                <div class="flex mx-4">--}}
                     {{--                    <a href=""--}}
                     {{--                       class="bg-teal-700 mx-2 justify-self-end border border-teal-700 hover:border-teal-500 text-gray-50 hover:bg-teal-500 hover:text-white text-center py-2 px-4 rounded">--}}
@@ -102,6 +167,14 @@
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                    修改內容
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                    刪除內容
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
                                     餐序詳情
                                 </th>
                             </tr>
@@ -110,10 +183,10 @@
                                 @foreach($queries as $query)
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            {{$query->progress_id}}
+                                            {{$query->id}}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            {{$query->content}}
+                                            {{$query->meal_order}}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             {{$query->created_at}}
@@ -122,7 +195,22 @@
                                             {{$query->updated_at}}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <a href="{{route('get_dietLog',['task_id'=>$query->progress_id,'patient_id'=>$id])}}"
+                                            <a href="#"
+                                               class="bg-transparent border border-teal-700 text-teal-700
+                                               hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded btn-patch"
+                                               value="{{$query->id}}"
+                                               data-bs-toggle="modal" data-bs-target="#orderListPatch">
+                                                修改
+                                            </a>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <a href="{{route('delete_orderList',['id' => $query->id])}}"
+                                               class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
+                                                刪除
+                                            </a>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <a href="{{route('get_dietLog',['task_id'=>$query->id,'patient_id'=>$id])}}"
                                                class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
                                                 查看
                                             </a>
@@ -136,65 +224,66 @@
             </div>
         </div>
     </div>
-
+    @include('pages.nutritionManagement.createOrderListModal')
+    @include('pages.nutritionManagement.patchOrderListModal')
     <script>
 
-        $('#btn_search').click(function (){
-            if($('#input_search').val() == ''){
-                window.location.reload();
-            }else {
-                update_data();
-            }
-        })
-        function update_data() {
+        {{--$('#btn_search').click(function (){--}}
+        {{--    if($('#input_search').val() == ''){--}}
+        {{--        window.location.reload();--}}
+        {{--    }else {--}}
+        {{--        update_data();--}}
+        {{--    }--}}
+        {{--})--}}
+        {{--function update_data() {--}}
 
-            $.ajax({
-                url:"{{route('get_nutritionManagement_data')}}",
-                method:'get',
-                data:{
-                    search_data :$('#input_search').val() ,
-                    search_from:$('#search_from').val()
-                },
-                success:function (res) {
-                    $('#tbody tr').remove();
-                    if(res.length > 0){
-                        console.log(res);
-                        res.forEach(function (row) {
-                            let patient_id = '<td class="px-6 py-4 whitespace-nowrap">' + row['patient_id'] + '</td>';
-                            let patient_name = '<td class="px-6 py-4 whitespace-nowrap">' + row['patient_name'] + '</td>';
-                            let id_number = '<td class="px-6 py-4 whitespace-nowrap">' + row['id_number'] + '</td>';
-                            let sex =""
-                            if(row['id_number'].substring(1,2) =='1') {
-                                sex =  '<td class="px-6 py-4 whitespace-nowrap">' + '男生' + '</td>';
-                            }
-                            else{
-                                sex = '<td class="px-6 py-4 whitespace-nowrap">' + '女生' + '</td>';
-                            }
-                            let diet_log = '<td class="px-6 py-4 whitespace-nowrap">' +
-                                `<a href="http://localhost:8080/dietLog?id=${row['patient_id']}&name=${row['patient_name']}"
-                               class="bg-transparent border border-teal-700 text-teal-700
-                                           hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
-                                飲食紀錄` +
-                                '</a>' + '</td>';
-                            let nutritionistComment = '<td class="px-6 py-4 whitespace-nowrap">' +
-                                `<a href="http://localhost:8080/nutritionistComment?id=${row['patient_id']}&name=${row['patient_name']}"
-                               class="bg-transparent border border-teal-700 text-teal-700
-                                           hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
-                                營養師評論` +
-                                '</a>' + '</td>';
-                            $('#tbody').append(
-                                '<tr class="text-gray-700 items-center">' +patient_id+patient_name+sex+id_number + diet_log + nutritionistComment +'</tr>'
-                            )
+        {{--    $.ajax({--}}
+        {{--        url:"{{route('get_nutritionManagement_data')}}",--}}
+        {{--        method:'get',--}}
+        {{--        data:{--}}
+        {{--            search_data :$('#input_search').val() ,--}}
+        {{--            search_from:$('#search_from').val()--}}
+        {{--        },--}}
+        {{--        success:function (res) {--}}
+        {{--            $('#tbody tr').remove();--}}
+        {{--            if(res.length > 0){--}}
+        {{--                console.log(res);--}}
+        {{--                res.forEach(function (row) {--}}
+        {{--                    let patient_id = '<td class="px-6 py-4 whitespace-nowrap">' + row['patient_id'] + '</td>';--}}
+        {{--                    let patient_name = '<td class="px-6 py-4 whitespace-nowrap">' + row['patient_name'] + '</td>';--}}
+        {{--                    let id_number = '<td class="px-6 py-4 whitespace-nowrap">' + row['id_number'] + '</td>';--}}
+        {{--                    let sex =""--}}
+        {{--                    if(row['id_number'].substring(1,2) =='1') {--}}
+        {{--                        sex =  '<td class="px-6 py-4 whitespace-nowrap">' + '男生' + '</td>';--}}
+        {{--                    }--}}
+        {{--                    else{--}}
+        {{--                        sex = '<td class="px-6 py-4 whitespace-nowrap">' + '女生' + '</td>';--}}
+        {{--                    }--}}
+        {{--                    let diet_log = '<td class="px-6 py-4 whitespace-nowrap">' +--}}
+        {{--                        `<a href="http://localhost:8080/dietLog?id=${row['patient_id']}&name=${row['patient_name']}"--}}
+        {{--                       class="bg-transparent border border-teal-700 text-teal-700--}}
+        {{--                                   hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">--}}
+        {{--                        飲食紀錄` +--}}
+        {{--                        '</a>' + '</td>';--}}
+        {{--                    let nutritionistComment = '<td class="px-6 py-4 whitespace-nowrap">' +--}}
+        {{--                        `<a href="http://localhost:8080/nutritionistComment?id=${row['patient_id']}&name=${row['patient_name']}"--}}
+        {{--                       class="bg-transparent border border-teal-700 text-teal-700--}}
+        {{--                                   hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">--}}
+        {{--                        營養師評論` +--}}
+        {{--                        '</a>' + '</td>';--}}
+        {{--                    $('#tbody').append(--}}
+        {{--                        '<tr class="text-gray-700 items-center">' +patient_id+patient_name+sex+id_number + diet_log + nutritionistComment +'</tr>'--}}
+        {{--                    )--}}
 
-                        })
+        {{--                })--}}
 
 
-                    }
+        {{--            }--}}
 
-                }
-            });
+        {{--        }--}}
+        {{--    });--}}
 
-        }
+        {{--}--}}
 
     </script>
 @endsection

@@ -31,8 +31,60 @@ class NutritionManagementController extends Controller
     public function get_orderList(Request $request)
     {
         $id = $request->id;
-        $queries = DB::table('work_progress')->where('diet_id',$id)->get();
+        $queries = DB::table('meal_order')->where('patient_id',$id)->get();
         return view('pages.nutritionManagement.orderList',compact('id','queries'));
+    }
+    //新增
+    public function store_orderList(Request $request)
+    {
+
+        $query = $request->except('_token');
+        try{
+            DB::table('meal_order')
+                ->insert([
+                    'patient_id'=>$query['patient_id'],
+                    'meal_order'=>$query['order'],
+                    'created_at'=>Carbon::now(),
+                ]);
+        }catch (\Throwable $e)
+        {
+            report($e);
+            return $e;
+        }
+        return redirect()->back();
+    }
+    // 刪除
+    public function delete_orderList(Request $request)
+    {
+        try {
+            $query = DB::table('meal_order')->where('id',$request->id);
+            $query->delete();
+        }catch (\Throwable $e)
+        {
+            report($e);
+            return false;
+        }
+        return redirect()->back();
+    }
+    // 修改
+    public function post_orderList_patch_page(Request $request)
+    {
+        $query = DB::table('meal_order')->where('id',$request->id)->first();
+        return [$query->meal_order,$request->id];
+    }
+    public function patch_orderList(Request $request)
+    {
+//        dd($request);
+        try {
+            DB::table('meal_order')->where('id',$request->id)->update([
+                'meal_order'=>$request->order,
+                'updated_at'=>Carbon::now(),
+            ]);
+
+            return redirect()->back();
+        }catch (\Throwable $e){
+            report($e);
+        }
     }
     // 飲食紀錄
     public function get_dietLog(Request $request)

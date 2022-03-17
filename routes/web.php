@@ -67,6 +67,11 @@ Route::get('/nutritionManagement',[\App\Http\Controllers\NutritionManagementCont
 Route::get('/nutritionManagement/get_nutritionManagement_data',[\App\Http\Controllers\NutritionManagementController::class,'get_nutritionManagement_data'])->name('get_nutritionManagement_data');
 // 餐敘列表
 Route::get('/orderList', [\App\Http\Controllers\NutritionManagementController::class, 'get_orderList'])->name('get_orderList');
+Route::get('/orderList/delete', [\App\Http\Controllers\NutritionManagementController::class, 'delete_orderList'])->name('delete_orderList');
+Route::post('/orderList/store', [\App\Http\Controllers\NutritionManagementController::class, 'store_orderList'])->name('store_orderList');
+Route::post('/orderList/patch/page',[\App\Http\Controllers\NutritionManagementController::class, 'post_orderList_patch_page'])->name('post_orderList_patch_page');
+Route::post('/orderList/patch', [\App\Http\Controllers\NutritionManagementController::class, 'patch_orderList'])->name('patch_orderList');
+
 // 飲食紀錄
 Route::get('/dietLog',[\App\Http\Controllers\NutritionManagementController::class,'get_dietLog'])->name('get_dietLog');
 Route::post('/dietLog', [\App\Http\Controllers\NutritionManagementController::class, 'store_dietLog'])->name('store_dietLog');

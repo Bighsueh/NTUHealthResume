@@ -58,7 +58,7 @@
                             </div>
                             <div class="mx-4 px-5">
 
-                                <p class="text-xl text-gray-600 mb-3">營養師評論</p>
+                                <p class="text-xl text-gray-600 mb-3">餐序評論</p>
                                 <button
                                 class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white px-4 py-2 text-center rounded">
                                     查看
