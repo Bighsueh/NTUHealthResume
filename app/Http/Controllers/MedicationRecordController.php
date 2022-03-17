@@ -59,8 +59,8 @@ class MedicationRecordController extends Controller
             //醫師回饋單
             $doctor_feedback =
                 DB::table('doctor_feedback')
-                ->where('task_id',$task_id)
-                ->first();
+                    ->where('task_id', $task_id)
+                    ->first();
 
             foreach ($medication_records as $row) {
                 $record_id = $row->record_id;
@@ -193,4 +193,35 @@ class MedicationRecordController extends Controller
 
     }
 
+    //取得藥歷列表資訊(包含record及record_detail)
+    public function get_record_data(Request $request)
+    {
+        try{
+            //record_id
+            $record_id = $request->get('record_id');
+
+            //藥歷母表 medication_records
+            $record_data = DB::table('medication_records')
+                ->where('record_id',$record_id)
+                ->select('date_of_examination','redate','pres_hosp','disp_hosp')
+                ->first();
+
+            //record_detail_data
+            $record_detail_data = DB::table('medication_record_detail')
+                ->where('record_id', $record_id)
+                ->select('trade_name','generic_name','dose','freq')
+                ->get();
+
+            $result = [
+                'record_data' => $record_data,
+                'record_detail_data' => $record_detail_data,
+            ];
+
+
+            return $result;
+        }catch (\Exception $exception){
+            return $exception;
+        }
+
+    }
 }

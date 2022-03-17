@@ -19,11 +19,11 @@ use Illuminate\Support\Facades\Session;
 */
 
 //取得登入介面
-Route::get('/',[LoginController::class,'get_login_page'])->name('get_login_page');
-Route::post('/login',[LoginController::class,'post_login_data'])->name('post_login_data');
+Route::get('/', [LoginController::class, 'get_login_page'])->name('get_login_page');
+Route::post('/login', [LoginController::class, 'post_login_data'])->name('post_login_data');
 //病患雲端系統登入介面
-Route::get('/drive/login', [DriveController::class,'get_drive_login_page'])->name('get_drive_login_page');
-Route::post('/drive/login', [DriveController::class,'post_drive_login_data'])->name('post_drive_login_data');
+Route::get('/drive/login', [DriveController::class, 'get_drive_login_page'])->name('get_drive_login_page');
+Route::post('/drive/login', [DriveController::class, 'post_drive_login_data'])->name('post_drive_login_data');
 Route::get('drive', [DriveController::class, 'get_drive_page'])->name('get_drive_page');
 
 //用藥管理系統
@@ -87,6 +87,14 @@ Route::post('/dietLog/patch', [\App\Http\Controllers\NutritionManagementControll
 Route::post('/dishes/patch/page', [\App\Http\Controllers\NutritionManagementController::class, 'post_dishes_patch_page'])->name('post_dishes_patch_page');
 Route::post('/dishes/patch', [\App\Http\Controllers\NutritionManagementController::class, 'post_dishes_patch'])->name('post_dishes_patch');
 
+// 營養師評論
+Route::get('/nutritionistComment',[\App\Http\Controllers\NutritionManagementController::class,'get_nutritionistComment'])->name('get_nutritionistComment');
+Route::post('/nutritionistComment', [\App\Http\Controllers\NutritionManagementController::class, 'store_nutritionistComment'])->name('store_nutritionistComment');
+Route::get('/nutritionistComment/delete', [\App\Http\Controllers\NutritionManagementController::class, 'delete_nutritionistComment'])->name('delete_nutritionistComment');
+Route::get('/nutritionManagement/get_nutritionistComment_data',[\App\Http\Controllers\NutritionManagementController::class,'get_nutritionistComment_data'])->name('get_nutritionistComment_data');
+// 進入修改頁面並且帶值
+Route::post('/nutritionistComment/patch/page', [\App\Http\Controllers\NutritionManagementController::class, 'post_nutritionistComment_patch_page'])->name('post_nutritionistComment_patch_page');
+Route::post('/nutritionistComment/patch', [\App\Http\Controllers\NutritionManagementController::class, 'patch_nutritionistComment'])->name('patch_nutritionistComment');
 
 Route::get('/menu', function () {
     $user_name = Session::get('user_name');
