@@ -109,11 +109,11 @@
                 //再插入資料
                 $.each(record_detail_data, function (index, value) {
                     medication_record_detail_list.append(`
-                        <div class="flex gap-2 ">
-                            <input class="bg-gray-100 my-1 flex-1 text-left rounded block" value="${value['trade_name']}"/>
-                            <input class="bg-gray-100 my-1 flex-1 text-left rounded block" value="${value['generic_name']}"/>
-                            <input class="bg-gray-100 my-1 flex-1 text-left rounded block" value="${value['dose']}"/>
-                            <input class="bg-gray-100 my-1 flex-1 text-left rounded block" value="${value['freq']}"/>
+                        <div class=" gap-2 grid grid-cols-4">
+                            <input class="bg-gray-100 my-1 text-left rounded block" value="${value['trade_name']}"/>
+                            <input class="bg-gray-100 my-1 text-left rounded block" value="${value['generic_name']}"/>
+                            <input class="bg-gray-100 my-1 text-left rounded block" value="${value['dose']}"/>
+                            <input class="bg-gray-100 my-1 text-left rounded block" value="${value['freq']}"/>
                         </div>
                     `)
                 })
@@ -133,11 +133,11 @@
     //新增藥品項目
     $("#btn_medication_record_add_row").click(function () {
         medication_record_detail_list.append(`
-        <div class="flex gap-2 ">
-            <input class="flex-1 text-left block bg-gray-100 my-1 rounded" value=""/>
-            <input class="flex-1 text-left block bg-gray-100 my-1 rounded" value=""/>
-            <input class="flex-1 text-left block bg-gray-100 my-1 rounded" value=""/>
-            <input class="flex-1 text-left block bg-gray-100 my-1 rounded" value=""/>
+        <div class="grid grid-cols-4 gap-2 ">
+            <input class="text-left block bg-gray-100 my-1 rounded" value=""/>
+            <input class="text-left block bg-gray-100 my-1 rounded" value=""/>
+            <input class="text-left block bg-gray-100 my-1 rounded" value=""/>
+            <input class="text-left block bg-gray-100 my-1 rounded" value=""/>
         </div>
         `)
     })
