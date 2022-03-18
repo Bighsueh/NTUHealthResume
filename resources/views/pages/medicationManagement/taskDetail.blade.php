@@ -80,6 +80,7 @@
                                 <p class="col-span-1 text-xl text-gray-600">新增藥歷</p>
                                 <a
                                     id="btn-create-medication-record"
+                                    data-bs-toggle="modal" data-bs-target="#createMedicationRecordModel"
                                     class="col-span-1 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 x-4 rounded">
                                     查看
                                 </a>
@@ -101,7 +102,7 @@
                                 <p class="col-span-1 text-xl text-gray-600">其他資訊</p>
                                 <a
                                     id="btn_other_information"
-                                    data-bs-toggle="modal" data-bs-target="#OtherInformationModal"
+{{--                                    data-bs-toggle="modal" data-bs-target="#OtherInformationModal"--}}
                                     class="col-span-1 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 x-4 rounded">
                                     查看
                                 </a>
@@ -163,25 +164,33 @@
                     @foreach($medication_records as $row)
                         <div class="flex ">
                             <!--單筆藥歷共通項目-->
-                            <div class="rounded m-2 flex-none bg-gray-50 p-4 w-1/6">
-                                <p>就醫日期：</p>
-                                <li>{{$row->date_of_examination}}</li>
-                                <p>開方日期：</p>
-                                <li>{{$row->redate}}</li>
-                                <p>處方醫院：</p>
-                                <li>{{$row->pres_hosp}}</li>
-                                <p>調劑醫院：</p>
-                                <li>{{$row->disp_hosp}}</li>
+                            <div class="content-between grid rounded m-2 flex-none bg-gray-50 p-4 w-1/6">
+{{--                                <p>就醫日期：</p>--}}
+{{--                                <li>{{$row->date_of_examination}}</li>--}}
+                                <div class="mb-2">
+                                    <p>開方日期：</p>
+                                    <p>{{$row->redate}}</p>
+                                </div>
+{{--                                <p>處方醫院：</p>--}}
+{{--                                <li>{{$row->pres_hosp}}</li>--}}
+{{--                                <p>調劑醫院：</p>--}}
+{{--                                <li>{{$row->disp_hosp}}</li>--}}
+                                <div hidden class="record_id">{{$row->record_id}}</div>
+                                <a class="btn-open-medication-record-detail-modal col-span-1 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 x-4 rounded"
+                                   data-bs-toggle="modal" data-bs-target="#medicationRecordDetailModel">
+                                    詳細內容
+                                </a>
                             </div>
+
                             <!--單筆藥歷藥品列向-->
                             <div class="rounded m-2 flex-auto bg-gray-50 p-4">
                                 <table class="divide-y divide-gray-200 min-w-full">
                                     <thead class="bg-gray-50">
                                     <tr>
-                                        <th scope="col"
-                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                            適應症
-                                        </th>
+{{--                                        <th scope="col"--}}
+{{--                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">--}}
+{{--                                            適應症--}}
+{{--                                        </th>--}}
 {{--                                        <th scope="col"--}}
 {{--                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">--}}
 {{--                                            藥物種類--}}
@@ -198,10 +207,10 @@
                                             class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
                                             劑量(顆數)
                                         </th>
-                                        <th scope="col"
-                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                            途徑
-                                        </th>
+{{--                                        <th scope="col"--}}
+{{--                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">--}}
+{{--                                            途徑--}}
+{{--                                        </th>--}}
                                         <th scope="col"
                                             class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
                                             頻率
@@ -224,12 +233,12 @@
                                     <tbody class="divide-y divide-gray-200">
                                     @foreach($row->record_detail as $detail_row)
                                         <tr>
-                                            <td class="text-left px-6">{{$detail_row->indication}}</td>
+{{--                                            <td class="text-left px-6">{{$detail_row->indication}}</td>--}}
 {{--                                            <td class=text-left px-6">{{$detail_row->category}}</td>--}}
                                             <td class="text-left px-6">{{$detail_row->trade_name}}</td>
                                             <td class="text-left px-6">{{$detail_row->generic_name}}</td>
                                             <td class="text-left px-6">{{$detail_row->dose}}</td>
-                                            <td class="text-left px-6">{{$detail_row->routes}}</td>
+{{--                                            <td class="text-left px-6">{{$detail_row->routes}}</td>--}}
                                             <td class="text-left px-6">{{$detail_row->freq}}</td>
 {{--                                            <td>{{$detail_row->pres_day}}</td>--}}
 {{--                                            <td>{{$detail_row->total_amount}}</td>--}}
@@ -245,10 +254,12 @@
             </div>
         </div>
     </div>
+    @include('pages.medicationManagement.modal.medicationRecordDetailModal')
+    @include('pages.medicationManagement.modal.createMedicationRecordModal')
     @include('pages.medicationManagement.modal.pharmacistFeedbackModal')
     @include('pages.medicationManagement.modal.OtherInformationModal')
     <script>
-        $('#btn-create-medication-record').click(function(){
+        $('#btn_other_information').click(function(){
             Swal.fire({
                 icon: 'error',
                 title: '錯誤',
