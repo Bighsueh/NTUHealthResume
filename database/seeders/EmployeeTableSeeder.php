@@ -14,7 +14,7 @@ class EmployeeTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('diet_log')->insert([
+        DB::table('employees')->insert([
             'employee_no' => 'test',
             'employee_name' => 'test',
             'employee_account' => 'test',
