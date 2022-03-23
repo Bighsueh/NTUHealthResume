@@ -76,14 +76,23 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
                                 </svg>
                             </div>
-                            <div class="mx-2 px-5 grid grid-cols-1 ">
-                                <p class="col-span-1 text-xl text-gray-600">新增藥歷</p>
-                                <a
-                                    id="btn-create-medication-record"
-                                    data-bs-toggle="modal" data-bs-target="#createMedicationRecordModel"
-                                    class="col-span-1 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 x-4 rounded">
-                                    查看
-                                </a>
+                            <div class="mx-2 grid grid-cols-1 w-full">
+                                <p class="text-xl text-gray-600 px-2">新增藥歷</p>
+                                <div class="grid grid-cols-2 w-full">
+                                    <div
+                                        id="btn-create-medication-record"
+                                        data-bs-toggle="modal" data-bs-target="#createMedicationRecordModel"
+                                        class="mx-1 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 rounded">
+                                        手動操作
+                                    </div>
+                                    <div
+                                        id="btn-medication-record-excel"
+                                        {{--                                    data-bs-toggle="modal" data-bs-target="#"--}}
+                                        class="mx-1 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 rounded">
+                                        Excel操作
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
