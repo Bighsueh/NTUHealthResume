@@ -261,7 +261,7 @@ class NutritionManagementController extends Controller
     public function post_dietLog_patch_page(Request $request)
     {
         $query = DB::table('diet_log')->where('id',$request->id)->first();
-        return [$query->meal_order,$query->quantity,$query->id,$query->meal_name];
+        return [$query->quantity,$query->id,$query->meal_name];
 
     }
 
