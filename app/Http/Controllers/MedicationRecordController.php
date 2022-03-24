@@ -177,6 +177,7 @@ class MedicationRecordController extends Controller
         }
     }
 
+    //任務列表新增
     function create_task_data(Request $request){
         try{
             DB::table('patient_tasks')
@@ -191,6 +192,30 @@ class MedicationRecordController extends Controller
             return $exception;
         }
 
+    }
+    //任務列表查詢
+    function get_task_data(Request  $request){
+        try{
+            $data = DB::table('patient_tasks')
+                ->orWhere('created_at','like','%'.$request->search_time.'%')
+                ->orWhere('updated_at','like','%'.$request->search_time.'%')
+                ->orWhere('finish_date','like','%'.$request->search_time.'%')
+                ->get();
+            return $data;
+        }catch(Exception $exception){
+            return $exception;
+        }
+    }
+    //刪除任務
+    function delete_task_data(Request  $request){
+        try{
+            DB::table('patient_tasks')
+                ->where('task_id',$request->task_id)
+                ->delete();
+            return true;
+        }catch(\Exception $exception){
+            return $exception;
+        }
     }
 
     //取得藥歷列表資訊(包含record及record_detail)

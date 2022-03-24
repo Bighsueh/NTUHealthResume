@@ -40,6 +40,12 @@ Route::group(['prefix' => 'medication_management'], function () {
     //新增任務列表
     Route::get('/create_medication_management_task',[MedicationRecordController::class,'create_task_data'])
         ->name('create_medication_management_task');
+    //查詢任務列表
+    Route::get('/get_medication_management_task',[MedicationRecordController::class,'get_task_data'])
+        ->name('get_medication_management_task');
+    //刪除任務列表
+    Route::get('/delete_medication_management_task',[MedicationRecordController::class,'delete_task_data'])
+        ->name('delete_medication_management_task');
 
     //儲存藥師回饋單內容
     Route::post('/store_pharmacist_feedback_data', [MedicationRecordController::class, 'store_pharmacist_feedback_data'])

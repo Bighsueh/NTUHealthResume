@@ -13,10 +13,10 @@
                         </svg>
                         <input
                             class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
-                            type="text" placeholder="請輸入欲查詢資料">
+                            type="text" placeholder="請輸入欲查詢資料" id="search_parameter">
                         <button
                             class="mx-4 flex-shrink-0 bg-teal-700 hover:bg-teal-500 border-teal-700 hover:border-teal-500 text-sm border-4 text-white py-1 px-2 rounded"
-                            type="button">
+                            type="button" id="btn_search">
                             <p class="mx-4">
                                 搜尋
                             </p>
@@ -108,7 +108,7 @@
                                 </th>
                             </tr>
                             </thead>
-                            <tbody class="divide-y divide-gray-200">
+                            <tbody class="divide-y divide-gray-200" id="tbody">
                             <a hidden>{{$thread = 0}}</a>
                             @foreach($task_list as $row)
                                 <tr>
@@ -145,13 +145,14 @@
     </div>
     <script>
 
+        let is_delete_mode = false;
         let patient_id = "{{$patient_id}}";
         $('.btn_create_task').click(function () {
             Swal.fire({
                 title: '確定要新增任務嗎?',
                 showDenyButton: true,
-                confirmButtonText: 'Save',
-                denyButtonText: `Don't save`,
+                confirmButtonText: '是',
+                denyButtonText: `否`,
             }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
@@ -162,16 +163,100 @@
                         data:{
                             patient_id:patient_id
                         },success:function(res){
-                            if(res){
-                                Swal.fire('Saved!', '', 'success')
-                                window.location.reload();
+
+                            if(res==true){
+                                Swal.fire('新增成功', '', 'success');
+                                update_data()
                             }
                         }
 
                     })
-                    window.location.reload();
+
                 }
             })
         })
+
+
+        $('.btn_delete_task').click(function () {
+            if(is_delete_mode==true){
+                is_delete_mode=false
+            }else{
+                is_delete_mode=true;
+            }
+            update_data()
+        })
+        function update_data() {
+            $.ajax({
+                url:"{{route('get_medication_management_task')}}",
+                method:'GET',
+                data:{
+                    search_time:$('#search_parameter').val()
+                },
+                success:function (res) {
+                    $('#tbody tr').remove();
+                    if(res.length > 0){
+                        let thread = 0;
+                        res.forEach(function (row) {
+                            let task_id = '<td class="px-6 py-4 whitespace-nowrap">'+ (thread +=1) + '</td>';
+                            let task_status = '<td class="px-6 py-4 whitespace-nowrap">'+row['status']+'</td>';
+                            let task_created_at =  '<td class="px-6 py-4 whitespace-nowrap">'+row['created_at']+'</td>';
+                            let task_finish_date =  '<td class="px-6 py-4 whitespace-nowrap">'+row['finish_date']+'</td>';
+                            let task_updated_at =  '<td class="px-6 py-4 whitespace-nowrap">'+row['updated_at']+'</td>';
+                            let setting_btn = '<td class="px-6 py-4 whitespace-nowrap">';
+                            if (is_delete_mode==true){
+                                setting_btn += `<button  class="bg-transparent border border-red-700 text-red-700 hover:bg-red-700 hover:text-white text-center py-2 px-4 rounded btn_delete" value="`+row['task_id']+`"> 刪除 </button>`;
+
+                            }else {
+                                setting_btn += ` <a href="{{route('get_medication_management_task_detail_page',['task_id'=>$row->task_id])}}"
+                                           class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded ">
+                                            查看
+                                        </a>`;
+                            }
+                            setting_btn += '</td>';
+                            $('#tbody').append(
+                                '<tr>'+task_id+task_status+task_created_at+task_finish_date+task_updated_at+ setting_btn +'</tr>'
+                            )
+                        })
+
+                    }
+                    $('.btn_delete').click(function () {
+
+                        task_delete($(this).attr("value"));
+                    })
+                }
+            });
+        }
+
+        function task_delete(task_id) {
+            Swal.fire({
+                title: '確定要刪除任務嗎?',
+                showDenyButton: true,
+                confirmButtonText: '是',
+                denyButtonText: `否`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url:"{{route('delete_medication_management_task')}}",
+                        method:'GET',
+                        data:{
+                            task_id:task_id
+                        },
+                        success:function (res) {
+                            Swal.fire('刪除成功', '', 'success');
+                            update_data();
+                        }
+                    })
+
+                }
+            });
+
+        }
+
+        $('#btn_search').click(function () {
+            update_data();
+        })
+
+
+
     </script>
 @endsection
