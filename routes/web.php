@@ -56,6 +56,9 @@ Route::group(['prefix' => 'medication_management'], function () {
     //取得藥歷列表資訊(包含record及record_detail)
     Route::post('/get_record_data', [MedicationRecordController::class, 'get_record_data'])
         ->name('get_medication_management_record_data');
+    //新增藥歷紀錄
+    Route::post('/create_medication_record', [MedicationRecordController::class, 'create_medication_record'])
+        ->name('create_medication_management_medication_record');
 });
 
 

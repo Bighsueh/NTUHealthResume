@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-use mysql_xdevapi\Exception;
+
+
 
 class MedicationRecordController extends Controller
 {
@@ -177,7 +179,6 @@ class MedicationRecordController extends Controller
         }
     }
 
-    //任務列表新增
     function create_task_data(Request $request){
         try{
             DB::table('patient_tasks')
@@ -192,30 +193,6 @@ class MedicationRecordController extends Controller
             return $exception;
         }
 
-    }
-    //任務列表查詢
-    function get_task_data(Request  $request){
-        try{
-            $data = DB::table('patient_tasks')
-                ->orWhere('created_at','like','%'.$request->search_time.'%')
-                ->orWhere('updated_at','like','%'.$request->search_time.'%')
-                ->orWhere('finish_date','like','%'.$request->search_time.'%')
-                ->get();
-            return $data;
-        }catch(Exception $exception){
-            return $exception;
-        }
-    }
-    //刪除任務
-    function delete_task_data(Request  $request){
-        try{
-            DB::table('patient_tasks')
-                ->where('task_id',$request->task_id)
-                ->delete();
-            return true;
-        }catch(\Exception $exception){
-            return $exception;
-        }
     }
 
     //取得藥歷列表資訊(包含record及record_detail)
@@ -244,9 +221,52 @@ class MedicationRecordController extends Controller
 
 
             return $result;
-        }catch (\Exception $exception){
+        } catch (Exception $exception) {
             return $exception;
         }
 
+    }
+
+    //建立藥物紀錄
+    public function create_medication_record(Request $request)
+    {
+        try {
+            //取得今日日期，並依照日期建立資料夾
+            $date = date('Y-m-d');
+            //圖片們
+            $image_list = [];
+
+            //取得傳入的檔案
+            $files = $request->file();
+
+            foreach ($files as $file) {
+                //將傳入的檔案儲存至資料夾，
+                $image_path = $file->store("{$date}", "public");
+
+                //將檔案存入local，並取得table_id
+                $image_id = DB::table('images')->insertGetId([
+                    'file_path' => $image_path,
+                    'created_at' => Carbon::now(),
+                ]);
+
+                array_push($image_list, $image_id);
+            }
+
+            DB::table('medication_records')->insert([
+                'date_of_examination' => $request->get('date_of_examination'),
+                'redate' => $request->get('redate'),
+                'pres_hosp' => $request->get('pres_hosp'),
+                'disp_hosp' => $request->get('disp_hosp'),
+                'images' => implode(',',$image_list),
+                'created_at' => Carbon::now(),
+            ]);
+
+            return 'success';
+        } catch (Exception $exception) {
+            return $exception;
+        }
+
+
+        return 'success';
     }
 }

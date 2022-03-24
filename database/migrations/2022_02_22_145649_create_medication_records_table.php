@@ -21,6 +21,7 @@ class CreateMedicationRecordsTable extends Migration
             $table->date('redate')->nullable();
             $table->string('pres_hosp')->nullable();
             $table->string('disp_hosp')->nullable();
+            $table->string('images')->nullable();
             $table->timestamps();
         });
     }

@@ -9,17 +9,25 @@
 
     <script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery-qrcode.min.js')}}"></script>
-{{--    <script src="{{asset('assets/js/bootstrap.js')}}"></script>--}}
+    {{--    <script src="{{asset('assets/js/bootstrap.js')}}"></script>--}}
     <script src="{{asset('assets/js/sweetalert2@11.js')}}"></script>
-{{--    <script type="text/javascript" src="{{ asset('assets/js/font-awesome.js') }}"></script>--}}
+    {{--    <script type="text/javascript" src="{{ asset('assets/js/font-awesome.js') }}"></script>--}}
     <script type="text/javascript" src="{{ asset('assets/js/tailwind.min.js') }}"></script>
 
     <link href="{{ asset('assets/css/tailwind.min.css') }}" rel="stylesheet" type="text/css">
-{{--    <link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet" type="text/css">--}}
-{{--    <link href="{{ asset('assets/css/font-awesome.css') }}" rel="stylesheet" type="text/css">--}}
-{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />--}}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
+    {{--    <link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet" type="text/css">--}}
+    {{--    <link href="{{ asset('assets/css/font-awesome.css') }}" rel="stylesheet" type="text/css">--}}
+    {{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />--}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+
+    <link rel="stylesheet" href="{{asset('assets/css/datepicker.css')}}"/>
+{{--    <script src="{{asset('assets/js/datepicker.js')}}"></script>--}}
+    <script
+        src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+        integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+        crossorigin="anonymous"></script>
+
 </head>
 <body class="">
 
