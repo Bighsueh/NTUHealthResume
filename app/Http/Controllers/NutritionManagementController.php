@@ -34,6 +34,20 @@ class NutritionManagementController extends Controller
         $queries = DB::table('meal_order')->where('patient_id',$id)->get();
         return view('pages.nutritionManagement.orderList',compact('id','queries'));
     }
+    // 取得資料查詢資料用
+    public function get_orderList_data(Request $request){
+
+        try{
+            $data = DB::table('meal_order')
+                ->where('patient_id',$request->patient_id)
+                ->where($request->search_from,'like','%'.$request->search_data.'%')
+                ->get();
+            return $data;
+        }catch (\Throwable $e){
+            report($e);
+            return false;
+        }
+    }
     //新增
     public function store_orderList(Request $request)
     {
