@@ -47,7 +47,7 @@
             <!--數據統計-->
             <div class="grid">
                 <p class="mx-4 my-2 justify-self-start font-bold text-xl">功能統計</p>
-                <div class="flex">
+                <div class="md:flex-wrap lg:flex">
                     <!--數據欄位-->
                     <div class="rounded m-2 flex-1 bg-gray-50 p-4">
                         <div class="flex items-center mx-4 px-5 my-2">

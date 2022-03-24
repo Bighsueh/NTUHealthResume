@@ -65,7 +65,7 @@
             <!--數據統計-->
             <div class="grid">
                 <p class="mx-4 my-2 justify-self-start font-bold text-xl">功能統計</p>
-                <div class="flex">
+                <div class="md:flex-wrap lg:flex">
                     <!--功能欄位-->
                     <div class="rounded m-2 flex-1 bg-gray-50 p-4">
                         <div class="flex items-center mx-4 px-5 my-2">
@@ -86,7 +86,6 @@
                             </div>
                         </div>
                     </div>
-                    <!--數據欄位-->
                     <div class="rounded m-2 flex-1 bg-gray-50 p-4">
                         <div class="flex items-center mx-4 px-5 my-2">
                             <div class="flex grid">
@@ -132,94 +131,81 @@
             <div class="grid">
                 <div class="flex justify-between ">
                     <p class="mx-4 my-2 justify-self-start font-bold text-xl">餐序列表</p>
-                    {{--                <div class="flex mx-4">--}}
-                    {{--                    <a href=""--}}
-                    {{--                       class="bg-teal-700 mx-2 justify-self-end border border-teal-700 hover:border-teal-500 text-gray-50 hover:bg-teal-500 hover:text-white text-center py-2 px-4 rounded">--}}
-                    {{--                        新增病患回饋單--}}
-                    {{--                    </a>--}}
-                    {{--                    <a href=""--}}
-                    {{--                       class="bg-teal-700 mx-2 justify-self-end border border-teal-700 hover:border-teal-500 text-gray-50 hover:bg-teal-500 hover:text-white text-center py-2 px-4 rounded">--}}
-                    {{--                        新增藥師回饋單--}}
-                    {{--                    </a>--}}
-                    {{--                </div>--}}
                 </div>
-                <div class="flex">
-                    <!--數據欄位-->
-                    <div class="rounded m-2 flex-1 bg-gray-50 p-4">
-                        <table class="divide-y divide-gray-200 min-w-full">
-                            <thead class="bg-gray-50">
+                <div class="rounded m-2 flex-auto bg-gray-50 p-4 overflow-scroll">
+                    <table class="divide-y divide-gray-200 min-w-full">
+                        <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col"
+                                class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                #
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                餐序狀態
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                餐序建立日期
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                最後異動時間
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                修改內容
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                刪除內容
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                餐序詳情
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200" id="tbody">
+                        @foreach($queries as $query)
                             <tr>
-                                <th scope="col"
-                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    #
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    餐序狀態
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    餐序建立日期
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    最後異動時間
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    修改內容
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    刪除內容
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    餐序詳情
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody class="divide-y divide-gray-200" id="tbody">
-                                @foreach($queries as $query)
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            {{$query->id}}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            {{$query->meal_order}}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            {{$query->created_at}}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            {{$query->updated_at}}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <a href="#"
-                                               class="bg-transparent border border-teal-700 text-teal-700
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    {{$query->id}}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    {{$query->meal_order}}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    {{$query->created_at}}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    {{$query->updated_at}}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <a href="#"
+                                       class="bg-transparent border border-teal-700 text-teal-700
                                                hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded btn-patch"
-                                               value="{{$query->id}}"
-                                               data-bs-toggle="modal" data-bs-target="#orderListPatch">
-                                                修改
-                                            </a>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <a href="{{route('delete_orderList',['id' => $query->id])}}"
-                                               class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
-                                                刪除
-                                            </a>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <a href="{{route('get_dietLog',['task_id'=>$query->id,'patient_id'=>$id])}}"
-                                               class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
-                                                查看
-                                            </a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                                       value="{{$query->id}}"
+                                       data-bs-toggle="modal" data-bs-target="#orderListPatch">
+                                        修改
+                                    </a>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <a href="{{route('delete_orderList',['id' => $query->id])}}"
+                                       class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
+                                        刪除
+                                    </a>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <a href="{{route('get_dietLog',['task_id'=>$query->id,'patient_id'=>$id])}}"
+                                       class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
+                                        查看
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
