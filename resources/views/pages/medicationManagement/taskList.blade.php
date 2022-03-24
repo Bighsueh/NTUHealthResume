@@ -145,6 +145,7 @@
     </div>
     <script>
 
+
         let is_delete_mode = false;
         let patient_id = "{{$patient_id}}";
         $('.btn_create_task').click(function () {
@@ -183,7 +184,8 @@
             }else{
                 is_delete_mode=true;
             }
-            update_data()
+
+            update_data();
         })
         function update_data() {
             $.ajax({
