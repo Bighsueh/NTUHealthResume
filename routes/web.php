@@ -71,6 +71,9 @@ Route::get('/setting/patient/delete_patient',[\App\Http\Controllers\PatientContr
 
 Route::get('/nutritionManagement',[\App\Http\Controllers\NutritionManagementController::class,'get_nutritionManagement'])->name('get_nutritionManagement');
 Route::get('/nutritionManagement/get_nutritionManagement_data',[\App\Http\Controllers\NutritionManagementController::class,'get_nutritionManagement_data'])->name('get_nutritionManagement_data');
+// 餐序評論
+Route::post('/orderList/comment/patch/page',[\App\Http\Controllers\NutritionManagementController::class,'get_orderList_comment_patch_page'])->name('get_orderList_comment_patch_page');
+Route::post('/orderList/comment/patch',[\App\Http\Controllers\NutritionManagementController::class,'get_orderList_comment_patch'])->name('get_orderList_comment_patch');
 // 餐敘列表
 Route::get('/orderList', [\App\Http\Controllers\NutritionManagementController::class, 'get_orderList'])->name('get_orderList');
 Route::get('/orderList/delete', [\App\Http\Controllers\NutritionManagementController::class, 'delete_orderList'])->name('delete_orderList');

@@ -60,7 +60,9 @@
 
                                 <p class="text-xl text-gray-600 mb-3">餐序評論</p>
                                 <button
-                                class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white px-4 py-2 text-center rounded">
+                                class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700
+                                hover:text-white px-4 py-2 text-center rounded btn-orderList-comment-patch"
+                                data-bs-target="#orderListComment" data-bs-toggle="modal" value="{{$patient_data['task_id']}}">
                                     查看
                                 </button>
                             </div>
@@ -88,22 +90,11 @@
                     </div>
                     <!--數據欄位-->
                     <div class="rounded m-2 flex-1 bg-gray-50 p-4">
-                        <div class="flex items-center mx-4 px-5 my-2">
-                            <div class="flex grid">
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                     class="h-8 w-8 justify-self-end text-gray-600" fill="none" viewBox="0 0 24 24"
-                                     stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                          d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9"/>
-                                </svg>
+                        <div class="flex items-center m-auto px-5 my-2">
+                            <div class="m-auto py-5 text-xl">
+                                {{$meal_orders->created_at}}
+                                {{$meal_orders->meal_order}}
                             </div>
-                            <div class="mx-4 px-5">
-                                <p class="text-xl text-gray-600">標題</p>
-                                <p class="text-2xl text-gray-900">數據</p>
-                            </div>
-                        </div>
-                        <div class="mx-4 my-2 px-5">
-                            <a href="" class="mt-2 text-green-700">查看資訊</a>
                         </div>
                     </div>
                 </div>
@@ -281,4 +272,5 @@
     @include('pages.nutritionManagement.createDietLogModal')
     @include('pages.nutritionManagement.patchDietLogModal')
     @include('pages.nutritionManagement.createDishesCommentModal')
+    @include('pages.nutritionManagement.createOrderListCommentModal')
 @endsection

@@ -15,7 +15,8 @@ class CreateMealOrderCommentTable extends Migration
     {
         Schema::create('meal_order_comment', function (Blueprint $table) {
             $table->id();
-            $table->string('diet_log_id')->nullable();
+            $table->string('orderList_id')->nullable();
+            $table->string('patient_id')->nullable();
             $table->double('carbohydrate')->nullable();
             $table->double('protein')->nullable();
             $table->double('fat')->nullable();

@@ -72,6 +72,7 @@ class NutritionManagementController extends Controller
         $query = DB::table('meal_order')->where('id',$request->id)->first();
         return [$query->meal_order,$request->id];
     }
+
     public function patch_orderList(Request $request)
     {
 //        dd($request);
@@ -86,12 +87,70 @@ class NutritionManagementController extends Controller
             report($e);
         }
     }
+
+    public function get_orderList_comment_patch_page(Request $request)
+    {
+        $count = DB::table('meal_order_comment')->where('orderList_id',$request->id)->count();
+        if($count){
+            $query = DB::table('meal_order_comment')->where('orderList_id',$request->id)->first();
+            return [$count,$query,$request->id];
+        }
+        else{
+            return [$count,$request->id];
+        }
+    }
+
+    public function get_orderList_comment_patch(Request $request)
+    {
+        $count = DB::table('meal_order_comment')->where('orderList_id',$request->id)->count();
+        try{
+            if($count){
+                DB::table('meal_order_comment')
+                    ->update([
+                        'orderList_id'=>$request->id,
+                        'carbohydrate'=>$request->orderList[0],
+                        'protein'=>$request->orderList[1],
+                        'fat'=>$request->orderList[2],
+                        'cal'=>$request->orderList[3],
+                        'na'=>$request->orderList[4],
+                        'k'=>$request->orderList[5],
+                        'ca'=>$request->orderList[6],
+                        'mg'=>$request->orderList[7],
+                        'vit_b12'=>$request->orderList[8],
+                        'vit_d'=>$request->orderList[9],
+                        'vit_e'=>$request->orderList[10],
+                        'updated_at'=>Carbon::now(),
+                    ]);
+            }else{
+                DB::table('meal_order_comment')
+                    ->insert([
+                        'orderList_id'=>$request->id,
+                        'carbohydrate'=>$request->orderList[0],
+                        'protein'=>$request->orderList[1],
+                        'fat'=>$request->orderList[2],
+                        'cal'=>$request->orderList[3],
+                        'na'=>$request->orderList[4],
+                        'k'=>$request->orderList[5],
+                        'ca'=>$request->orderList[6],
+                        'mg'=>$request->orderList[7],
+                        'vit_b12'=>$request->orderList[8],
+                        'vit_d'=>$request->orderList[9],
+                        'vit_e'=>$request->orderList[10],
+                        'created_at'=>Carbon::now(),
+                    ]);
+            }
+            return 'success';
+        }catch (\Exception $exception){
+            return $exception;
+        }
+    }
     // 飲食紀錄
     public function get_dietLog(Request $request)
     {
         $queries = DB::table('diet_log')->where('patient_id',$request->patient_id)->where('task_id',$request->task_id)->get();
+        $meal_orders = DB::table('meal_order')->where('id', $request->task_id)->first();
         $patient_data = ['patient_id' => $request->patient_id,'task_id'=>$request->task_id];
-        return view('pages.nutritionManagement.dietLog',compact('queries','patient_data'));
+        return view('pages.nutritionManagement.dietLog',compact('queries','patient_data','meal_orders'));
     }
     // 取得資料查詢資料用
     public function get_dietLog_data(Request $request)
