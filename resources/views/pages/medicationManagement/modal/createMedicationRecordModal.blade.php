@@ -121,115 +121,116 @@
     </div>
 </div>
 <script>
-    let image_index = 0;
+    $(function () {
+        let image_index = 0;
 
-    set_image_list(image_index);
-
-    //就醫日期
-    $("#grid-date-of-examination").datepicker({
-        dateFormat: "yy-mm-dd"
-        ,	duration: "fast"
-    });
-
-    //開方日期
-    $("#grid-redate").datepicker({
-        dateFormat: "yy-mm-dd"
-        ,	duration: "fast"
-    });
-
-    //換下一張圖片
-    $('#medicationRecordNext').click(function () {
-        let image_length = $("#medeicationRecordImageList").children().length;
-        image_index = (image_index + 1) % image_length;
         set_image_list(image_index);
-    });
 
-    //換上一張圖片
-    $('#medicationRecordPrev').click(function () {
-        let image_length = $("#medeicationRecordImageList").children().length;
-        image_index = (image_index - 1) % image_length;
-        if (image_index + 1 <= 0) image_index += image_length;
-        set_image_list(image_index);
-    });
+        //就醫日期
+        $("#grid-date-of-examination").datepicker({
+            dateFormat: "yy-mm-dd"
+            , duration: "fast"
+        });
 
-    //新增圖片時可以自動更新預覽圖片
-    $('#file_create_medication_detail_modal_img_upload').on('change', function () {
-        //先清乾淨
-        let image_list = $("#medeicationRecordImageList");
-        image_list.children().remove();
+        //開方日期
+        $("#grid-redate").datepicker({
+            dateFormat: "yy-mm-dd"
+            , duration: "fast"
+        });
 
-        //將上傳的照片寫入img_container
-        $.each(this.files, function (index, file) {
-            //取得單筆上傳檔案的url
-            let object_url = URL.createObjectURL(file);
+        //換下一張圖片
+        $('#medicationRecordNext').click(function () {
+            let image_length = $("#medeicationRecordImageList").children().length;
+            image_index = (image_index + 1) % image_length;
+            set_image_list(image_index);
+        });
 
-            image_list.append(`
+        //換上一張圖片
+        $('#medicationRecordPrev').click(function () {
+            let image_length = $("#medeicationRecordImageList").children().length;
+            image_index = (image_index - 1) % image_length;
+            if (image_index + 1 <= 0) image_index += image_length;
+            set_image_list(image_index);
+        });
+
+        //新增圖片時可以自動更新預覽圖片
+        $('#file_create_medication_detail_modal_img_upload').on('change', function () {
+            //先清乾淨
+            let image_list = $("#medeicationRecordImageList");
+            image_list.children().remove();
+
+            //將上傳的照片寫入img_container
+            $.each(this.files, function (index, file) {
+                //取得單筆上傳檔案的url
+                let object_url = URL.createObjectURL(file);
+
+                image_list.append(`
                 <img class="object-fill w-auto h-1/4 rounded" src="${object_url}">
             `);
+            })
+
+            image_index = 0;
+            set_image_list(image_index)
         })
 
-        image_index = 0;
-        set_image_list(image_index)
-    })
-
-    //儲存按鈕
-    $(".btn-create-medication-record-modal-save").click(function () {
-        create_medication_management_medication_record();
-    });
+        //儲存按鈕
+        $(".btn-create-medication-record-modal-save").click(function () {
+            create_medication_management_medication_record();
+        });
 
 
-    function set_image_list(image_index) {
-        $('#medeicationRecordImageList img').eq(image_index).siblings().hide();
-        $('#medeicationRecordImageList img').eq(image_index).show();
+        function set_image_list(image_index) {
+            $('#medeicationRecordImageList img').eq(image_index).siblings().hide();
+            $('#medeicationRecordImageList img').eq(image_index).show();
 
-        let image_length = $("#medeicationRecordImageList").children().length;
-        $('#medicationRecordNum').text(`第 ${image_index + 1} 張，共 ${image_length} 張圖片`)
-    }
+            let image_length = $("#medeicationRecordImageList").children().length;
+            $('#medicationRecordNum').text(`第 ${image_index + 1} 張，共 ${image_length} 張圖片`)
+        }
 
-    function create_medication_management_medication_record() {
-        let url = "{{route('create_medication_management_medication_record')}}";//route_url
-        let csrf_token = "{{csrf_token()}}";//csrf_token
+        function create_medication_management_medication_record() {
+            let url = "{{route('create_medication_management_medication_record')}}";//route_url
+            let csrf_token = "{{csrf_token()}}";//csrf_token
 
-        let date_of_examination = $("#grid-date-of-examination").val();//就醫日期
-        let redate = $("#grid-redate").val();//開方日期
-        let pred_hosp = $("#grid-pres-hosp").val();//處方醫院
-        let disp_hosp = $("#grid-disp-hosp").val();//調劑醫院
+            let date_of_examination = $("#grid-date-of-examination").val();//就醫日期
+            let redate = $("#grid-redate").val();//開方日期
+            let pred_hosp = $("#grid-pres-hosp").val();//處方醫院
+            let disp_hosp = $("#grid-disp-hosp").val();//調劑醫院
 
-        let connect_url = `
+            let connect_url = `
             ${url}?_token=${csrf_token}&date_of_examination=${date_of_examination}&redate=${redate}&pred_hosp=${pred_hosp}&disp_hosp=${disp_hosp}
         `;
 
-        //圖片input
-        let upload_file = $('#file_create_medication_detail_modal_img_upload')[0].files;
+            //圖片input
+            let upload_file = $('#file_create_medication_detail_modal_img_upload')[0].files;
 
-        if (upload_file.length > 0) {
-            //先建立formData
-            let form_data = new FormData()
+            if (upload_file.length > 0) {
+                //先建立formData
+                let form_data = new FormData()
 
-            //將上傳的圖片塞入formData
-            $.each(upload_file, function (index, value) {
-                form_data.append(index, value)
-            });
+                //將上傳的圖片塞入formData
+                $.each(upload_file, function (index, value) {
+                    form_data.append(index, value)
+                });
 
-            //建立連線
-            $.ajax({
-                url: connect_url,
-                method: 'post',
-                data: form_data,
-                cache: false,
-                contentType: false,
-                processData: false,
-                success: function (res) {
-                    // console.log('upload success');
-                    console.log(res);
-                },
-                error: function (res) {
-                    console.log(res);
-                }
-            });
+                //建立連線
+                $.ajax({
+                    url: connect_url,
+                    method: 'post',
+                    data: form_data,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (res) {
+                        // console.log('upload success');
+                        console.log(res);
+                    },
+                    error: function (res) {
+                        console.log(res);
+                    }
+                });
+            }
         }
-    }
-
+    });
 
 
 </script>
