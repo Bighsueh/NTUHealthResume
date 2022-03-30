@@ -239,9 +239,27 @@ class MedicationRecordController extends Controller
                 ->select('trade_name','generic_name','dose','freq')
                 ->get();
 
+            //圖片路徑
+            $image_urls =[];
+            $image_array = DB::table('medication_records')
+                ->where('record_id',$record_id)
+                ->select('images')->first();
+
+            $image_array = explode(',',$image_array->images);
+
+            foreach ($image_array as $image_id) {
+                $path = DB::table('images')
+                    ->where('image_id',$image_id)
+                    ->select('file_path')->first();
+                $path = asset('/storage/'.$path->file_path);
+
+                array_push($image_urls, $path);
+            }
+
             $result = [
                 'record_data' => $record_data,
                 'record_detail_data' => $record_detail_data,
+                'image_urls' => $image_urls,
             ];
 
 
