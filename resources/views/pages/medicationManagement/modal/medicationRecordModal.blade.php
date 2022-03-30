@@ -138,7 +138,6 @@
         let pres_hosp = $("#medication_record_modal_pres_hosp").val();
         let disp_hosp = $("#medication_record_modal_disp_hosp").val();
         let insurance_type = $("#medication_record_modal_insurance_type").val();
-        let patient_id = $("#patient_id").text();
         let url = "{{route('update_medication_record_detail')}}";
         $.ajax({
             url: url,
@@ -150,7 +149,6 @@
                 "pres_hosp": pres_hosp,
                 "disp_hosp": disp_hosp,
                 "insurance_type": insurance_type,
-                "patient_id": patient_id
             },
             success: function (res) {
                 if (res === 'success') {
