@@ -17,8 +17,8 @@
 
                         <select class=" bg-transparent  border-none w-1/6 text-gray-700 mr-3 py-1 px-2  leading-tight focus:outline-none "
                                 id="search_from">
-                            <option value="progress_id">ID</option>
-                            <option value="content">餐序狀態</option>
+                            <option value="id">ID</option>
+                            <option value="meal_order">餐序狀態</option>
                             <option value="created_at">餐序建立日期</option>
                             <option value="updated_at">最後異動時間</option>
                         </select>
@@ -214,62 +214,84 @@
     @include('pages.nutritionManagement.patchOrderListModal')
     <script>
 
-        {{--$('#btn_search').click(function (){--}}
-        {{--    if($('#input_search').val() == ''){--}}
-        {{--        window.location.reload();--}}
-        {{--    }else {--}}
-        {{--        update_data();--}}
-        {{--    }--}}
-        {{--})--}}
-        {{--function update_data() {--}}
+        $('#btn_search').click(function (){
+            if($('#input_search').val() == ''){
+                window.location.reload();
+            }else {
+                update_data();
+            }
+        })
+        function update_data() {
 
-        {{--    $.ajax({--}}
-        {{--        url:"{{route('get_nutritionManagement_data')}}",--}}
-        {{--        method:'get',--}}
-        {{--        data:{--}}
-        {{--            search_data :$('#input_search').val() ,--}}
-        {{--            search_from:$('#search_from').val()--}}
-        {{--        },--}}
-        {{--        success:function (res) {--}}
-        {{--            $('#tbody tr').remove();--}}
-        {{--            if(res.length > 0){--}}
-        {{--                console.log(res);--}}
-        {{--                res.forEach(function (row) {--}}
-        {{--                    let patient_id = '<td class="px-6 py-4 whitespace-nowrap">' + row['patient_id'] + '</td>';--}}
-        {{--                    let patient_name = '<td class="px-6 py-4 whitespace-nowrap">' + row['patient_name'] + '</td>';--}}
-        {{--                    let id_number = '<td class="px-6 py-4 whitespace-nowrap">' + row['id_number'] + '</td>';--}}
-        {{--                    let sex =""--}}
-        {{--                    if(row['id_number'].substring(1,2) =='1') {--}}
-        {{--                        sex =  '<td class="px-6 py-4 whitespace-nowrap">' + '男生' + '</td>';--}}
-        {{--                    }--}}
-        {{--                    else{--}}
-        {{--                        sex = '<td class="px-6 py-4 whitespace-nowrap">' + '女生' + '</td>';--}}
-        {{--                    }--}}
-        {{--                    let diet_log = '<td class="px-6 py-4 whitespace-nowrap">' +--}}
-        {{--                        `<a href="http://localhost:8080/dietLog?id=${row['patient_id']}&name=${row['patient_name']}"--}}
-        {{--                       class="bg-transparent border border-teal-700 text-teal-700--}}
-        {{--                                   hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">--}}
-        {{--                        飲食紀錄` +--}}
-        {{--                        '</a>' + '</td>';--}}
-        {{--                    let nutritionistComment = '<td class="px-6 py-4 whitespace-nowrap">' +--}}
-        {{--                        `<a href="http://localhost:8080/nutritionistComment?id=${row['patient_id']}&name=${row['patient_name']}"--}}
-        {{--                       class="bg-transparent border border-teal-700 text-teal-700--}}
-        {{--                                   hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">--}}
-        {{--                        營養師評論` +--}}
-        {{--                        '</a>' + '</td>';--}}
-        {{--                    $('#tbody').append(--}}
-        {{--                        '<tr class="text-gray-700 items-center">' +patient_id+patient_name+sex+id_number + diet_log + nutritionistComment +'</tr>'--}}
-        {{--                    )--}}
+            $.ajax({
+                url:"{{route('get_orderList_data')}}",
+                method:'get',
+                data:{
+                    patient_id : '{{$id}}',
+                    search_data :$('#input_search').val() ,
+                    search_from:$('#search_from').val()
+                },
+                success:function (res) {
+                    $('#tbody tr').remove();
+                    if(res.length > 0){
+                        console.log(res);
+                        var del_url = '{{route('delete_orderList')}}'
+                        var check_url = '{{route('get_dietLog')}}'
+                        res.forEach(function (row) {
+                            let id = '<td class="px-6 py-4 whitespace-nowrap">' + row['id'] + '</td>';
+                            let meal_order = '<td class="px-6 py-4 whitespace-nowrap">' + row['meal_order'] + '</td>';
+                            let created_at = '<td class="px-6 py-4 whitespace-nowrap">' + row['created_at'] + '</td>';
+                            let updated_at = '<td class="px-6 py-4 whitespace-nowrap">' + row['updated_at'] + '</td>';
 
-        {{--                })--}}
+                            let change = '<td class="px-6 py-4 whitespace-nowrap">' +
+                                `<a href="#"
+                               class="bg-transparent border border-teal-700 text-teal-700
+                                      hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded btn-patch"
+                                      data-bs-toggle="modal" data-bs-target="#orderListPatch" value="${row['id']}">
+                                修改` +
+                                '</a>' + '</td>';
 
+                            let del = '<td class="px-6 py-4 whitespace-nowrap">' +
+                                `<a href="${del_url}?id=${row['id']}"
+                               class="bg-transparent border border-teal-700 text-teal-700
+                                           hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
+                                刪除` +
+                                '</a>' + '</td>';
+                            let check = '<td class="px-6 py-4 whitespace-nowrap">' +
+                                `<a href="${check_url}?task_id=${row['id']}&patient_id=${row['patient_id']}"
+                               class="bg-transparent border border-teal-700 text-teal-700
+                                           hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
+                                查看` +
+                                '</a>' + '</td>';
+                            $('#tbody').append(
+                                '<tr class="text-gray-700 items-center">' + id + meal_order + created_at + updated_at + change + del + check +'</tr>'
+                            )
 
-        {{--            }--}}
+                        })
+                        $('.btn-patch').click(function (){
+                            let url  = '{{route('post_orderList_patch_page')}}'
+                            // alert($(this).attr("value"))
+                            $.ajax({
+                                url : url,
+                                method : "post",
+                                data:{
+                                    "_token":"{{csrf_token()}}",
+                                    "id":$(this).attr("value"),
+                                },
+                                success:function(res){
+                                    console.log(res[0]);
+                                    $("#select").val(res[0]);
+                                    $("#p_orderList_id").val(res[1])
+                                }
+                            })
+                        })
 
-        {{--        }--}}
-        {{--    });--}}
+                    }
 
-        {{--}--}}
+                }
+            });
+
+        }
 
     </script>
 @endsection

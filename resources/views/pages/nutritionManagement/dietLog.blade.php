@@ -81,7 +81,7 @@
                                 <button
                                    class="bg-transparent border border-teal-700 text-teal-700
                                    hover:bg-teal-700 hover:text-white px-4 py-2 text-center rounded"
-                                   id="btn_dietLog">
+                                   id="btn_dietLog" data-bs-target="#dietLog" data-bs-toggle="modal">
 
                                     新增
                                 </button>
