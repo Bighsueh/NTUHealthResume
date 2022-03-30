@@ -14,16 +14,16 @@ body {
     margin-right: auto;
     padding-top: 4rem;
 }
-label {
-    font-size: 0.75rem;
-    font-weight: 400;
-    display: block;
-    margin-bottom: 0.5rem;
-    color: #B0BEC5;
-    border: 1px solid #ECEFF1;
-    padding: 0.5rem 0.75rem;
-    border-radius: 0.5rem;
-}
+/*label {*/
+/*    font-size: 0.75rem;*/
+/*    font-weight: 400;*/
+/*    display: block;*/
+/*    margin-bottom: 0.5rem;*/
+/*    color: #B0BEC5;*/
+/*    border: 1px solid #ECEFF1;*/
+/*    padding: 0.5rem 0.75rem;*/
+/*    border-radius: 0.5rem;*/
+/*}*/
 input {
     font-family: 'Roboto', sans-serif;
     display:block;
@@ -46,10 +46,10 @@ input:focus {outline: none;}
     border-radius: 0.5rem;
     padding: 0.5rem;
 }
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
+/*table {*/
+/*    border-collapse: collapse;*/
+/*    border-spacing: 0;*/
+/*}*/
 .ui-datepicker-calendar thead th {
     padding: 0.25rem 0;
     text-align: center;
