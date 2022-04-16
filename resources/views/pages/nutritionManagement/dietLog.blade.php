@@ -85,6 +85,14 @@
 
                                     新增
                                 </button>
+                                <button
+                                    class="bg-transparent border border-teal-700 text-teal-700
+                                   hover:bg-teal-700 hover:text-white px-4 py-2 text-center rounded"
+                                    id="btn_excel_upload_dietLog">
+                                    excel上傳
+                                </button>
+                                <input type="file" class="hidden" onchange="excel_upload()" id="upload_file" name="upload_file"  accept=".xlsx">
+
                             </div>
                         </div>
                     </div>
@@ -200,6 +208,48 @@
                 update_data();
             }
         })
+
+        // excel上傳
+        $("#btn_excel_upload_dietLog").click(function (){
+            $('#upload_file').click();
+        })
+        function excel_upload(){
+            let upload_file = $('#upload_file')[0].files;
+            let url = "{{route('post_diet_log_excel_upload')}}";
+            let csrf_token = "{{csrf_token()}}";
+            let form_data = new FormData()
+            console.log(upload_file[0]);
+            form_data.append('upload_file', upload_file[0])
+            console.log(form_data);
+            $.ajax({
+                url: url + "?_token=" + csrf_token,
+                method: 'post',
+                data: form_data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (res) {
+                    if (res === 'success') {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'excel上傳成功',
+                            confirmButtonColor: '#8CD4F5'
+                        })
+                        window.location.reload();
+                    }
+                },
+                error: function (res) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '儲存失敗',
+                        text: res['statusText'],
+                        confirmButtonColor: '#8CD4F5'
+                    })
+                }
+            })
+            $('#upload_file').val("");
+        }
+
         function update_data() {
             $.ajax({
                 url:"{{route('get_dietLog_data')}}",

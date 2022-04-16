@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\DietLogImport;
+use App\Models\DietLog;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Maatwebsite\Excel\Facades\Excel;
 
 class NutritionManagementController extends Controller
 {
@@ -161,6 +164,15 @@ class NutritionManagementController extends Controller
     // 飲食紀錄
     public function get_dietLog(Request $request)
     {
+        if(Session::has('patient_id') && Session::has('task_id')){
+            Session::forget('patient_id');
+            Session::forget('task_id');
+            Session::put('patient_id', $request->patient_id);
+            Session::put('task_id', $request->task_id);
+        }else{
+            Session::put('patient_id', $request->patient_id);
+            Session::put('task_id', $request->task_id);
+        }
         $queries = DB::table('diet_log')->where('patient_id',$request->patient_id)->where('task_id',$request->task_id)->get();
         $meal_orders = DB::table('meal_order')->where('id', $request->task_id)->first();
         $patient_data = ['patient_id' => $request->patient_id,'task_id'=>$request->task_id];
@@ -226,18 +238,19 @@ class NutritionManagementController extends Controller
 
             //取得傳入的檔案
             $files = $request->file();
+            if($files){
+                foreach ($files as $file) {
+                    //將傳入的檔案儲存至資料夾，
+                    $image_path = $file->store("{$date}", "public");
 
-            foreach ($files as $file) {
-                //將傳入的檔案儲存至資料夾，
-                $image_path = $file->store("{$date}", "public");
+                    //將檔案存入local，並取得table_id
+                    $image_id = DB::table('images')->insertGetId([
+                        'file_path' => $image_path,
+                        'created_at' => Carbon::now(),
+                    ]);
 
-                //將檔案存入local，並取得table_id
-                $image_id = DB::table('images')->insertGetId([
-                    'file_path' => $image_path,
-                    'created_at' => Carbon::now(),
-                ]);
-
-                array_push($image_list, $image_id);
+                    array_push($image_list, $image_id);
+                }
             }
 
             DB::table('diet_log')->insert([
@@ -255,6 +268,13 @@ class NutritionManagementController extends Controller
             return $exception;
         }
 
+        return 'success';
+    }
+
+    public function post_diet_log_excel_upload(Request $request)
+    {
+        $file = $request->file('upload_file');
+        Excel::import(new DietLogImport, $file);
         return 'success';
     }
 
