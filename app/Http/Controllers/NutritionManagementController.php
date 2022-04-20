@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\DietLogExport;
 use App\Imports\DietLogImport;
 use App\Models\DietLog;
 use Carbon\Carbon;
@@ -276,6 +277,11 @@ class NutritionManagementController extends Controller
         $file = $request->file('upload_file');
         Excel::import(new DietLogImport, $file);
         return 'success';
+    }
+
+    public function get_diet_log_excel_download()
+    {
+        return Excel::download(new DietLogExport,'excel_download.xlsx');
     }
 
     public function post_dietLog_patch_page(Request $request)

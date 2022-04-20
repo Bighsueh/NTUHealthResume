@@ -97,6 +97,7 @@ Route::post('/dietLog', [\App\Http\Controllers\NutritionManagementController::cl
 Route::get('/nutritionManagement/get_dietLog_data',[\App\Http\Controllers\NutritionManagementController::class,'get_dietLog_data'])->name('get_dietLog_data');
 Route::get('/dietLog/delete', [\App\Http\Controllers\NutritionManagementController::class, 'delete_dietLog'])->name('delete_dietLog');
 Route::post('/dietLog/upload', [\App\Http\Controllers\NutritionManagementController::class, 'post_diet_log_excel_upload'])->name('post_diet_log_excel_upload');
+Route::get('/dietLog/download', [\App\Http\Controllers\NutritionManagementController::class, 'get_diet_log_excel_download'])->name('get_diet_log_excel_download');
 // 進入修改頁面並且帶值
 Route::post('/dietLog/patch/page', [\App\Http\Controllers\NutritionManagementController::class, 'post_dietLog_patch_page'])->name('post_dietLog_patch_page');
 Route::post('/dietLog/patch', [\App\Http\Controllers\NutritionManagementController::class, 'patch_dietLog'])->name('patch_dietLog');

@@ -105,10 +105,26 @@
                             </div>
                         </div>
                     </div>
+                    <div class="rounded m-2 flex-1 bg-gray-50 p-4">
+                        <div class="flex items-center mx-4 px-5 my-2">
+                            <div class="flex grid">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                                </svg>
+                            </div>
+                            <div class="mx-4 px-5">
+                                <p class="text-xl text-gray-600 mb-3">excel下載</p>
+                                <button onclick="location.href='{{route('get_diet_log_excel_download')}}';"
+                                    class="bg-transparent border border-teal-700 text-teal-700
+                                   hover:bg-teal-700 hover:text-white px-4 py-2 text-center rounded"
+                                    id="btn_excel_download_dietLog">
+                                    下載
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-
             <div class="grid">
                 <div class="flex mx-2">
                     <p id="" class="my-2 justify-self-start font-bold text-xl">飲食紀錄</p>
@@ -249,6 +265,36 @@
             })
             $('#upload_file').val("");
         }
+        {{--$("#btn_excel_download_dietLog").click(function (){--}}
+        {{--    location.href('{{route('get_diet_log_excel_download')}}')--}}
+        {{--})--}}
+        {{--function excel_download(){--}}
+        {{--    let url = "{{route('post_diet_log_excel_download')}}";--}}
+        {{--    $.ajax({--}}
+        {{--        url: url,--}}
+        {{--        method: 'get',--}}
+        {{--        success: function (res) {--}}
+        {{--            console.log(res);--}}
+        {{--            if (res === 'success') {--}}
+        {{--                Swal.fire({--}}
+        {{--                    icon: 'success',--}}
+        {{--                    title: 'excel下載成功',--}}
+        {{--                    confirmButtonColor: '#8CD4F5'--}}
+        {{--                })--}}
+        {{--            }--}}
+        {{--        },--}}
+        {{--        error: function (res) {--}}
+        {{--            Swal.fire({--}}
+        {{--                icon: 'error',--}}
+        {{--                title: '儲存失敗',--}}
+        {{--                text: res['statusText'],--}}
+        {{--                confirmButtonColor: '#8CD4F5'--}}
+        {{--            })--}}
+        {{--        }--}}
+        {{--    })--}}
+        {{--}--}}
+
+
 
         function update_data() {
             $.ajax({

@@ -27,7 +27,7 @@ class DietLogImport implements ToModel,WithStartRow
                 'created_at'=>Carbon::now(),
         ]);
     }
-
+    //skip first row
     public function startRow(): int
     {
         return 2;
