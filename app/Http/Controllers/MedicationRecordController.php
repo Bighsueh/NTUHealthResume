@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 
-
 class MedicationRecordController extends Controller
 {
     //開啟用藥管理系統-病患列表介面
@@ -32,7 +31,7 @@ class MedicationRecordController extends Controller
                 ->where('patient_id', $patient_id)
                 ->get();
 
-            $result = ['task_list' => $task_list,'patient_id' => $patient_id];
+            $result = ['task_list' => $task_list, 'patient_id' => $patient_id];
 
             return view('pages.medicationManagement.taskList', $result);
         } catch (\Exception $exception) {
@@ -179,8 +178,9 @@ class MedicationRecordController extends Controller
         }
     }
 
-    function create_task_data(Request $request){
-        try{
+    function create_task_data(Request $request)
+    {
+        try {
             DB::table('patient_tasks')
                 ->insert([
                     'patient_id' => $request->patient_id,
@@ -189,26 +189,29 @@ class MedicationRecordController extends Controller
                     'updated_at' => date('Y/m/d H:i:s')
                 ]);
             return true;
-        }catch (Exception $exception){
+        } catch (Exception $exception) {
             return $exception;
         }
 
     }
+
     //任務列表查詢
-    function get_task_data(Request  $request){
-        try{
+    function get_task_data(Request $request)
+    {
+        try {
             $data = DB::table('patient_tasks')
-                ->orWhere('created_at','like','%'.$request->search_time.'%')
-                ->orWhere('updated_at','like','%'.$request->search_time.'%')
-                ->orWhere('finish_date','like','%'.$request->search_time.'%')
+                ->orWhere('created_at', 'like', '%' . $request->search_time . '%')
+                ->orWhere('updated_at', 'like', '%' . $request->search_time . '%')
+                ->orWhere('finish_date', 'like', '%' . $request->search_time . '%')
                 ->get();
             return $data;
-        }catch(\mysql_xdevapi\Exception $exception){
+        } catch (\mysql_xdevapi\Exception $exception) {
             return $exception;
         }
     }
+
     //刪除任務
-    function delete_task_data(Request  $request)
+    function delete_task_data(Request $request)
     {
         try {
             DB::table('patient_tasks')
@@ -223,36 +226,37 @@ class MedicationRecordController extends Controller
     //取得藥歷列表資訊(包含record及record_detail)
     public function get_record_data(Request $request)
     {
-        try{
+        try {
             //record_id
             $record_id = $request->get('record_id');
 
             //藥歷母表 medication_records
             $record_data = DB::table('medication_records')
-                ->where('record_id',$record_id)
-                ->select('date_of_examination','redate','pres_hosp','disp_hosp')
+                ->where('record_id', $record_id)
+                ->select('date_of_examination', 'redate', 'pres_hosp', 'disp_hosp')
                 ->first();
+//            dd($record_data);
 
             //record_detail_data
             $record_detail_data = DB::table('medication_record_detail')
                 ->where('record_id', $record_id)
-                ->select('trade_name','generic_name','dose','freq')
+                ->select('trade_name', 'generic_name', 'dose', 'freq')
                 ->get();
 
             //圖片路徑
-            $image_urls =[];
+            $image_urls = [];
             $image_array = DB::table('medication_records')
-                ->where('record_id',$record_id)
+                ->where('record_id', $record_id)
                 ->select('images')->first();
 
-            $image_array = explode(',',$image_array->images);
+            $image_array = explode(',', $image_array->images);
 
             foreach ($image_array as $image_id) {
-                if($image_id){
+                if ($image_id) {
                     $path = DB::table('images')
-                        ->where('image_id',$image_id)
+                        ->where('image_id', $image_id)
                         ->select('file_path')->first();
-                    $path = asset('/storage/'.$path->file_path);
+                    $path = asset('/storage/' . $path->file_path);
 
                     array_push($image_urls, $path);
                 }
@@ -264,7 +268,6 @@ class MedicationRecordController extends Controller
                 'record_detail_data' => $record_detail_data,
                 'image_urls' => $image_urls,
             ];
-
 
             return $result;
         } catch (Exception $exception) {
@@ -303,7 +306,7 @@ class MedicationRecordController extends Controller
                 'redate' => $request->get('redate'),
                 'pres_hosp' => $request->get('pres_hosp'),
                 'disp_hosp' => $request->get('disp_hosp'),
-                'images' => implode(',',$image_list),
+                'images' => implode(',', $image_list),
                 'created_at' => Carbon::now(),
             ]);
 
@@ -314,5 +317,53 @@ class MedicationRecordController extends Controller
 
 
         return 'success';
+    }
+
+    //儲存藥歷列表資訊
+    public function store_medication_record_detail(Request $request)
+    {
+        try {
+            $record_id = $request->get('record_id'); //Record_id
+            $record_data = $request->get('record_data'); //Record_data
+            $detail_rows = $request->get('detail_rows'); //RecordDetails
+
+            //record_id 空值判斷
+            if($record_id == null) return 'no record id';
+            //detail_rows 判斷
+            if($detail_rows == null) return 'no detail rows';
+
+            //修改record data(藥單資訊)
+            DB::table('medication_records')
+                ->where('record_id', $record_id)
+                ->update([
+                    'date_of_examination' => $record_data['date_of_examination'],
+                    'redate' => $record_data['redate'],
+                    'pres_hosp' => $record_data['pres_hosp'],
+                    'disp_hosp' => $record_data['disp_hosp'],
+                ]);
+
+            //先將對應Record_id的資料清除
+            DB::table('medication_record_detail')
+                ->where('record_id', $record_id)
+                ->delete();
+
+            foreach ($detail_rows as $row) {
+                //將收到的更改資料寫入
+                DB::table('medication_record_detail')
+                    ->insert([
+                        'record_id' => $record_id,
+                        'trade_name' => $row['trade_name'],
+                        'generic_name' => $row['generic_name'],
+                        'dose' => $row['dose'],
+                        'freq' => $row['freq'],
+                    ]);
+            }
+
+            return 'success';
+        } catch (Exception $exception) {
+            return $exception;
+        }
+
+
     }
 }

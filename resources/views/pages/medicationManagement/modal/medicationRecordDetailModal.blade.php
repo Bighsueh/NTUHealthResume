@@ -89,7 +89,7 @@
                     </button>
                     <button type="button"
                             class="mx-2 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded"
-                            id = "btn-medication-detail-modal-save"
+                            id="btn-medication-detail-modal-save"
                             data-bs-dismiss="modal">
                         儲存並關閉
                     </button>
@@ -101,6 +101,7 @@
 <script>
     $(function () {
         //原資料
+        let record_id;
         let origin_record_detail_data;
         let image_index = 0;
 
@@ -110,7 +111,7 @@
         //點擊詳細內容按鈕時自動帶入欄位資訊
         $(".btn-open-medication-record-detail-modal").click(function () {
             let url = "{{route('get_medication_management_record_data')}}";
-            let record_id = $(this).parent().find('.record_id').text();
+            record_id = $(this).parent().find('.record_id').text();
 
             $.ajax({
                 url: url,
@@ -213,10 +214,73 @@
         $("#btn-medication-detail-modal-save").click(function () {
             //RecordDetailContainer
             let medication_record_detail_list = $('#medication_record_detail_list').children();
-
+            let all_detail_row = []; //要傳到後端寫入的record_detail們
             //將藥品項目各筆讀出來
+            $.each(medication_record_detail_list, function (index, value) {
+                let list_row = medication_record_detail_list.eq(index).children();
+                let detail_row = {
+                    'trade_name': list_row.eq(0).val(),    //藥品名稱
+                    'generic_name': list_row.eq(1).val(),  //藥品成分
+                    'dose': list_row.eq(2).val(),          //劑量(顆數)
+                    'freq': list_row.eq(3).val(),          //頻率
+                }
+                all_detail_row.push(detail_row);
+            });
 
-            console.log(origin_record_detail_data);
+            //藥單資訊
+            let record_data = {
+                'date_of_examination': $('#medication_record_detail_date_of_examination').val(),
+                'redate': $('#medication_record_detail_redate').val(),
+                'pres_hosp': $('#medication_record_detail_pres_hosp').val(),
+                'disp_hosp': $('#medication_record_detail_disp_hosp').val(),
+            }
+
+            //建立連線，將更改結果傳到後端
+            $.ajax({
+                url: "{{route('store_medication_management_record_detail')}}",
+                method: 'post',
+                data: {
+                    "_token": "{{csrf_token()}}",
+                    "record_data":record_data,
+                    "detail_rows": all_detail_row,
+                    "record_id": record_id,
+                },
+                success: function (res) {
+                    if (res === 'no record id') {
+                        Swal.fire({
+                            icon: 'error',
+                            title: '儲存失敗',
+                            text: '查無Record_id',
+                            confirmButtonColor: '#8CD4F5'
+                        })
+                    }
+                    if (res === 'no detail rows') {
+                        Swal.fire({
+                            icon: 'error',
+                            title: '儲存失敗',
+                            text: '藥品項目為空白',
+                            confirmButtonColor: '#8CD4F5'
+                        })
+                    }
+                    if (res === 'success') {
+                        Swal.fire({
+                            icon: 'success',
+                            title: '儲存成功',
+                            text: '點擊刷新頁面',
+                            confirmButtonColor: '#8CD4F5'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                //刷新頁面
+                                location.reload();
+                            }
+                        })
+                    }
+                },
+                error: function (res) {
+                    console.log(res);
+                },
+            })
+
         });
 
 
