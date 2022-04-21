@@ -79,7 +79,7 @@
                             <div class="mx-4 px-5">
                                 <p class="text-xl text-gray-600 mb-3">新增飲食紀錄</p>
                                 <button
-                                   class="bg-transparent border border-teal-700 text-teal-700
+                                   class="bg-transparent border border-teal-700 text-teal-700 mb-2
                                    hover:bg-teal-700 hover:text-white px-4 py-2 text-center rounded"
                                    id="btn_dietLog" data-bs-target="#dietLog" data-bs-toggle="modal">
 
@@ -116,7 +116,7 @@
                             <div class="mx-4 px-5">
                                 <p class="text-xl text-gray-600 mb-3">excel下載</p>
                                 <button onclick="location.href='{{route('get_diet_log_excel_download')}}';"
-                                    class="bg-transparent border border-teal-700 text-teal-700
+                                    class="bg-transparent border border-teal-700 text-teal-700 mb-2
                                    hover:bg-teal-700 hover:text-white px-4 py-2 text-center rounded"
                                     id="btn_excel_download_dietLog">
                                     下載
