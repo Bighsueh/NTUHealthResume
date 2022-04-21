@@ -70,11 +70,11 @@
                         </div>
                         <div class="mx-2">
                             <a id="btn_medication_record_add_row"
-                               class="btn-medication-detail-modal-save mx-2 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-1 px-4 rounded">
+                               class="mx-2 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-1 px-4 rounded">
                                 新增藥品項目
                             </a>
                             <a id="btn_medication_record_reduce_row"
-                               class="btn-medication-detail-modal-save mx-2 bg-transparent border border-red-700 text-red-700 hover:bg-red-700 hover:text-white text-center py-1 px-4 rounded">
+                               class="mx-2 bg-transparent border border-red-700 text-red-700 hover:bg-red-700 hover:text-white text-center py-1 px-4 rounded">
                                 刪除最後一筆項目
                             </a>
                         </div>
@@ -88,7 +88,8 @@
                         不儲存並關閉
                     </button>
                     <button type="button"
-                            class="btn-medication-detail-modal-save mx-2 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded"
+                            class="mx-2 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded"
+                            id = "btn-medication-detail-modal-save"
                             data-bs-dismiss="modal">
                         儲存並關閉
                     </button>
@@ -99,6 +100,8 @@
 </div>
 <script>
     $(function () {
+        //原資料
+        let origin_record_detail_data;
         let image_index = 0;
 
         //藥品項目列表容器
@@ -117,7 +120,7 @@
                     'record_id': record_id,
                 },
                 success: function (res) {
-                    let record_data = res['record_data']
+                    let record_data = res['record_data'];
                     let record_detail_data = res['record_detail_data'];
                     let image_urls = res['image_urls'];
 
@@ -125,11 +128,14 @@
                     let image_list = $('#medeicationRecordDetailImageList');
 
                     //取得資料以後先將藥歷資訊塞入資料
-                    $('#medication_record_detail_date_of_examination').val(record_data['date_of_examination'])
-                    $('#medication_record_detail_redate').val(record_data['redate'])
-                    $('#medication_record_detail_pres_hosp').val(record_data['pres_hosp'])
-                    $('#medication_record_detail_disp_hosp').val(record_data['disp_hosp'])
+                    $('#medication_record_detail_date_of_examination').val(record_data['date_of_examination']);
+                    $('#medication_record_detail_redate').val(record_data['redate']);
+                    $('#medication_record_detail_pres_hosp').val(record_data['pres_hosp']);
+                    $('#medication_record_detail_disp_hosp').val(record_data['disp_hosp']);
 
+
+                    //將資料暫存
+                    origin_record_detail_data = record_detail_data;
                     //再將藥品項目帶入
                     //先刪除資料
                     medication_record_detail_list.children().remove();
@@ -148,6 +154,7 @@
                     //在將圖片路徑更新上去
                     //先清空原有圖片
                     image_list.children().remove();
+
                     //寫入回傳的圖片
                     $.each(image_urls, function (index, value) {
                         image_list.append(`
@@ -201,6 +208,17 @@
             if (image_index + 1 <= 0) image_index += image_length;
             set_image_list(image_index);
         });
+
+        //明天做這個，然後把其他資訊及藥師回饋完成
+        $("#btn-medication-detail-modal-save").click(function () {
+            //RecordDetailContainer
+            let medication_record_detail_list = $('#medication_record_detail_list').children();
+
+            //將藥品項目各筆讀出來
+
+            console.log(origin_record_detail_data);
+        });
+
 
         function set_image_list(image_index) {
             $('#medeicationRecordDetailImageList img').eq(image_index).siblings().hide();
