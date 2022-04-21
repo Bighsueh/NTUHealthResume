@@ -284,6 +284,11 @@ class NutritionManagementController extends Controller
         return Excel::download(new DietLogExport,'excel_download.xlsx');
     }
 
+    public function get_diet_log_excel_example_download()
+    {
+        return response()->download(public_path('assets\files\excel_example_download.xlsx'));
+    }
+
     public function post_dietLog_patch_page(Request $request)
     {
         $query = DB::table('diet_log')->where('id',$request->id)->first();

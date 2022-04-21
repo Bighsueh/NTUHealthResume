@@ -108,8 +108,9 @@
                     <div class="rounded m-2 flex-1 bg-gray-50 p-4">
                         <div class="flex items-center mx-4 px-5 my-2">
                             <div class="flex grid">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2
+                                    0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                                 </svg>
                             </div>
                             <div class="mx-4 px-5">
@@ -119,6 +120,12 @@
                                    hover:bg-teal-700 hover:text-white px-4 py-2 text-center rounded"
                                     id="btn_excel_download_dietLog">
                                     下載
+                                </button>
+                                <button onclick="location.href='{{route('get_diet_log_excel_example_download')}}';"
+                                        class="bg-transparent border border-teal-700 text-teal-700
+                                   hover:bg-teal-700 hover:text-white px-4 py-2 text-center rounded"
+                                        id="btn_excel_example_download_dietLog">
+                                    範例檔案下載
                                 </button>
                             </div>
                         </div>
