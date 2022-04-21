@@ -32,7 +32,7 @@
 {{--                <input type="file" class="hidden"--}}
 {{--                       onchange="import_medicationRecordsExcel()"--}}
 {{--                       id="import_file" name="import_file"  accept=".xlsx">--}}
-                <input type="file" class="hidden" onchange="import_medicationRecordsExcel()" id="upload_file" name="upload_file"  accept=".xlsx">
+                <input type="file" class="hidden" onchange="import_medicationRecordsExcel()" id="medication_upload_file" name="medication_upload_file"  accept=".xlsx">
 
 
             </div>
@@ -59,11 +59,11 @@
     }
 
     $('#btn_import_excel').click(function (){
-        $('#upload_file').click();
+        $('#medication_upload_file').click();
     })
 
     function import_medicationRecordsExcel() {
-        let upload_file = $('#upload_file')[0].files;
+        let upload_file = $('#medication_upload_file')[0].files;
         let url = "{{route('import_medication_records_excel')}}";
         let csrf_token = "{{csrf_token()}}";
         let form_data = new FormData()
@@ -96,6 +96,6 @@
                 })
             }
         })
-        $('#upload_file').val("");
+        $('#medication_upload_file').val("");
     }
 </script>

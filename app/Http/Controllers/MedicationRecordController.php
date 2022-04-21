@@ -379,11 +379,16 @@ class MedicationRecordController extends Controller
     public function import_medication_records(Request $request)
     {
 
-        $file = $request->file('form_file');
+        $file = $request->file('upload_file');
 //        Excel::import(new MedicationRecordsImport, $file);
-        Excel::import(new DietLogImport, $file);
-        return 'success';
-
+        try
+        {
+            Excel::import(new DietLogImport, $file);
+            return 'success';
+        }catch (Exception $e)
+        {
+            return $e;
+        }
 
 
     }
