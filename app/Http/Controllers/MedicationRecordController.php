@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Imports\DietLogImport;
+use App\Imports\MedicationRecordDetailImport;
+use App\Imports\MedicationRecordDetailImportImport;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
@@ -383,7 +385,8 @@ class MedicationRecordController extends Controller
 //        Excel::import(new MedicationRecordsImport, $file);
         try
         {
-            Excel::import(new DietLogImport, $file);
+            Excel::import(new MedicationRecordsImport(), $file);
+//            Excel::import(new MedicationRecordDetailImport(), $file);
             return 'success';
         }catch (Exception $e)
         {

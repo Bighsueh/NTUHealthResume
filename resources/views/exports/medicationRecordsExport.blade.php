@@ -18,7 +18,7 @@
                 <td>{{ $row->date_of_examination }}</td>
                 <td>{{ $row->redate }}</td>
                 <td>{{ $row->pres_hosp }}</td>
-                <td>{{ $row->created_at }}</td>
+                <td>{{ $row->disp_hosp }}</td>
                 <td>{{ $row->trade_name }}</td>
                 <td>{{ $row->generic_name }}</td>
                 <td>{{ $row->dose }}</td>
