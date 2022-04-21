@@ -88,7 +88,8 @@
                                     <div
                                         id="btn-medication-record-excel"
                                         {{--                                    data-bs-toggle="modal" data-bs-target="#"--}}
-                                        class="mx-1 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 rounded">
+{{--                                        onclick="location.href='{{route('export_medication_records_excel')}}';"--}}
+                                        class="mx-1 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 rounded btn-medication-record-excel">
                                         Excel操作
                                     </div>
                                 </div>
@@ -263,10 +264,11 @@
             </div>
         </div>
     </div>
-    @include('pages.medicationManagement.modal.medicationRecordDetailModal')
+{{--    @include('pages.medicationManagement.modal.medicationRecordDetailModal')--}}
     @include('pages.medicationManagement.modal.createMedicationRecordModal')
     @include('pages.medicationManagement.modal.pharmacistFeedbackModal')
     @include('pages.medicationManagement.modal.OtherInformationModal')
+    @include('pages.medicationManagement.modal.medicationRecordsExcelModal')
     <script>
         $('#btn_other_information').click(function(){
             Swal.fire({
@@ -283,6 +285,9 @@
                 text: '此功能尚未開放',
                 confirmButtonColor: '#8CD4F5'
             })
+        })
+        $('#btn-medication-record-excel').click(function () {
+            open_medicationRecordsExcelModal();
         })
     </script>
 @endsection

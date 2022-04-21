@@ -46,6 +46,13 @@ Route::group(['prefix' => 'medication_management'], function () {
     //刪除任務列表
     Route::get('/delete_medication_management_task',[MedicationRecordController::class,'delete_task_data'])
         ->name('delete_medication_management_task');
+    //export藥歷紀錄Excel http://localhost/medication_management/export_medication_records_excel
+    Route::get('/export_medication_records_excel',[MedicationRecordController::class,'export_medication_records'])
+        ->name('export_medication_records_excel');
+
+    //import藥歷紀錄Excel http://localhost/medication_management/import_medication_records_excel
+    Route::post('/import_medication_records_excel',[MedicationRecordController::class,'import_medication_records'])
+        ->name('import_medication_records_excel');
 
     //儲存藥師回饋單內容
     Route::post('/store_pharmacist_feedback_data', [MedicationRecordController::class, 'store_pharmacist_feedback_data'])
@@ -59,6 +66,8 @@ Route::group(['prefix' => 'medication_management'], function () {
     //新增藥歷紀錄
     Route::post('/create_medication_record', [MedicationRecordController::class, 'create_medication_record'])
         ->name('create_medication_management_medication_record');
+
+
 });
 
 

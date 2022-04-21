@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\DietLogImport;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-
+use App\Exports\MedicationRecordsExport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\MedicationRecordsImport;
 
 class MedicationRecordController extends Controller
 {
@@ -366,4 +369,24 @@ class MedicationRecordController extends Controller
 
 
     }
+
+    public function export_medication_records()
+    {
+        return Excel::download(new MedicationRecordsExport, 'MedicationRecords.xlsx');
+
+    }
+
+    public function import_medication_records(Request $request)
+    {
+
+        $file = $request->file('form_file');
+//        Excel::import(new MedicationRecordsImport, $file);
+        Excel::import(new DietLogImport, $file);
+        return 'success';
+
+
+
+    }
+
+
 }
