@@ -63,39 +63,39 @@
     })
 
     function import_medicationRecordsExcel() {
-        {{--let upload_file = $('#upload_file')[0].files;--}}
-        {{--let url = "{{route('post_diet_log_excel_upload')}}";--}}
-        {{--let csrf_token = "{{csrf_token()}}";--}}
-        {{--let form_data = new FormData()--}}
-        {{--console.log(upload_file[0]);--}}
-        {{--form_data.append('upload_file', upload_file[0])--}}
-        {{--console.log(form_data);--}}
-        {{--$.ajax({--}}
-        {{--    url: url + "?_token=" + csrf_token,--}}
-        {{--    method: 'post',--}}
-        {{--    data: form_data,--}}
-        {{--    cache: false,--}}
-        {{--    contentType: false,--}}
-        {{--    processData: false,--}}
-        {{--    success: function (res) {--}}
-        {{--        if (res === 'success') {--}}
-        {{--            Swal.fire({--}}
-        {{--                icon: 'success',--}}
-        {{--                title: 'excel上傳成功',--}}
-        {{--                confirmButtonColor: '#8CD4F5'--}}
-        {{--            })--}}
-        {{--            window.location.reload();--}}
-        {{--        }--}}
-        {{--    },--}}
-        {{--    error: function (res) {--}}
-        {{--        Swal.fire({--}}
-        {{--            icon: 'error',--}}
-        {{--            title: '儲存失敗',--}}
-        {{--            text: res['statusText'],--}}
-        {{--            confirmButtonColor: '#8CD4F5'--}}
-        {{--        })--}}
-        {{--    }--}}
-        {{--})--}}
-        {{--$('#upload_file').val("");--}}
+        let upload_file = $('#upload_file')[0].files;
+        let url = "{{route('import_medication_records_excel')}}";
+        let csrf_token = "{{csrf_token()}}";
+        let form_data = new FormData()
+        console.log(upload_file[0]);
+        form_data.append('upload_file', upload_file[0])
+        console.log(form_data);
+        $.ajax({
+            url: url + "?_token=" + csrf_token,
+            method: 'post',
+            data: form_data,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (res) {
+                if (res === 'success') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'excel上傳成功',
+                        confirmButtonColor: '#8CD4F5'
+                    })
+                    window.location.reload();
+                }
+            },
+            error: function (res) {
+                Swal.fire({
+                    icon: 'error',
+                    title: '儲存失敗',
+                    text: res['statusText'],
+                    confirmButtonColor: '#8CD4F5'
+                })
+            }
+        })
+        $('#upload_file').val("");
     }
 </script>
