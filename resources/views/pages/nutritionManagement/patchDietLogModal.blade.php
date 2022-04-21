@@ -15,15 +15,15 @@
                         </svg>
                     </button>
                 </div>
-                <div class="modal-body relative p-4">
-                    <div class="group-input flex py-5 text-xl">
-                        <div class="px-2 flex">
-                            <label for="patch_meal_name">菜色：</label>
-                            <input name="patch_meal_name" id="patch_meal_name" type="text" class="border border-black">
+                <div class="modal-body w-full h-full flex p-16">
+                    <div class="group-input flex-wrap w-full text-xl">
+                        <div class="w-1/2 flex my-4">
+                            <label class="w-2/4 text-black font-medium" for="patch_meal_name">菜色：</label>
+                            <input name="patch_meal_name" id="patch_meal_name" type="text" class="border border-black p-1">
                         </div>
-                        <div class="px-2 flex">
-                            <label for="patch_size">餐點份量：</label>
-                            <input name="patch_size" id="patch_size" type="text" class="border border-black">
+                        <div class="w-1/2 flex my-4">
+                            <label class="w-2/4 text-black font-medium" for="patch_size">餐點份量：</label>
+                            <input name="patch_size" id="patch_size" type="text" class="border border-black p-1">
                             <input name="patch_id" id="patch_id" type="text" class="border border-black hidden" value="">
                         </div>
 

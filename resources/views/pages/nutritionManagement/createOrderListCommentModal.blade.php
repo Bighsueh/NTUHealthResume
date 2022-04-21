@@ -17,32 +17,32 @@
                 </div>
                 <div class="modal-body w-full h-full flex p-16">
                     <input class="hidden" value="" id="orderList_id">
-                    <div class="h-1/5 p-1 flex flex-wrap flex-col">
-                        <label for="orderList_comment_carbohydrate">醣類：</label>
+                    <div class="h-1/4 p-3 flex flex-wrap flex-col">
+                        <label for="orderList_comment_carbohydrate" class="text-black font-medium">醣類：</label>
                         <input name="orderList_comment_carbohydrate" id="orderList_comment_carbohydrate" type="text" class="border border-black">
-                        <label for="orderList_comment_protein">蛋白質：</label>
+                        <label for="orderList_comment_protein" class="text-black font-medium">蛋白質：</label>
                         <input name="orderList_comment_protein" id="orderList_comment_protein" type="text" class="border border-black">
-                        <label for="orderList_comment_fat">脂肪：</label>
+                        <label for="orderList_comment_fat" class="text-black font-medium">脂肪：</label>
                         <input name="orderList_comment_fat" id="orderList_comment_fat" type="text" class="border border-black">
-                        <label for="orderList_comment_cal">熱量：</label>
+                        <label for="orderList_comment_cal" class="text-black font-medium">熱量：</label>
                         <input name="orderList_comment_cal" id="orderList_comment_cal" type="text" class="border border-black">
                     </div>
-                    <div class="h-1/5 p-1 flex flex-wra flex-col">
-                        <label for="orderList_comment_na">鈉：</label>
+                    <div class="h-1/4 p-3 flex flex-wra flex-col">
+                        <label for="orderList_comment_na" class="text-black font-medium">鈉：</label>
                         <input name="orderList_comment_na" id="orderList_comment_na" type="text" class="border border-black">
-                        <label for="orderList_comment_k">鉀：</label>
+                        <label for="orderList_comment_k" class="text-black font-medium">鉀：</label>
                         <input name="orderList_comment_k" id="orderList_comment_k" type="text" class="border border-black">
-                        <label for="orderList_comment_ca">鈣：</label>
+                        <label for="orderList_comment_ca" class="text-black font-medium">鈣：</label>
                         <input name="orderList_comment_ca" id="orderList_comment_ca" type="text" class="border border-black">
-                        <label for="orderList_comment_mg">鎂：</label>
+                        <label for="orderList_comment_mg" class="text-black font-medium">鎂：</label>
                         <input name="orderList_comment_mg" id="orderList_comment_mg" type="text" class="border border-black">
                     </div>
-                    <div class="h-1/5 p-1 flex flex-wrap flex-col">
-                        <label for="orderList_comment_vit_b12">維他命B12：</label>
+                    <div class="h-1/4 p-3 flex flex-wrap flex-col">
+                        <label for="orderList_comment_vit_b12" class="text-black font-medium">維他命B12：</label>
                         <input name="orderList_comment_vit_b12" id="orderList_comment_vit_b12" type="text" class="border border-black">
-                        <label for="orderList_comment_vit_d">維他命D：</label>
+                        <label for="orderList_comment_vit_d" class="text-black font-medium">維他命D：</label>
                         <input name="orderList_comment_vit_d" id="orderList_comment_vit_d" type="text" class="border border-black">
-                        <label for="orderList_comment_vit_e">維他命E：</label>
+                        <label for="orderList_comment_vit_e" class="text-black font-medium">維他命E：</label>
                         <input name="orderList_comment_vit_e" id="orderList_comment_vit_e" type="text" class="border border-black">
                     </div>
 

@@ -17,32 +17,32 @@
                 </div>
                 <div class="modal-body w-full h-full flex p-16">
                     <input class="hidden" value="" id="dishes_dietLog_id">
-                    <div class="h-1/5 p-1 flex flex-wrap flex-col">
-                        <label for="carbohydrate">醣類：</label>
+                    <div class="h-1/4  flex flex-wrap flex-col p-3">
+                        <label for="carbohydrate" class="text-black font-medium">醣類：</label>
                         <input name="carbohydrate" id="carbohydrate" type="text" class="border border-black">
-                        <label for="protein">蛋白質：</label>
+                        <label for="protein" class="text-black font-medium">蛋白質：</label>
                         <input name="protein" id="protein" type="text" class="border border-black">
-                        <label for="fat">脂肪：</label>
+                        <label for="fat" class="text-black font-medium">脂肪：</label>
                         <input name="fat" id="fat" type="text" class="border border-black">
-                        <label for="cal">熱量：</label>
+                        <label for="cal" class="text-black font-medium">熱量：</label>
                         <input name="cal" id="cal" type="text" class="border border-black">
                     </div>
-                    <div class="h-1/5 p-1 flex flex-wra flex-col">
-                        <label for="na">鈉：</label>
+                    <div class="h-1/4  flex flex-wra flex-col p-3">
+                        <label for="na" class="text-black font-medium">鈉：</label>
                         <input name="na" id="na" type="text" class="border border-black">
-                        <label for="k">鉀：</label>
+                        <label for="k" class="text-black font-medium">鉀：</label>
                         <input name="k" id="k" type="text" class="border border-black">
-                        <label for="ca">鈣：</label>
+                        <label for="ca" class="text-black font-medium">鈣：</label>
                         <input name="ca" id="ca" type="text" class="border border-black">
-                        <label for="mg">鎂：</label>
+                        <label for="mg" class="text-black font-medium">鎂：</label>
                         <input name="mg" id="mg" type="text" class="border border-black">
                     </div>
-                    <div class="h-1/5 p-1 flex flex-wrap flex-col">
-                        <label for="vit_b12">維他命B12：</label>
+                    <div class="h-1/4  flex flex-wrap flex-col p-3">
+                        <label for="vit_b12" class="text-black font-medium">維他命B12：</label>
                         <input name="vit_b12" id="vit_b12" type="text" class="border border-black">
-                        <label for="vit_d">維他命D：</label>
+                        <label for="vit_d" class="text-black font-medium">維他命D：</label>
                         <input name="vit_d" id="vit_d" type="text" class="border border-black">
-                        <label for="vit_e">維他命E：</label>
+                        <label for="vit_e" class="text-black font-medium">維他命E：</label>
                         <input name="vit_e" id="vit_e" type="text" class="border border-black">
                     </div>
 
