@@ -248,13 +248,16 @@ class MedicationRecordController extends Controller
             $image_array = explode(',',$image_array->images);
 
             foreach ($image_array as $image_id) {
-                $path = DB::table('images')
-                    ->where('image_id',$image_id)
-                    ->select('file_path')->first();
-                $path = asset('/storage/'.$path->file_path);
+                if($image_id){
+                    $path = DB::table('images')
+                        ->where('image_id',$image_id)
+                        ->select('file_path')->first();
+                    $path = asset('/storage/'.$path->file_path);
 
-                array_push($image_urls, $path);
+                    array_push($image_urls, $path);
+                }
             }
+
 
             $result = [
                 'record_data' => $record_data,
