@@ -16,8 +16,8 @@
             <div class="modal-body relative p-4">
                 <!--藥師向醫師提問的內容-->
                 <div class="flex justify-center">
-                    <div class="mb-3 xl:w-full">
-                        <b class="mx-2">藥師提問的內容</b>
+                    <div class="mb-3 w-full">
+                        <b class="mx-2">醫師意見</b>
                         <textarea
                             class="
                             form-control
@@ -37,36 +37,8 @@
                             focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                             id="other_information_modal_ask_to_doctor"
                             rows="5"
-                            placeholder="藥師尚未填寫內容"
-                            disabled
-                        >{{isset($pharmacist_feedback->pharmacist_question) ? $pharmacist_feedback->pharmacist_question : null}}</textarea>
-                    </div>
-                </div>
-                <!--藥師向醫師提問-->
-                <div class="flex justify-center">
-                    <div class="mb-3 xl:w-full">
-                        <b class="mx-2">回覆藥師的內容</b>
-                        <textarea
-                            class="
-                            form-control
-                            block
-                            w-full
-                            px-3
-                            py-1.5
-                            text-base
-                            font-normal
-                            text-gray-700
-                            bg-white bg-clip-padding
-                            border border-solid border-gray-300
-                            rounded
-                            transition
-                            ease-in-out
-                            m-0
-                            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                            id="other_information_modal_doctor_reply"
-                            rows="5"
-                            placeholder="請在此處填寫內容...  (Shift + Enter可以換行)"
-                        >{{isset($doctor_feedback->doctor_reply) ? $doctor_feedback->doctor_reply : null}}</textarea>
+                            placeholder="尚未填寫內容"
+                        ></textarea>
                     </div>
                 </div>
             </div>
@@ -99,37 +71,13 @@
         $('#btn-doctor-feedback-save').click(function () {
             let doctor_reply = $('#other_information_modal_doctor_reply').val();
 
-            let url = "{{route('store_medication_management_doctor_feedback_data')}}";
+            let url = "";
 
-            $.ajax({
-                url: url,
-                method: "post",
-                data: {
-                    "_token": "{{csrf_token()}}",
-                    "task_id": $('#task_id').text(),
-                    "doctor_reply": doctor_reply,
-                },
-                success: function (res) {
-                    if (res === 'success') {
-                        Swal.fire({
-                            icon: 'success',
-                            title: '醫師回覆儲存成功',
-                            confirmButtonColor: '#8CD4F5'
-                        })
-                    }
-                },
-                error: function (res) {
-                    //錯誤訊息
-                    console.log(res);
+        })
 
-                    Swal.fire({
-                        icon: 'error',
-                        title: '儲存失敗',
-                        text: res['statusText'],
-                        confirmButtonColor: '#8CD4F5'
-                    })
-                }
-            })
+        //開啟Modal
+        $("#btn_other_information").click(function(){
+            console.log('btn_other_information')
         })
 
         //other_information_modal_doctor_reply
