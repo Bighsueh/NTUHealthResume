@@ -47,4 +47,16 @@ class LoginController extends Controller
             return $exception;
         }
     }
+
+    public function log_out()
+    {
+        try {
+            //Session flush
+            Session::flush();
+
+            return redirect()->route('get_login_page');
+        } catch (\Exception $exception) {
+            return $exception;
+        }
+    }
 }

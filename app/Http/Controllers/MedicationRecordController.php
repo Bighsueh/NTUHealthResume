@@ -210,7 +210,7 @@ class MedicationRecordController extends Controller
                 ->orWhere('finish_date', 'like', '%' . $request->search_time . '%')
                 ->get();
             return $data;
-        } catch (\mysql_xdevapi\Exception $exception) {
+        } catch (Exception $exception) {
             return $exception;
         }
     }
