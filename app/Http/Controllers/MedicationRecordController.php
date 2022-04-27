@@ -387,7 +387,7 @@ class MedicationRecordController extends Controller
         try
         {
 //            dd($file);
-//            Log::debug($file);
+//            Log::debug('123');
             Excel::import(new MedicationRecordsImport(), $file);
             Excel::import(new MedicationRecordDetailImport(),$file);
             return 'success';

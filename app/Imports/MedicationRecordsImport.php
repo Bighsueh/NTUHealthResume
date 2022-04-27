@@ -23,7 +23,7 @@ class MedicationRecordsImport implements  ToModel,WithStartRow
     {
 //        Log::debug($row);
         return new MedicationRecords([
-            'record_id' => $row[0],
+//            'record_id' => $row[0],
             'date_of_examination' => $row[1],
             'redate' => $row[2],
             'pres_hosp' => $row[3],
