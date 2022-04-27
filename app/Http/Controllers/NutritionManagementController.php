@@ -35,8 +35,15 @@ class NutritionManagementController extends Controller
     public function get_orderList(Request $request)
     {
         $id = $request->id;
-        $queries = DB::table('meal_order')->where('patient_id',$id)->get();
-        return view('pages.nutritionManagement.orderList',compact('id','queries'));
+        //餐敘為母表
+        $order_lists = DB::table('meal_order')->where('patient_id',$id)->get();
+        //在母表中插入子表diet_log
+        foreach ($order_lists as $row)
+        {
+            $row->diet_logs=DB::table('diet_log')->where('task_id',$row->id)->get();
+        }
+//        dd($order_lists);
+        return view('pages.nutritionManagement.orderList',compact('id','order_lists'));
     }
     // 取得資料查詢資料用
     public function get_orderList_data(Request $request){
@@ -174,7 +181,13 @@ class NutritionManagementController extends Controller
             Session::put('patient_id', $request->patient_id);
             Session::put('task_id', $request->task_id);
         }
+//        $meal_orders =
         $queries = DB::table('diet_log')->where('patient_id',$request->patient_id)->where('task_id',$request->task_id)->get();
+//        foreach ($queries as $q)
+//        {
+//
+//        }
+//        dd($queries);
         $meal_orders = DB::table('meal_order')->where('id', $request->task_id)->first();
         $patient_data = ['patient_id' => $request->patient_id,'task_id'=>$request->task_id];
         return view('pages.nutritionManagement.dietLog',compact('queries','patient_data','meal_orders'));
