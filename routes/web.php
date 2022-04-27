@@ -54,6 +54,9 @@ Route::group(['prefix' => 'medication_management'], function () {
     Route::post('/import_medication_records_excel',[MedicationRecordController::class,'import_medication_records'])
         ->name('import_medication_records_excel');
 
+    //儲存藥歷詳細記錄Modal
+    Route::post('/store_record_detail', [MedicationRecordController::class, 'store_medication_record_detail'])
+        ->name('store_medication_management_record_detail');
     //儲存藥師回饋單內容
     Route::post('/store_pharmacist_feedback_data', [MedicationRecordController::class, 'store_pharmacist_feedback_data'])
         ->name('store_medication_management_pharmacist_feedback_data');

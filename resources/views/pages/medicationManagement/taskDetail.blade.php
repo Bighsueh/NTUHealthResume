@@ -264,7 +264,7 @@
             </div>
         </div>
     </div>
-{{--    @include('pages.medicationManagement.modal.medicationRecordDetailModal')--}}
+    @include('pages.medicationManagement.modal.medicationRecordDetailModal')
     @include('pages.medicationManagement.modal.createMedicationRecordModal')
     @include('pages.medicationManagement.modal.pharmacistFeedbackModal')
     @include('pages.medicationManagement.modal.OtherInformationModal')
