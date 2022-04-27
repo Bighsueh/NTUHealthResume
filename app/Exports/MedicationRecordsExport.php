@@ -6,6 +6,7 @@ use App\Models\MedicationRecords;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class MedicationRecordsExport implements FromView
 {
@@ -15,7 +16,8 @@ class MedicationRecordsExport implements FromView
     public function view():View
     {
        $data = DB::table('medication_records')
-           ->leftJoin('medication_record_detail','medication_records.record_id','=','medication_record_detail.record_id')
+           ->LeftJoin('medication_record_detail','medication_records.record_id','=','medication_record_detail.record_id')
+           ->select('medication_records.id')
            ->get();
 
 //        dd($data);

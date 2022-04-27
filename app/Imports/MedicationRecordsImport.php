@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithStartRow;
+use Illuminate\Support\Facades\Log;
 
 class MedicationRecordsImport implements  ToModel,WithStartRow
 {
@@ -20,12 +21,13 @@ class MedicationRecordsImport implements  ToModel,WithStartRow
      */
     public function model(array $row)
     {
+//        Log::debug($row);
         return new MedicationRecords([
-            'record_id' => Session::get('record_id'),
-            'date_of_examination' => $row[0],
-            'redate' => $row[1],
-            'pres_hosp' => $row[2],
-            'disp_hosp' => $row[3],
+            'record_id' => $row[0],
+            'date_of_examination' => $row[1],
+            'redate' => $row[2],
+            'pres_hosp' => $row[3],
+            'disp_hosp' => $row[4],
             'updated_at' => Carbon::now()
         ]);
 

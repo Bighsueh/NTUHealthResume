@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Imports\DietLogImport;
 use App\Imports\MedicationRecordDetailImport;
-use App\Imports\MedicationRecordDetailImportImport;
+use App\Models\MedicationRecordDetail;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Session;
 use App\Exports\MedicationRecordsExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\MedicationRecordsImport;
+use Illuminate\Support\Facades\Log;
 
 class MedicationRecordController extends Controller
 {
@@ -385,8 +386,10 @@ class MedicationRecordController extends Controller
 //        Excel::import(new MedicationRecordsImport, $file);
         try
         {
+//            dd($file);
+//            Log::debug($file);
             Excel::import(new MedicationRecordsImport(), $file);
-//            Excel::import(new MedicationRecordDetailImport(), $file);
+            Excel::import(new MedicationRecordDetailImport(),$file);
             return 'success';
         }catch (Exception $e)
         {
