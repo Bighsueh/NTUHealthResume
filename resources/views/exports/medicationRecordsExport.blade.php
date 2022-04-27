@@ -1,15 +1,15 @@
 <table>
     <thead>
     <tr>
-        <th>record_id(禁止修改)</th>
-        <th>date_of_examination</th>
-        <th>redate</th>
-        <th>pres_hosp</th>
-        <th>disp_hosp</th>
-        <th>trade_name</th>
-        <th>generic_name</th>
-        <th>dose</th>
-        <th>freq</th>
+        <th>病例id(禁止修改)</th>
+        <th>就醫日</th>
+        <th>開方日期</th>
+        <th>處方醫院</th>
+        <th>調劑醫院</th>
+        <th>藥品商品名稱</th>
+        <th>藥品成分名稱</th>
+        <th>劑量(顆數)</th>
+        <th>頻率</th>
     </tr>
     </thead>
     <tbody>

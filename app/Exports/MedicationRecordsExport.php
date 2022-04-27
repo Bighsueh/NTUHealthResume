@@ -16,8 +16,8 @@ class MedicationRecordsExport implements FromView
     public function view():View
     {
        $data = DB::table('medication_records')
+           ->select('medication_records.record_id','medication_records.date_of_examination','medication_records.redate','medication_records.pres_hosp','medication_records.disp_hosp','medication_record_detail.trade_name','medication_record_detail.generic_name','medication_record_detail.dose','medication_record_detail.freq')
            ->LeftJoin('medication_record_detail','medication_records.record_id','=','medication_record_detail.record_id')
-           ->select('medication_records.id')
            ->get();
 
 //        dd($data);
