@@ -269,6 +269,7 @@
     @include('pages.medicationManagement.modal.pharmacistFeedbackModal')
     @include('pages.medicationManagement.modal.OtherInformationModal')
     @include('pages.medicationManagement.modal.medicationRecordsExcelModal')
+    @include('pages.medicationManagement.modal.previewExcelModal')
     <script>
         $('#btn_other_information').click(function(){
             Swal.fire({

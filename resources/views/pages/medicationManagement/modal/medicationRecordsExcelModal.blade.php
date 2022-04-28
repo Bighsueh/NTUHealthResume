@@ -34,19 +34,16 @@
 {{--                       id="import_file" name="import_file"  accept=".xlsx">--}}
                 <input type="file" class="hidden" onchange="import_medicationRecordsExcel()" id="medication_upload_file" name="medication_upload_file"  accept=".xlsx">
 
+                <div class="mx-1  py-2 "></div>
+                <div
+                    id="btn_open_previewExcelModal"
+                    class="mx-1 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 rounded btn-medication-record-excel">
+                    test previewExcelModal
+                </div>
 
             </div>
 
 
-{{--            <div class="modal-footer flex flex-shrink-0 flex-wrap items-center--}}
-{{--                justify-center p-4 border-t border-gray-200 rounded-b-md">--}}
-{{--                <button class="mx-4 flex-shrink-0 bg-teal-700 hover:bg-blue-500--}}
-{{--                border-teal-700 hover:border-blue-500 text-sm--}}
-{{--                -4 text-white py-1 px-10 rounded btn_store_edit" id="btn_store_edit">修改</button>--}}
-
-{{--                <button class="mx-4 flex-shrink-0 bg-teal-700 hover:bg-red-500--}}
-{{--                border-teal-700 hover:border-blue-500 text-sm--}}
-{{--                -4 text-white py-1 px-10 rounded btn_delete" id="btn_delete">刪除</button>--}}
 
             </div>
         </div>
@@ -98,4 +95,9 @@
         })
         $('#medication_upload_file').val("");
     }
+
+
+    $('#btn_open_previewExcelModal').click(function () {
+        open_previewExcelModal();
+    })
 </script>
