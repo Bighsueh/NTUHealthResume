@@ -20,13 +20,13 @@
                         <div class="grid grid-cols-2 md:grid-cols-2 sm:grid-cols-1">
                             <div class="mx-4 font-base 2xl:font-2xl">
                                 <div class="my-1">
-                                    <label for="medication_record_detail_date_of_examination">建立日期：</label>
-                                    <input class="bg-gray-100 rounded" id="medication_record_detail_date_of_examination"
+                                    <label for="created_date">建立日期：</label>
+                                    <input class="bg-gray-100 rounded" id="created_date"
                                            value=""/>
                                 </div>
                                 <div class="my-1">
-                                    <label for="medication_record_detail_redate">最後修改日期：</label>
-                                    <input class="bg-gray-100 rounded" id="medication_record_detail_redate" value=""/>
+                                    <label for="updated_date">最後修改日期：</label>
+                                    <input class="bg-gray-100 rounded" id="updated_date" value=""/>
                                 </div>
                             </div>
                             <div class="w-full">
@@ -46,24 +46,22 @@
                         </div>
                         <div class="flex-grow border-t border-gray-400 m-2 w-full"></div>
                         <div class="mb-3 mx-2 w-full">
-                            <a class="font-bold mb-2">藥品項目</a>
+                            <a class="font-bold mb-2">飲食紀錄</a>
                             <div class="grid grid-cols-4 gap-2 mx-2">
-                                <div class="mx-2 text-left block">藥品名稱</div>
-                                <div class="mx-2 text-left block">藥品成分</div>
-                                <div class="mx-2 text-left block">劑量(顆數)</div>
-                                <div class="mx-2 text-left block">頻率</div>
+                                <div class="mx-2 text-left block">菜色</div>
+                                <div class="mx-2 text-left block">份量</div>
                             </div>
                             <div class="flex-grow border-t w-full"></div>
-                            <div id="medication_record_detail_list" class="mx-2">
-                                <!--藥品項目table content-->
+                            <div id="order_list_detail_list" class="mx-2">
+                                <!--飲食紀錄table content-->
                             </div>
                         </div>
                         <div class="mx-2">
-                            <a id="btn_medication_record_add_row"
+                            <a id="btn_diet_log_add_row"
                                class="mx-2 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-1 px-4 rounded">
-                                新增藥品項目
+                                新增飲食項目
                             </a>
-                            <a id="btn_medication_record_reduce_row"
+                            <a id="btn_diet_log_reduce_row"
                                class="mx-2 bg-transparent border border-red-700 text-red-700 hover:bg-red-700 hover:text-white text-center py-1 px-4 rounded">
                                 刪除最後一筆項目
                             </a>
@@ -91,53 +89,48 @@
 <script>
     $(function () {
         //原資料
-        let record_id;
+        let task_id;
         let origin_record_detail_data;
         let image_index = 0;
 
         //藥品項目列表容器
-        let medication_record_detail_list = $('#medication_record_detail_list');
+        let order_list_detail_list = $('#order_list_detail_list');
 
         //點擊詳細內容按鈕時自動帶入欄位資訊
-        $(".btn-open-medication-record-detail-modal").click(function () {
-            let url = "{{route('get_medication_management_record_data')}}";
-            record_id = $(this).parent().find('.record_id').text();
+        $(".btn-open-order-list-detail-modal").click(function () {
+            let url = "{{route('post_orderList_detail')}}";
+            task_id = $(this).parent().find('.task_id').text();
 
             $.ajax({
                 url: url,
                 method: 'post',
                 data: {
                     '_token': "{{csrf_token()}}",
-                    'record_id': record_id,
+                    'task_id': task_id,
                 },
                 success: function (res) {
-                    let record_data = res['record_data'];
-                    let record_detail_data = res['record_detail_data'];
+                    let order_list = res[0];
+                    let diet_log = res[1];
                     let image_urls = res['image_urls'];
-
                     //圖片容器
                     let image_list = $('#medeicationRecordDetailImageList');
-
+                    console.log(diet_log)
                     //取得資料以後先將藥歷資訊塞入資料
-                    $('#medication_record_detail_date_of_examination').val(record_data['date_of_examination']);
-                    $('#medication_record_detail_redate').val(record_data['redate']);
-                    $('#medication_record_detail_pres_hosp').val(record_data['pres_hosp']);
-                    $('#medication_record_detail_disp_hosp').val(record_data['disp_hosp']);
-
+                    $('#created_date').val(order_list['created_at']);
+                    $('#updated_date').val(order_list['updated_at']);
 
                     //將資料暫存
-                    origin_record_detail_data = record_detail_data;
+                    // origin_record_detail_data = record_detail_data;
                     //再將藥品項目帶入
                     //先刪除資料
-                    medication_record_detail_list.children().remove();
+                    order_list_detail_list.children().remove();
                     //再插入資料
-                    $.each(record_detail_data, function (index, value) {
-                        medication_record_detail_list.append(`
+                    $.each(diet_log, function (index, value) {
+                        console.log(value);
+                        order_list_detail_list.append(`
                         <div class=" gap-2 grid grid-cols-4">
-                            <input class="bg-gray-100 my-1 text-left rounded block" value="${value['trade_name']}"/>
-                            <input class="bg-gray-100 my-1 text-left rounded block" value="${value['generic_name']}"/>
-                            <input class="bg-gray-100 my-1 text-left rounded block" value="${value['dose']}"/>
-                            <input class="bg-gray-100 my-1 text-left rounded block" value="${value['freq']}"/>
+                            <input class="bg-gray-100 my-1 text-left rounded block" value="${value['meal_name']}"/>
+                            <input class="bg-gray-100 my-1 text-left rounded block" value="${value['quantity']}"/>
                         </div>
                     `)
                     })
@@ -169,11 +162,9 @@
         })
 
         //新增藥品項目
-        $("#btn_medication_record_add_row").click(function () {
-            medication_record_detail_list.append(`
+        $("#btn_diet_log_add_row").click(function () {
+            order_list_detail_list.append(`
         <div class="grid grid-cols-4 gap-2 ">
-            <input class="text-left block bg-gray-100 my-1 rounded" value=""/>
-            <input class="text-left block bg-gray-100 my-1 rounded" value=""/>
             <input class="text-left block bg-gray-100 my-1 rounded" value=""/>
             <input class="text-left block bg-gray-100 my-1 rounded" value=""/>
         </div>
@@ -181,8 +172,8 @@
         })
 
         //移除藥品項目最後一列
-        $("#btn_medication_record_reduce_row").click(function () {
-            medication_record_detail_list.children().last().remove();
+        $("#btn_diet_log_reduce_row").click(function () {
+            order_list_detail_list.children().last().remove();
         })
 
         //換下一張圖片
@@ -200,40 +191,37 @@
             set_image_list(image_index);
         });
 
-        //明天做這個，然後把其他資訊及藥師回饋完成
+        // 儲存並關閉
         $("#btn-medication-detail-modal-save").click(function () {
-            //RecordDetailContainer
-            let medication_record_detail_list = $('#medication_record_detail_list').children();
+            // RecordDetailContainer
+            let order_list_detail_list = $('#order_list_detail_list').children();
             let all_detail_row = []; //要傳到後端寫入的record_detail們
-            //將藥品項目各筆讀出來
-            $.each(medication_record_detail_list, function (index, value) {
-                let list_row = medication_record_detail_list.eq(index).children();
+            // 將飲食紀錄各筆讀出來
+            $.each(order_list_detail_list, function (index, value) {
+                let list_row = order_list_detail_list.eq(index).children();
                 let detail_row = {
-                    'trade_name': list_row.eq(0).val(),    //藥品名稱
-                    'generic_name': list_row.eq(1).val(),  //藥品成分
-                    'dose': list_row.eq(2).val(),          //劑量(顆數)
-                    'freq': list_row.eq(3).val(),          //頻率
+                    'meal_name': list_row.eq(0).val(),    //菜色
+                    'quantity': list_row.eq(1).val(),  //份量
+                    'patient_id': {{$id}},
                 }
                 all_detail_row.push(detail_row);
             });
 
-            //藥單資訊
+            // 餐序資訊
             let record_data = {
-                'date_of_examination': $('#medication_record_detail_date_of_examination').val(),
-                'redate': $('#medication_record_detail_redate').val(),
-                'pres_hosp': $('#medication_record_detail_pres_hosp').val(),
-                'disp_hosp': $('#medication_record_detail_disp_hosp').val(),
+                'updated_at': $('#updated_date').val(),
             }
 
+            console.log(task_id)
             //建立連線，將更改結果傳到後端
             $.ajax({
-                url: "{{route('store_medication_management_record_detail')}}",
+                url: "{{route('store_orderList_detail')}}",
                 method: 'post',
                 data: {
                     "_token": "{{csrf_token()}}",
                     "record_data":record_data,
                     "detail_rows": all_detail_row,
-                    "record_id": record_id,
+                    "task_id": task_id,
                 },
                 success: function (res) {
                     if (res === 'no record id') {
