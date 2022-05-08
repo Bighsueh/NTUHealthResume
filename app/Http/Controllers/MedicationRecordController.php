@@ -406,6 +406,7 @@ class MedicationRecordController extends Controller
                     'dose' => $row[7],
                     'freq' => $row[8]
                 ]);
+
             }
 
             return 'success';
