@@ -48,11 +48,32 @@ class NutritionManagementController extends Controller
     // 詳細餐序
     public function post_orderList_detail(Request $request)
     {
+
+        //圖片路徑
+        $image_urls = [];
+        $image_array = DB::table('meal_order')
+            ->where('id', $request->task_id)
+            ->select('img_src')->first();
+        if($image_array)
+        {
+            $image_array = explode(',', $image_array->img_src);
+            foreach ($image_array as $image_id) {
+                if ($image_id) {
+                    $path = DB::table('images')
+                        ->where('image_id', $image_id)
+                        ->select('file_path')->first();
+                    $path = asset('/storage/' . $path->file_path);
+
+                    array_push($image_urls, $path);
+                }
+            }
+        }
+
         // 母表
         $order_list = DB::table('meal_order')->where('id', $request->task_id)->first();
         // 子表
         $diet_logs = DB::table('diet_log')->where('task_id', $request->task_id)->get();
-        return [$order_list, $diet_logs];
+        return [$order_list, $diet_logs,$image_urls];
     }
 
 
@@ -100,6 +121,7 @@ class NutritionManagementController extends Controller
                 ->insert([
                     'patient_id'=>$query['patient_id'],
                     'meal_order'=>$query['meal_name'],
+                    'img_src' => implode(',', $image_list),
                     'created_at'=>Carbon::now(),
                 ]);
             return 'success';

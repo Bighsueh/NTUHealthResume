@@ -112,10 +112,10 @@
                 success: function (res) {
                     let order_list = res[0];
                     let diet_log = res[1];
-                    let image_urls = res['image_urls'];
+                    let image_urls = res[2];
                     //圖片容器
                     let image_list = $('#medeicationRecordDetailImageList');
-                    console.log(diet_log)
+                    console.log(image_urls)
                     //取得資料以後先將藥歷資訊塞入資料
                     $('#created_date').val(order_list['created_at']);
                     $('#updated_date').val(order_list['updated_at']);
