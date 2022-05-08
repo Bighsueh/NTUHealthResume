@@ -18,57 +18,84 @@
             <div class="px-12">
                 <div class="modal-body relative m-3 w-full ">
 
-                    <ul class="nav nav-tabs flex flex-col md:flex-row flex-wrap list-none border-b-0 pl-0 mb-4" id="tabs-tabFill"
-                        role="tablist">
-                        <li class="nav-item flex-1 text-center" role="presentation">
-                            <a href="#tabs-homeFill" class="
-      nav-link
-      w-full
-      block
-      font-medium
-      text-xs
-      leading-tight
-      uppercase
-      border-x-0 border-t-0 border-b-2 border-transparent
-      px-6
-      py-3
-      my-2
-      hover:border-transparent hover:bg-gray-100
-      focus:border-transparent
-      active
-    " id="tabs-home-tabFill" data-bs-toggle="pill" data-bs-target="#tabs-homeFill" role="tab"
-                               aria-controls="tabs-homeFill" aria-selected="true">Records</a>
-                        </li>
-                        <li class="nav-item flex-1 text-center" role="presentation">
-{{-- mx-1 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700
-hover:text-white text-center py-2 rounded btn-medication-record-excel--}}
-                            <a href="#tabs-profileFill" class="
-      nav-link
-      w-full
-      block
-      font-medium
-      text-xs
-      leading-tight
-      uppercase
-      border-x-0 border-t-0 border-b-2 border-transparent
-      px-6
-      py-3
-      my-2
-      hover:border-transparent hover:bg-gray-100
-      focus:border-teal-700
-    " id="tabs-profile-tabFill" data-bs-toggle="pill" data-bs-target="#tabs-profileFill" role="tab"
-                               aria-controls="tabs-profileFill" aria-selected="false">Record_Detail</a>
-                        </li>
+                    <table class="divide-y divide-gray-200 min-w-full">
+                        <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col"
+                                class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                #
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                就醫日
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                開方日期
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                處方醫院
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                調劑醫院
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                藥品商品
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                藥品成分
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                劑量(顆數)
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                頻率
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200" id="tbody">
+{{--                        <a hidden>{{$thread = 0}}</a>--}}
+{{--                        @foreach($task_list as $row)--}}
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    1
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    2
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    3
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    4
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    5
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    6
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    7
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    8
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    9
+                                </td>
 
-                    </ul>
-                    <div class="tab-content" id="tabs-tabContentFill">
-                        <div class="tab-pane fade show active" id="tabs-homeFill" role="tabpanel" aria-labelledby="tabs-home-tabFill">
-                            Tab 1 content fill
-                        </div>
-                        <div class="tab-pane fade" id="tabs-profileFill" role="tabpanel" aria-labelledby="tabs-profile-tabFill">
-                            Tab 2 content fill
-                        </div>
-                    </div>
+
+{{--                            </tr>--}}
+{{--                        @endforeach--}}
+                        </tbody>
+                    </table>
 
 
                 </div>
@@ -78,11 +105,11 @@ hover:text-white text-center py-2 rounded btn-medication-record-excel--}}
             <div class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-center p-4 border-t border-gray-200 rounded-b-md">
                 <button class="mx-4 flex-shrink-0 bg-teal-700
                 hover:bg-blue-500 border-teal-700
-                hover:border-blue-500 text-sm border-4 text-white py-1 px-10 rounded " id="btn_store_edit_patient">修改</button>
+                hover:border-blue-500 text-sm border-4 text-white py-1 px-10 rounded " id="btn_store_import">儲存</button>
 
-                <button class="mx-4 flex-shrink-0 bg-teal-700
-                hover:bg-red-500 border-teal-700
-                hover:border-red-500 text-sm border-4 text-white py-1 px-10 rounded btn_delete_patient" id="btn_delete_patient" >刪除</button>
+{{--                <button class="mx-4 flex-shrink-0 bg-teal-700--}}
+{{--                hover:bg-red-500 border-teal-700--}}
+{{--                hover:border-red-500 text-sm border-4 text-white py-1 px-10 rounded btn_delete_patient" id="btn_delete_patient" >刪除</button>--}}
 
 
             </div>
@@ -91,8 +118,62 @@ hover:text-white text-center py-2 rounded btn-medication-record-excel--}}
 </div>
 
 <script>
+    let data;
+    function open_previewExcelModal(res) {
+        data = res;
+        $('#tbody tr').remove();
+        let count = 0;
+        if(data.length > 0){
+            // window.alert(data.length);
+            data.forEach(function (row) {
+                if(count != 0){
+                    let record_id = '<td class="px-6 py-4 whitespace-nowrap">'+row[0]+'</td>';
+                    let date_of_examination = '<td class="px-6 py-4 whitespace-nowrap">'+row[1]+'</td>';
+                    let redate = '<td class="px-6 py-4 whitespace-nowrap">'+row[2]+'</td>';
+                    let pres_hosp = '<td class="px-6 py-4 whitespace-nowrap">'+row[3]+'</td>';
+                    let disp_hosp = '<td class="px-6 py-4 whitespace-nowrap">'+row[4]+'</td>';
+                    let trade_name = '<td class="px-6 py-4 whitespace-nowrap">'+row[5]+'</td>';
+                    let generic_name = '<td class="px-6 py-4 whitespace-nowrap">'+row[6]+'</td>';
+                    let dose = '<td class="px-6 py-4 whitespace-nowrap">'+row[7]+'</td>';
+                    let freq = '<td class="px-6 py-4 whitespace-nowrap">'+row[8]+'</td>';
+                    $('#tbody').append(
+                        '<tr>'+ record_id + date_of_examination + redate + pres_hosp + disp_hosp + trade_name + generic_name + dose + freq +'</tr>'
+                    )
+                }
+                count +=1;
+            })
+        }
 
-    function open_previewExcelModal() {
         $('#previewExcelModal').modal('show');
     }
+
+    $('#btn_store_import').click(function () {
+        $.ajax({
+            url:"{{route('store_import_data')}}",
+            mothed:'get',
+            data:{
+                import_data:data
+            },
+            success: function (res) {
+                if (res === 'success') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'excel上傳成功',
+                        confirmButtonColor: '#8CD4F5'
+                    })
+                    window.location.reload();
+                }
+            },
+            error: function (res) {
+                Swal.fire({
+                    icon: 'error',
+                    title: '儲存失敗',
+                    text: res['statusText'],
+                    confirmButtonColor: '#8CD4F5'
+                })
+            }
+        })
+
+
+    })
 </script>
