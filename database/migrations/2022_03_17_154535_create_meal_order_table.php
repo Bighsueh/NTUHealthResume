@@ -16,6 +16,7 @@ class CreateMealOrderTable extends Migration
         Schema::create('meal_order', function (Blueprint $table) {
             $table->id();
             $table->string('meal_order');
+            $table->string('img_src')->nullable();
             $table->string('patient_id');
             $table->timestamps();
         });
