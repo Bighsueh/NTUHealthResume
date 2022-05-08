@@ -52,8 +52,12 @@ Route::group(['prefix' => 'medication_management', 'middleware' => ['login']], f
         ->name('export_medication_records_excel');
 
     //import藥歷紀錄Excel http://localhost/medication_management/import_medication_records_excel
-    Route::post('/import_medication_records_excel', [MedicationRecordController::class, 'import_medication_records'])
+    Route::post('/import_medication_records_excel', [MedicationRecordController::class, 'previewExcel'])
         ->name('import_medication_records_excel');
+    //預覽後儲存import的藥歷紀錄
+    Route::get('/store_import_data', [MedicationRecordController::class, 'import_medication_records'])
+        ->name('store_import_data');
+
 
     //儲存藥歷詳細記錄Modal
     Route::post('/store_record_detail', [MedicationRecordController::class, 'store_medication_record_detail'])

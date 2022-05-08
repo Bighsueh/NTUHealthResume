@@ -34,10 +34,10 @@
 {{--                       id="import_file" name="import_file"  accept=".xlsx">--}}
                 <input type="file" class="hidden" onchange="import_medicationRecordsExcel()" id="medication_upload_file" name="medication_upload_file"  accept=".xlsx">
 
-                <div class="mx-1  py-2 "></div>
+{{--                <div class="mx-1  py-2 "></div>--}}
                 <div
                     id="btn_open_previewExcelModal"
-                    class="mx-1 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 rounded btn-medication-record-excel">
+                    class="mx-1 bg-transparent border hidden border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 rounded btn-medication-record-excel">
                     test previewExcelModal
                 </div>
 
@@ -56,6 +56,7 @@
     }
 
     $('#btn_import_excel').click(function (){
+        // open_previewExcelModal();
         $('#medication_upload_file').click();
     })
 
@@ -75,24 +76,27 @@
             contentType: false,
             processData: false,
             success: function (res) {
-                if (res === 'success') {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'excel上傳成功',
-                        confirmButtonColor: '#8CD4F5'
-                    })
-                    window.location.reload();
-                }
+
+                open_previewExcelModal(res);
+                // if (res === 'success') {
+                //     Swal.fire({
+                //         icon: 'success',
+                //         title: 'excel上傳成功',
+                //         confirmButtonColor: '#8CD4F5'
+                //     })
+                //     window.location.reload();
+                // }
             },
             error: function (res) {
-                Swal.fire({
-                    icon: 'error',
-                    title: '儲存失敗',
-                    text: res['statusText'],
-                    confirmButtonColor: '#8CD4F5'
-                })
+                // Swal.fire({
+                //     icon: 'error',
+                //     title: '儲存失敗',
+                //     text: res['statusText'],
+                //     confirmButtonColor: '#8CD4F5'
+                // })
             }
         })
+
         $('#medication_upload_file').val("");
     }
 
