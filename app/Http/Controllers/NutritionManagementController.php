@@ -75,20 +75,57 @@ class NutritionManagementController extends Controller
     {
 
         $query = $request->except('_token');
+        //取得今日日期，並依照日期建立資料夾
+        $date = date('Y-m-d');
+        //圖片們
+        $image_list = [];
+
         try{
+            //取得傳入的檔案
+            $files = $request->file();
+
+            foreach ($files as $file) {
+                //將傳入的檔案儲存至資料夾，
+                $image_path = $file->store("{$date}", "public");
+
+                //將檔案存入local，並取得table_id
+                $image_id = DB::table('images')->insertGetId([
+                    'file_path' => $image_path,
+                    'created_at' => Carbon::now(),
+                ]);
+
+                array_push($image_list, $image_id);
+            }
             DB::table('meal_order')
                 ->insert([
                     'patient_id'=>$query['patient_id'],
-                    'meal_order'=>$query['order'],
+                    'meal_order'=>$query['meal_name'],
                     'created_at'=>Carbon::now(),
                 ]);
+            return 'success';
         }catch (\Throwable $e)
         {
             report($e);
-            return $e;
+//            dd(1234);
+            return 'error';
         }
-        return redirect()->back();
+
+//        $query = $request->except('_token');
+//        try{
+//            DB::table('meal_order')
+//                ->insert([
+//                    'patient_id'=>$query['patient_id'],
+//                    'meal_order'=>$query['order'],
+//                    'created_at'=>Carbon::now(),
+//                ]);
+//        }catch (\Throwable $e)
+//        {
+//            report($e);
+//            return $e;
+//        }
+//        return redirect()->back();
     }
+
     // 刪除
     public function delete_orderList(Request $request)
     {
