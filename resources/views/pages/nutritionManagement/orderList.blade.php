@@ -232,7 +232,7 @@
                 <div class="flex justify-between ">
                     <p class="mx-4 my-2 justify-self-start font-bold text-xl">餐序列表</p>
                 </div>
-                <div class="overflow-y-scroll h-2/3 ">
+                <div class="overflow-y-scroll h-7/8 ">
                     @foreach($order_lists as $order_list)
                         <div class="flex ">
                             <!--單筆藥歷共通項目-->
@@ -241,8 +241,9 @@
                                     <p>建立時間：</p>
                                     <p>{{$order_list->created_at}}</p>
                                 </div>
-                                {{--                                <div hidden class="record_id">{{$query->record_id}}</div>--}}
-                                <a class="btn-open-medication-record-detail-modal col-span-1 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 x-4 rounded"
+                                {{--task_id--}}
+                                <div hidden class="task_id">{{$order_list->id}}</div>
+                                <a class="btn-open-order-list-detail-modal col-span-1 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 x-4 rounded"
                                    data-bs-toggle="modal" data-bs-target="#dietLog">
                                     詳細內容
                                 </a>

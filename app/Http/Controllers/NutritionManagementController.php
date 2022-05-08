@@ -34,6 +34,7 @@ class NutritionManagementController extends Controller
     // 餐序列表
     public function get_orderList(Request $request)
     {
+        // patient_id
         $id = $request->id;
         //餐敘為母表
         $order_lists = DB::table('meal_order')->where('patient_id',$id)->get();
@@ -42,9 +43,19 @@ class NutritionManagementController extends Controller
         {
             $row->diet_logs=DB::table('diet_log')->where('task_id',$row->id)->get();
         }
-//        dd($order_lists);
         return view('pages.nutritionManagement.orderList',compact('id','order_lists'));
     }
+    // 詳細餐序
+    public function post_orderList_detail(Request $request)
+    {
+        // 母表
+        $order_list = DB::table('meal_order')->where('id', $request->task_id)->first();
+        // 子表
+        $diet_logs = DB::table('diet_log')->where('task_id', $request->task_id)->get();
+        return [$order_list, $diet_logs];
+    }
+
+
     // 取得資料查詢資料用
     public function get_orderList_data(Request $request){
 
@@ -220,6 +231,50 @@ class NutritionManagementController extends Controller
         }
         return redirect()->back();
     }
+
+    // 儲存餐序資訊
+    public function store_orderList_detail(Request $request)
+    {
+        try {
+            $task_id = $request->get('task_id'); //task_id
+            $record_data = $request->get('record_data'); //Record_data
+            $detail_rows = $request->get('detail_rows'); //RecordDetails
+            //record_id 空值判斷
+            if($task_id == null) return 'no record id';
+            //detail_rows 判斷
+            if($detail_rows == null) return 'no detail rows';
+
+            //修改record data(藥單資訊)
+            DB::table('meal_order')
+                ->where('id', $task_id)
+                ->update([
+                    'updated_at' => $record_data['updated_at'],
+                ]);
+
+            //先將對應Record_id的資料清除
+            DB::table('diet_log')
+                ->where('task_id', $task_id)
+                ->delete();
+
+            foreach ($detail_rows as $row) {
+                //將收到的更改資料寫入
+                DB::table('diet_log')
+                    ->insert([
+                        'task_id' => $task_id,
+                        'meal_name' => $row['meal_name'],
+                        'quantity' => $row['quantity'],
+                        'patient_id' => $row['patient_id']
+                    ]);
+            }
+
+            return 'success';
+        } catch (Exception $exception) {
+            return $exception;
+        }
+
+
+    }
+
     // 新增一筆飲食紀錄
 //    public function store_dietLog(Request $request)
 //    {

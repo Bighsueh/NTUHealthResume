@@ -107,6 +107,8 @@ Route::get('/orderList/delete', [\App\Http\Controllers\NutritionManagementContro
 Route::post('/orderList/store', [\App\Http\Controllers\NutritionManagementController::class, 'store_orderList'])->name('store_orderList');
 Route::post('/orderList/patch/page', [\App\Http\Controllers\NutritionManagementController::class, 'post_orderList_patch_page'])->name('post_orderList_patch_page');
 Route::post('/orderList/patch', [\App\Http\Controllers\NutritionManagementController::class, 'patch_orderList'])->name('patch_orderList');
+Route::post('/orderList/detail', [\App\Http\Controllers\NutritionManagementController::class, 'post_orderList_detail'])->name('post_orderList_detail');
+Route::post('/orderList/detail/store', [\App\Http\Controllers\NutritionManagementController::class, 'store_orderList_detail'])->name('store_orderList_detail');
 
 // 飲食紀錄
 Route::get('/dietLog', [\App\Http\Controllers\NutritionManagementController::class, 'get_dietLog'])->name('get_dietLog');
@@ -116,6 +118,10 @@ Route::get('/dietLog/delete', [\App\Http\Controllers\NutritionManagementControll
 Route::post('/dietLog/upload', [\App\Http\Controllers\NutritionManagementController::class, 'post_diet_log_excel_upload'])->name('post_diet_log_excel_upload');
 Route::get('/dietLog/download', [\App\Http\Controllers\NutritionManagementController::class, 'get_diet_log_excel_download'])->name('get_diet_log_excel_download');
 Route::get('/dietLog/example/download', [\App\Http\Controllers\NutritionManagementController::class, 'get_diet_log_excel_example_download'])->name('get_diet_log_excel_example_download');
+//儲存藥歷詳細記錄Modal
+
+
+
 // 進入修改頁面並且帶值
 Route::post('/dietLog/patch/page', [\App\Http\Controllers\NutritionManagementController::class, 'post_dietLog_patch_page'])->name('post_dietLog_patch_page');
 Route::post('/dietLog/patch', [\App\Http\Controllers\NutritionManagementController::class, 'patch_dietLog'])->name('patch_dietLog');
