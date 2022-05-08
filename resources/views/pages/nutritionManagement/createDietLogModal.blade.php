@@ -50,6 +50,7 @@
                             <div class="grid grid-cols-4 gap-2 mx-2">
                                 <div class="mx-2 text-left block">菜色</div>
                                 <div class="mx-2 text-left block">份量</div>
+                                <div class="mx-2 text-left block">備註</div>
                             </div>
                             <div class="flex-grow border-t w-full"></div>
                             <div id="order_list_detail_list" class="mx-2">
@@ -127,10 +128,12 @@
                     //再插入資料
                     $.each(diet_log, function (index, value) {
                         console.log(value);
+                        (value['remark'] == null)? value['remark'] = "" :value['remark'];
                         order_list_detail_list.append(`
                         <div class=" gap-2 grid grid-cols-4">
                             <input class="bg-gray-100 my-1 text-left rounded block" value="${value['meal_name']}"/>
                             <input class="bg-gray-100 my-1 text-left rounded block" value="${value['quantity']}"/>
+                            <input class="bg-gray-100 my-1 text-left rounded block" value="${value['remark']}"/>
                         </div>
                     `)
                     })
@@ -165,6 +168,7 @@
         $("#btn_diet_log_add_row").click(function () {
             order_list_detail_list.append(`
         <div class="grid grid-cols-4 gap-2 ">
+            <input class="text-left block bg-gray-100 my-1 rounded" value=""/>
             <input class="text-left block bg-gray-100 my-1 rounded" value=""/>
             <input class="text-left block bg-gray-100 my-1 rounded" value=""/>
         </div>
@@ -202,6 +206,7 @@
                 let detail_row = {
                     'meal_name': list_row.eq(0).val(),    //菜色
                     'quantity': list_row.eq(1).val(),  //份量
+                    'remark': list_row.eq(2).val(),  //備註
                     'patient_id': {{$id}},
                 }
                 all_detail_row.push(detail_row);
