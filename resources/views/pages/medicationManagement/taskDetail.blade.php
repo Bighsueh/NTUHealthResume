@@ -112,7 +112,7 @@
                                 <p class="col-span-1 text-xl text-gray-600">其他資訊</p>
                                 <a
                                     id="btn_other_information"
-{{--                                    data-bs-toggle="modal" data-bs-target="#OtherInformationModal"--}}
+                                    data-bs-toggle="modal" data-bs-target="#OtherInformationModal"
                                     class="col-span-1 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 x-4 rounded">
                                     查看
                                 </a>
@@ -271,14 +271,14 @@
     @include('pages.medicationManagement.modal.medicationRecordsExcelModal')
     @include('pages.medicationManagement.modal.previewExcelModal')
     <script>
-        $('#btn_other_information').click(function(){
-            Swal.fire({
-                icon: 'error',
-                title: '錯誤',
-                text: '此功能尚未開放',
-                confirmButtonColor: '#8CD4F5'
-            })
-        })
+        // $('#btn_other_information').click(function(){
+        //     Swal.fire({
+        //         icon: 'error',
+        //         title: '錯誤',
+        //         text: '此功能尚未開放',
+        //         confirmButtonColor: '#8CD4F5'
+        //     })
+        // })
         $('#btn-progress-status').click(function(){
             Swal.fire({
                 icon: 'error',
