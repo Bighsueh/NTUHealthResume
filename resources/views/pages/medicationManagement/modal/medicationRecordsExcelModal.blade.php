@@ -15,6 +15,7 @@
                 </button>
             </div>
             <div class="px-12 py-6">
+
                 <div
 
                     {{--                                    data-bs-toggle="modal" data-bs-target="#"--}}
@@ -34,11 +35,13 @@
 {{--                       id="import_file" name="import_file"  accept=".xlsx">--}}
                 <input type="file" class="hidden" onchange="import_medicationRecordsExcel()" id="medication_upload_file" name="medication_upload_file"  accept=".xlsx">
 
-{{--                <div class="mx-1  py-2 "></div>--}}
+                <div class="mx-1  py-2 "></div>
                 <div
-                    id="btn_open_previewExcelModal"
-                    class="mx-1 bg-transparent border hidden border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 rounded btn-medication-record-excel">
-                    test previewExcelModal
+
+                    {{--                                    data-bs-toggle="modal" data-bs-target="#"--}}
+                    onclick="location.href='{{route('get_medication_records_example')}}';"
+                    class="mx-1  bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 rounded ">
+                    下載空白範例檔
                 </div>
 
             </div>

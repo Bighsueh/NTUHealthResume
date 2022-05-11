@@ -57,6 +57,9 @@ Route::group(['prefix' => 'medication_management', 'middleware' => ['login']], f
     //預覽後儲存import的藥歷紀錄
     Route::get('/store_import_data', [MedicationRecordController::class, 'import_medication_records'])
         ->name('store_import_data');
+    //下載MedicationRecords空白Excel http://localhost/medication_management/get_medication_records_example
+    Route::get('/get_medication_records_example', [MedicationRecordController::class, 'get_medication_records_excel_example'])
+        ->name('get_medication_records_example');
 
 
     //儲存藥歷詳細記錄Modal
