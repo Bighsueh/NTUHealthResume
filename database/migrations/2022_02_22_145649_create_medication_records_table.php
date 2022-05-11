@@ -16,8 +16,6 @@ class CreateMedicationRecordsTable extends Migration
         Schema::create('medication_records', function (Blueprint $table) {
             $table->id('record_id')->autoIncrement();
             $table->date('date_of_examination')->nullable();
-            $table->integer('medical_history_no')->nullable();
-            $table->string('insurance_type')->nullable();
             $table->date('redate')->nullable();
             $table->string('pres_hosp')->nullable();
             $table->string('disp_hosp')->nullable();
