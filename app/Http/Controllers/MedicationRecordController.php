@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Imports\DietLogImport;
 use App\Imports\MedicationRecordDetailImport;
+use App\Imports\previewExcelImport;
 use App\Models\MedicationRecordDetail;
 use Carbon\Carbon;
 use Exception;
@@ -382,14 +383,32 @@ class MedicationRecordController extends Controller
     public function import_medication_records(Request $request)
     {
 
-        $file = $request->file('upload_file');
-//        Excel::import(new MedicationRecordsImport, $file);
         try
         {
-//            dd($file);
-//            Log::debug('123');
-            Excel::import(new MedicationRecordsImport(), $file);
-            Excel::import(new MedicationRecordDetailImport(),$file);
+            $data = $request->import_data;
+            $count = 0;
+            foreach ($data as $row){
+                if($count == 0) {
+                    $count = $count + 1;
+                    continue;
+                }
+                DB::table('medication_records')->insert([
+                    'date_of_examination' => $row[1],
+                    'redate' => $row[2],
+                    'pres_hosp' => $row[3],
+                    'disp_hosp' => $row[4],
+                    'updated_at' => Carbon::now()
+                ]);
+                DB::table('medication_record_detail')->insert([
+                    'record_id' => $row[0],
+                    'trade_name' => $row[5],
+                    'generic_name' => $row[6],
+                    'dose' => $row[7],
+                    'freq' => $row[8]
+                ]);
+
+            }
+
             return 'success';
         }catch (Exception $e)
         {
@@ -397,6 +416,25 @@ class MedicationRecordController extends Controller
         }
 
 
+    }
+    public function previewExcel(Request $request)
+    {
+        $file = $request->file('upload_file');
+//        Log::debug('previewExcell');
+        try{//
+            $importdata = Excel::toArray(new previewExcelImport(), $file);
+
+            $data = $importdata[0];
+//            Log::debug($data);
+            return $data;
+        }catch (Exception $e)
+        {
+            return $e;
+        }
+    }
+    public function get_medication_records_excel_example()
+    {
+        return response()->download(public_path('assets\files\MedicationRecordsExample.xlsx'));
     }
 
 

@@ -13,7 +13,7 @@ class MedicationRecordDetailImport implements ToCollection
     public function collection(Collection $rows)
     {
         $count = 0;
-       Log::debug($rows);
+//       Log::debug($rows);
         foreach ($rows as $row)
         {
 
@@ -28,7 +28,7 @@ class MedicationRecordDetailImport implements ToCollection
                 continue;
             }
 
-            Log::debug($row[5]);
+//            Log::debug($row[5]);
             MedicationRecordDetail::create([
                 'record_id' => $row[0],
                 'trade_name' => $row[5],

@@ -72,11 +72,32 @@ class NutritionManagementController extends Controller
     // 詳細餐序
     public function post_orderList_detail(Request $request)
     {
+
+        //圖片路徑
+        $image_urls = [];
+        $image_array = DB::table('meal_order')
+            ->where('id', $request->task_id)
+            ->select('img_src')->first();
+        if($image_array)
+        {
+            $image_array = explode(',', $image_array->img_src);
+            foreach ($image_array as $image_id) {
+                if ($image_id) {
+                    $path = DB::table('images')
+                        ->where('image_id', $image_id)
+                        ->select('file_path')->first();
+                    $path = asset('/storage/' . $path->file_path);
+
+                    array_push($image_urls, $path);
+                }
+            }
+        }
+
         // 母表
         $order_list = DB::table('meal_order')->where('id', $request->task_id)->first();
         // 子表
         $diet_logs = DB::table('diet_log')->where('task_id', $request->task_id)->get();
-        return [$order_list, $diet_logs];
+        return [$order_list, $diet_logs,$image_urls];
     }
 
 
@@ -99,20 +120,58 @@ class NutritionManagementController extends Controller
     {
 
         $query = $request->except('_token');
+        //取得今日日期，並依照日期建立資料夾
+        $date = date('Y-m-d');
+        //圖片們
+        $image_list = [];
+
         try{
+            //取得傳入的檔案
+            $files = $request->file();
+
+            foreach ($files as $file) {
+                //將傳入的檔案儲存至資料夾，
+                $image_path = $file->store("{$date}", "public");
+
+                //將檔案存入local，並取得table_id
+                $image_id = DB::table('images')->insertGetId([
+                    'file_path' => $image_path,
+                    'created_at' => Carbon::now(),
+                ]);
+
+                array_push($image_list, $image_id);
+            }
             DB::table('meal_order')
                 ->insert([
                     'patient_id'=>$query['patient_id'],
-                    'meal_order'=>$query['order'],
+                    'meal_order'=>$query['meal_name'],
+                    'img_src' => implode(',', $image_list),
                     'created_at'=>Carbon::now(),
                 ]);
+            return 'success';
         }catch (\Throwable $e)
         {
             report($e);
-            return $e;
+//            dd(1234);
+            return 'error';
         }
-        return redirect()->back();
+
+//        $query = $request->except('_token');
+//        try{
+//            DB::table('meal_order')
+//                ->insert([
+//                    'patient_id'=>$query['patient_id'],
+//                    'meal_order'=>$query['order'],
+//                    'created_at'=>Carbon::now(),
+//                ]);
+//        }catch (\Throwable $e)
+//        {
+//            report($e);
+//            return $e;
+//        }
+//        return redirect()->back();
     }
+
     // 刪除
     public function delete_orderList(Request $request)
     {
