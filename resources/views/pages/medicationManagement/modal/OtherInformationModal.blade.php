@@ -14,12 +14,13 @@
                         data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body relative p-4">
-                <!--藥師向醫師提問的內容-->
+                <!--需要時服藥建議-->
                 <div class="flex justify-center">
                     <div class="mb-3 w-full">
-                        <b class="mx-2">醫師意見</b>
+                        <b class="mx-2">需要時服藥建議</b>
                         <textarea
                             class="
+                            otehr-info-modal-textarea
                             form-control
                             block
                             w-full
@@ -35,9 +36,93 @@
                             ease-in-out
                             m-0
                             focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                            id="other_information_modal_ask_to_doctor"
+                            id="other_information_modal_textarea_1"
                             rows="5"
-                            placeholder="尚未填寫內容"
+                            placeholder="請在此處填寫內容...  (Shift + Enter可以換行)"
+                        ></textarea>
+                    </div>
+                </div>
+                <!--需固定服用藥物建議-->
+                <div class="flex justify-center">
+                    <div class="mb-3 w-full">
+                        <b class="mx-2">需固定服用藥物建議</b>
+                        <textarea
+                            class="
+                            otehr-info-modal-textarea
+                            form-control
+                            block
+                            w-full
+                            px-3
+                            py-1.5
+                            text-base
+                            font-normal
+                            text-gray-700
+                            bg-white bg-clip-padding
+                            border border-solid border-gray-300
+                            rounded
+                            transition
+                            ease-in-out
+                            m-0
+                            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                            id="other_information_modal_textarea_2"
+                            rows="5"
+                            placeholder="請在此處填寫內容...  (Shift + Enter可以換行)"
+                        ></textarea>
+                    </div>
+                </div>
+                <!--交互作用或副作用指標-->
+                <div class="flex justify-center">
+                    <div class="mb-3 w-full">
+                        <b class="mx-2">交互作用或副作用指標</b>
+                        <textarea
+                            class="
+                            otehr-info-modal-textarea
+                            form-control
+                            block
+                            w-full
+                            px-3
+                            py-1.5
+                            text-base
+                            font-normal
+                            text-gray-700
+                            bg-white bg-clip-padding
+                            border border-solid border-gray-300
+                            rounded
+                            transition
+                            ease-in-out
+                            m-0
+                            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                            id="other_information_modal_textarea_3"
+                            rows="5"
+                            placeholder="例：抗膽鹼、鎮靜、高致跌藥物..."
+                        ></textarea>
+                    </div>
+                </div>
+                <!--個案特殊問題回饋-->
+                <div class="flex justify-center">
+                    <div class="mb-3 w-full">
+                        <b class="mx-2">個案特殊問題回饋</b>
+                        <textarea
+                            class="
+                            otehr-info-modal-textarea
+                            form-control
+                            block
+                            w-full
+                            px-3
+                            py-1.5
+                            text-base
+                            font-normal
+                            text-gray-700
+                            bg-white bg-clip-padding
+                            border border-solid border-gray-300
+                            rounded
+                            transition
+                            ease-in-out
+                            m-0
+                            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                            id="other_information_modal_textarea_4"
+                            rows="5"
+                            placeholder="請在此處填寫內容...  (Shift + Enter可以換行)"
                         ></textarea>
                     </div>
                 </div>
@@ -84,5 +169,7 @@
 
 
     })
-
+    function test(){
+        console.log($('textarea'));
+    }
 </script>
