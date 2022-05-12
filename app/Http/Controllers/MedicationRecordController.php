@@ -33,6 +33,18 @@ class MedicationRecordController extends Controller
             //病患id
             $patient_id = $request->get('patient_id');
 
+            Session::forget('patient_id');
+            Session::put('patient_id', $patient_id);
+
+            $patient_no = DB::table('patients')
+                ->select('patient_no')
+                ->where('patient_id',$patient_id)
+                ->first();
+
+
+            Session::forget('patient_no');
+            Session::put('patient_no', $patient_no);
+
             //依照病患id取得patient_tasks資料
             $task_list = DB::table('patient_tasks')
                 ->where('patient_id', $patient_id)
@@ -52,6 +64,9 @@ class MedicationRecordController extends Controller
         try {
             //task_id
             $task_id = $request->get('task_id');
+
+            Session::forget('task_id');
+            Session::put('task_id', $task_id);
 
             //藥歷列表
             $medication_records =

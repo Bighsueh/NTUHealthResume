@@ -8,7 +8,8 @@
         <th>調劑醫院</th>
         <th>藥品商品名稱</th>
         <th>藥品成分名稱</th>
-        <th>劑量(顆數)</th>
+        <th>單位劑量</th>
+        <th>顆、包數或c.c.</th>
         <th>頻率</th>
     </tr>
     </thead>
@@ -24,6 +25,8 @@
                 <td>{{ $row->trade_name }}</td>
                 <td>{{ $row->generic_name }}</td>
                 <td>{{ $row->dose }}</td>
+                <td>{{ $row->dose_per_unit }}</td>
+                <td>{{ $row->daily_dose}}</td>
                 <td>{{ $row->freq }}</td>
             </tr>
         @endforeach

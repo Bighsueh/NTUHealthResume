@@ -16,7 +16,7 @@ class PatientsTableSeeder extends Seeder
     {
         DB::table('patients')->insert([
             'patient_id' => 1,
-            'patient_no' => '123',
+            'patient_no' => 'A12345',
             'close_date' => '110-02-4',
             'place' => '工專',
             'id_number' => 'C12345678',
