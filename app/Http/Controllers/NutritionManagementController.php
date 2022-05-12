@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Exports\DietLogExport;
 use App\Imports\DietLogImport;
+use App\Imports\OrderListImport;
 use App\Models\DietLog;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
+use mysql_xdevapi\Table;
 
 class NutritionManagementController extends Controller
 {
@@ -36,6 +38,15 @@ class NutritionManagementController extends Controller
     {
         // patient_id
         $id = $request->id;
+
+        //紀錄Session
+        if(Session::has('patient_id')){
+            Session::forget('patient_id');
+            Session::put('patient_id', $id);
+        }else{
+            Session::put('patient_id', $id);
+        }
+
         //餐敘為母表
         $order_lists = DB::table('meal_order')->where('patient_id',$id)->get();
         //在母表中插入子表diet_log
@@ -43,6 +54,19 @@ class NutritionManagementController extends Controller
         {
             $row->diet_logs=DB::table('diet_log')->where('task_id',$row->id)->get();
         }
+
+//        $data = DB::table('meal_order')
+//            ->select('meal_order.id','meal_order.meal_order','meal_order.created_at','meal_order.updated_at','diet_log.meal_name','diet_log.quantity','diet_log.remark')
+//            ->LeftJoin('diet_log','meal_order.id','=','diet_log.task_id')
+//            ->orderBy('meal_order.id')
+//            ->get();
+//        foreach ($order_lists as $od)
+//        {
+//            dd($od->diet_logs->count());
+//        }
+
+//        dd($order_lists[0]->diet_logs->count());
+
         return view('pages.nutritionManagement.orderList',compact('id','order_lists'));
     }
     // 詳細餐序
@@ -344,6 +368,7 @@ class NutritionManagementController extends Controller
     {
         $file = $request->file('upload_file');
         Excel::import(new DietLogImport, $file);
+        Excel::import(new OrderListImport, $file);
         return 'success';
     }
 

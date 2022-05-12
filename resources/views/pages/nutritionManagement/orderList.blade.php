@@ -184,6 +184,12 @@
 
                                     新增
                                 </button>
+                                <button
+                                    id="btn-medication-record-excel"
+                                    class="bg-transparent border border-teal-700 text-teal-700
+                                   hover:bg-teal-700 hover:text-white px-4 py-2 text-center rounded" data-bs-target="#showOrderListExcelModal" data-bs-toggle="modal">
+                                    Excel操作
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -373,6 +379,7 @@
     @include('pages.nutritionManagement.createDietLogModal')
     @include('pages.nutritionManagement.createOrderListModal')
     @include('pages.nutritionManagement.patchOrderListModal')
+    @include('pages.nutritionManagement.showOrderListExcelModal')
     <script>
 
         $('#btn_search').click(function (){
