@@ -15,6 +15,7 @@ use App\Exports\MedicationRecordsExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\MedicationRecordsImport;
 use Illuminate\Support\Facades\Log;
+use App\Models\CommonReply;
 
 class MedicationRecordController extends Controller
 {
@@ -452,5 +453,32 @@ class MedicationRecordController extends Controller
         return response()->download(public_path('assets\files\MedicationRecordsExample.xlsx'));
     }
 
+    //取得常用字詞
+    public function get_common_reply_data()
+    {
+        try {
+            $reply_content = DB::table('common_reply')
+                ->get();
+            return $reply_content;
+        } catch (Exception $exception) {
+            return $exception;
+        }
+    }
 
+    //儲存常用字詞
+    public function store_common_reply_data(Request $request)
+    {
+        try {
+            $common_reply = $request->get('common_reply');
+            CommonReply::truncate();
+            foreach ($common_reply as $key => $value) {
+                CommonReply::create([
+                    'reply_content' => $value
+                ]);
+            }
+            return 'success';
+        } catch (Exception $exception) {
+            return $exception;
+        }
+    }
 }

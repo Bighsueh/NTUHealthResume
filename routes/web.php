@@ -4,6 +4,7 @@ use App\Http\Controllers\DriveController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\MedicationRecordController;
+use App\Http\Controllers\ProgressController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
@@ -78,6 +79,12 @@ Route::group(['prefix' => 'medication_management', 'middleware' => ['login']], f
     Route::post('/create_medication_record', [MedicationRecordController::class, 'create_medication_record'])
         ->name('create_medication_management_medication_record');
 
+    //其他資訊-常用回覆功能
+    Route::post('/get_common_reply_data', [MedicationRecordController::class, 'get_common_reply_data'])
+        ->name('get_medicatoin_common_reply_data');
+    //其他資訊-常用回覆功能
+    Route::post('/store_common_reply_data', [MedicationRecordController::class, 'store_common_reply_data'])
+        ->name('store_medicatoin_common_reply_data');
 
 });
 
