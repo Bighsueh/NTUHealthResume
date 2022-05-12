@@ -19,6 +19,7 @@ class MedicationRecordsTableSeeder extends Seeder
     {
 
         DB::table('medication_records')->insert([
+            'patient_no' => 'A12345',
             'date_of_examination' => Carbon::now(),
             'redate' => Carbon::now(),
             'pres_hosp' => '醫院A',
@@ -27,6 +28,7 @@ class MedicationRecordsTableSeeder extends Seeder
             'updated_at'=> Carbon::now(),
         ]);
         DB::table('medication_records')->insert([
+            'patient_no' => 'A12345',
             'date_of_examination' => Carbon::now(),
             'redate' => Carbon::now(),
             'pres_hosp' => '診所A',
