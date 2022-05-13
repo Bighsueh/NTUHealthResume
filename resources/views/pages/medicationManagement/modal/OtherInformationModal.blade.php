@@ -141,10 +141,10 @@
                 '_token': token,
                 'task_id': task_id,
             },
-            success: function (res) {
+            success: function (res = null) {
                 //醫師意見欄位
                 let doctor_comment = $("#other_information_modal_doctor_comment");
-                doctor_comment.val(res);
+                doctor_comment.val(res['doctor_comment']);
             },
             error: function (res) {
                 console.log(res);

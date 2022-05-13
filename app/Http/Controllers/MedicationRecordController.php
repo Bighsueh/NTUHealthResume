@@ -82,7 +82,7 @@ class MedicationRecordController extends Controller
 
             //醫師回饋單
             $doctor_feedback =
-                DB::table('doctor_feedback')
+                DB::table('other_information')
                     ->where('task_id', $task_id)
                     ->first();
 
@@ -209,9 +209,10 @@ class MedicationRecordController extends Controller
             $task_id = $request->get('task_id');
             $doctor_comment = DB::table('other_information')
                 ->where('task_id', $task_id)
+                ->select('doctor_comment')
                 ->first();
 
-            return $doctor_comment->doctor_comment;
+            return $doctor_comment;
         } catch (Exception $exception) {
             return $exception;
         }
