@@ -15,8 +15,9 @@ class CreateWorkProgressTable extends Migration
     {
         Schema::create('work_progress', function (Blueprint $table) {
             $table->id('progress_id');
-            $table->integer('record_id')->nullable();
+            $table->integer('task_id')->nullable();
             $table->integer('diet_id')->nullable();
+            $table->integer('reporter_id');
             $table->string('content')->nullable();
             $table->timestamps();
         });

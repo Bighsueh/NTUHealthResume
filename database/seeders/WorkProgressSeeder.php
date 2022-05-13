@@ -16,16 +16,18 @@ class WorkProgressSeeder extends Seeder
     {
         DB::table('work_progress')->insert([
             'progress_id' => 1,
-            'diet_id' => '1',
-            'content' => '未排',
+            'task_id' => '1',
+            'reporter_id' => 1,
+            'content' => 'case_created',
             'created_at'=>'2022-03-10 23:50:52',
             'updated_at'=>'2022-03-10 23:50:52',
         ]);
 
         DB::table('work_progress')->insert([
             'progress_id' => 2,
-            'diet_id' => '2',
-            'content' => '未排',
+            'task_id' => '1',
+            'reporter_id' => 1,
+            'content' => 'other_info',
             'created_at'=>'2022-03-09 23:50:52',
             'updated_at'=>'2022-03-09 23:50:52',
         ]);

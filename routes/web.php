@@ -87,7 +87,15 @@ Route::group(['prefix' => 'medication_management', 'middleware' => ['login']], f
         ->name('store_medicatoin_common_reply_data');
 
 });
+Route::group(['prefix' => 'progress', 'middleware' => ['login']], function () {
+    //取得個別案件進度
+    Route::post('/get_progress_data', [ProgressController::class, 'get_progress_data'])
+        ->name('get_progress_data');
 
+    //取得所有案件進度
+    Route::post('/get_medication_record_list', [ProgressController::class, 'get_medication_record_list'])
+        ->name('get_medication_record_list');
+});
 
 Route::get('/setting/employee', [\App\Http\Controllers\EmployeeController::class, 'get_setting_employee'])->name('get_setting_employee');
 
