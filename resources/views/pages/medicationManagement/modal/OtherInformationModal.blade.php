@@ -54,13 +54,13 @@
             <div
                 class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
                 <button type="button"
-                        id="btn-doctor-feedback-cancel"
+                        id="btn-other-info-cancel"
                         class="mx-2 bg-transparent border border-red-700 text-red-700 hover:bg-red-700 hover:text-white text-center py-2 px-4 rounded"
                         data-bs-dismiss="modal">
                     不儲存並關閉
                 </button>
                 <button type="button"
-                        id="btn-doctor-feedback-save"
+                        id="btn-other-info-save"
                         class="mx-2 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded"
                         data-bs-dismiss="modal">
                     儲存並關閉
@@ -77,8 +77,16 @@
     $(function () {
 
         //儲存醫師回覆的內容
-        $('#btn-doctor-feedback-save').click(function () {
+        $('#btn-other-info-save').click(function () {
+            //醫師意見
+            let doctor_comment = $('#other_information_modal_doctor_comment').val()
+            //task_id
+            let task_id = $("#task_id").text().trim();
+
+            //儲存常用回覆
             store_common_reply();
+            //儲存醫師意見
+            store_doctor_comment(doctor_comment, task_id);
         })
 
         //新增常用回覆
@@ -88,11 +96,13 @@
 
         //開啟Modal
         $("#btn_other_information").click(function () {
+            set_doctor_comment_data();
             set_common_reply_data();
         })
     })
+
     //新增常用回覆
-    function add_common_reply_row(content=''){
+    function add_common_reply_row(content = '') {
         let container = $("#common_reply_container");
         let row = `
             <div class="m-1 flex">
@@ -118,54 +128,100 @@
         set_listener()
     }
 
+    //設定醫師意見欄位資訊
+    function set_doctor_comment_data() {
+        let url = "{{route('get_medication_management_doctor_comment_data')}}";
+        let token = "{{csrf_token()}}";
+        let task_id = $("#task_id").text().trim();
+
+        $.ajax({
+            url: url,
+            method: 'post',
+            data: {
+                '_token': token,
+                'task_id': task_id,
+            },
+            success: function (res) {
+                //醫師意見欄位
+                let doctor_comment = $("#other_information_modal_doctor_comment");
+                doctor_comment.val(res);
+            },
+            error: function (res) {
+                console.log(res);
+            }
+        })
+    }
+
     //設定常用回覆欄位資訊
     function set_common_reply_data() {
         let url = "{{route('get_medicatoin_common_reply_data')}}";
         let token = "{{csrf_token()}}";
         $.ajax({
-            url:url,
-            method :'post',
-            data:{
+            url: url,
+            method: 'post',
+            data: {
                 '_token': token,
             },
-            success:function(res){
+            success: function (res) {
                 let container = $("#common_reply_container");
                 container.children().remove();
-                $.each(res,function(index,value){
+                $.each(res, function (index, value) {
                     let reply_content = value['reply_content'];
                     add_common_reply_row(reply_content);
                 })
             },
-            error:function(res){
+            error: function (res) {
+                console.log(res);
+            }
+        })
+    }
+
+    //儲存醫師意見欄位
+    function store_doctor_comment(doctor_comment, task_id) {
+        let url = "{{route('store_medication_management_doctor_comment_data')}}";
+        let token = "{{csrf_token()}}";
+
+        $.ajax({
+            url: url,
+            method: 'post',
+            data: {
+                '_token': token,
+                'task_id': task_id,
+                'doctor_comment': doctor_comment,
+            },
+            success: function (res) {
+                console.log(res);
+            },
+            error: function (res) {
                 console.log(res);
             }
         })
     }
 
     //儲存常用回覆欄位資訊
-    function store_common_reply(){
+    function store_common_reply() {
         let common_reply_container = $("#common_reply_container").children(); //container
         let result = []; //要回傳的數值
         let url = "{{route('store_medicatoin_common_reply_data')}}";
         let token = "{{csrf_token()}}";
 
         //提取container中的value，塞進result裡面
-        $.each(common_reply_container,function(index,value){
+        $.each(common_reply_container, function (index, value) {
             let common_reply = common_reply_container.eq(index).find('textarea').val();
             result.push(common_reply);
         })
 
         $.ajax({
-            url:url,
-            method : 'post',
-            data:{
-                '_token' : token,
+            url: url,
+            method: 'post',
+            data: {
+                '_token': token,
                 'common_reply': result,
             },
-            success:function(res){
+            success: function (res) {
                 console.log(res);
             },
-            error:function(res){
+            error: function (res) {
                 console.log(res);
             }
         })
@@ -173,7 +229,7 @@
 
     }
 
-    function set_listener(){
+    function set_listener() {
         //define
         let btn_common_reply_upload = $('.btn-common-reply-upload');
         let btn_common_reply_delete = $('.btn-common-reply-delete');
@@ -183,13 +239,13 @@
         btn_common_reply_delete.off('click');
 
         //點選常用回復中的上傳圖示時將內容同步到醫師意見textarea
-        btn_common_reply_upload.on('click',function(){
+        btn_common_reply_upload.on('click', function () {
             let common_reply = $(this).parent().parent().find('textarea').val();
             $("#other_information_modal_doctor_comment").val(common_reply);
         })
 
         //點選常用回復中的上傳圖示時將將該常用回覆刪除
-        btn_common_reply_delete.on('click',function(){
+        btn_common_reply_delete.on('click', function () {
             $(this).parent().parent().remove();
         })
     }

@@ -158,45 +158,61 @@ class MedicationRecordController extends Controller
         }
     }
 
-    //儲存醫師回饋單內容
-    public function store_doctor_feedback_data(Request $request)
+    //儲存其他資訊內容
+    public function store_doctor_comment_data(Request $request)
     {
         try {
-            //醫師回覆藥師的內容
-            $doctor_reply = $request->get('doctor_reply');
+            //醫師意見
+            $doctor_comment = $request->get('doctor_comment');
             //task_id
             $task_id = $request->get('task_id');
 
-            $reply_check =
-                DB::table('doctor_feedback')
+            $comment_check =
+                DB::table('other_information')
                     ->where('task_id', $task_id)
                     ->first();
 
-            //若存在醫師回覆紀錄
-            if ($reply_check) {
-                DB::table('doctor_feedback')
+            //若存在醫師意見紀錄
+            if ($comment_check !== null) {
+                DB::table('other_information')
                     ->where('task_id', $task_id)
                     ->update([
                         'task_id' => $task_id,
-                        'doctor_id' => $request->session()->get('user_name'),
-                        'doctor_reply' => $doctor_reply,
+                        'doctor_id' => $request->session()->get('user_id'),
+                        'doctor_comment' => $doctor_comment,
                         'updated_at' => Carbon::now(),
                     ]);
             }
 
-            //若不存在醫師回覆紀錄
-            if (!$reply_check) {
-                DB::table('doctor_feedback')
+            //若不存在醫師意見紀錄
+            if ($comment_check === null) {
+                DB::table('other_information')
                     ->insert([
                         'task_id' => $task_id,
-                        'doctor_id' => $request->session()->get('user_name'),
-                        'doctor_reply' => $doctor_reply,
+                        'doctor_id' => $request->session()->get('user_id'),
+                        'doctor_comment' => $doctor_comment,
                         'created_at' => Carbon::now(),
                     ]);
             }
 
             return 'success';
         } catch (\Exception $exception) {
+            return $exception;
+        }
+    }
+
+    //取得其他資訊-醫師意見內容
+    public function get_doctor_comment_data(Request $request)
+    {
+        try {
+            //task_id
+            $task_id = $request->get('task_id');
+            $doctor_comment = DB::table('other_information')
+                ->where('task_id', $task_id)
+                ->first();
+
+            return $doctor_comment->doctor_comment;
+        } catch (Exception $exception) {
             return $exception;
         }
     }
@@ -351,9 +367,9 @@ class MedicationRecordController extends Controller
             $detail_rows = $request->get('detail_rows'); //RecordDetails
 
             //record_id 空值判斷
-            if($record_id == null) return 'no record id';
+            if ($record_id == null) return 'no record id';
             //detail_rows 判斷
-            if($detail_rows == null) return 'no detail rows';
+            if ($detail_rows == null) return 'no detail rows';
 
             //修改record data(藥單資訊)
             DB::table('medication_records')
@@ -399,12 +415,11 @@ class MedicationRecordController extends Controller
     public function import_medication_records(Request $request)
     {
 
-        try
-        {
+        try {
             $data = $request->import_data;
             $count = 0;
-            foreach ($data as $row){
-                if($count == 0) {
+            foreach ($data as $row) {
+                if ($count == 0) {
                     $count = $count + 1;
                     continue;
                 }
@@ -426,28 +441,28 @@ class MedicationRecordController extends Controller
             }
 
             return 'success';
-        }catch (Exception $e)
-        {
+        } catch (Exception $e) {
             return $e;
         }
 
 
     }
+
     public function previewExcel(Request $request)
     {
         $file = $request->file('upload_file');
 //        Log::debug('previewExcell');
-        try{//
+        try {//
             $importdata = Excel::toArray(new previewExcelImport(), $file);
 
             $data = $importdata[0];
 //            Log::debug($data);
             return $data;
-        }catch (Exception $e)
-        {
+        } catch (Exception $e) {
             return $e;
         }
     }
+
     public function get_medication_records_excel_example()
     {
         return response()->download(public_path('assets\files\MedicationRecordsExample.xlsx'));
@@ -471,12 +486,16 @@ class MedicationRecordController extends Controller
         try {
             $common_reply = $request->get('common_reply');
             CommonReply::truncate();
-            foreach ($common_reply as $key => $value) {
-                CommonReply::create([
-                    'reply_content' => $value
-                ]);
+            if ($common_reply !== null) {
+                if ($common_reply)
+                    foreach ($common_reply as $key => $value) {
+                        CommonReply::create([
+                            'reply_content' => $value
+                        ]);
+                    }
+                return 'success';
             }
-            return 'success';
+            return 'common_reply_is_null';
         } catch (Exception $exception) {
             return $exception;
         }

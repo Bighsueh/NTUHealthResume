@@ -69,9 +69,13 @@ Route::group(['prefix' => 'medication_management', 'middleware' => ['login']], f
     //儲存藥師回饋單內容
     Route::post('/store_pharmacist_feedback_data', [MedicationRecordController::class, 'store_pharmacist_feedback_data'])
         ->name('store_medication_management_pharmacist_feedback_data');
-    //儲存醫師回饋單內容
-    Route::post('/store_doctor_feedback_data', [MedicationRecordController::class, 'store_doctor_feedback_data'])
-        ->name('store_medication_management_doctor_feedback_data');
+    //儲存其他資訊內容
+    Route::post('/store_doctor_comment_data', [MedicationRecordController::class, 'store_doctor_comment_data'])
+        ->name('store_medication_management_doctor_comment_data');
+    //取得其他資訊醫師回覆內容
+    Route::post('/get_doctor_comment_data', [MedicationRecordController::class, 'get_doctor_comment_data'])
+        ->name('get_medication_management_doctor_comment_data');
+
     //取得藥歷列表資訊(包含record及record_detail)
     Route::post('/get_record_data', [MedicationRecordController::class, 'get_record_data'])
         ->name('get_medication_management_record_data');
