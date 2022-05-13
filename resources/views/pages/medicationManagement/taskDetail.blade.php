@@ -170,21 +170,15 @@
                 <div class="flex justify-between ">
                     <p class="mx-4 my-2 justify-self-start font-bold text-xl">藥歷列表</p>
                 </div>
-                <div class="overflow-y-scroll h-2/3 ">
+                <div class="overflow-y-scroll h-screen">
                     @foreach($medication_records as $row)
                         <div class="flex ">
                             <!--單筆藥歷共通項目-->
                             <div class="content-between grid rounded m-2 flex-none bg-gray-50 p-4 w-1/6">
-{{--                                <p>就醫日期：</p>--}}
-{{--                                <li>{{$row->date_of_examination}}</li>--}}
                                 <div class="mb-2">
                                     <p>開方日期：</p>
                                     <p>{{$row->redate}}</p>
                                 </div>
-{{--                                <p>處方醫院：</p>--}}
-{{--                                <li>{{$row->pres_hosp}}</li>--}}
-{{--                                <p>調劑醫院：</p>--}}
-{{--                                <li>{{$row->disp_hosp}}</li>--}}
                                 <div hidden class="record_id">{{$row->record_id}}</div>
                                 <a class="btn-open-medication-record-detail-modal col-span-1 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 x-4 rounded"
                                    data-bs-toggle="modal" data-bs-target="#medicationRecordDetailModel">
@@ -197,14 +191,6 @@
                                 <table class="divide-y divide-gray-200 min-w-full">
                                     <thead class="bg-gray-50">
                                     <tr>
-{{--                                        <th scope="col"--}}
-{{--                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">--}}
-{{--                                            適應症--}}
-{{--                                        </th>--}}
-{{--                                        <th scope="col"--}}
-{{--                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">--}}
-{{--                                            藥物種類--}}
-{{--                                        </th>--}}
                                         <th scope="col"
                                             class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
                                             藥品名稱
@@ -215,44 +201,31 @@
                                         </th>
                                         <th scope="col"
                                             class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                            劑量(顆數)
+                                            單位劑量
                                         </th>
-{{--                                        <th scope="col"--}}
-{{--                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">--}}
-{{--                                            途徑--}}
-{{--                                        </th>--}}
+                                        <th scope="col"
+                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                            顆、包數或CC數
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                            每日劑量
+                                        </th>
                                         <th scope="col"
                                             class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
                                             頻率
                                         </th>
-{{--                                        <th scope="col"--}}
-{{--                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">--}}
-{{--                                            處方天數--}}
-{{--                                        </th>--}}
-{{--                                        <th scope="col"--}}
-{{--                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">--}}
-{{--                                            總數--}}
-{{--                                        </th>--}}
-{{--                                        <th scope="col"--}}
-{{--                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">--}}
-{{--                                            相關註記--}}
-{{--                                        </th>--}}
-
                                     </tr>
                                     </thead>
                                     <tbody class="divide-y divide-gray-200">
                                     @foreach($row->record_detail as $detail_row)
                                         <tr>
-{{--                                            <td class="text-left px-6">{{$detail_row->indication}}</td>--}}
-{{--                                            <td class=text-left px-6">{{$detail_row->category}}</td>--}}
                                             <td class="text-left px-6">{{$detail_row->trade_name}}</td>
                                             <td class="text-left px-6">{{$detail_row->generic_name}}</td>
+                                            <td class="text-left px-6">{{$detail_row->dose_per_unit}}</td>
                                             <td class="text-left px-6">{{$detail_row->dose}}</td>
-{{--                                            <td class="text-left px-6">{{$detail_row->routes}}</td>--}}
+                                            <td class="text-left px-6">{{$detail_row->daily_dose}}</td>
                                             <td class="text-left px-6">{{$detail_row->freq}}</td>
-{{--                                            <td>{{$detail_row->pres_day}}</td>--}}
-{{--                                            <td>{{$detail_row->total_amount}}</td>--}}
-{{--                                            <td>{{$detail_row->total_amount}}</td>--}}
                                         </tr>
                                     @endforeach
                                     </tbody>
@@ -271,14 +244,6 @@
     @include('pages.medicationManagement.modal.medicationRecordsExcelModal')
     @include('pages.medicationManagement.modal.previewExcelModal')
     <script>
-        // $('#btn_other_information').click(function(){
-        //     Swal.fire({
-        //         icon: 'error',
-        //         title: '錯誤',
-        //         text: '此功能尚未開放',
-        //         confirmButtonColor: '#8CD4F5'
-        //     })
-        // })
         $('#btn-progress-status').click(function(){
             Swal.fire({
                 icon: 'error',
