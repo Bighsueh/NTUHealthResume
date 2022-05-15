@@ -107,6 +107,7 @@
             <div class="px-12">
                 <div class="modal-body relative m-3 w-full ">
                     <div class="grid grid-cols-4 gap-2 mx-2">
+                        <div class="mx-2 text-left block">X</div>
                         <div class="mx-2 text-left block">餐序</div>
                         <div class="mx-2 text-left block">菜色</div>
                         <div class="mx-2 text-left block">份量</div>
@@ -209,14 +210,16 @@
             // window.alert(data.length);
             data.forEach(function (row) {
                 if(count !== 0){
+                    //若為空則為子表內容
                     if(row[0]== null)
                     {
                         row[0] = ""
                         $('#order_list_preview_list').append(`
                         <div class="grid grid-cols-4 gap-2 ">
-                            <input disabled class="invisible text-left block bg-gray-100 my-1 mx-auto rounded cursor-not-allowed" value="${row[0]}"/>
-                            <input class="text-left block bg-gray-100 my-1 mx-auto rounded" value="${row[1]}"/>
-                            <input class="text-left block bg-gray-100 my-1 mx-auto rounded" value="${row[2]}"/>
+                            <button class="bg-red-400  mx-3 px-2 my-1 text-white text-left rounded block btn_child_delete_row" >X</button>
+                            <input disabled class="invisible text-left block bg-gray-100 my-1 mx-auto rounded cursor-not-allowed child" value="${row[0]}"/>
+                            <input class="text-left block bg-gray-100 my-1 mx-auto rounded child" value="${row[1]}"/>
+                            <input class="text-left block bg-gray-100 my-1 mx-auto rounded child" value="${row[2]}"/>
                         </div>
                         `)
                     }
@@ -224,9 +227,10 @@
                     {
                         $('#order_list_preview_list').append(`
                         <div class="grid grid-cols-4 gap-2 ">
-                            <input class="text-left block bg-gray-100 my-1 mx-auto rounded" value="${row[0]}"/>
-                            <input class="text-left block bg-gray-100 my-1 mx-auto rounded" value="${row[1]}"/>
-                            <input class="text-left block bg-gray-100 my-1 mx-auto rounded" value="${row[2]}"/>
+                            <button class="bg-red-400  mx-3  px-2 my-1 text-white text-left rounded block btn_master_delete_row" >X</button>
+                            <input class="text-left block bg-gray-100 my-1 mx-auto rounded master" value="${row[0]}"/>
+                            <input class="text-left block bg-gray-100 my-1 mx-auto rounded master" value="${row[1]}"/>
+                            <input class="text-left block bg-gray-100 my-1 mx-auto rounded master" value="${row[2]}"/>
                         </div>
                         `)
                     }
@@ -236,37 +240,64 @@
             })
         }
 
+        //母表刪除連同子表刪除
+        $('.btn_master_delete_row').click(function () {
+            this.parentNode.parentNode.removeChild(this.parentNode);
+
+        })
+        //子表刪除
+        $('.btn_child_delete_row').click(function () {
+            this.parentNode.parentNode.removeChild(this.parentNode);
+
+        })
     }
+    //儲存
+    $('#btn_store_import').click(function () {
+        let records_data = [];
+        let order_list_preview_list_children = $('#order_list_preview_list').children();
+        console.log(order_list_preview_list_children)
+        $.each(order_list_preview_list_children, function (index, value){
+            let list_tr = order_list_preview_list_children.eq(index).children();
+            // window.alert(list_tr.eq(0).children().val());
+            console.log(list_tr.eq(1).val())
+            let push_row = {
+                'meal_order':list_tr.eq(1).val(),
+                'meal_name':list_tr.eq(2).val(),
+                'quantity':list_tr.eq(3).val(),
 
-    {{--$('#btn_store_import').click(function () {--}}
-    {{--    $.ajax({--}}
-    {{--        url:"{{route('store_import_data')}}",--}}
-    {{--        mothed:'get',--}}
-    {{--        data:{--}}
-    {{--            import_data:data--}}
-    {{--        },--}}
-    {{--        success: function (res) {--}}
-    {{--            if (res === 'success') {--}}
-    {{--                Swal.fire({--}}
-    {{--                    icon: 'success',--}}
-    {{--                    title: 'excel上傳成功',--}}
-    {{--                    confirmButtonColor: '#8CD4F5'--}}
-    {{--                })--}}
-    {{--                window.location.reload();--}}
-    {{--            }--}}
-    {{--        },--}}
-    {{--        error: function (res) {--}}
-    {{--            Swal.fire({--}}
-    {{--                icon: 'error',--}}
-    {{--                title: '儲存失敗',--}}
-    {{--                text: res['statusText'],--}}
-    {{--                confirmButtonColor: '#8CD4F5'--}}
-    {{--            })--}}
-    {{--        }--}}
-    {{--    })--}}
+            }
+            console.log(push_row)
+            records_data.push(push_row);
+        });
+
+        $.ajax({
+            url:"{{route('post_diet_log_excel_upload')}}",
+            mothed:'get',
+            data:{
+                import_data:records_data
+            },
+            success: function (res) {
+                if (res === 'success') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'excel上傳成功',
+                        confirmButtonColor: '#8CD4F5'
+                    })
+                    window.location.reload();
+                }
+            },
+            error: function (res) {
+                Swal.fire({
+                    icon: 'error',
+                    title: '儲存失敗',
+                    text: res['statusText'],
+                    confirmButtonColor: '#8CD4F5'
+                })
+            }
+        })
 
 
-    {{--})--}}
+    })
 </script>
 
 

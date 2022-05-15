@@ -39,12 +39,6 @@
                 <input type="file" class="hidden" onchange="preview_excel()" id="excel_upload_file" name="excel_upload_file"  accept=".xlsx">
 
                 <div class="mx-1  py-2 "></div>
-                {{--預覽--}}
-                <div
-                    id="btn_open_previewExcelModal"
-                    class="mx-1 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 rounded btn-medication-record-excel">
-                    test previewExcelModal
-                </div>
                 <button
                     id="btn_preview_excel"
                     class="hidden"

@@ -431,13 +431,59 @@ class NutritionManagementController extends Controller
         return $data;
 
     }
+
+
+    //儲存預覽畫面的資料
     public function post_diet_log_excel_upload(Request $request)
     {
-        $file = $request->file('upload_file');
-        Excel::import(new DietLogImport, $file);
-//        Excel::import(new OrderListImport, $file);
-        return 'success';
+
+        try {
+            $data = $request->import_data;
+//            dd($data);
+            $count = 0;
+            $patient = DB::table('meal_order')
+                ->where('patient_id',Session::get('patient_id'))
+                ->first();
+            $last_record_id = null;
+            $task_id = '';
+            foreach ($data as $row) {
+                if($row['meal_order']!=''){
+                    DB::table('meal_order')
+                        ->insert([
+                            'meal_order' => $row['meal_order'],
+                            'patient_id' => Session::get('patient_id')
+                        ]);
+                    $task_id = DB::table('meal_order')
+                        ->select('id')->orderBy('id','desc')->first()->id;
+                }
+//                Log::debug($last_record_id);
+                DB::table('diet_log')
+                    ->insert([
+                        'patient_id' => Session::get('patient_id'),
+                        'task_id' => $task_id,
+                        'meal_name' =>  $row['meal_name'],
+                        'quantity' => $row['quantity'],
+                        'created_at' => Carbon::now(),
+                    ]);
+//                Log::debug($last_record_id);
+            }
+
+            return 'success';
+        } catch (Exception $e) {
+            return $e;
+        }
+
+
     }
+
+
+//    public function post_diet_log_excel_upload(Request $request)
+//    {
+//        $file = $request->file('upload_file');
+//        Excel::import(new DietLogImport, $file);
+////        Excel::import(new OrderListImport, $file);
+//        return 'success';
+//    }
 
     public function get_diet_log_excel_download()
     {
