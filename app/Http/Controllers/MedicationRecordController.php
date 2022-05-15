@@ -484,7 +484,7 @@ class MedicationRecordController extends Controller
             return $e;
         }
     }
-
+    //下載範例Excel
     public function get_medication_records_excel_example()
     {
         return response()->download(public_path('assets\files\MedicationRecordsExample.xlsx'));

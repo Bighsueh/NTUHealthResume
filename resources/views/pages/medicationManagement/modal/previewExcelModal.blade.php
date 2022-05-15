@@ -130,7 +130,7 @@
 
 <script>
     let data;
-
+    //開啟Modal 生表格
     function open_previewExcelModal(res) {
         data = res;
         $('#tbody tr').remove();
@@ -182,13 +182,13 @@
         }
 
         $('#previewExcelModal').modal('show');
-
+        //刪除
         $('.btn_delete_row').click(function () {
             this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
 
         })
     }
-
+    //儲存
     $('#btn_store_import').click(function () {
         let records_data = [];
         let tbody_children = $('#tbody').children();

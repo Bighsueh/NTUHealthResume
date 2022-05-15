@@ -14,6 +14,7 @@ class MedicationRecordsExport implements FromView
     /**
     * @return \Illuminate\Support\Collection
     */
+    //下載Records LeftJoin Record_Detail Excel
     public function view():View
     {
         $patient_no = DB::table('patients')

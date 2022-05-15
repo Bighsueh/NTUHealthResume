@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 
 class MedicationRecordDetailImport implements ToCollection
 {
-
+    //沒有再用
     public function collection(Collection $rows)
     {
         $count = 0;
