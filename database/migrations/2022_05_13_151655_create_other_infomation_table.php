@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateWorkProgressTable extends Migration
+class CreateOtherInfomationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateWorkProgressTable extends Migration
      */
     public function up()
     {
-        Schema::create('work_progress', function (Blueprint $table) {
-            $table->id('progress_id');
-            $table->integer('task_id')->nullable();
-            $table->integer('diet_id')->nullable();
-            $table->integer('reporter_id');
-            $table->string('content')->nullable();
+        Schema::create('other_information', function (Blueprint $table) {
+            $table->id('other_info_id')->autoIncrement();
+            $table->integer('task_id');
+            $table->integer('doctor_id');
+            $table->text('doctor_comment')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateWorkProgressTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('work_progress');
+        Schema::dropIfExists('other_infomation');
     }
 }

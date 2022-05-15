@@ -13,12 +13,13 @@
                         data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body relative p-4">
-                <!--藥師回覆病患-->
+                <!--需要時服藥建議-->
                 <div class="flex justify-center">
-                    <div class="mb-3 xl:w-full">
-                        <b class="mx-2">要回覆病患的內容</b>
+                    <div class="mb-3 w-full">
+                        <b class="mx-2">需要時服藥建議</b>
                         <textarea
                             class="
+                            otehr-info-modal-textarea
                             form-control
                             block
                             w-full
@@ -34,19 +35,19 @@
                             ease-in-out
                             m-0
                             focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                            id="pharmacist_feedback_modal_pharmacist_reply"
+                            id="other_information_modal_textarea_1"
                             rows="5"
                             placeholder="請在此處填寫內容...  (Shift + Enter可以換行)"
-{{--                            disabled--}}
-                        >{{isset($pharmacist_feedback->pharmacist_reply) ? $pharmacist_feedback->pharmacist_reply : null}}</textarea>
+                        ></textarea>
                     </div>
                 </div>
-                <!--藥師向醫師提問-->
+                <!--需固定服用藥物建議-->
                 <div class="flex justify-center">
-                    <div class="mb-3 xl:w-full">
-                        <b class="mx-2">醫師回饋函(選填)</b>
+                    <div class="mb-3 w-full">
+                        <b class="mx-2">需固定服用藥物建議</b>
                         <textarea
                             class="
+                            otehr-info-modal-textarea
                             form-control
                             block
                             w-full
@@ -62,10 +63,66 @@
                             ease-in-out
                             m-0
                             focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                            id="pharmacist_feedback_modal_ask_to_doctor"
+                            id="other_information_modal_textarea_2"
                             rows="5"
                             placeholder="請在此處填寫內容...  (Shift + Enter可以換行)"
-                        >{{isset($pharmacist_feedback->pharmacist_question) ? $pharmacist_feedback->pharmacist_question : null}}</textarea>
+                        ></textarea>
+                    </div>
+                </div>
+                <!--交互作用或副作用指標-->
+                <div class="flex justify-center">
+                    <div class="mb-3 w-full">
+                        <b class="mx-2">交互作用或副作用指標</b>
+                        <textarea
+                            class="
+                            otehr-info-modal-textarea
+                            form-control
+                            block
+                            w-full
+                            px-3
+                            py-1.5
+                            text-base
+                            font-normal
+                            text-gray-700
+                            bg-white bg-clip-padding
+                            border border-solid border-gray-300
+                            rounded
+                            transition
+                            ease-in-out
+                            m-0
+                            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                            id="other_information_modal_textarea_3"
+                            rows="5"
+                            placeholder="例：抗膽鹼、鎮靜、高致跌藥物..."
+                        ></textarea>
+                    </div>
+                </div>
+                <!--個案特殊問題回饋-->
+                <div class="flex justify-center">
+                    <div class="mb-3 w-full">
+                        <b class="mx-2">個案特殊問題回饋</b>
+                        <textarea
+                            class="
+                            otehr-info-modal-textarea
+                            form-control
+                            block
+                            w-full
+                            px-3
+                            py-1.5
+                            text-base
+                            font-normal
+                            text-gray-700
+                            bg-white bg-clip-padding
+                            border border-solid border-gray-300
+                            rounded
+                            transition
+                            ease-in-out
+                            m-0
+                            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                            id="other_information_modal_textarea_4"
+                            rows="5"
+                            placeholder="請在此處填寫內容...  (Shift + Enter可以換行)"
+                        ></textarea>
                     </div>
                 </div>
             </div>
@@ -96,6 +153,8 @@
 
     //儲存藥師回覆給病患的內容
     $('#btn-pharmacist-feedback-save').click(function(){
+        console.log('btn-pharmacist-feedback-save 未完成CRUD')
+        return;
         //要回覆病患的內容
         let pharmacist_reply = $('#pharmacist_feedback_modal_pharmacist_reply').val();
         //向醫師提問(選填)

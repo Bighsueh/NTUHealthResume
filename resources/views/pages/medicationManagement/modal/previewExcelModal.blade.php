@@ -22,39 +22,47 @@
                         <thead class="bg-gray-50">
                         <tr>
                             <th scope="col"
-                                class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                #
+                                class="px-1 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                X
                             </th>
                             <th scope="col"
-                                class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                class="px-3 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
                                 就醫日
                             </th>
                             <th scope="col"
-                                class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                class="px-3 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
                                 開方日期
                             </th>
                             <th scope="col"
-                                class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                class="px-3 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
                                 處方醫院
                             </th>
                             <th scope="col"
-                                class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                class="px-3 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
                                 調劑醫院
                             </th>
                             <th scope="col"
-                                class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                class="px-3 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
                                 藥品商品
                             </th>
                             <th scope="col"
-                                class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                class="px-3 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
                                 藥品成分
                             </th>
                             <th scope="col"
-                                class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                劑量(顆數)
+                                class="px-3 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                單位劑量
                             </th>
                             <th scope="col"
-                                class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                class="px-3 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                顆、包數或c.c.
+                            </th>
+                            <th scope="col"
+                                class="px-3 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                每日劑量
+                            </th>
+                            <th scope="col"
+                                class="px-3 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
                                 頻率
                             </th>
                         </tr>
@@ -63,6 +71,9 @@
 {{--                        <a hidden>{{$thread = 0}}</a>--}}
 {{--                        @foreach($task_list as $row)--}}
                             <tr>
+                                <td class="px-2 py-4 whitespace-nowrap">
+                                    X
+                                </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     1
                                 </td>
@@ -92,7 +103,7 @@
                                 </td>
 
 
-{{--                            </tr>--}}
+                            </tr>
 {{--                        @endforeach--}}
                         </tbody>
                     </table>
@@ -119,6 +130,7 @@
 
 <script>
     let data;
+    //開啟Modal 生表格
     function open_previewExcelModal(res) {
         data = res;
         $('#tbody tr').remove();
@@ -127,32 +139,82 @@
             // window.alert(data.length);
             data.forEach(function (row) {
                 if(count != 0){
-                    let record_id = '<td class="px-6 py-4 whitespace-nowrap">'+row[0]+'</td>';
-                    let date_of_examination = '<td class="px-6 py-4 whitespace-nowrap">'+row[1]+'</td>';
-                    let redate = '<td class="px-6 py-4 whitespace-nowrap">'+row[2]+'</td>';
-                    let pres_hosp = '<td class="px-6 py-4 whitespace-nowrap">'+row[3]+'</td>';
-                    let disp_hosp = '<td class="px-6 py-4 whitespace-nowrap">'+row[4]+'</td>';
-                    let trade_name = '<td class="px-6 py-4 whitespace-nowrap">'+row[5]+'</td>';
-                    let generic_name = '<td class="px-6 py-4 whitespace-nowrap">'+row[6]+'</td>';
-                    let dose = '<td class="px-6 py-4 whitespace-nowrap">'+row[7]+'</td>';
-                    let freq = '<td class="px-6 py-4 whitespace-nowrap">'+row[8]+'</td>';
-                    $('#tbody').append(
-                        '<tr>'+ record_id + date_of_examination + redate + pres_hosp + disp_hosp + trade_name + generic_name + dose + freq +'</tr>'
-                    )
+                    $('#tbody').append(`
+                        <tr class="tr_row">
+                            <td>
+                                <button class="bg-red-400  px-2 my-1 text-white text-left rounded block btn_delete_row" >X</button>
+                            </td>
+                            <td>
+                                <input class="bg-gray-100 my-1 text-left rounded block" value="${row[0]}"/>
+                            </td>
+                            <td>
+                                <input class="bg-gray-100 my-1 text-left rounded block" value="${row[1]}"/>
+                            </td>
+                            <td>
+                                <input class="bg-gray-100 my-1 text-left rounded block" value="${row[2]}"/>
+                            </td>
+                            <td>
+                                <input class="bg-gray-100 my-1 text-left rounded block" value="${row[3]}"/>
+                            </td>
+                            <td>
+                                <input class="bg-gray-100 my-1 text-left rounded block" value="${row[4]}"/>
+                            </td>
+                            <td>
+                                <input class="bg-gray-100 my-1 text-left rounded block" value="${row[5]}"/>
+                            </td>
+                            <td>
+                                <input class="bg-gray-100 my-1 text-left rounded block" value="${row[6]}"/>
+                            </td>
+                            <td>
+                                <input class="bg-gray-100 my-1 text-left rounded block" value="${row[7]}"/>
+                            </td>
+                            <td>
+                                <input class="bg-gray-100 my-1 text-left rounded block" value="${row[8]}"/>
+                            </td>
+                            <td>
+                                <input class="bg-gray-100 my-1 text-left rounded block" value="${row[9]}"/>
+                            </td>
+                        </td>
+                    `)
                 }
                 count +=1;
             })
         }
 
         $('#previewExcelModal').modal('show');
-    }
+        //刪除
+        $('.btn_delete_row').click(function () {
+            this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
 
+        })
+    }
+    //儲存
     $('#btn_store_import').click(function () {
+        let records_data = [];
+        let tbody_children = $('#tbody').children();
+        $.each(tbody_children, function (index, value){
+            let list_tr = tbody_children.eq(index).children();
+            // window.alert(list_tr.eq(0).children().val());
+            let push_row = {
+                'date_of_examination':list_tr.eq(1).children().val(),
+                'redate':list_tr.eq(2).children().val(),
+                'pres_hosp':list_tr.eq(3).children().val(),
+                'disp_hosp':list_tr.eq(4).children().val(),
+                'trade_name':list_tr.eq(5).children().val(),
+                'generic_name':list_tr.eq(6).children().val(),
+                'dose':list_tr.eq(7).children().val(),
+                'dose_per_unit':list_tr.eq(8).children().val(),
+                'daily_dose':list_tr.eq(9).children().val(),
+                'freq':list_tr.eq(10).children().val()
+            }
+            records_data.push(push_row);
+        });
+
         $.ajax({
             url:"{{route('store_import_data')}}",
             mothed:'get',
             data:{
-                import_data:data
+                import_data:records_data
             },
             success: function (res) {
                 if (res === 'success') {

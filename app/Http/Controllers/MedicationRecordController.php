@@ -15,6 +15,7 @@ use App\Exports\MedicationRecordsExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\MedicationRecordsImport;
 use Illuminate\Support\Facades\Log;
+use App\Models\CommonReply;
 
 class MedicationRecordController extends Controller
 {
@@ -32,6 +33,18 @@ class MedicationRecordController extends Controller
         try {
             //病患id
             $patient_id = $request->get('patient_id');
+
+            Session::forget('patient_id');
+            Session::put('patient_id', $patient_id);
+
+            $patient_no = DB::table('patients')
+                ->select('patient_no')
+                ->where('patient_id',$patient_id)
+                ->first();
+
+
+            Session::forget('patient_no');
+            Session::put('patient_no', $patient_no);
 
             //依照病患id取得patient_tasks資料
             $task_list = DB::table('patient_tasks')
@@ -53,6 +66,9 @@ class MedicationRecordController extends Controller
             //task_id
             $task_id = $request->get('task_id');
 
+            Session::forget('task_id');
+            Session::put('task_id', $task_id);
+
             //藥歷列表
             $medication_records =
                 DB::table('medication_records')
@@ -66,7 +82,7 @@ class MedicationRecordController extends Controller
 
             //醫師回饋單
             $doctor_feedback =
-                DB::table('doctor_feedback')
+                DB::table('other_information')
                     ->where('task_id', $task_id)
                     ->first();
 
@@ -142,45 +158,62 @@ class MedicationRecordController extends Controller
         }
     }
 
-    //儲存醫師回饋單內容
-    public function store_doctor_feedback_data(Request $request)
+    //儲存其他資訊內容
+    public function store_doctor_comment_data(Request $request)
     {
         try {
-            //醫師回覆藥師的內容
-            $doctor_reply = $request->get('doctor_reply');
+            //醫師意見
+            $doctor_comment = $request->get('doctor_comment');
             //task_id
             $task_id = $request->get('task_id');
 
-            $reply_check =
-                DB::table('doctor_feedback')
+            $comment_check =
+                DB::table('other_information')
                     ->where('task_id', $task_id)
                     ->first();
 
-            //若存在醫師回覆紀錄
-            if ($reply_check) {
-                DB::table('doctor_feedback')
+            //若存在醫師意見紀錄
+            if ($comment_check !== null) {
+                DB::table('other_information')
                     ->where('task_id', $task_id)
                     ->update([
                         'task_id' => $task_id,
-                        'doctor_id' => $request->session()->get('user_name'),
-                        'doctor_reply' => $doctor_reply,
+                        'doctor_id' => $request->session()->get('user_id'),
+                        'doctor_comment' => $doctor_comment,
                         'updated_at' => Carbon::now(),
                     ]);
             }
 
-            //若不存在醫師回覆紀錄
-            if (!$reply_check) {
-                DB::table('doctor_feedback')
+            //若不存在醫師意見紀錄
+            if ($comment_check === null) {
+                DB::table('other_information')
                     ->insert([
                         'task_id' => $task_id,
-                        'doctor_id' => $request->session()->get('user_name'),
-                        'doctor_reply' => $doctor_reply,
+                        'doctor_id' => $request->session()->get('user_id'),
+                        'doctor_comment' => $doctor_comment,
                         'created_at' => Carbon::now(),
                     ]);
             }
 
             return 'success';
         } catch (\Exception $exception) {
+            return $exception;
+        }
+    }
+
+    //取得其他資訊-醫師意見內容
+    public function get_doctor_comment_data(Request $request)
+    {
+        try {
+            //task_id
+            $task_id = $request->get('task_id');
+            $doctor_comment = DB::table('other_information')
+                ->where('task_id', $task_id)
+                ->select('doctor_comment')
+                ->first();
+
+            return $doctor_comment;
+        } catch (Exception $exception) {
             return $exception;
         }
     }
@@ -335,9 +368,9 @@ class MedicationRecordController extends Controller
             $detail_rows = $request->get('detail_rows'); //RecordDetails
 
             //record_id 空值判斷
-            if($record_id == null) return 'no record id';
+            if ($record_id == null) return 'no record id';
             //detail_rows 判斷
-            if($detail_rows == null) return 'no detail rows';
+            if ($detail_rows == null) return 'no detail rows';
 
             //修改record data(藥單資訊)
             DB::table('medication_records')
@@ -373,69 +406,120 @@ class MedicationRecordController extends Controller
 
 
     }
-
+    //export MedicationRecords
     public function export_medication_records()
     {
         return Excel::download(new MedicationRecordsExport, 'MedicationRecords.xlsx');
 
     }
-
+    //儲存MedicationRecords預覽畫面的資料
     public function import_medication_records(Request $request)
     {
 
-        try
-        {
+        try {
             $data = $request->import_data;
             $count = 0;
-            foreach ($data as $row){
-                if($count == 0) {
-                    $count = $count + 1;
-                    continue;
-                }
-                DB::table('medication_records')->insert([
-                    'date_of_examination' => $row[1],
-                    'redate' => $row[2],
-                    'pres_hosp' => $row[3],
-                    'disp_hosp' => $row[4],
-                    'updated_at' => Carbon::now()
-                ]);
-                DB::table('medication_record_detail')->insert([
-                    'record_id' => $row[0],
-                    'trade_name' => $row[5],
-                    'generic_name' => $row[6],
-                    'dose' => $row[7],
-                    'freq' => $row[8]
-                ]);
+            $patient = DB::table('patients')
+                ->where('patient_id',Session::get('patient_id'))
+                ->first();
+            $last_record_id = null;
+            foreach ($data as $row) {
+                $now_time = Carbon::now();
 
+                if($row['date_of_examination']!='null'){
+                    DB::table('medication_records')
+                        ->insert([
+                            'date_of_examination' => $row['date_of_examination'],
+                            'patient_no' => $patient->patient_no,
+                            'redate' => $row['redate'],
+                            'pres_hosp' => $row['pres_hosp'],
+                            'disp_hosp' => $row['disp_hosp'],
+                            'created_at' => $now_time,
+                            'updated_at' => $now_time
+                        ]);
+                    $last_record_id = DB::table('medication_records')
+                        ->where('created_at',$now_time)
+                        ->where('patient_no',$patient->patient_no)
+                        ->where('date_of_examination',$row['date_of_examination'])
+                        ->where('redate',$row['redate'])
+                        ->where('pres_hosp',$row['pres_hosp'])
+                        ->where('disp_hosp',$row['disp_hosp'])
+                        ->first()->record_id;
+                }
+//                Log::debug($last_record_id);
+                DB::table('medication_record_detail')
+                    ->insert([
+                        'record_id' => $last_record_id,
+                        'trade_name' => $row['trade_name'],
+                        'generic_name' =>  $row['generic_name'],
+                        'dose' =>  $row['dose'],
+                        'dose_per_unit' =>  $row['dose_per_unit'],
+                        'daily_dose' =>  $row['daily_dose'],
+                        'freq' =>  $row['freq'],
+                        'created_at' => $now_time,
+                        'updated_at' => $now_time
+                    ]);
+//                Log::debug($last_record_id);
             }
 
             return 'success';
-        }catch (Exception $e)
-        {
+        } catch (Exception $e) {
             return $e;
         }
 
 
     }
+    //讀取import的Excel回傳進預覽畫面
     public function previewExcel(Request $request)
     {
         $file = $request->file('upload_file');
 //        Log::debug('previewExcell');
-        try{//
+        try {//
             $importdata = Excel::toArray(new previewExcelImport(), $file);
 
             $data = $importdata[0];
 //            Log::debug($data);
             return $data;
-        }catch (Exception $e)
-        {
+        } catch (Exception $e) {
             return $e;
         }
     }
+    //下載範例Excel
     public function get_medication_records_excel_example()
     {
         return response()->download(public_path('assets\files\MedicationRecordsExample.xlsx'));
     }
 
+    //取得常用字詞
+    public function get_common_reply_data()
+    {
+        try {
+            $reply_content = DB::table('common_reply')
+                ->get();
+            return $reply_content;
+        } catch (Exception $exception) {
+            return $exception;
+        }
+    }
 
+    //儲存常用字詞
+    public function store_common_reply_data(Request $request)
+    {
+        try {
+            $common_reply = $request->get('common_reply');
+            CommonReply::truncate();
+            if ($common_reply !== null) {
+                if ($common_reply)
+                    foreach ($common_reply as $key => $value) {
+                        CommonReply::create([
+                            'reply_content' => $value
+                        ]);
+                    }
+                return 'success';
+            }
+            return 'common_reply_is_null';
+        } catch (Exception $exception) {
+            return $exception;
+        }
+    }
 }

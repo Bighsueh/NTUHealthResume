@@ -38,6 +38,7 @@ class LoginController extends Controller
             //員工存在
             if ($check_employee !== null) {
                 Session::put('user_name',$check_employee->employee_name);
+                Session::put('user_id',$check_employee->employee_id);
                 return 'success';
             }
 

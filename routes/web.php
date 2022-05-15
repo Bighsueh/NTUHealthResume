@@ -4,6 +4,7 @@ use App\Http\Controllers\DriveController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\MedicationRecordController;
+use App\Http\Controllers\ProgressController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
@@ -68,9 +69,13 @@ Route::group(['prefix' => 'medication_management', 'middleware' => ['login']], f
     //儲存藥師回饋單內容
     Route::post('/store_pharmacist_feedback_data', [MedicationRecordController::class, 'store_pharmacist_feedback_data'])
         ->name('store_medication_management_pharmacist_feedback_data');
-    //儲存醫師回饋單內容
-    Route::post('/store_doctor_feedback_data', [MedicationRecordController::class, 'store_doctor_feedback_data'])
-        ->name('store_medication_management_doctor_feedback_data');
+    //儲存其他資訊內容
+    Route::post('/store_doctor_comment_data', [MedicationRecordController::class, 'store_doctor_comment_data'])
+        ->name('store_medication_management_doctor_comment_data');
+    //取得其他資訊醫師回覆內容
+    Route::post('/get_doctor_comment_data', [MedicationRecordController::class, 'get_doctor_comment_data'])
+        ->name('get_medication_management_doctor_comment_data');
+
     //取得藥歷列表資訊(包含record及record_detail)
     Route::post('/get_record_data', [MedicationRecordController::class, 'get_record_data'])
         ->name('get_medication_management_record_data');
@@ -78,9 +83,23 @@ Route::group(['prefix' => 'medication_management', 'middleware' => ['login']], f
     Route::post('/create_medication_record', [MedicationRecordController::class, 'create_medication_record'])
         ->name('create_medication_management_medication_record');
 
+    //其他資訊-常用回覆功能
+    Route::post('/get_common_reply_data', [MedicationRecordController::class, 'get_common_reply_data'])
+        ->name('get_medicatoin_common_reply_data');
+    //其他資訊-常用回覆功能
+    Route::post('/store_common_reply_data', [MedicationRecordController::class, 'store_common_reply_data'])
+        ->name('store_medicatoin_common_reply_data');
 
 });
+Route::group(['prefix' => 'progress', 'middleware' => ['login']], function () {
+    //取得個別案件進度
+    Route::post('/get_progress_data', [ProgressController::class, 'get_progress_data'])
+        ->name('get_progress_data');
 
+    //取得所有案件進度
+    Route::post('/get_medication_record_list', [ProgressController::class, 'get_medication_record_list'])
+        ->name('get_medication_record_list');
+});
 
 Route::get('/setting/employee', [\App\Http\Controllers\EmployeeController::class, 'get_setting_employee'])->name('get_setting_employee');
 

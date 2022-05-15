@@ -19,6 +19,7 @@ class MedicationRecordsImport implements  ToModel,WithStartRow
      *
      * @return \Illuminate\Database\Eloquent\Model|null
      */
+    //沒有再用
     public function model(array $row)
     {
 //        Log::debug($row);
