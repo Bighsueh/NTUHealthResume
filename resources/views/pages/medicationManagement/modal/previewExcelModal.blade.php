@@ -142,7 +142,7 @@
                     $('#tbody').append(`
                         <tr class="tr_row">
                             <td>
-                                <button class="bg-red-400  px-2 my-1 text-white text-left rounded block" value="">X</button>
+                                <button class="bg-red-400  px-2 my-1 text-white text-left rounded block btn_delete_row" >X</button>
                             </td>
                             <td>
                                 <input class="bg-gray-100 my-1 text-left rounded block" value="${row[0]}"/>
@@ -182,8 +182,10 @@
         }
 
         $('#previewExcelModal').modal('show');
-        $('.tr_row').click(function () {
-            this.remove();
+
+        $('.btn_delete_row').click(function () {
+            this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
+
         })
     }
 
