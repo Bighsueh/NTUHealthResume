@@ -36,7 +36,7 @@
                     匯入 Excel
                 </div>
                 {{--檔案上傳--}}
-                <input type="file" class="hidden" onchange="import_medicationRecordsExcel()" id="excel_upload_file" name="excel_upload_file"  accept=".xlsx">
+                <input type="file" class="hidden" onchange="preview_excel()" id="excel_upload_file" name="excel_upload_file"  accept=".xlsx">
 
                 <div class="mx-1  py-2 "></div>
                 {{--預覽--}}
@@ -45,7 +45,12 @@
                     class="mx-1 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 rounded btn-medication-record-excel">
                     test previewExcelModal
                 </div>
-
+                <button
+                    id="btn_preview_excel"
+                    class="hidden"
+                data-bs-target="#orderListPreviewExcel" data-bs-toggle="modal">
+                    匯入 Excel
+                </button>
             </div>
 
 
@@ -61,7 +66,13 @@
             $('#excel_upload_file').click();
         })
 
-        function import_medicationRecordsExcel() {
+        function preview_excel()
+        {
+            $('#btn_preview_excel').click()
+        }
+
+
+        function import_orderListExcel() {
             let upload_file = $('#excel_upload_file')[0].files;
             let url = "{{route('post_diet_log_excel_upload')}}";
             let csrf_token = "{{csrf_token()}}";

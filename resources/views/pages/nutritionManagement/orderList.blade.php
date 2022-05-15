@@ -380,6 +380,7 @@
     @include('pages.nutritionManagement.createOrderListModal')
     @include('pages.nutritionManagement.patchOrderListModal')
     @include('pages.nutritionManagement.showOrderListExcelModal')
+    @include('pages.nutritionManagement.orderListPreviewExcelModal')
     <script>
 
         $('#btn_search').click(function (){

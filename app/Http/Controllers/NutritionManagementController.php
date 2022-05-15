@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\DietLogExport;
 use App\Imports\DietLogImport;
 use App\Imports\OrderListImport;
+use App\Imports\previewExcelImport;
 use App\Models\DietLog;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -420,14 +421,21 @@ class NutritionManagementController extends Controller
             return $exception;
         }
 
-        return 'success';
     }
 
+    public function orderList_preview_excel(Request $request)
+    {
+        $file = $request->file('upload_file');
+        $importdata = Excel::toArray(new previewExcelImport(), $file);
+        $data = $importdata[0];
+        return $data;
+
+    }
     public function post_diet_log_excel_upload(Request $request)
     {
         $file = $request->file('upload_file');
         Excel::import(new DietLogImport, $file);
-        Excel::import(new OrderListImport, $file);
+//        Excel::import(new OrderListImport, $file);
         return 'success';
     }
 

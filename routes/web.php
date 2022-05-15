@@ -118,6 +118,7 @@ Route::get('/dietLog', [\App\Http\Controllers\NutritionManagementController::cla
 Route::post('/dietLog', [\App\Http\Controllers\NutritionManagementController::class, 'store_dietLog'])->name('store_dietLog');
 Route::get('/nutritionManagement/get_dietLog_data', [\App\Http\Controllers\NutritionManagementController::class, 'get_dietLog_data'])->name('get_dietLog_data');
 Route::get('/dietLog/delete', [\App\Http\Controllers\NutritionManagementController::class, 'delete_dietLog'])->name('delete_dietLog');
+Route::post('/dietLog/excel/preview',[\App\Http\Controllers\NutritionManagementController::class, 'orderList_preview_excel'])->name('orderList_preview_excel');
 Route::post('/dietLog/upload', [\App\Http\Controllers\NutritionManagementController::class, 'post_diet_log_excel_upload'])->name('post_diet_log_excel_upload');
 Route::get('/dietLog/download', [\App\Http\Controllers\NutritionManagementController::class, 'get_diet_log_excel_download'])->name('get_diet_log_excel_download');
 Route::get('/dietLog/example/download', [\App\Http\Controllers\NutritionManagementController::class, 'get_diet_log_excel_example_download'])->name('get_diet_log_excel_example_download');
