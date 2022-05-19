@@ -149,7 +149,7 @@
                                 <button class="bg-red-400  px-2 my-1 text-white text-left rounded block btn_delete_row" >-</button>
                             </td>
                             <td>
-                                <button class="bg-blue-400  px-2 my-1 text-white text-left rounded block btn_delete_row" >+</button>
+                                <button class="bg-blue-400  px-2 my-1 text-white text-left rounded block btn_creat_row" >+</button>
                             </td>
                             <td>
                                 <input class="bg-gray-100 my-1 text-left rounded block" value="${row[0]}"/>
@@ -184,17 +184,74 @@
                         </td>
                     `)
                 }
+
                 count +=1;
             })
         }
 
         $('#previewExcelModal').modal('show');
-        //刪除
-        $('.btn_delete_row').click(function () {
-            this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
 
-        })
+        set_listener();
+
     }
+    function set_listener() {
+        let btn_delete_row = $('.btn_delete_row');
+        let btn_creat_row = $('.btn_creat_row');
+
+        btn_delete_row.off('click');
+        btn_creat_row.off('click');
+
+        btn_delete_row.on('click',function () {
+            this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
+        })
+
+        btn_creat_row.on('click',function () {
+            $(this).parent().parent().after(`
+                        <tr class="tr_row">
+                            <td>
+                                <button class="bg-red-400  px-2 my-1 text-white text-left rounded block btn_delete_row" >-</button>
+                            </td>
+                            <td>
+                                <button class="bg-blue-400  px-2 my-1 text-white text-left rounded block btn_creat_row" >+</button>
+                            </td>
+                            <td>
+                                <input class="bg-gray-100 my-1 text-left rounded block" value="null"/>
+                            </td>
+                            <td>
+                                <input class="bg-gray-100 my-1 text-left rounded block" value="null"/>
+                            </td>
+                            <td>
+                                <input class="bg-gray-100 my-1 text-left rounded block" value="null"/>
+                            </td>
+                            <td>
+                                <input class="bg-gray-100 my-1 text-left rounded block" value="null"/>
+                            </td>
+                            <td>
+                                <input class="bg-gray-100 my-1 text-left rounded block" value="null"/>
+                            </td>
+                            <td>
+                                <input class="bg-gray-100 my-1 text-left rounded block" value="null"/>
+                            </td>
+                            <td>
+                                <input class="bg-gray-100 my-1 text-left rounded block" value="null"/>
+                            </td>
+                            <td>
+                                <input class="bg-gray-100 my-1 text-left rounded block" value="null"/>
+                            </td>
+                            <td>
+                                <input class="bg-gray-100 my-1 text-left rounded block" value="null"/>
+                            </td>
+                            <td>
+                                <input class="bg-gray-100 my-1 text-left rounded block" value="null"/>
+                            </td>
+                        </td>
+                    `)
+            set_listener();
+        })
+
+    }
+
+
     //儲存
     $('#btn_store_import').click(function () {
         let records_data = [];
