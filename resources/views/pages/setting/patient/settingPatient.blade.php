@@ -27,8 +27,8 @@
                         <button type="button" class="mx-4 flex-shrink-0 bg-teal-700 hover:bg-teal-500 border-teal-700 hover:border-teal-500 text-sm border-4 text-white py-1 px-3 rounded"
                         id="btn_search">查詢</button>
 
-                            <button type="button" class="mx-4 flex-shrink-0 bg-teal-700 hover:bg-teal-500 border-teal-700 hover:border-teal-500 text-sm border-4 text-white py-1 px-3 rounded"
-                            >顯示資訊</button>
+                            <button type="button"  class="mx-4 flex-shrink-0 bg-teal-700 hover:bg-teal-500 border-teal-700 hover:border-teal-500 text-sm border-4 text-white py-1 px-3 rounded"
+                            id="btn_privacy_mode">顯示資訊</button>
 
                     </div>
 
@@ -86,42 +86,38 @@
                             </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200" id="tbody">
-                            @foreach($patients as $patient)
-                            <tr class="text-gray-700 items-center">
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    {{$patient->patient_id}}
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    {{$patient->patient_no}}
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    {{$patient->patient_name}}
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    {{$patient->place}}
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    {{$patient->id_number}}
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    {{$patient->patient_bd}}
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    {{$patient->close_date}}
-                                </td>
-{{--                                <td class="px-10 py-2 whitespace-nowrap">--}}
-{{--                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">--}}
-{{--                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />--}}
-{{--                                    </svg>--}}
+{{--                            @foreach($patients as $patient)--}}
+{{--                            <tr class="text-gray-700 items-center">--}}
+{{--                                <td class="px-6 py-4 whitespace-nowrap">--}}
+{{--                                    {{$patient->patient_id}}--}}
 {{--                                </td>--}}
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <button type="button" class="bg-teal-700
-                                     hover:bg-teal-500 border-teal-700 hover:border-teal-500 text-sm
-                                     border-4 text-white py-1 px-3 rounded btn_patient" value="{{$patient->patient_id}}"
-                                    >修改</button>
-                                </td>
-                            </tr>
-                            @endforeach
+{{--                                <td class="px-6 py-4 whitespace-nowrap">--}}
+{{--                                    {{$patient->patient_no}}--}}
+{{--                                </td>--}}
+{{--                                <td class="px-6 py-4 whitespace-nowrap">--}}
+{{--                                    {{$patient->patient_name}}--}}
+{{--                                </td>--}}
+{{--                                <td class="px-6 py-4 whitespace-nowrap">--}}
+{{--                                    {{$patient->place}}--}}
+{{--                                </td>--}}
+{{--                                <td class="px-6 py-4 whitespace-nowrap">--}}
+{{--                                    {{$patient->id_number}}--}}
+{{--                                </td>--}}
+{{--                                <td class="px-6 py-4 whitespace-nowrap">--}}
+{{--                                    {{$patient->patient_bd}}--}}
+{{--                                </td>--}}
+{{--                                <td class="px-6 py-4 whitespace-nowrap">--}}
+{{--                                    {{$patient->close_date}}--}}
+{{--                                </td>--}}
+
+{{--                                <td class="px-6 py-4 whitespace-nowrap">--}}
+{{--                                    <button type="button" class="bg-teal-700--}}
+{{--                                     hover:bg-teal-500 border-teal-700 hover:border-teal-500 text-sm--}}
+{{--                                     border-4 text-white py-1 px-3 rounded btn_patient" value="{{$patient->patient_id}}"--}}
+{{--                                    >修改</button>--}}
+{{--                                </td>--}}
+{{--                            </tr>--}}
+{{--                            @endforeach--}}
                             </tbody>
                         </table>
                     </div>
@@ -136,6 +132,10 @@
     @include('pages.setting.patient.settingPatientModal')
     @include('pages.setting.patient.createPatientModal')
     <script>
+        let privacy_mode = true;
+
+        update_patient_data();
+
         $('#btn_search').click(function () {
             if($('#input_search').val() == ''){
                 window.location.reload();
@@ -155,24 +155,46 @@
                 success:function (res) {
                     $('#tbody tr').remove();
                     if(res.length > 0){
-                        res.forEach(function (row) {
-                            let patient_id = '<td class="px-6 py-4 whitespace-nowrap">'+row['patient_id']+'</td>';
-                            let patient_no = '<td class="px-6 py-4 whitespace-nowrap">'+row['patient_no']+'</td>';
-                            let patient_name = '<td class="px-6 py-4 whitespace-nowrap">'+row['patient_name']+'</td>';
-                            let place = '<td class="px-6 py-4 whitespace-nowrap">'+row['place']+'</td>';
-                            let id_number = '<td class="px-6 py-4 whitespace-nowrap">'+row['id_number']+'</td>';
-                            let patient_bd = '<td class="px-6 py-4 whitespace-nowrap">'+row['patient_bd']+'</td>';
-                            let close_date = '<td class="px-6 py-4 whitespace-nowrap">'+row['close_date']+'</td>';
-                            let setting_btn = `<td class="px-6 py-4 whitespace-nowrap">
+                        if(privacy_mode){
+                            res.forEach(function (row) {
+                                let patient_id = '<td class="px-6 py-4 whitespace-nowrap">'+row['patient_id']+'</td>';
+                                let patient_no = '<td class="px-6 py-4 whitespace-nowrap">'+row['patient_no'].substr(0,3)+"***"+'</td>';
+                                let patient_name = '<td class="px-6 py-4 whitespace-nowrap">'+row['patient_name']+'</td>';
+                                let place = '<td class="px-6 py-4 whitespace-nowrap">'+row['place'].substr(0,3)+"***"+'</td>';
+                                let id_number = '<td class="px-6 py-4 whitespace-nowrap">'+row['id_number'].substr(0,3)+"***"+'</td>';
+                                let patient_bd = '<td class="px-6 py-4 whitespace-nowrap">'+row['patient_bd'].substr(0,2)+"***"+'</td>';
+                                let close_date = '<td class="px-6 py-4 whitespace-nowrap">'+row['close_date']+'</td>';
+                                let setting_btn = `<td class="px-6 py-4 whitespace-nowrap">
                                     <button type="button" class="bg-teal-700
                                      hover:bg-teal-500 border-teal-700 hover:border-teal-500 text-sm
                                      border-4 text-white py-1 px-3 rounded btn_patient" value="`+row['patient_id']+`"
                                     >修改</button>`+
-                                '</td>';
-                            $('#tbody').append(
-                                '<tr>'+patient_id+patient_no+patient_name+place+id_number+patient_bd+close_date+setting_btn+'</tr>'
-                            )
-                        })
+                                    '</td>';
+                                $('#tbody').append(
+                                    '<tr>'+patient_id+patient_no+patient_name+place+id_number+patient_bd+close_date+setting_btn+'</tr>'
+                                )
+                            })
+                        }else {
+                            res.forEach(function (row) {
+                                let patient_id = '<td class="px-6 py-4 whitespace-nowrap">'+row['patient_id']+'</td>';
+                                let patient_no = '<td class="px-6 py-4 whitespace-nowrap">'+row['patient_no']+'</td>';
+                                let patient_name = '<td class="px-6 py-4 whitespace-nowrap">'+row['patient_name']+'</td>';
+                                let place = '<td class="px-6 py-4 whitespace-nowrap">'+row['place']+'</td>';
+                                let id_number = '<td class="px-6 py-4 whitespace-nowrap">'+row['id_number']+'</td>';
+                                let patient_bd = '<td class="px-6 py-4 whitespace-nowrap">'+row['patient_bd']+'</td>';
+                                let close_date = '<td class="px-6 py-4 whitespace-nowrap">'+row['close_date']+'</td>';
+                                let setting_btn = `<td class="px-6 py-4 whitespace-nowrap">
+                                    <button type="button" class="bg-teal-700
+                                     hover:bg-teal-500 border-teal-700 hover:border-teal-500 text-sm
+                                     border-4 text-white py-1 px-3 rounded btn_patient" value="`+row['patient_id']+`"
+                                    >修改</button>`+
+                                    '</td>';
+                                $('#tbody').append(
+                                    '<tr>'+patient_id+patient_no+patient_name+place+id_number+patient_bd+close_date+setting_btn+'</tr>'
+                                )
+                            })
+                        }
+
 
                         $('.btn_patient').click(function () {
                             open_settingPatientModal($(this).attr('value'));
@@ -190,6 +212,16 @@
 
     $('.btn_create_patient').click(function () {
         open_createPatientModal();
+    })
+
+    $('#btn_privacy_mode').click(function () {
+        if(privacy_mode){
+            privacy_mode = false;
+        }else {
+            privacy_mode = true;
+        }
+
+        update_patient_data();
     })
 
     </script>
