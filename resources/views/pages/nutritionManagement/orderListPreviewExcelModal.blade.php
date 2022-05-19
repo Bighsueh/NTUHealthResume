@@ -217,7 +217,7 @@
                         row[0] = ""
                         $('#order_list_preview_list').append(`
                         <div class="grid grid-cols-5 gap-2 ">
-                            <button class="bg-red-400  px-2 my-1 text-white text-left rounded block btn_master_delete_row" >X</button>
+                            <button class="bg-red-400  px-2 my-1 text-white text-left rounded block btn_delete_row" >X</button>
                             <button class="bg-blue-400 px-2 my-1 text-white text-left rounded block btn_insert_next_row" >+</button>
                             <input disabled class="invisible text-left block bg-gray-100 my-1 mx-auto rounded cursor-not-allowed child" value="${row[0]}"/>
                             <input class="text-left block bg-gray-100 my-1 mx-auto rounded child" value="${row[1]}"/>
@@ -229,7 +229,7 @@
                     {
                         $('#order_list_preview_list').append(`
                         <div class="grid grid-cols-5 gap-2 ">
-                            <button class="bg-red-400  px-2 my-1 text-white text-left rounded block btn_master_delete_row" >X</button>
+                            <button class="bg-red-400  px-2 my-1 text-white text-left rounded block btn_delete_row" >X</button>
                             <button class="bg-blue-400  px-2 my-1 text-white text-left rounded block btn_insert_next_row">+</button>
                             <input class="text-left block bg-gray-100 my-1 mx-auto rounded master" value="${row[0]}"/>
                             <input class="text-left block bg-gray-100 my-1 mx-auto rounded master" value="${row[1]}"/>
@@ -242,31 +242,37 @@
                 count +=1;
             })
         }
-
+        set_listener()
+        //子表刪除
+        // $('.btn_child_delete_row').on('click',function () {
+        //     this.parentNode.parentNode.removeChild(this.parentNode);
+        //
+        // })
+    }
+    function set_listener()
+    {
+        let btn_insert = $(".btn_insert_next_row")
+        let btn_delete = $(".btn_delete_row")
+        btn_insert.off('click');
+        btn_delete.off('click');
         //新增藥品項目
-        $(".btn_insert_next_row").click(function () {
-           $(this).parent().after(`<div class="grid grid-cols-5 gap-2 ">
-                            <button class="bg-red-400  px-2 my-1 text-white text-left rounded block btn_master_delete_row" >X</button>
+        btn_insert.on('click',function () {
+            $(this).parent().after(`<div class="grid grid-cols-5 gap-2 ">
+                            <button class="bg-red-400  px-2 my-1 text-white text-left rounded block btn_delete_row" >X</button>
                             <button class="bg-blue-400  px-2 my-1 text-white text-left rounded block btn_insert_next_row">+</button>
-                            <input class="text-left block bg-gray-100 my-1 mx-auto rounded master" value=""/>
+                            <input disabled class="invisible text-left block bg-gray-100 my-1 mx-auto rounded cursor-not-allowed child" value=""/>
                             <input class="text-left block bg-gray-100 my-1 mx-auto rounded master" value=""/>
                             <input class="text-left block bg-gray-100 my-1 mx-auto rounded master" value=""/>
                         </div>`)
+            set_listener()
         })
-
-
-
         //母表刪除連同子表刪除
-        $('.btn_master_delete_row').click(function () {
-            this.parentNode.parentNode.removeChild(this.parentNode);
-
-        })
-        //子表刪除
-        $('.btn_child_delete_row').click(function () {
+        btn_delete.on('click',function () {
             this.parentNode.parentNode.removeChild(this.parentNode);
 
         })
     }
+
     //儲存
     $('#btn_store_import').click(function () {
         let records_data = [];
@@ -277,9 +283,9 @@
             // window.alert(list_tr.eq(0).children().val());
             console.log(list_tr.eq(1).val())
             let push_row = {
-                'meal_order':list_tr.eq(1).val(),
-                'meal_name':list_tr.eq(2).val(),
-                'quantity':list_tr.eq(3).val(),
+                'meal_order':list_tr.eq(2).val(),
+                'meal_name':list_tr.eq(3).val(),
+                'quantity':list_tr.eq(4).val(),
 
             }
             console.log(push_row)
