@@ -95,7 +95,7 @@
             class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
             <div
                 class="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
-                <h5 class="" id="exampleModalLabel"></h5>
+                <h5 class="font-medium" id="orderListPreviewExcelLabel">儲存資訊前請在此畫面確認資料無誤</h5>
                 <button type="button"
                         class="btn-close box-content w-4 h-3  text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
                         data-bs-dismiss="modal" aria-label="Close">
@@ -106,8 +106,9 @@
             </div>
             <div class="px-12">
                 <div class="modal-body relative m-3 w-full ">
-                    <div class="grid grid-cols-4 gap-2 mx-2">
+                    <div class="grid grid-cols-5 gap-2 mx-2">
                         <div class="mx-2 text-left block">X</div>
+                        <div class="mx-2 text-left block">新增</div>
                         <div class="mx-2 text-left block">餐序</div>
                         <div class="mx-2 text-left block">菜色</div>
                         <div class="mx-2 text-left block">份量</div>
@@ -215,8 +216,9 @@
                     {
                         row[0] = ""
                         $('#order_list_preview_list').append(`
-                        <div class="grid grid-cols-4 gap-2 ">
-                            <button class="bg-red-400  mx-3 px-2 my-1 text-white text-left rounded block btn_child_delete_row" >X</button>
+                        <div class="grid grid-cols-5 gap-2 ">
+                            <button class="bg-red-400  px-2 my-1 text-white text-left rounded block btn_master_delete_row" >X</button>
+                            <button class="bg-blue-400 px-2 my-1 text-white text-left rounded block btn_insert_next_row" >+</button>
                             <input disabled class="invisible text-left block bg-gray-100 my-1 mx-auto rounded cursor-not-allowed child" value="${row[0]}"/>
                             <input class="text-left block bg-gray-100 my-1 mx-auto rounded child" value="${row[1]}"/>
                             <input class="text-left block bg-gray-100 my-1 mx-auto rounded child" value="${row[2]}"/>
@@ -226,8 +228,9 @@
                     else
                     {
                         $('#order_list_preview_list').append(`
-                        <div class="grid grid-cols-4 gap-2 ">
-                            <button class="bg-red-400  mx-3  px-2 my-1 text-white text-left rounded block btn_master_delete_row" >X</button>
+                        <div class="grid grid-cols-5 gap-2 ">
+                            <button class="bg-red-400  px-2 my-1 text-white text-left rounded block btn_master_delete_row" >X</button>
+                            <button class="bg-blue-400  px-2 my-1 text-white text-left rounded block btn_insert_next_row">+</button>
                             <input class="text-left block bg-gray-100 my-1 mx-auto rounded master" value="${row[0]}"/>
                             <input class="text-left block bg-gray-100 my-1 mx-auto rounded master" value="${row[1]}"/>
                             <input class="text-left block bg-gray-100 my-1 mx-auto rounded master" value="${row[2]}"/>
@@ -239,6 +242,19 @@
                 count +=1;
             })
         }
+
+        //新增藥品項目
+        $(".btn_insert_next_row").click(function () {
+           $(this).parent().after(`<div class="grid grid-cols-5 gap-2 ">
+                            <button class="bg-red-400  px-2 my-1 text-white text-left rounded block btn_master_delete_row" >X</button>
+                            <button class="bg-blue-400  px-2 my-1 text-white text-left rounded block btn_insert_next_row">+</button>
+                            <input class="text-left block bg-gray-100 my-1 mx-auto rounded master" value=""/>
+                            <input class="text-left block bg-gray-100 my-1 mx-auto rounded master" value=""/>
+                            <input class="text-left block bg-gray-100 my-1 mx-auto rounded master" value=""/>
+                        </div>`)
+        })
+
+
 
         //母表刪除連同子表刪除
         $('.btn_master_delete_row').click(function () {
