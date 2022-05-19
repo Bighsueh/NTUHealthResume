@@ -143,7 +143,49 @@
             // window.alert(data.length);
             data.forEach(function (row) {
                 if(count != 0){
-                    $('#tbody').append(`
+                    if(row[0]==null){
+                        $('#tbody').append(`
+                        <tr class="tr_row">
+                            <td>
+                                <button class="bg-red-400  px-2 my-1 text-white text-left rounded block btn_delete_row" >-</button>
+                            </td>
+                            <td>
+                                <button class="bg-blue-400  px-2 my-1 text-white text-left rounded block btn_creat_row" >+</button>
+                            </td>
+                            <td>
+                                <input class="bg-gray-100 my-1 text-left rounded block hidden" value="${row[0]}"/>
+                            </td>
+                            <td>
+                                <input class="bg-gray-100 my-1 text-left rounded block hidden" value="${row[1]}"/>
+                            </td>
+                            <td>
+                                <input class="bg-gray-100 my-1 text-left rounded block hidden" value="${row[2]}"/>
+                            </td>
+                            <td>
+                                <input class="bg-gray-100 my-1 text-left rounded block hidden" value="${row[3]}"/>
+                            </td>
+                            <td>
+                                <input class="bg-gray-100 my-1 text-left rounded block" value="${row[4]}"/>
+                            </td>
+                            <td>
+                                <input class="bg-gray-100 my-1 text-left rounded block" value="${row[5]}"/>
+                            </td>
+                            <td>
+                                <input class="bg-gray-100 my-1 text-left rounded block" value="${row[6]}"/>
+                            </td>
+                            <td>
+                                <input class="bg-gray-100 my-1 text-left rounded block" value="${row[7]}"/>
+                            </td>
+                            <td>
+                                <input class="bg-gray-100 my-1 text-left rounded block" value="${row[8]}"/>
+                            </td>
+                            <td>
+                                <input class="bg-gray-100 my-1 text-left rounded block" value="${row[9]}"/>
+                            </td>
+                        </td>
+                    `)
+                    }else{
+                        $('#tbody').append(`
                         <tr class="tr_row">
                             <td>
                                 <button class="bg-red-400  px-2 my-1 text-white text-left rounded block btn_delete_row" >-</button>
@@ -183,6 +225,8 @@
                             </td>
                         </td>
                     `)
+                    }
+
                 }
 
                 count +=1;
@@ -215,34 +259,34 @@
                                 <button class="bg-blue-400  px-2 my-1 text-white text-left rounded block btn_creat_row" >+</button>
                             </td>
                             <td>
-                                <input class="bg-gray-100 my-1 text-left rounded block" value="null"/>
+                                <input class="bg-gray-100 my-1 text-left rounded block hidden" value="null"/>
                             </td>
                             <td>
-                                <input class="bg-gray-100 my-1 text-left rounded block" value="null"/>
+                                <input class="bg-gray-100 my-1 text-left rounded block hidden" value="null"/>
                             </td>
                             <td>
-                                <input class="bg-gray-100 my-1 text-left rounded block" value="null"/>
+                                <input class="bg-gray-100 my-1 text-left rounded block hidden" value="null"/>
                             </td>
                             <td>
-                                <input class="bg-gray-100 my-1 text-left rounded block" value="null"/>
+                                <input class="bg-gray-100 my-1 text-left rounded block hidden" value="null"/>
                             </td>
                             <td>
-                                <input class="bg-gray-100 my-1 text-left rounded block" value="null"/>
+                                <input class="bg-gray-100 my-1 text-left rounded block" value=""/>
                             </td>
                             <td>
-                                <input class="bg-gray-100 my-1 text-left rounded block" value="null"/>
+                                <input class="bg-gray-100 my-1 text-left rounded block" value=""/>
                             </td>
                             <td>
-                                <input class="bg-gray-100 my-1 text-left rounded block" value="null"/>
+                                <input class="bg-gray-100 my-1 text-left rounded block" value=""/>
                             </td>
                             <td>
-                                <input class="bg-gray-100 my-1 text-left rounded block" value="null"/>
+                                <input class="bg-gray-100 my-1 text-left rounded block" value=""/>
                             </td>
                             <td>
-                                <input class="bg-gray-100 my-1 text-left rounded block" value="null"/>
+                                <input class="bg-gray-100 my-1 text-left rounded block" value=""/>
                             </td>
                             <td>
-                                <input class="bg-gray-100 my-1 text-left rounded block" value="null"/>
+                                <input class="bg-gray-100 my-1 text-left rounded block" value=""/>
                             </td>
                         </td>
                     `)
