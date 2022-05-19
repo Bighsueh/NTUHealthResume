@@ -217,7 +217,7 @@
                         row[0] = ""
                         $('#order_list_preview_list').append(`
                         <div class="grid grid-cols-5 gap-2 ">
-                            <button class="bg-red-400  px-2 my-1 text-white text-left rounded block btn_delete_row" >X</button>
+                            <button class="bg-red-400  px-2 my-1 text-white text-left rounded block btn_delete_row">X</button>
                             <button class="bg-blue-400 px-2 my-1 text-white text-left rounded block btn_insert_next_row" >+</button>
                             <input disabled class="invisible text-left block bg-gray-100 my-1 mx-auto rounded cursor-not-allowed child" value="${row[0]}"/>
                             <input class="text-left block bg-gray-100 my-1 mx-auto rounded child" value="${row[1]}"/>
@@ -249,6 +249,7 @@
         //
         // })
     }
+    // 新增欄位後需要
     function set_listener()
     {
         let btn_insert = $(".btn_insert_next_row")
