@@ -22,8 +22,12 @@
                         <thead class="bg-gray-50">
                         <tr>
                             <th scope="col"
-                                class="px-1 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                X
+                                class="px-2 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                -
+                            </th>
+                            <th scope="col"
+                                class="px-2 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                +
                             </th>
                             <th scope="col"
                                 class="px-3 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
@@ -142,7 +146,10 @@
                     $('#tbody').append(`
                         <tr class="tr_row">
                             <td>
-                                <button class="bg-red-400  px-2 my-1 text-white text-left rounded block btn_delete_row" >X</button>
+                                <button class="bg-red-400  px-2 my-1 text-white text-left rounded block btn_delete_row" >-</button>
+                            </td>
+                            <td>
+                                <button class="bg-blue-400  px-2 my-1 text-white text-left rounded block btn_delete_row" >+</button>
                             </td>
                             <td>
                                 <input class="bg-gray-100 my-1 text-left rounded block" value="${row[0]}"/>
@@ -196,16 +203,16 @@
             let list_tr = tbody_children.eq(index).children();
             // window.alert(list_tr.eq(0).children().val());
             let push_row = {
-                'date_of_examination':list_tr.eq(1).children().val(),
-                'redate':list_tr.eq(2).children().val(),
-                'pres_hosp':list_tr.eq(3).children().val(),
-                'disp_hosp':list_tr.eq(4).children().val(),
-                'trade_name':list_tr.eq(5).children().val(),
-                'generic_name':list_tr.eq(6).children().val(),
-                'dose':list_tr.eq(7).children().val(),
-                'dose_per_unit':list_tr.eq(8).children().val(),
-                'daily_dose':list_tr.eq(9).children().val(),
-                'freq':list_tr.eq(10).children().val()
+                'date_of_examination':list_tr.eq(2).children().val(),
+                'redate':list_tr.eq(3).children().val(),
+                'pres_hosp':list_tr.eq(4).children().val(),
+                'disp_hosp':list_tr.eq(5).children().val(),
+                'trade_name':list_tr.eq(6).children().val(),
+                'generic_name':list_tr.eq(7).children().val(),
+                'dose':list_tr.eq(8).children().val(),
+                'dose_per_unit':list_tr.eq(9).children().val(),
+                'daily_dose':list_tr.eq(10).children().val(),
+                'freq':list_tr.eq(11).children().val()
             }
             records_data.push(push_row);
         });
