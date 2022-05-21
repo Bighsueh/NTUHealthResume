@@ -39,7 +39,7 @@ class MedicationRecordController extends Controller
 
             $patient_no = DB::table('patients')
                 ->select('patient_no')
-                ->where('patient_id',$patient_id)
+                ->where('patient_id', $patient_id)
                 ->first();
 
 
@@ -415,12 +415,14 @@ class MedicationRecordController extends Controller
 
 
     }
+
     //export MedicationRecords
     public function export_medication_records()
     {
         return Excel::download(new MedicationRecordsExport, 'MedicationRecords.xlsx');
 
     }
+
     //儲存MedicationRecords預覽畫面的資料
     public function import_medication_records(Request $request)
     {
@@ -429,13 +431,13 @@ class MedicationRecordController extends Controller
             $data = $request->import_data;
             $count = 0;
             $patient = DB::table('patients')
-                ->where('patient_id',Session::get('patient_id'))
+                ->where('patient_id', Session::get('patient_id'))
                 ->first();
             $last_record_id = null;
             foreach ($data as $row) {
                 $now_time = Carbon::now();
 
-                if($row['date_of_examination']!='null'){
+                if ($row['date_of_examination'] != 'null') {
                     DB::table('medication_records')
                         ->insert([
                             'date_of_examination' => $row['date_of_examination'],
@@ -447,12 +449,12 @@ class MedicationRecordController extends Controller
                             'updated_at' => $now_time
                         ]);
                     $last_record_id = DB::table('medication_records')
-                        ->where('created_at',$now_time)
-                        ->where('patient_no',$patient->patient_no)
-                        ->where('date_of_examination',$row['date_of_examination'])
-                        ->where('redate',$row['redate'])
-                        ->where('pres_hosp',$row['pres_hosp'])
-                        ->where('disp_hosp',$row['disp_hosp'])
+                        ->where('created_at', $now_time)
+                        ->where('patient_no', $patient->patient_no)
+                        ->where('date_of_examination', $row['date_of_examination'])
+                        ->where('redate', $row['redate'])
+                        ->where('pres_hosp', $row['pres_hosp'])
+                        ->where('disp_hosp', $row['disp_hosp'])
                         ->first()->record_id;
                 }
 //                Log::debug($last_record_id);
@@ -460,11 +462,11 @@ class MedicationRecordController extends Controller
                     ->insert([
                         'record_id' => $last_record_id,
                         'trade_name' => $row['trade_name'],
-                        'generic_name' =>  $row['generic_name'],
-                        'dose' =>  $row['dose'],
-                        'dose_per_unit' =>  $row['dose_per_unit'],
-                        'daily_dose' =>  $row['daily_dose'],
-                        'freq' =>  $row['freq'],
+                        'generic_name' => $row['generic_name'],
+                        'dose' => $row['dose'],
+                        'dose_per_unit' => $row['dose_per_unit'],
+                        'daily_dose' => $row['daily_dose'],
+                        'freq' => $row['freq'],
                         'created_at' => $now_time,
                         'updated_at' => $now_time
                     ]);
@@ -478,6 +480,7 @@ class MedicationRecordController extends Controller
 
 
     }
+
     //讀取import的Excel回傳進預覽畫面
     public function previewExcel(Request $request)
     {
@@ -493,6 +496,7 @@ class MedicationRecordController extends Controller
             return $e;
         }
     }
+
     //下載範例Excel
     public function get_medication_records_excel_example()
     {
