@@ -218,17 +218,26 @@ class MedicationRecordController extends Controller
         }
     }
 
+    //新增任務資料
     function create_task_data(Request $request)
     {
         try {
-            DB::table('patient_tasks')
-                ->insert([
+            //insert task
+            $task_id = DB::table('patient_tasks')
+                ->insertGetId([
                     'patient_id' => $request->patient_id,
                     'status' => "未開始",
                     'created_at' => date('Y/m/d H:i:s'),
                     'updated_at' => date('Y/m/d H:i:s')
                 ]);
-            return true;
+            //insert otherInfo
+            DB::table('other_information')
+                ->insert([
+                    'task_id' => $task_id,
+                ]);
+
+
+            return 'success';
         } catch (Exception $exception) {
             return $exception;
         }
