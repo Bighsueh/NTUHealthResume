@@ -44,18 +44,27 @@ class DietLogExport implements FromView,WithEvents
                     ->orderBy('meal_order.id', 'asc')->get();
                 $counts = [];
                 $c = 1;
+//                dd($data);
+                //計算需要合併的欄位
                 for($i = 0; $i <= count($data)-2 ; $i++)
                 {
+                    //若值一樣則計數
                     if($data[$i]->id == $data[$i+1]-> id)
                     {
                         $c++;
                     }
                     else
                     {
+                        //不一樣則push
                         array_push($counts, $c);
                         $c = 1;
                     }
+                    //最後一筆的時候需要push
+                    if ($i == count($data) - 2) {
+                        array_push($counts, $c);
+                    }
                 }
+//                dd($counts);
                 $now_column = 2;
 //                dd($counts);
                 foreach ($counts as $c)
@@ -66,6 +75,10 @@ class DietLogExport implements FromView,WithEvents
                         $s = 'A' . $now_column . ':A'.($next_column);
                         $event->sheet->getDelegate()->mergeCells($s);
                         $now_column = $next_column+1;
+                    }
+                    else
+                    {
+                        $now_column = $now_column+1;
                     }
 
                 }
