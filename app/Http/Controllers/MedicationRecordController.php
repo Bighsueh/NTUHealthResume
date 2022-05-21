@@ -361,6 +361,7 @@ class MedicationRecordController extends Controller
             }
 
             DB::table('medication_records')->insert([
+                'task_id' => $request->get('task_id'),
                 'date_of_examination' => $request->get('date_of_examination'),
                 'redate' => $request->get('redate'),
                 'pres_hosp' => $request->get('pres_hosp'),

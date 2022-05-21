@@ -195,40 +195,44 @@
             let redate = $("#grid-redate").val();//開方日期
             let pred_hosp = $("#grid-pres-hosp").val();//處方醫院
             let disp_hosp = $("#grid-disp-hosp").val();//調劑醫院
+            let task_id = $("#task_id").text().trim();//task_id
 
             let connect_url = `
-            ${url}?_token=${csrf_token}&date_of_examination=${date_of_examination}&redate=${redate}&pred_hosp=${pred_hosp}&disp_hosp=${disp_hosp}
+                ${url}?_token=${csrf_token}&task_id=${task_id}&date_of_examination=${date_of_examination}&redate=${redate}&pred_hosp=${pred_hosp}&disp_hosp=${disp_hosp}
         `;
 
             //圖片input
             let upload_file = $('#file_create_medication_detail_modal_img_upload')[0].files;
 
-            if (upload_file.length > 0) {
-                //先建立formData
-                let form_data = new FormData()
+            //先建立formData
+            let form_data = new FormData()
 
+            if (upload_file.length > 0) {
                 //將上傳的圖片塞入formData
                 $.each(upload_file, function (index, value) {
                     form_data.append(index, value)
                 });
-
-                //建立連線
-                $.ajax({
-                    url: connect_url,
-                    method: 'post',
-                    data: form_data,
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    success: function (res) {
-                        // console.log('upload success');
-                        console.log(res);
-                    },
-                    error: function (res) {
-                        console.log(res);
-                    }
-                });
             }
+            //建立連線
+            $.ajax({
+                url: connect_url,
+                method: 'post',
+                data: form_data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (res) {
+                    // console.log('upload success');
+                    console.log(res);
+                    if(res==='success'){
+                        //reload page
+                        location.reload();
+                    }
+                },
+                error: function (res) {
+                    console.log(res);
+                }
+            });
         }
     });
 
