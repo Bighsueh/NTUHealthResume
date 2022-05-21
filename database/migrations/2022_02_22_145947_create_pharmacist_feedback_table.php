@@ -16,9 +16,10 @@ class CreatePharmacistFeedbackTable extends Migration
         Schema::create('pharmacist_feedback', function (Blueprint $table) {
             $table->id('pharmacist_feedback_id')->autoIncrement();
             $table->integer('task_id');
-            $table->integer('pharmacist_id')->nullable();
-            $table->text('pharmacist_reply')->nullable();
-            $table->text('pharmacist_question')->nullable();
+            $table->string('feedback_1');
+            $table->string('feedback_2');
+            $table->string('feedback_3');
+            $table->string('feedback_4');
             $table->timestamps();
         });
     }
