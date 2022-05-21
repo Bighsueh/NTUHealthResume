@@ -522,4 +522,93 @@ class MedicationRecordController extends Controller
             return $exception;
         }
     }
+
+    //從陣列搜尋name取得value
+    private function get_array_value_by_key($array, $value)
+    {
+        $key = 'name';
+        $results = array();
+
+        //取得該筆陣列資料
+        if (is_array($array)) {
+            if (isset($array[$key]) && $array[$key] == $value) {
+                $results[] = $array;
+            }
+            foreach ($array as $subarray) {
+                $results = array_merge($results, $this->get_array_value_by_key($subarray, $value));
+            }
+        }
+        return $results;
+    }
+
+    //取得first row的value,並將例外回傳設為空字串
+    private function get_value_from_first_row($form_data,$name){
+        try{
+            return $this->get_array_value_by_key($form_data,$name)[0]['value'];
+        }catch (Exception $exception){
+            return '';
+        }
+    }
+
+    //其他資訊欄位資訊儲存
+    public function store_other_info_data(Request $request)
+    {
+        try {
+            //form data
+            $form_data = $request->get('form_data');
+            //task_id
+            $task_id = $request->get('task_id');
+            //將資料寫入table->other_information
+            DB::table('other_information')
+                ->where('task_id', $task_id)
+                ->update([
+                    'Weight' => $this->get_value_from_first_row($form_data,'Weight'),
+                    'Height' => $this->get_value_from_first_row($form_data,'Height'),
+                    'Diagnosis' => $this->get_value_from_first_row($form_data,'Diagnosis'),
+                    'Surgery' => $this->get_value_from_first_row($form_data,'Surgery'),
+                    'Hb' => $this->get_value_from_first_row($form_data,'Hb'),
+                    'Alb' => $this->get_value_from_first_row($form_data,'Alb'),
+                    'AST' => $this->get_value_from_first_row($form_data,'AST'),
+                    'Cre' => $this->get_value_from_first_row($form_data,'Cre'),
+                    'CCr' => $this->get_value_from_first_row($form_data,'CCr'),
+                    'Suger' => $this->get_value_from_first_row($form_data,'Suger'),
+                    'HbA1C' => $this->get_value_from_first_row($form_data,'HbA1C'),
+                    'TCHO' => $this->get_value_from_first_row($form_data,'TCHO'),
+                    'TG' => $this->get_value_from_first_row($form_data,'TG'),
+                    'LDL' => $this->get_value_from_first_row($form_data,'LDL'),
+                    'UA' => $this->get_value_from_first_row($form_data,'UA'),
+                    'HDL' => $this->get_value_from_first_row($form_data,'HDL'),
+                    'Fall' => $this->get_value_from_first_row($form_data,'Fall'),
+                    'medication_adherence_1' => $this->get_value_from_first_row($form_data,'medication_adherence_1[]'),
+                    'medication_adherence_2' => $this->get_value_from_first_row($form_data,'medication_adherence_2[]'),
+                    'medication_adherence_3' => $this->get_value_from_first_row($form_data,'medication_adherence_3[]'),
+                    'drug_side_effect' => $this->get_value_from_first_row($form_data,'drug_side_effect[]'),
+                    'drug_side_effect_text' => $this->get_value_from_first_row($form_data,'drug_side_effect_text'),
+                    'other_information_modal_textarea' => $this->get_value_from_first_row($form_data,'other_information_modal_textarea'),
+                    'updated_at' => Carbon::now(),
+                ]);
+
+            return 'success';
+        } catch (Exception $exception) {
+            return $exception;
+        }
+    }
+
+    //取得其他資訊資料(用task_id查詢)
+    public function get_other_info_data(Request $request)
+    {
+        try{
+            //task_id
+            $task_id = $request->task_id;
+
+            //其他資訊
+            $other_info = DB::table('other_information')
+                ->where('task_id',$task_id)
+                ->first();
+
+            return $other_info;
+        }catch (Exception $exception){
+            return $exception;
+        }
+    }
 }
