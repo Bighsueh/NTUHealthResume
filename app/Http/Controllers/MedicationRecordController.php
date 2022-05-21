@@ -108,49 +108,41 @@ class MedicationRecordController extends Controller
 
     }
 
+    //取得藥師回饋單內容
+    public function get_pharmacist_feedback_data(Request $request)
+    {
+        try{
+            //task_id
+            $task_id = $request->get('task_id');
+
+            //依task_id查詢指定的pharmacist_feedback資料
+            $feedback_data = DB::table('pharmacist_feedback')
+                ->where('task_id',$task_id)
+                ->first();
+
+            return $feedback_data;
+        }catch (Exception $exception){
+            return $exception;
+        }
+    }
+
     //儲存藥師回饋單內容
     public function store_pharmacist_feedback_data(Request $request)
     {
         try {
-            //要回覆病患的內容
-            $pharmacist_reply = $request->get('pharmacist_reply');
-            //向醫師提問(選填)
-            $ask_to_doctor = $request->get('ask_to_doctor');
             //task_id
             $task_id = $request->get('task_id');
-            //user_name
-            $user_name = $request->session()->get('user_name');
 
-            //先確認是否存在藥師回覆紀錄
-            $reply_check =
-                DB::table('pharmacist_feedback')
-                    ->where('task_id', $task_id)
-                    ->first();
-
-            //若存在藥師回覆紀錄
-            if ($reply_check) {
-                DB::table('pharmacist_feedback')
-                    ->where('task_id', $task_id)
-                    ->update([
-                        'task_id' => $task_id,
-                        'pharmacist_id' => $user_name,
-                        'pharmacist_reply' => $pharmacist_reply,
-                        'pharmacist_question' => $ask_to_doctor,
-                        'updated_at' => Carbon::now(),
-                    ]);
-            }
-
-            //若不存在藥師回覆紀錄
-            if (!$reply_check) {
-                DB::table('pharmacist_feedback')
-                    ->insert([
-                        'task_id' => $task_id,
-                        'pharmacist_id' => $user_name,
-                        'pharmacist_reply' => $pharmacist_reply,
-                        'pharmacist_question' => $ask_to_doctor,
-                        'created_at' => Carbon::now(),
-                    ]);
-            }
+            //依task_id查詢指定的pharmacist_feedback,然後寫入欲修改的資料
+            DB::table('pharmacist_feedback')
+                ->where('task_id', $task_id)
+                ->update([
+                    'feedback_1' => $request->get('feedback_1'),
+                    'feedback_2' => $request->get('feedback_2'),
+                    'feedback_3' => $request->get('feedback_3'),
+                    'feedback_4' => $request->get('feedback_4'),
+                    'updated_at' => Carbon::now(),
+                ]);
 
             return 'success';
         } catch (\Exception $exception) {
@@ -234,6 +226,14 @@ class MedicationRecordController extends Controller
             DB::table('other_information')
                 ->insert([
                     'task_id' => $task_id,
+                    'created_at' => Carbon::now(),
+                ]);
+
+            //insert pharmacist
+            DB::table('pharmacist_feedback')
+                ->insert([
+                    'task_id' => $task_id,
+                    'created_at' => Carbon::now(),
                 ]);
 
 
@@ -272,7 +272,7 @@ class MedicationRecordController extends Controller
 
             //remove from other_information
             DB::table('other_information')
-                ->where('task_id',$task_id)
+                ->where('task_id', $task_id)
                 ->delete();
 
 
@@ -566,10 +566,11 @@ class MedicationRecordController extends Controller
     }
 
     //取得first row的value,並將例外回傳設為空字串
-    private function get_value_from_first_row($form_data,$name){
-        try{
-            return $this->get_array_value_by_key($form_data,$name)[0]['value'];
-        }catch (Exception $exception){
+    private function get_value_from_first_row($form_data, $name)
+    {
+        try {
+            return $this->get_array_value_by_key($form_data, $name)[0]['value'];
+        } catch (Exception $exception) {
             return '';
         }
     }
@@ -586,29 +587,29 @@ class MedicationRecordController extends Controller
             DB::table('other_information')
                 ->where('task_id', $task_id)
                 ->update([
-                    'Weight' => $this->get_value_from_first_row($form_data,'Weight'),
-                    'Height' => $this->get_value_from_first_row($form_data,'Height'),
-                    'Diagnosis' => $this->get_value_from_first_row($form_data,'Diagnosis'),
-                    'Surgery' => $this->get_value_from_first_row($form_data,'Surgery'),
-                    'Hb' => $this->get_value_from_first_row($form_data,'Hb'),
-                    'Alb' => $this->get_value_from_first_row($form_data,'Alb'),
-                    'AST' => $this->get_value_from_first_row($form_data,'AST'),
-                    'Cre' => $this->get_value_from_first_row($form_data,'Cre'),
-                    'CCr' => $this->get_value_from_first_row($form_data,'CCr'),
-                    'Suger' => $this->get_value_from_first_row($form_data,'Suger'),
-                    'HbA1C' => $this->get_value_from_first_row($form_data,'HbA1C'),
-                    'TCHO' => $this->get_value_from_first_row($form_data,'TCHO'),
-                    'TG' => $this->get_value_from_first_row($form_data,'TG'),
-                    'LDL' => $this->get_value_from_first_row($form_data,'LDL'),
-                    'UA' => $this->get_value_from_first_row($form_data,'UA'),
-                    'HDL' => $this->get_value_from_first_row($form_data,'HDL'),
-                    'Fall' => $this->get_value_from_first_row($form_data,'Fall'),
-                    'medication_adherence_1' => $this->get_value_from_first_row($form_data,'medication_adherence_1[]'),
-                    'medication_adherence_2' => $this->get_value_from_first_row($form_data,'medication_adherence_2[]'),
-                    'medication_adherence_3' => $this->get_value_from_first_row($form_data,'medication_adherence_3[]'),
-                    'drug_side_effect' => $this->get_value_from_first_row($form_data,'drug_side_effect[]'),
-                    'drug_side_effect_text' => $this->get_value_from_first_row($form_data,'drug_side_effect_text'),
-                    'other_information_modal_textarea' => $this->get_value_from_first_row($form_data,'other_information_modal_textarea'),
+                    'Weight' => $this->get_value_from_first_row($form_data, 'Weight'),
+                    'Height' => $this->get_value_from_first_row($form_data, 'Height'),
+                    'Diagnosis' => $this->get_value_from_first_row($form_data, 'Diagnosis'),
+                    'Surgery' => $this->get_value_from_first_row($form_data, 'Surgery'),
+                    'Hb' => $this->get_value_from_first_row($form_data, 'Hb'),
+                    'Alb' => $this->get_value_from_first_row($form_data, 'Alb'),
+                    'AST' => $this->get_value_from_first_row($form_data, 'AST'),
+                    'Cre' => $this->get_value_from_first_row($form_data, 'Cre'),
+                    'CCr' => $this->get_value_from_first_row($form_data, 'CCr'),
+                    'Suger' => $this->get_value_from_first_row($form_data, 'Suger'),
+                    'HbA1C' => $this->get_value_from_first_row($form_data, 'HbA1C'),
+                    'TCHO' => $this->get_value_from_first_row($form_data, 'TCHO'),
+                    'TG' => $this->get_value_from_first_row($form_data, 'TG'),
+                    'LDL' => $this->get_value_from_first_row($form_data, 'LDL'),
+                    'UA' => $this->get_value_from_first_row($form_data, 'UA'),
+                    'HDL' => $this->get_value_from_first_row($form_data, 'HDL'),
+                    'Fall' => $this->get_value_from_first_row($form_data, 'Fall'),
+                    'medication_adherence_1' => $this->get_value_from_first_row($form_data, 'medication_adherence_1[]'),
+                    'medication_adherence_2' => $this->get_value_from_first_row($form_data, 'medication_adherence_2[]'),
+                    'medication_adherence_3' => $this->get_value_from_first_row($form_data, 'medication_adherence_3[]'),
+                    'drug_side_effect' => $this->get_value_from_first_row($form_data, 'drug_side_effect[]'),
+                    'drug_side_effect_text' => $this->get_value_from_first_row($form_data, 'drug_side_effect_text'),
+                    'other_information_modal_textarea' => $this->get_value_from_first_row($form_data, 'other_information_modal_textarea'),
                     'updated_at' => Carbon::now(),
                 ]);
 
@@ -621,17 +622,17 @@ class MedicationRecordController extends Controller
     //取得其他資訊資料(用task_id查詢)
     public function get_other_info_data(Request $request)
     {
-        try{
+        try {
             //task_id
             $task_id = $request->task_id;
 
             //其他資訊
             $other_info = DB::table('other_information')
-                ->where('task_id',$task_id)
+                ->where('task_id', $task_id)
                 ->first();
 
             return $other_info;
-        }catch (Exception $exception){
+        } catch (Exception $exception) {
             return $exception;
         }
     }
