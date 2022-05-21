@@ -79,11 +79,6 @@
                                 > </a>
                         </div>
                         <div id="medeicationRecordImageList">
-                            <img class="object-fill w-fit rounded" src="{{asset('pills.jpg')}}">
-                            <img class="object-fill w-fit rounded" src="{{asset('pills.jpg')}}">
-                            <img class="object-fill w-fit rounded" src="{{asset('pills.jpg')}}">
-                            <img class="object-fill w-fit rounded" src="{{asset('pills.jpg')}}">
-                            <img class="object-fill w-fit rounded" src="{{asset('pills.jpg')}}">
                         </div>
                         <!---->
                         <!---->

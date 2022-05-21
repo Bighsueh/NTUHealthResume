@@ -128,7 +128,7 @@
                 <div class="flex justify-center">
                     <div class="mb-3 w-full">
                         <b class="mx-2">常用回覆</b>
-                        <a id="btn_app_common_reply" class="underline">新增常用回復</a>
+                        <a id="btn_app_common_reply" class="underline">新增常用回覆</a>
                         <div id="common_reply_container" class="grid grid-cols-2">
 
                         </div>
@@ -159,34 +159,33 @@
 </div>
 <script>
     $(function () {
-        //btn_pharmacist_feedback
+        //開啟Modal
         $('#btn_pharmacist_feedback').click(function () {
             set_common_reply_data();
+            set_pharmacist_modal_data();
         })
 
         //新增常用回覆
         $('#btn_app_common_reply').click(function () {
-            // add_common_reply_row();
+            add_common_reply_row();
         })
 
-
-        //儲存藥師回覆給病患的內容
+        //儲存藥師回饋Modal資訊
         $('#btn-pharmacist-feedback-save').click(function () {
             //task_id
             let task_id = $("#task_id").text().trim();
 
             //儲存常用回覆
             store_common_reply();
-            //儲存醫師意見
-            store_doctor_comment(doctor_comment, task_id);
 
-
-            console.log('btn-pharmacist-feedback-save 未完成CRUD')
-            return;
-            //要回覆病患的內容
-            let pharmacist_reply = $('#pharmacist_feedback_modal_pharmacist_reply').val();
-            //向醫師提問(選填)
-            let ask_to_doctor = $('#pharmacist_feedback_modal_ask_to_doctor').val();
+            //需要時服藥建議
+            let feedback_1 = $("#other_information_modal_textarea_1").val();
+            //需固定服用藥物建議
+            let feedback_2 = $("#other_information_modal_textarea_2").val();
+            //交互作用或副作用指標
+            let feedback_3 = $("#other_information_modal_textarea_3").val();
+            //個案特殊問題回饋
+            let feedback_4 = $("#other_information_modal_textarea_4").val();
 
             let url = "{{route('store_medication_management_pharmacist_feedback_data')}}";
 
@@ -195,15 +194,18 @@
                 method: "post",
                 data: {
                     "_token": "{{csrf_token()}}",
-                    "task_id": $('#task_id').text(),
-                    "pharmacist_reply": pharmacist_reply,
-                    "ask_to_doctor": ask_to_doctor
+                    "task_id": task_id,
+                    'feedback_1': feedback_1,
+                    'feedback_2': feedback_2,
+                    'feedback_3': feedback_3,
+                    'feedback_4': feedback_4,
                 },
                 success: function (res) {
+                    console.log(res);
                     if (res === 'success') {
                         Swal.fire({
                             icon: 'success',
-                            title: '藥師回覆儲存成功',
+                            title: '儲存成功',
                             confirmButtonColor: '#8CD4F5'
                         })
                     }
@@ -224,6 +226,35 @@
 
 
         })
+
+        //取得藥師回饋Modal 資訊
+        function set_pharmacist_modal_data() {
+            let url = "{{route('get_medication_management_pharmacist_feedback_data')}}";
+            let token = "{{csrf_token()}}";
+            let task_id = $("#task_id").text().trim();
+
+            $.ajax({
+                url: url,
+                method: 'post',
+                data: {
+                    "_token": token,
+                    "task_id": task_id,
+                },
+                success: function (res) {
+                    //需要時服藥建議
+                    $("#other_information_modal_textarea_1").val(res['feedback_1']);
+                    //需固定服用藥物建議
+                    $("#other_information_modal_textarea_2").val(res['feedback_2']);
+                    //交互作用或副作用指標
+                    $("#other_information_modal_textarea_3").val(res['feedback_3']);
+                    //個案特殊問題回饋
+                    $("#other_information_modal_textarea_4").val(res['feedback_4']);
+                },
+                error: function (res) {
+                    console.log(res);
+                }
+            })
+        }
 
         //新增常用回覆
         function add_common_reply_row(content = '') {
@@ -286,6 +317,7 @@
             //提取container中的value，塞進result裡面
             $.each(common_reply_container, function (index, value) {
                 let common_reply = common_reply_container.eq(index).find('textarea').val();
+                if (common_reply.length === 0) common_reply = '無資料';
                 result.push(common_reply);
             })
 
@@ -316,10 +348,18 @@
             btn_common_reply_upload.off('click');
             btn_common_reply_delete.off('click');
 
-            //點選常用回復中的上傳圖示時將內容同步到醫師意見textarea
+            //點選常用回復中的上傳圖示時將內容複製到剪貼簿
             btn_common_reply_upload.on('click', function () {
-                let common_reply = $(this).parent().parent().find('textarea').val();
-                $("#other_information_modal_doctor_comment").val(common_reply);
+                let common_reply = $(this).parent().parent().find('textarea');
+                common_reply.select();
+                document.execCommand('copy');
+
+                //sweet alert
+                Swal.fire({
+                    icon: 'success',
+                    title: '已將內容複製到剪貼簿',
+                    confirmButtonColor: '#8CD4F5'
+                })
             })
 
             //點選常用回復中的上傳圖示時將將該常用回覆刪除
