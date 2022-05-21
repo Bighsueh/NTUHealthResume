@@ -263,9 +263,19 @@ class MedicationRecordController extends Controller
     function delete_task_data(Request $request)
     {
         try {
+            //task_id
+            $task_id = $request->task_id;
+            //remove from patient_tasks
             DB::table('patient_tasks')
                 ->where('task_id', $request->task_id)
                 ->delete();
+
+            //remove from other_information
+            DB::table('other_information')
+                ->where('task_id',$task_id)
+                ->delete();
+
+
             return true;
         } catch (\Exception $exception) {
             return $exception;
