@@ -85,7 +85,7 @@
                     "id":$(this).attr("value"),
                 },
                 success:function(res){
-                    console.log(res);
+                    // console.log(res);
                     if(res[0]) {
                         $("#dishes_dietLog_id").val(res[2])
                         $("#carbohydrate").val(res[1]["carbohydrate"]);
@@ -130,7 +130,7 @@
                 },
                 error: function (res) {
                     //錯誤訊息
-                    console.log(res);
+                    // console.log(res);
                     Swal.fire({
                         icon: 'error',
                         title: '儲存失敗',

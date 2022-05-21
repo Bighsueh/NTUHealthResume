@@ -403,7 +403,7 @@
                 success:function (res) {
                     $('#tbody tr').remove();
                     if(res.length > 0){
-                        console.log(res);
+                        // console.log(res);
                         var del_url = '{{route('delete_orderList')}}'
                         var check_url = '{{route('get_dietLog')}}'
                         res.forEach(function (row) {
@@ -448,7 +448,7 @@
                                     "id":$(this).attr("value"),
                                 },
                                 success:function(res){
-                                    console.log(res[0]);
+                                    // console.log(res[0]);
                                     $("#select").val(res[0]);
                                     $("#p_orderList_id").val(res[1])
                                 }

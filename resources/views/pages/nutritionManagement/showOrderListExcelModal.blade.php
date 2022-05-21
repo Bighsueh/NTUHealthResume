@@ -71,9 +71,9 @@
             let url = "{{route('post_diet_log_excel_upload')}}";
             let csrf_token = "{{csrf_token()}}";
             let form_data = new FormData()
-            console.log(upload_file[0]);
+            // console.log(upload_file[0]);
             form_data.append('upload_file', upload_file[0])
-            console.log(form_data);
+            // console.log(form_data);
             $.ajax({
                 url: url + "?_token=" + csrf_token,
                 method: 'post',

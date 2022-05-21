@@ -173,9 +173,9 @@
             let url = "{{route('orderList_preview_excel')}}";
             let csrf_token = "{{csrf_token()}}";
             let form_data = new FormData()
-            console.log(upload_file[0]);
+            // console.log(upload_file[0]);
             form_data.append('upload_file', upload_file[0])
-            console.log(form_data);
+            // console.log(form_data);
             $.ajax({
                 url: url + "?_token=" + csrf_token,
                 method: 'post',
@@ -278,18 +278,18 @@
     $('#btn_store_import').click(function () {
         let records_data = [];
         let order_list_preview_list_children = $('#order_list_preview_list').children();
-        console.log(order_list_preview_list_children)
+        // console.log(order_list_preview_list_children)
         $.each(order_list_preview_list_children, function (index, value){
             let list_tr = order_list_preview_list_children.eq(index).children();
             // window.alert(list_tr.eq(0).children().val());
-            console.log(list_tr.eq(1).val())
+            // console.log(list_tr.eq(1).val())
             let push_row = {
                 'meal_order':list_tr.eq(2).val(),
                 'meal_name':list_tr.eq(3).val(),
                 'quantity':list_tr.eq(4).val(),
 
             }
-            console.log(push_row)
+            // console.log(push_row)
             records_data.push(push_row);
         });
 

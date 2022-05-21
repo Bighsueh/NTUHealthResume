@@ -115,7 +115,7 @@
                     let image_urls = res[2];
                     //圖片容器
                     let image_list = $('#medeicationRecordDetailImageList');
-                    console.log(image_urls)
+                    // console.log(image_urls)
                     //取得資料以後先將藥歷資訊塞入資料
                     $('#created_date').val(order_list['created_at']);
                     $('#updated_date').val(order_list['updated_at']);
@@ -127,7 +127,7 @@
                     order_list_detail_list.children().remove();
                     //再插入資料
                     $.each(diet_log, function (index, value) {
-                        console.log(value);
+                        // console.log(value);
                         (value['remark'] == null)? value['remark'] = "" :value['remark'];
                         order_list_detail_list.append(`
                         <div class=" gap-2 grid grid-cols-4">
@@ -153,7 +153,7 @@
 
                 },
                 error: function (res) {
-                    console.log(res);
+                    // console.log(res);
                     Swal.fire({
                         icon: 'error',
                         title: '連線錯誤，無法取得資料',
@@ -217,7 +217,7 @@
                 'updated_at': $('#updated_date').val(),
             }
 
-            console.log(task_id)
+            // console.log(task_id)
             //建立連線，將更改結果傳到後端
             $.ajax({
                 url: "{{route('store_orderList_detail')}}",
@@ -260,7 +260,7 @@
                     }
                 },
                 error: function (res) {
-                    console.log(res);
+                    // console.log(res);
                 },
             })
 

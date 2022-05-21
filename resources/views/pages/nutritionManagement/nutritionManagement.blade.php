@@ -213,9 +213,9 @@
             success:function (res) {
                 $('#tbody tr').remove();
                 if(res.length > 0){
-                    console.log(res);
+                    // console.log(res);
                     var url = "{{route('get_orderList')}}";
-                    console.log(url);
+                    // console.log(url);
                     res.forEach(function (row) {
                         let patient_id = '<td class="px-6 py-4 whitespace-nowrap">' + row['patient_id'] + '</td>';
                         let patient_name = '<td class="px-6 py-4 whitespace-nowrap">' + row['patient_name'] + '</td>';

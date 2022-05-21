@@ -60,7 +60,7 @@
                 "id":$(this).attr("value"),
             },
             success:function(res){
-                console.log(res[0]);
+                // console.log(res[0]);
                 $("#select").val(res[0]);
                 $("#p_orderList_id").val(res[1])
             }

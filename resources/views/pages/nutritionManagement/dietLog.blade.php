@@ -241,9 +241,9 @@
             let url = "{{route('post_diet_log_excel_upload')}}";
             let csrf_token = "{{csrf_token()}}";
             let form_data = new FormData()
-            console.log(upload_file[0]);
+            // console.log(upload_file[0]);
             form_data.append('upload_file', upload_file[0])
-            console.log(form_data);
+            // console.log(form_data);
             $.ajax({
                 url: url + "?_token=" + csrf_token,
                 method: 'post',
@@ -316,7 +316,7 @@
                 success:function (res) {
                     $('#tbody tr').remove();
                     if(res.length > 0){
-                        console.log(res);
+                        // console.log(res);
                         let delete_url = "{{route('delete_dietLog')}}";
                         res.forEach(function (row) {
                             let id = '<td class="px-6 py-4 whitespace-nowrap">' + row['id'] + '</td>';
@@ -353,7 +353,7 @@
                                     "id":$(this).attr("value"),
                                 },
                                 success:function(res){
-                                    console.log(res[1]);
+                                    // console.log(res[1]);
                                     $("#select").val(res[0]);
                                     $("#patch_size").val(res[1]);
                                     $("#patch_id").val(res[2]);

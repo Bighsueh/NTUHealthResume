@@ -56,7 +56,7 @@
                     "id":$(this).attr("value"),
                 },
                 success:function(res){
-                    console.log(res[1]);
+                    // console.log(res[1]);
                     $("#patch_size").val(res[0]);
                     $("#patch_id").val(res[1]);
                     $("#patch_meal_name").val(res[2])
