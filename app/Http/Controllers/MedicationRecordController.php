@@ -101,6 +101,7 @@ class MedicationRecordController extends Controller
                 'pharmacist_feedback' => $pharmacist_feedback,
                 'doctor_feedback' => $doctor_feedback,
             ];
+
             return view('pages.medicationManagement.taskDetail', $result);
         } catch (\Exception $exception) {
             return $exception;
@@ -248,11 +249,14 @@ class MedicationRecordController extends Controller
     function get_task_data(Request $request)
     {
         try {
+
             $data = DB::table('patient_tasks')
                 ->orWhere('created_at', 'like', '%' . $request->search_time . '%')
                 ->orWhere('updated_at', 'like', '%' . $request->search_time . '%')
                 ->orWhere('finish_date', 'like', '%' . $request->search_time . '%')
+                ->where('patient_id',Session::get('patient_id'))
                 ->get();
+
             return $data;
         } catch (Exception $exception) {
             return $exception;

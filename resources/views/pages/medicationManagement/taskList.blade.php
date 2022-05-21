@@ -144,7 +144,7 @@
         </div>
     </div>
     <script>
-
+        update_data();
 
         let is_delete_mode = false;
         let patient_id = "{{$patient_id}}";
@@ -180,37 +180,36 @@
 
 
         $('.btn_delete_task').click(function () {
-            if (is_delete_mode == true) {
-                is_delete_mode = false
-            } else {
-                is_delete_mode = true;
+            if(is_delete_mode==true){
+                is_delete_mode=false
+            }else{
+                is_delete_mode=true;
             }
 
             update_data();
         })
-
         function update_data() {
             $.ajax({
-                url: "{{route('get_medication_management_task')}}",
-                method: 'GET',
-                data: {
-                    search_time: $('#search_parameter').val()
+                url:"{{route('get_medication_management_task')}}",
+                method:'GET',
+                data:{
+                    search_time:$('#search_parameter').val()
                 },
-                success: function (res) {
+                success:function (res) {
                     $('#tbody tr').remove();
-                    if (res.length > 0) {
+                    if(res.length > 0){
                         let thread = 0;
                         res.forEach(function (row) {
-                            let task_id = '<td class="px-6 py-4 whitespace-nowrap">' + (thread += 1) + '</td>';
-                            let task_status = '<td class="px-6 py-4 whitespace-nowrap">' + row['status'] + '</td>';
-                            let task_created_at = '<td class="px-6 py-4 whitespace-nowrap">' + row['created_at'] + '</td>';
-                            let task_finish_date = '<td class="px-6 py-4 whitespace-nowrap">' + row['finish_date'] + '</td>';
-                            let task_updated_at = '<td class="px-6 py-4 whitespace-nowrap">' + row['updated_at'] + '</td>';
+                            let task_id = '<td class="px-6 py-4 whitespace-nowrap">'+ (thread +=1) + '</td>';
+                            let task_status = '<td class="px-6 py-4 whitespace-nowrap">'+row['status']+'</td>';
+                            let task_created_at =  '<td class="px-6 py-4 whitespace-nowrap">'+row['created_at']+'</td>';
+                            let task_finish_date =  '<td class="px-6 py-4 whitespace-nowrap">'+row['finish_date']+'</td>';
+                            let task_updated_at =  '<td class="px-6 py-4 whitespace-nowrap">'+row['updated_at']+'</td>';
                             let setting_btn = '<td class="px-6 py-4 whitespace-nowrap">';
-                            if (is_delete_mode == true) {
-                                setting_btn += `<button  class="bg-transparent border border-red-700 text-red-700 hover:bg-red-700 hover:text-white text-center py-2 px-4 rounded btn_delete" value="` + row['task_id'] + `"> 刪除 </button>`;
+                            if (is_delete_mode==true){
+                                setting_btn += `<button  class="bg-transparent border border-red-700 text-red-700 hover:bg-red-700 hover:text-white text-center py-2 px-4 rounded btn_delete" value="`+row['task_id']+`"> 刪除 </button>`;
 
-                            } else {
+                            }else {
                                 setting_btn += ` <a href="{{route('get_medication_management_task_detail_page',['task_id'=>$row->task_id])}}"
                                            class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded ">
                                             查看
@@ -218,7 +217,7 @@
                             }
                             setting_btn += '</td>';
                             $('#tbody').append(
-                                '<tr>' + task_id + task_status + task_created_at + task_finish_date + task_updated_at + setting_btn + '</tr>'
+                                '<tr>'+task_id+task_status+task_created_at+task_finish_date+task_updated_at+ setting_btn +'</tr>'
                             )
                         })
 
@@ -240,12 +239,12 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: "{{route('delete_medication_management_task')}}",
-                        method: 'GET',
-                        data: {
-                            task_id: task_id
+                        url:"{{route('delete_medication_management_task')}}",
+                        method:'GET',
+                        data:{
+                            task_id:task_id
                         },
-                        success: function (res) {
+                        success:function (res) {
                             Swal.fire('刪除成功', '', 'success');
                             update_data();
                         }
@@ -259,6 +258,7 @@
         $('#btn_search').click(function () {
             update_data();
         })
+
 
 
     </script>
