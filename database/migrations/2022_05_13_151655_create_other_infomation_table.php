@@ -50,6 +50,6 @@ class CreateOtherInfomationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('other_infomation');
+        Schema::dropIfExists('other_information');
     }
 }
