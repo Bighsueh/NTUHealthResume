@@ -231,21 +231,22 @@
                         task_delete($(this).attr("value"));
                     })
                     $('.btn_get_detail_page').click(function () {
+                            let task_id = $(this).attr("value");
+                            // window.alert(task_id);
+                        $.ajax({
+                            url:"{{route('get_push_task_id')}}",
+                            method:'get',
+                            data:{
+                                'task_id' :task_id
+                            },
+                            success:function (res) {
+                                // console.log(res)
+                                window.location.href=`{{route('get_medication_management_task_detail_page')}}`;
 
+                            },error:function (res){
 
-                        window.location.href=`{{route('get_medication_management_task_detail_page',['task_id'=>` + $(this).attr("value") + `])}}`;
-                        {{--$.ajax({--}}
-                        {{--    url:"{{route('get_medication_management_task_detail_page')}}",--}}
-                        {{--    method:'get',--}}
-                        {{--    data:{--}}
-                        {{--        'task_id' :$(this).attr("value")--}}
-                        {{--    },--}}
-                        {{--    success:function (res) {--}}
-
-                        {{--    },error:function (res){--}}
-
-                        {{--    }--}}
-                        {{--})--}}
+                            }
+                        })
                         update_data();
                     })
                 }

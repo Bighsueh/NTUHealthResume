@@ -21,14 +21,14 @@ class MedicationRecordsExport implements FromView
             ->where('patient_id',Session::get('patient_id'))
             ->first();
 
-//        Log::debug($patient_no->patient_no);
+        Log::debug($patient_no->patient_no);
        $data = DB::table('medication_records')
            ->where('medication_records.patient_no', $patient_no->patient_no)
            ->select('medication_records.record_id','medication_records.patient_no','medication_records.date_of_examination','medication_records.redate','medication_records.pres_hosp','medication_records.disp_hosp','medication_record_detail.trade_name','medication_record_detail.generic_name','medication_record_detail.dose','medication_record_detail.dose_per_unit','medication_record_detail.daily_dose','medication_record_detail.freq')
            ->LeftJoin('medication_record_detail','medication_records.record_id','=','medication_record_detail.record_id')
            ->get();
 
-        Log::debug($data);
+//        Log::debug(Session::get('task_id'));
         return view('exports.medicationRecordsExport',[
             'data' => $data
         ]);

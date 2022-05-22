@@ -58,17 +58,32 @@ class MedicationRecordController extends Controller
             return $exception;
         }
     }
-
-    //開啟用藥管理系統-藥歷列表頁面
-    public function get_task_detail_page(Request $request)
+    //帶task_id
+    public function get_push_task_id(Request  $request)
     {
-        try {
+        try{
             //task_id
             $task_id = $request->get('task_id');
 
             Session::forget('task_id');
             Session::put('task_id', $task_id);
+//            Log::debug(Session::get('task_id'));
 
+            return $task_id;
+        } catch (\Exception $exception) {
+            return $exception;
+        }
+
+    }
+
+    //開啟用藥管理系統-藥歷列表頁面
+    public function get_task_detail_page(Request $request)
+    {
+        try {
+
+            $task_id = $request->session()->get('task_id');
+
+            Log::debug($task_id);
             //藥歷列表
             $medication_records =
                 DB::table('medication_records')

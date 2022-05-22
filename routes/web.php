@@ -36,6 +36,9 @@ Route::group(['prefix' => 'medication_management', 'middleware' => ['login']], f
     //個別病患任務列表頁面
     Route::get('/get_task_list_page', [MedicationRecordController::class, 'get_task_list_page'])
         ->name('get_medication_management_task_list_page');
+    //push_task_id
+    Route::get('/get_push_task_id', [MedicationRecordController::class, 'get_push_task_id'])
+        ->name('get_push_task_id');
     //個別病患任務詳細資訊頁面
     Route::get('/get_task_detail_page', [MedicationRecordController::class, 'get_task_detail_page'])
         ->name('get_medication_management_task_detail_page');
