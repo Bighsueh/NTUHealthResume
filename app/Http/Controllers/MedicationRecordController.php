@@ -250,12 +250,23 @@ class MedicationRecordController extends Controller
     {
         try {
 
-            $data = DB::table('patient_tasks')
-                ->orWhere('created_at', 'like', '%' . $request->search_time . '%')
-                ->orWhere('updated_at', 'like', '%' . $request->search_time . '%')
-                ->orWhere('finish_date', 'like', '%' . $request->search_time . '%')
-                ->where('patient_id',Session::get('patient_id'))
-                ->get();
+//            $data = DB::table('patient_tasks')
+//                ->where('patient_id',Session::get('patient_id'))
+//                ->orWhere('created_at', 'like', '%' . $request->search_time . '%')
+//                ->orWhere('updated_at', 'like', '%' . $request->search_time . '%')
+//                ->orWhere('finish_date', 'like', '%' . $request->search_time . '%')
+//                ->get();
+            $search = $request->search_time;
+            $patient_id = Session::get('patient_id');
+
+            $data = DB::table('patient_tasks')->where('patient_id',$patient_id)
+                ->where(function($data) use ($search,$patient_id){
+                    $data
+                        ->orWhere('created_at', 'like', '%' . $search . '%')
+                        ->orWhere('updated_at', 'like', '%' . $search . '%')
+                        ->orWhere('finish_date', 'like', '%' . $search . '%')
+                        ;
+                })->get();
 
             return $data;
         } catch (Exception $exception) {

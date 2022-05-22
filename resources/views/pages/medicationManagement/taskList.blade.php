@@ -164,12 +164,10 @@
                         data: {
                             patient_id: patient_id
                         }, success: function (res) {
-                            if (res === 'success') {
-                                Swal.fire('新增成功', '', 'success');
-                                update_data()
-                            } else {
-                                console.log(res);
-                            }
+
+                            Swal.fire('新增成功', '', 'success');
+
+                            update_data()
                         }
 
                     })
@@ -197,8 +195,11 @@
                 },
                 success:function (res) {
                     $('#tbody tr').remove();
+
+                    console.log(res);
                     if(res.length > 0){
                         let thread = 0;
+
                         res.forEach(function (row) {
                             let task_id = '<td class="px-6 py-4 whitespace-nowrap">'+ (thread +=1) + '</td>';
                             let task_status = '<td class="px-6 py-4 whitespace-nowrap">'+row['status']+'</td>';
@@ -210,10 +211,13 @@
                                 setting_btn += `<button  class="bg-transparent border border-red-700 text-red-700 hover:bg-red-700 hover:text-white text-center py-2 px-4 rounded btn_delete" value="`+row['task_id']+`"> 刪除 </button>`;
 
                             }else {
-                                setting_btn += ` <a href="{{route('get_medication_management_task_detail_page',['task_id'=>$row->task_id])}}"
-                                           class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded ">
-                                            查看
-                                        </a>`;
+                                {{--setting_btn += ` <a href="{{route('get_medication_management_task_detail_page',['task_id'=>$row->task_id])}}"--}}
+                                {{--           class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded ">--}}
+                                {{--            查看--}}
+                                {{--        </a>`;--}}
+                                setting_btn += `<button class="bg-transparent border border-teal-700 text-teal-700
+                                                    hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded
+                                                       btn_get_detail_page " value="`+row['task_id']+`">查看</button>`;
                             }
                             setting_btn += '</td>';
                             $('#tbody').append(
@@ -225,6 +229,15 @@
                     $('.btn_delete').click(function () {
 
                         task_delete($(this).attr("value"));
+                    })
+                    $('.btn_get_detail_page').click(function () {
+                        // window.alert($(this).attr('value'));
+                        let val = $(this).attr('value');
+                        $.ajax({
+                            url:"{{route('get_medication_management_task_detail_page',['task_id'=>])}}",
+                            method:'get',
+                            data:{}
+                        });
                     })
                 }
             });
