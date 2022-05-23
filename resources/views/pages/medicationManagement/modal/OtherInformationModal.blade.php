@@ -405,7 +405,19 @@
                 'form_data': form_data,
             },
             success: function (res) {
-                console.log(res);
+                if (res === 'success') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: '儲存成功',
+                        text: '點擊刷新頁面',
+                        confirmButtonColor: '#8CD4F5'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            //刷新頁面
+                            location.reload();
+                        }
+                    })
+                }
             },
             error: function (res) {
                 console.log(res);
