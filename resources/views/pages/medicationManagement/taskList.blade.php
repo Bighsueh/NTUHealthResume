@@ -129,7 +129,7 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <a href="{{route('get_medication_management_task_detail_page',['task_id'=>$row->task_id])}}"
-                                           class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded ">
+                                           class="btn_get_detail_page bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded ">
                                             查看
                                         </a>
                                     </td>
@@ -230,27 +230,33 @@
 
                         task_delete($(this).attr("value"));
                     })
-                    $('.btn_get_detail_page').click(function () {
-                            let task_id = $(this).attr("value");
-                            // window.alert(task_id);
-                        $.ajax({
-                            url:"{{route('get_push_task_id')}}",
-                            method:'get',
-                            data:{
-                                'task_id' :task_id
-                            },
-                            success:function (res) {
-                                // console.log(res)
-                                window.location.href=`{{route('get_medication_management_task_detail_page')}}`;
-
-                            },error:function (res){
-
-                            }
-                        })
-                        update_data();
-                    })
+                    get_detail_page()
                 }
             });
+        }
+
+        function get_detail_page(){
+            $('.btn_get_detail_page').click(function () {
+                let task_id = $(this).attr("value");
+                // window.alert(task_id);
+                $.ajax({
+                    url:"{{route('get_push_task_id')}}",
+                    method:'get',
+                    data:{
+                        'task_id' :task_id
+                    },
+                    success:function (res) {
+                        //取得task_id
+                        let task_id = res;
+
+                        window.location.href=`{{route('get_medication_management_task_detail_page')}}?task_id=${task_id}&patient_id=${patient_id}`
+
+                    },error:function (res){
+
+                    }
+                })
+                update_data();
+            })
         }
 
         function task_delete(task_id) {

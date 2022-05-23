@@ -58,10 +58,11 @@ class MedicationRecordController extends Controller
             return $exception;
         }
     }
+
     //帶task_id
-    public function get_push_task_id(Request  $request)
+    public function get_push_task_id(Request $request)
     {
-        try{
+        try {
             //task_id
             $task_id = $request->get('task_id');
 
@@ -80,10 +81,17 @@ class MedicationRecordController extends Controller
     public function get_task_detail_page(Request $request)
     {
         try {
+            $task_id = $request->get('task_id');
 
-            $task_id = $request->session()->get('task_id');
+            $patient_id = $request->get('patient_id');
+//            dd($task_id, $patient_id);
 
-            Log::debug($task_id);
+            //利用patient_id取得patient_no
+            $patient_info = DB::table('patients')
+                ->where('patient_id', $patient_id)
+                ->select('patient_no','patient_id')
+                ->first();
+
             //藥歷列表
             $medication_records =
                 DB::table('medication_records')
@@ -112,6 +120,7 @@ class MedicationRecordController extends Controller
 
             $result = [
                 'task_id' => $task_id,
+                'patient_info' => $patient_info,
                 'medication_records' => $medication_records,
                 'pharmacist_feedback' => $pharmacist_feedback,
                 'doctor_feedback' => $doctor_feedback,
@@ -324,7 +333,6 @@ class MedicationRecordController extends Controller
                 ->where('record_id', $record_id)
                 ->select('date_of_examination', 'redate', 'pres_hosp', 'disp_hosp')
                 ->first();
-//            dd($record_data);
 
             //record_detail_data
             $record_detail_data = DB::table('medication_record_detail')
@@ -391,7 +399,7 @@ class MedicationRecordController extends Controller
             }
 
             DB::table('medication_records')->insert([
-                'task_id' => $request->get('task_id'),
+                'patient_no' => $request->get('patient_no'),
                 'date_of_examination' => $request->get('date_of_examination'),
                 'redate' => $request->get('redate'),
                 'pres_hosp' => $request->get('pres_hosp'),

@@ -190,10 +190,11 @@
             let redate = $("#grid-redate").val();//開方日期
             let pred_hosp = $("#grid-pres-hosp").val();//處方醫院
             let disp_hosp = $("#grid-disp-hosp").val();//調劑醫院
+
             let task_id = $("#task_id").text().trim();//task_id
 
             let connect_url = `
-                ${url}?_token=${csrf_token}&task_id=${task_id}&date_of_examination=${date_of_examination}&redate=${redate}&pred_hosp=${pred_hosp}&disp_hosp=${disp_hosp}
+                ${url}?_token=${csrf_token}&task_id=${task_id}&date_of_examination=${date_of_examination}&redate=${redate}&pred_hosp=${pred_hosp}&disp_hosp=${disp_hosp}&patient_no=${patient_no}
         `;
 
             //圖片input
@@ -219,9 +220,18 @@
                 success: function (res) {
                     // console.log('upload success');
                     console.log(res);
-                    if(res==='success'){
-                        //reload page
-                        location.reload();
+                    if (res === 'success') {
+                        Swal.fire({
+                            icon: 'success',
+                            title: '儲存成功',
+                            text: '點擊刷新頁面',
+                            confirmButtonColor: '#8CD4F5'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                //刷新頁面
+                                location.reload();
+                            }
+                        })
                     }
                 },
                 error: function (res) {

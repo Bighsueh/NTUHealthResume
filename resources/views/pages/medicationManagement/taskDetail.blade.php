@@ -244,6 +244,7 @@
     @include('pages.medicationManagement.modal.medicationRecordsExcelModal')
     @include('pages.medicationManagement.modal.previewExcelModal')
     <script>
+        let patient_no = "{{$patient_info->patient_no}}";
         $('#btn-progress-status').click(function(){
             Swal.fire({
                 icon: 'error',
