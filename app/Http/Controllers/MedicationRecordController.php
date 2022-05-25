@@ -19,6 +19,15 @@ use App\Models\CommonReply;
 
 class MedicationRecordController extends Controller
 {
+    //providers
+    private $progressService;
+
+    public function __construct(ProgressService $progressService)
+    {
+        //掛載Service
+        $this->progressService = $progressService;
+    }
+
     //開啟用藥管理系統-病患列表介面
     public function get_patient_list_page(Request $request)
     {
@@ -377,6 +386,10 @@ class MedicationRecordController extends Controller
     public function create_medication_record(Request $request)
     {
         try {
+            //病患編號
+            $patient_no = $request->get('patient_no');
+            //
+
             //取得今日日期，並依照日期建立資料夾
             $date = date('Y-m-d');
             //圖片們
@@ -399,7 +412,7 @@ class MedicationRecordController extends Controller
             }
 
             DB::table('medication_records')->insert([
-                'patient_no' => $request->get('patient_no'),
+                'patient_no' => $patient_no,
                 'date_of_examination' => $request->get('date_of_examination'),
                 'redate' => $request->get('redate'),
                 'pres_hosp' => $request->get('pres_hosp'),
@@ -407,6 +420,14 @@ class MedicationRecordController extends Controller
                 'images' => implode(',', $image_list),
                 'created_at' => Carbon::now(),
             ]);
+
+
+            //新增任務狀態
+            $task_type = 'medication_record';
+            $user_id = $request->session()->get('user_id');
+            $content = '新增藥歷紀錄';
+
+            $this->progressService->add_progress_data($patient_no, $task_type, $user_id, $content);
 
             return 'success';
         } catch (Exception $exception) {
