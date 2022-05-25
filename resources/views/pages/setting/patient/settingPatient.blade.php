@@ -17,7 +17,7 @@
 
                         <select class=" bg-transparent  border-none w-1/6 text-gray-700 mr-3 py-1 px-2  leading-tight focus:outline-none "
                         id="search_from">
-                            <option value="patient_id">ID</option>
+{{--                            <option value="patient_id">ID</option>--}}
                             <option value="patient_no">病患編號</option>
                             <option value="patient_name">姓名</option>
                             <option value="place">所屬據點</option>
@@ -132,10 +132,12 @@
     @include('pages.setting.patient.settingPatientModal')
     @include('pages.setting.patient.createPatientModal')
     <script>
+        //隱私功能(顯示資訊按鈕)
         let privacy_mode = true;
 
         update_patient_data();
 
+        //查詢按鈕click
         $('#btn_search').click(function () {
             if($('#input_search').val() == ''){
                 window.location.reload();
@@ -144,6 +146,7 @@
             }
         })
 
+        //table刷新、查詢
         function update_patient_data(){
             $.ajax({
                 url:"{{route('get_patient_data')}}",
@@ -155,9 +158,11 @@
                 success:function (res) {
                     $('#tbody tr').remove();
                     if(res.length > 0){
+                        let thead = 0;
                         if(privacy_mode){
                             res.forEach(function (row) {
-                                let patient_id = '<td class="px-6 py-4 whitespace-nowrap">'+row['patient_id']+'</td>';
+                                thead +=1;
+                                let patient_id = '<td class="px-6 py-4 whitespace-nowrap">'+thead+'</td>';
                                 let patient_no = '<td class="px-6 py-4 whitespace-nowrap">'+row['patient_no'].substr(0,3)+"***"+'</td>';
                                 let patient_name = '<td class="px-6 py-4 whitespace-nowrap">'+row['patient_name']+'</td>';
                                 let place = '<td class="px-6 py-4 whitespace-nowrap">'+row['place'].substr(0,3)+"***"+'</td>';
@@ -176,7 +181,8 @@
                             })
                         }else {
                             res.forEach(function (row) {
-                                let patient_id = '<td class="px-6 py-4 whitespace-nowrap">'+row['patient_id']+'</td>';
+                                thead +=1;
+                                let patient_id = '<td class="px-6 py-4 whitespace-nowrap">'+thead+'</td>';
                                 let patient_no = '<td class="px-6 py-4 whitespace-nowrap">'+row['patient_no']+'</td>';
                                 let patient_name = '<td class="px-6 py-4 whitespace-nowrap">'+row['patient_name']+'</td>';
                                 let place = '<td class="px-6 py-4 whitespace-nowrap">'+row['place']+'</td>';
@@ -202,18 +208,20 @@
                     }
                 }
 
-
             });
         }
 
+        //打開修改Modal
     $('.btn_patient').click(function () {
         open_settingPatientModal($(this).attr('value'));
     })
 
+        //打開新增Modal
     $('.btn_create_patient').click(function () {
         open_createPatientModal();
     })
 
+        //顯示資訊按鈕click
     $('#btn_privacy_mode').click(function () {
         if(privacy_mode){
             privacy_mode = false;

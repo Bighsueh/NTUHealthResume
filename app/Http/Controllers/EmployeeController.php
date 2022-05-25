@@ -37,6 +37,7 @@ class EmployeeController extends Controller
             DB::table('employees')
                 ->where('employee_id',$request->employee_id)
                 ->update([
+                    'employee_no' => $request->employee_no,
                     'employee_name' => $request->employee_name,
                     'employee_account' => $request->employee_account,
                     'employee_password' => $request->employee_password,
@@ -67,7 +68,7 @@ class EmployeeController extends Controller
 
             DB::table('employees')
                 ->insert([
-                    'employee_id' => $request->employee_id,
+                    'employee_no' => $request->employee_no,
                     'employee_name' => $request->employee_name,
                     'employee_account' => $request->employee_account,
                     'employee_password' => $request->employee_password,
@@ -82,7 +83,6 @@ class EmployeeController extends Controller
                     'add_nutritionist' => $request->add_nutritionist,
                     'manage_employee' => $request->manage_employee,
                     'manage_patient' => $request->manage_patient
-
                 ]);
 
 

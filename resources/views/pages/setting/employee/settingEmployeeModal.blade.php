@@ -17,6 +17,11 @@
                 </button>
             </div>
             <div class="px-12 py-6">
+                    <div class="relative z-0 mb-4 w-full group">
+                        <input id="edit_employee_no"
+                            type="email" name="floating_email" class="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer" placeholder=" " required />
+                        <label for="floating_email" class="absolute text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-teal-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">員工編號</label>
+                    </div>
                         <div class="relative z-0 mb-4 w-full group">
                             <input id="edit_employee_name"
                                 type="email" name="floating_email" class="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer" placeholder=" " required />
@@ -108,8 +113,10 @@
 </div>
 
 <script>
+    //員工id
     let id;
 
+    //打改修改Modal
     function open_settingEmployeeModal(employee_id){
         id = employee_id;
         $.ajax({
@@ -119,7 +126,7 @@
                 employee_id:employee_id,
             },
             success:function (res){
-                // $('#edit_employee_id').val(res[0]['employee_id']);
+                $('#edit_employee_no').val(res[0]['employee_no']);
                 $('#edit_employee_name').val(res[0]['employee_name']);
                 $('#edit_employee_account').val(res[0]['employee_account']);
                 $('#edit_employee_password').val(res[0]['employee_password']);
@@ -158,17 +165,20 @@
         $('#settingEmployeeModal').modal('show');
     }
 
+    //儲存按鈕click
     $('#btn_store_edit').click(function (){
         store_edit_employee();
         // $('#settingEmployeeModal').modal('hide');
     })
 
+    //儲存功能
     function store_edit_employee(){
         $.ajax({
             url:"{{route('store_edit_employee')}}",
             method:'get',
             data:{
                 employee_id:id,
+                employee_no:$('#edit_employee_no').val(),
                 employee_name:$('#edit_employee_name').val(),
                 employee_account:$('#edit_employee_account').val(),
                 employee_password:$('#edit_employee_password').val(),
@@ -185,17 +195,35 @@
                 manage_patient:$('#edit_manage_patient').val()
             },
             success:function (res){
-                window.alert(res)
+                // window.alert(res)
+                Swal.fire(res, '', 'success');
                 window.location.reload();
+            },error:function (res){
+                Swal.fire({
+                    icon:'error',
+                    title:'儲存失敗',
+                    confirmButton:'#8CD4F5'
+                });
             }
         })
     }
 
+    //刪除按鈕click
     $('#btn_delete').click(function () {
-        if(window.confirm('確定要刪除')){
-            delete_employee()
-        }
+        Swal.fire({
+            title: '確定要刪除嗎?',
+            showDenyButton: true,
+            confirmButtonText: '是',
+            denyButtonText: `否`,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                delete_employee()
+            }
+        });
+
     })
+
+    //刪除功能
     function delete_employee(){
         $.ajax({
             url:"{{route('delete_employee')}}",
@@ -204,13 +232,20 @@
                 employee_id:id
             },
             success:function (res) {
-                window.alert(res);
-
+                // window.alert(res);
+                Swal.fire(res, '', 'success');
                 update_data();
+            },error:function (res){
+                Swal.fire({
+                    icon:'error',
+                    title:'刪除失敗',
+                    confirmButton:'#8CD4F5'
+                });
             }
         });
         $('#settingEmployeeModal').modal('hide');
     }
+    //權限checkbox
     $('.btn_check').change(function () {
         this.value = (Number(this.checked));
         if(this.value == 0){
@@ -218,7 +253,7 @@
             $('.btn_admin').val(0);
         }
     })
-
+    //管理功能權限
     $('.btn_admin').change(function () {
         if(this.value == 1){
             $('.btn_check').prop('checked',true);

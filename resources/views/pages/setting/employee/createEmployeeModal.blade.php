@@ -16,9 +16,9 @@
             </div>
             <div class="px-12 py-3">
                         <div class="relative z-0 mb-4 w-full group">
-                            <input id="create_employee_id"
+                            <input id="create_employee_no"
                                    type="email" name="floating_email" class="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer" placeholder=" " required />
-                            <label for="floating_email" class="absolute text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-teal-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">ID</label>
+                            <label for="floating_email" class="absolute text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-teal-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">員工編號</label>
                         </div>
                         <div class="relative z-0 mb-4 w-full group">
                             <input id="create_employee_name"
@@ -107,27 +107,28 @@
     </div>
 </div>
 <script>
-
+    //打開新增Modal
     function open_createEmployeeModal(){
         $('.btn_check').prop('checked',false);
         $('.btn_check').val(0);
         $('#createEmployeeModal').modal('show');
     }
 
+    //新增按鈕click
     $('#btn_store_create').click(function () {
         store_create_employee();
     })
 
 
 
-
+    //新增功能
     function store_create_employee(){
 
         $.ajax({
             url:'{{route('store_create_employee')}}',
             method:'get',
             data:{
-                employee_id:$('#create_employee_id').val(),
+                employee_no:$('#create_employee_no').val(),
                 employee_name:$('#create_employee_name').val(),
                 employee_account:$('#create_employee_account').val(),
                 employee_password:$('#create_employee_password').val(),
@@ -144,11 +145,19 @@
                 manage_patient:$('#create_manage_patient').val()
             },
             success:function (res){
-                window.alert(res)
+                // window.alert(res)
+                Swal.fire('新增成功', '', 'success');
                 window.location.reload();
+            },error:function (res){
+                Swal.fire({
+                    icon:'error',
+                    title:'新增失敗',
+                    confirmButton:'#8CD4F5'
+                });
             }
         })
     }
+    //權限checkbox
     $('.btn_check').change(function () {
         this.value = (Number(this.checked));
         if(this.value == 0){
@@ -156,6 +165,7 @@
             $('.btn_admin').val(0);
         }
     })
+    //管理員權限checkbox
     $('.btn_admin').change(function () {
         if(this.value == 1){
             $('.btn_check').prop('checked',true);

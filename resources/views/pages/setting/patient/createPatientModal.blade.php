@@ -82,104 +82,6 @@
                             </div>
                         </div>
                     </div>
-{{----}}
-{{--                    <div class="flex px-1 py-1">--}}
-{{--                        <p class="mx-4 my-2 justify-self-start font-bold text-xl">基本資訊</p>--}}
-{{--                        <div class="flex-1">--}}
-{{--                            <div class="flex">--}}
-{{--                                <div class="flex-1 flex justify-between">--}}
-{{--                                    <div>--}}
-{{--                                        <label class="mx-6">#</label>--}}
-{{--                                    </div>--}}
-{{--                                    <div>--}}
-{{--                                        <input value="" class="border-teal-700 border-b py-1 px-20" id="create_patient_id">--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="flex-1 flex justify-between">--}}
-{{--                                    <div>--}}
-{{--                                        <label class="mx-6">病患編號</label>--}}
-{{--                                    </div>--}}
-{{--                                    <div>--}}
-{{--                                        <input  class="border-teal-700 border-b py-1 px-20" id="create_patient_no">--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="flex ">--}}
-{{--                                <div class="flex-1 flex justify-between">--}}
-{{--                                    <div>--}}
-{{--                                        <label class="mx-6">結案日期</label>--}}
-{{--                                    </div>--}}
-{{--                                    <div>--}}
-{{--                                        <input  class="border-teal-700 border-b py-1 px-20" id="create_close_date">--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="flex-1 flex justify-between">--}}
-{{--                                    <div>--}}
-{{--                                        <label class="mx-6">所述據點</label>--}}
-{{--                                    </div>--}}
-{{--                                    <div>--}}
-{{--                                        <input  class=" border-teal-700 border-b py-1 px-20" id="create_place">--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="flex">--}}
-{{--                                <div class="flex-1 flex justify-between">--}}
-{{--                                    <div>--}}
-{{--                                        <label class="mx-6">身分證字號</label>--}}
-{{--                                    </div>--}}
-{{--                                    <div>--}}
-{{--                                        <input  class="border-teal-700 border-b py-1 px-20" id="create_id_number">--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="flex-1 flex justify-between">--}}
-{{--                                    <div>--}}
-{{--                                        <label class="mx-6">姓名</label>--}}
-{{--                                    </div>--}}
-{{--                                    <div>--}}
-{{--                                        <input  class=" border-teal-700 border-b py-1 px-20" id="create_patient_name">--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="flex">--}}
-{{--                                <div class="flex-1 flex justify-between">--}}
-{{--                                    <div>--}}
-{{--                                        <label class="mx-6">生日</label>--}}
-{{--                                    </div>--}}
-{{--                                    <div>--}}
-{{--                                        <input  class="border-teal-700 border-b py-1 px-20" id="create_patient_bd">--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="flex-1 flex justify-between">--}}
-{{--                                    <div>--}}
-{{--                                        <label class="mx-6">年齡</label>--}}
-{{--                                    </div>--}}
-{{--                                    <div>--}}
-{{--                                        <input  class=" border-teal-700 border-b py-1 px-20"  id="create_age">--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="flex">--}}
-{{--                                <div class="flex-1 flex justify-between">--}}
-{{--                                    <div>--}}
-{{--                                        <label class="mx-6">體重</label>--}}
-{{--                                    </div>--}}
-{{--                                    <div>--}}
-{{--                                        <input  class="border-teal-700 border-b py-1 px-20" id="create_weight">--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="flex-1 flex justify-between">--}}
-{{--                                    <div>--}}
-{{--                                        <label class="mx-6">身高</label>--}}
-{{--                                    </div>--}}
-{{--                                    <div>--}}
-{{--                                        <input  class=" border-teal-700 border-b py-1 px-20" id="create_height">--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-
-{{--                    </div>--}}
-
                 </div>
 
             </div>
@@ -198,11 +100,22 @@
 </div>
 <script>
 
+    $('#create_close_date').datepicker({
+        dateFormat: "yy-mm-dd"
+        , duration: "fast"
+    });
+    $('#create_patient_bd').datepicker({
+        dateFormat: "yy-mm-dd"
+        , duration: "fast"
+    });
+
+    //新增按鈕click
     $('#btn_store_create_patient').click(function () {
         store_create_patient();
 
     })
 
+    //新增功能
     function open_createPatientModal() {
         $('#createPatientModal').modal('show');
     }
@@ -223,10 +136,28 @@
                 height:$('#create_height').val()
             },
             success:function (res) {
-                window.alert(res);
-                window.location.reload();
+                Swal.fire(res, '', 'success');
+                update_patient_data();
+            },error:function (res){
+                Swal.fire({
+                    icon:'error',
+                    title:'新增失敗',
+                    confirmButton:'#8CD4F5'
+                });
             }
+
         });
+        $('#createPatientModal').modal('hide');
+        $('#create_patient_id').val('')
+        $('#create_patient_no').val('')
+        $('#create_close_date').val('')
+        $('#create_place').val('')
+        $('#create_id_number').val('')
+        $('#create_patient_name').val('')
+        $('#create_patient_bd').val('')
+        $('#create_age').val('')
+        $('#create_weight').val('')
+        $('#create_height').val('')
     }
 
 

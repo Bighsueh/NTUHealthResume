@@ -16,11 +16,11 @@ class CreatePatientsTable extends Migration
         Schema::create('patients', function (Blueprint $table) {
             $table->id('patient_id')->autoIncrement();
             $table->string('patient_no')->nullable();
-            $table->string('close_date')->nullable();
+            $table->date('close_date')->nullable();
             $table->string('place')->nullable();
             $table->string('id_number')->nullable();
             $table->string('patient_name')->nullable();
-            $table->string('patient_bd')->nullable();
+            $table->date('patient_bd')->nullable();
             $table->string('age')->nullable();
             $table->string('weight')->nullable();
             $table->string('height')->nullable();

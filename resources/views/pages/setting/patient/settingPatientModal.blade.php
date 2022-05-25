@@ -22,11 +22,11 @@
                             <p class="mx-4 my-2 justify-self-start font-bold text-xl">基本資訊</p>
                         <div class="flex-1">
                             <div class="grid xl:grid-cols-2 xl:gap-6">
-                                    <div class="relative z-0 mb-4 w-full group">
-                                        <input id="edit_patient_id"
-                                               type="email" name="floating_email" class="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer" placeholder=" " required />
-                                        <label for="floating_email" class="absolute text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-teal-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">ID</label>
-                                    </div>
+{{--                                    <div class="relative z-0 mb-4 w-full group">--}}
+{{--                                        <input id="edit_patient_id"--}}
+{{--                                               type="email" name="floating_email" class="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer" placeholder=" " required />--}}
+{{--                                        <label for="floating_email" class="absolute text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-teal-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75  peer-focus:-translate-y-6">ID</label>--}}
+{{--                                    </div>--}}
                                     <div class="relative z-0 mb-4 w-full group">
                                         <input id="edit_patient_no"
                                                type="email" name="floating_email" class="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer" placeholder=" " required />
@@ -219,7 +219,10 @@
 </div>
 
 <script>
+    //病患id
     let patient_id;
+
+    //打開修改Modal
     function open_settingPatientModal(id){
         patient_id = id;
         // window.alert(id);
@@ -247,9 +250,12 @@
         $('#settingPatientModal').modal('show');
     }
 
+    //儲存按鈕click
     $('#btn_store_edit_patient').click(function () {
         store_edit_patient();
     })
+
+    //儲存功能
     function store_edit_patient() {
        $.ajax({
            url:"{{route('store_edit_patient')}}",
@@ -267,17 +273,33 @@
                height:$('#edit_height').val()
            },
            success:function (res) {
-               window.alert(res);
+               Swal.fire(res, '', 'success');
                update_patient_data();
+           },error:function (res){
+               Swal.fire({
+                   icon:'error',
+                   title:'儲存失敗',
+                   confirmButton:'#8CD4F5'
+               });
            }
        });
        $('#settingPatientModal').modal('hide');
     }
+    //刪除按鈕click
     $('#btn_delete_patient').click(function () {
-        if(window.confirm('確定要刪除')){
-            delete_patient();
-        }
+        Swal.fire({
+            title: '確定要刪除嗎?',
+            showDenyButton: true,
+            confirmButtonText: '是',
+            denyButtonText: `否`,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                delete_patient();
+            }
+        });
+
     })
+    //刪除功能
     function delete_patient(){
         $.ajax({
             url:"{{route('delete_patient')}}",
@@ -286,8 +308,14 @@
                 patient_id:patient_id
             },
             success:function (res) {
-                window.alert(res);
+                Swal.fire(res, '', 'success');
                 update_patient_data();
+            },error:function (res){
+                Swal.fire({
+                    icon:'error',
+                    title:'刪除失敗',
+                    confirmButton:'#8CD4F5'
+                });
             }
         });
         $('#settingPatientModal').modal('hide');

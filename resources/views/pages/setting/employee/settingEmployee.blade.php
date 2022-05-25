@@ -18,7 +18,7 @@
 
                         <select class=" bg-transparent  border-none w-1/6 text-gray-700 mr-3 py-1 px-2  leading-tight focus:outline-none "
                         id="search_from">
-                            <option value="employee_id">ID</option>
+                            <option value="employee_no">員工編號</option>
                             <option value="employee_name">姓名</option>
                             <option value="employee_account">帳號</option>
                             <option value="job_title">職位</option>
@@ -73,6 +73,7 @@
                             <thead class="bg-gray-50">
                             <tr>
                                 <th class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">#</th>
+                                <th class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">員工編號</th>
                                 <th class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">姓名</th>
                                 <th class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">帳號</th>
                                 <th class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">密碼</th>
@@ -90,35 +91,38 @@
                             </thead>
                             <tbody class="divide-y divide-gray-200" id="tbody">
 
-                            @foreach($employees as $employees)
-                            <tr class="text-gray-700 items-center">
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    {{$employees->employee_id}}
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    {{$employees->employee_name}}
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    {{$employees->employee_account}}
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    {{$employees->employee_password}}
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    {{$employees->job_title}}
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    {{$employees->department}}
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <button type="button" class="bg-teal-700
-                                     hover:bg-teal-500 border-teal-700 hover:border-teal-500 text-sm
-                                     border-4 text-white py-1 px-3 rounded btn_employee"
-                                            id="btn_employee"
-                                    value='{{$employees->employee_id}}'>修改</button>
-                                </td>
-                            </tr>
-                            @endforeach
+{{--                            @foreach($employees as $employees)--}}
+{{--                            <tr class="text-gray-700 items-center">--}}
+{{--                                <td class="px-6 py-4 whitespace-nowrap">--}}
+{{--                                    {{$employees->employee_id}}--}}
+{{--                                </td>--}}
+{{--                                <td class="px-6 py-4 whitespace-nowrap">--}}
+{{--                                    {{$employees->employee_no}}--}}
+{{--                                </td>--}}
+{{--                                <td class="px-6 py-4 whitespace-nowrap">--}}
+{{--                                    {{$employees->employee_name}}--}}
+{{--                                </td>--}}
+{{--                                <td class="px-6 py-4 whitespace-nowrap">--}}
+{{--                                    {{$employees->employee_account}}--}}
+{{--                                </td>--}}
+{{--                                <td class="px-6 py-4 whitespace-nowrap">--}}
+{{--                                    {{$employees->employee_password}}--}}
+{{--                                </td>--}}
+{{--                                <td class="px-6 py-4 whitespace-nowrap">--}}
+{{--                                    {{$employees->job_title}}--}}
+{{--                                </td>--}}
+{{--                                <td class="px-6 py-4 whitespace-nowrap">--}}
+{{--                                    {{$employees->department}}--}}
+{{--                                </td>--}}
+{{--                                <td class="px-6 py-4 whitespace-nowrap">--}}
+{{--                                    <button type="button" class="bg-teal-700--}}
+{{--                                     hover:bg-teal-500 border-teal-700 hover:border-teal-500 text-sm--}}
+{{--                                     border-4 text-white py-1 px-3 rounded btn_employee"--}}
+{{--                                            id="btn_employee"--}}
+{{--                                    value='{{$employees->employee_id}}'>修改</button>--}}
+{{--                                </td>--}}
+{{--                            </tr>--}}
+{{--                            @endforeach--}}
                             </tbody>
                         </table>
                     </div>
@@ -134,6 +138,9 @@
     </div>
     <script>
 
+        update_data();
+
+        //查詢按鈕
         $('#btn_search').click(function (){
             if($('#input_search').val() == ''){
                 window.location.reload();
@@ -141,6 +148,8 @@
                 update_data();
             }
         })
+
+        //table刷新、查詢
         function update_data() {
 
             $.ajax({
@@ -152,9 +161,12 @@
                 },
                 success:function (res) {
                     $('#tbody tr').remove();
+                    let thead = 0
                     if(res.length > 0){
                         res.forEach(function (row) {
-                            let employee_id = '<td class="px-6 py-4 whitespace-nowrap">' + row['employee_id'] + '</td>';
+                            thead += 1;
+                            let employee_id = '<td class="px-6 py-4 whitespace-nowrap">' + thead + '</td>';
+                            let employee_no = '<td class="px-6 py-4 whitespace-nowrap">' + row['employee_no'] + '</td>';
                             let employee_name = '<td class="px-6 py-4 whitespace-nowrap">' + row['employee_name'] + '</td>';
                             let employee_account = '<td class="px-6 py-4 whitespace-nowrap">' + row['employee_account'] + '</td>';
                             let employee_password = '<td class="px-6 py-4 whitespace-nowrap">' + row['employee_password'] + '</td>';
@@ -167,7 +179,7 @@
                                     value="`+row['employee_id'] + `">修改</button>
                                 </td>`  +  '</td>';
                             $('#tbody').append(
-                                '<tr class="text-gray-700 items-center">' +employee_id+employee_name+employee_account+employee_password+job_title+department+setting_btn+'</tr>'
+                                '<tr class="text-gray-700 items-center">' +employee_id+employee_no+employee_name+employee_account+employee_password+job_title+department+setting_btn+'</tr>'
                             )
 
                         })
@@ -184,12 +196,12 @@
 
         }
 
-
+        //打開新增Modal
         $('.btn_create_employee').click(function (){
             open_createEmployeeModal();
         })
 
-
+        //打開修改Modal
         $('.btn_employee').click(function (){
             open_settingEmployeeModal($(this).attr("value"));
         })
