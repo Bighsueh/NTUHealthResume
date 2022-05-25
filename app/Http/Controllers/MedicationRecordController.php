@@ -53,7 +53,7 @@ class MedicationRecordController extends Controller
 
 
             Session::forget('patient_no');
-            Session::put('patient_no', $patient_no);
+            Session::put('patient_no', $patient_no->patient_no);
 
             //依照病患id取得patient_tasks資料
             $task_list = DB::table('patient_tasks')
