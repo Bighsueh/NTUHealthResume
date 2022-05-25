@@ -448,9 +448,9 @@ class MedicationRecordController extends Controller
             $detail_rows = $request->get('detail_rows'); //RecordDetails
 
             //record_id 空值判斷
-            if ($record_id == null) return 'no record id';
+            if ($record_id === null) return 'no record id';
             //detail_rows 判斷
-            if ($detail_rows == null) return 'no detail rows';
+            if ($detail_rows === null) return 'no detail rows';
 
             //修改record data(藥單資訊)
             DB::table('medication_records')
@@ -478,6 +478,15 @@ class MedicationRecordController extends Controller
                         'freq' => $row['freq'],
                     ]);
             }
+
+            //新增任務狀態
+            $task_type = 'medication_record';
+            $patient_no = $request->session()->get('patient_no');
+            $user_id = $request->session()->get('user_id');
+            $content = '編輯藥歷紀錄';
+
+            $this->progressService->add_progress_data($patient_no, $task_type, $user_id, $content);
+
 
             return 'success';
         } catch (Exception $exception) {

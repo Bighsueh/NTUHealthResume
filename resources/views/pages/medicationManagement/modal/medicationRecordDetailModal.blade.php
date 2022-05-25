@@ -235,15 +235,17 @@
                 'disp_hosp': $('#medication_record_detail_disp_hosp').val(),
             }
 
+            let url = "{{route('store_medication_management_record_detail')}}";
+            let token = "{{csrf_token()}}";
             //建立連線，將更改結果傳到後端
             $.ajax({
-                url: "{{route('store_medication_management_record_detail')}}",
+                url: url,
                 method: 'post',
                 data: {
-                    "_token": "{{csrf_token()}}",
-                    "record_data":record_data,
-                    "detail_rows": all_detail_row,
-                    "record_id": record_id,
+                    '_token': token,
+                    'record_data': record_data,
+                    'detail_rows': all_detail_row,
+                    'record_id': record_id,
                 },
                 success: function (res) {
                     if (res === 'no record id') {
@@ -278,6 +280,12 @@
                 },
                 error: function (res) {
                     console.log(res);
+                    Swal.fire({
+                        icon: 'error',
+                        title: '儲存失敗',
+                        text: res['statusText'],
+                        confirmButtonColor: '#8CD4F5'
+                    })
                 },
             })
 
