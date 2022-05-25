@@ -14,16 +14,16 @@ class CreatePatientsTable extends Migration
     public function up()
     {
         Schema::create('patients', function (Blueprint $table) {
-            $table->id('patient_id');
-            $table->string('patient_no');
-            $table->string('close_date');
-            $table->string('place');
-            $table->string('id_number');
-            $table->string('patient_name');
-            $table->string('patient_bd');
-            $table->string('age');
-            $table->string('weight');
-            $table->string('height');
+            $table->id('patient_id')->autoIncrement();
+            $table->string('patient_no')->nullable();
+            $table->string('close_date')->nullable();
+            $table->string('place')->nullable();
+            $table->string('id_number')->nullable();
+            $table->string('patient_name')->nullable();
+            $table->string('patient_bd')->nullable();
+            $table->string('age')->nullable();
+            $table->string('weight')->nullable();
+            $table->string('height')->nullable();
             $table->timestamps();
         });
     }
