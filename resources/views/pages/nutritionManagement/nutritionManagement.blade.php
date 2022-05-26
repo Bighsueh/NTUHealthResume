@@ -67,22 +67,20 @@
                 <div class="md:flex-wrap lg:flex">
                     <!--數據欄位-->
                     <div class="rounded m-2 flex-1 bg-gray-50 p-4">
-                        <div class="flex items-center mx-4 px-5 my-2">
+                        {{--                        <div class="flex items-center md:mx-4 md:px-5 my-2">--}}
+                        <div class="flex items-center xl:mx-4 lg:px-5 my-2 content-around">
                             <div class="flex grid">
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                     class="h-8 w-8 justify-self-end text-gray-600" fill="none" viewBox="0 0 24 24"
-                                     stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                          d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 justify-self-end text-gray-600" fill="none"
+                                     viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                          d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"/>
                                 </svg>
                             </div>
                             <div class="mx-4 px-5">
-                                <p class="text-xl text-gray-600">標題</p>
-                                <p class="text-2xl text-gray-900">數據</p>
+                                <p class="text-xl text-gray-600">任務統計</p>
+{{--                                <p class="text-2xl text-gray-900" id="task_nums"> 件</p>--}}
+                                <p class="text-2xl text-gray-900" id="task_nums">{{$task_nums}} 件</p>
                             </div>
-                        </div>
-                        <div class="mx-4 my-2 px-5">
-                            <a href="" class="mt-2 text-green-700">查看資訊</a>
                         </div>
                     </div>
 
@@ -134,7 +132,8 @@
                     <p class="mx-4 my-2 justify-self-start font-bold text-xl">病患列表</p>
                 </div>
                 <div class="rounded m-2 flex-auto overflow-scroll bg-gray-50 p-4 ">
-                    <table class="divide-y divide-gray-200 min-w-full">
+                    {{--        電腦板面            --}}
+                    <table class="divide-y divide-gray-200 min-w-full hidden sm:table">
                         <thead class="bg-gray-50">
                         <tr>
                             <th scope="col"
@@ -188,6 +187,53 @@
                         @endforeach
                         </tbody>
                     </table>
+
+                    {{--        手機版面            --}}
+                    <div class="grid min-w-full sm:hidden">
+                        @foreach($queries as $query)
+                            <div class="border border-teal-700 rounded  grid my-3 p-1" id="tbody_sm">
+                                    <div class="grid grid-cols-2 my-2 text-center">
+                                        <div>
+                                            姓名
+                                        </div>
+                                        <div>
+                                            {{$query->patient_name}}
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-2 my-2 text-center">
+                                        <div>
+                                            性別
+                                        </div>
+                                        <div>
+                                            @if(substr($query->id_number,1,1) ==1)
+                                                男生
+                                            @else
+                                                女生
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-2 my-2 text-center">
+                                        <div>
+                                            身分證字號
+                                        </div>
+                                        <div>
+                                            {{$query->id_number}}
+                                        </div>
+                                    </div>
+                                    <div class="grid my-2 text-center">
+
+                                            <a href="{{route('get_orderList',['id' => $query->patient_id])}}"
+                                               class="bg-transparent border border-teal-700 text-teal-700 mx-1
+                                               hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
+                                                檢視餐序
+                                            </a>
+
+                                    </div>
+                            </div>
+                        @endforeach
+                    </div>
+
+
                 </div>
             </div>
         </div>
@@ -239,7 +285,9 @@
                         )
 
                     })
-
+                    //更新任務統計數量
+                    let task_nums = $("#tbody").children().length;
+                    $("#task_nums").text(`${task_nums} 件`);
 
                 }
 

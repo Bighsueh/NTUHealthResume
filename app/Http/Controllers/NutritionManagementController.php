@@ -20,7 +20,8 @@ class NutritionManagementController extends Controller
     public function get_nutritionManagement()
     {
         $queries = DB::table('patients')->get();
-        return view('pages.nutritionManagement.nutritionManagement',compact('queries'));
+        $task_nums = DB::table('patients')->count();
+        return view('pages.nutritionManagement.nutritionManagement',compact('queries','task_nums'));
     }
     // 取得資料查詢資料用
     public function get_nutritionManagement_data(Request $request){
@@ -55,7 +56,6 @@ class NutritionManagementController extends Controller
         {
             $row->diet_logs=DB::table('diet_log')->where('task_id',$row->id)->get();
         }
-
 //        $data = DB::table('meal_order')
 //            ->select('meal_order.id','meal_order.meal_order','meal_order.created_at','meal_order.updated_at','diet_log.meal_name','diet_log.quantity','diet_log.remark')
 //            ->LeftJoin('diet_log','meal_order.id','=','diet_log.task_id')
@@ -106,11 +106,20 @@ class NutritionManagementController extends Controller
     public function get_orderList_data(Request $request){
 
         try{
-            $data = DB::table('meal_order')
-                ->where('patient_id',$request->patient_id)
-                ->where($request->search_from,'like','%'.$request->search_data.'%')
-                ->get();
-            return $data;
+
+            //餐敘為母表
+            $order_lists = DB::table('meal_order')->where('patient_id',Session::get('patient_id'))->get();
+            //在母表中插入子表diet_log
+            foreach ($order_lists as $row)
+            {
+                if(DB::table('diet_log')->where('task_id',$row->id)->where($request->search_from,'like','%'.$request->search_data.'%')->count())
+                {
+                    $row->diet_logs=DB::table('diet_log')->where('task_id',$row->id)->get();
+                }
+            }
+
+//            dd($order_lists);
+            return $order_lists;
         }catch (\Throwable $e){
             report($e);
             return false;
