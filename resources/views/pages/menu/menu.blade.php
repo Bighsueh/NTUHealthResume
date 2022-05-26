@@ -93,10 +93,10 @@
                                     class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
                                     完成時間
                                 </th>
-                                <th scope="col"
-                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                    功能
-                                </th>
+{{--                                <th scope="col"--}}
+{{--                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">--}}
+{{--                                    功能--}}
+{{--                                </th>--}}
                             </tr>
                             </thead>
                             <tbody id="tbody_progress_list" class="divide-y divide-gray-200">
@@ -135,7 +135,7 @@
                     '_token': token,
                 },
                 success: function (res) {
-                    // console.log(res);
+                    console.log(res);
                     set_progress_list(res);
                 },
                 error: function (res) {
@@ -157,15 +157,15 @@
                             <td class="px-6 py-4 whitespace-nowrap">${value['patient_name']}</td>
                             <td class="px-6 py-4 whitespace-nowrap">${value['content']}</td>
                             <td class="px-6 py-4 whitespace-nowrap">${value['employee_name']}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">${value['created_at']}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">${value['updated_at']}</td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <a class="btn-progress bg-transparent mx-2 border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
-                                    目前進度
-                                </a>
-                                <a href="{{route('get_medication_management_task_detail_page')}}?task_id=${value['task_id']}"
-                                    class="btn-detail bg-transparent mx-2 border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
-                                    詳細資料
-                                </a>
+                                {{--<a class="btn-progress bg-transparent mx-2 border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">--}}
+                                {{--    目前進度--}}
+                                {{--</a>--}}
+                                {{--<a href="{{route('get_medication_management_task_detail_page')}}?task_id=${value['task_id']}"--}}
+                                {{--    class="btn-detail bg-transparent mx-2 border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">--}}
+                                {{--    詳細資料--}}
+                                {{--</a>--}}
                             </td>
                         </tr>`;
                 tbody.append(row);

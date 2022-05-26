@@ -27,15 +27,10 @@ class ProgressController extends Controller
     {
         try{
             $record_list = DB::table('work_progress')
-                ->join('patient_tasks','work_progress.task_id','=','patient_tasks.task_id')
-                ->join('patients','patient_tasks.patient_id','=','patients.patient_id')
-                ->join('employees','work_progress.reporter_id','=','employees.employee_id')
-                ->select(
-                'patients.patient_name',
-                        'work_progress.content',
-                        'employees.employee_name',
-                        'work_progress.created_at',
-                        'work_progress.task_id')
+                ->join('patients','work_progress.patient_no','=','patients.patient_no')
+                ->join('employees','employees.employee_id','=','work_progress.reporter_id')
+                ->leftJoin('patient_tasks','patient_tasks.task_id','=','work_progress.task_id')
+                ->select('patients.patient_name','work_progress.content','employees.employee_name','work_progress.updated_at')
                 ->get();
             return $record_list;
         }catch (\Exception $exception){
