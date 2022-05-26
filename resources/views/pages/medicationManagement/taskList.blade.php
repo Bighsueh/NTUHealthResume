@@ -225,6 +225,10 @@
                             )
                         })
 
+                        //更新任務統計數量
+                        let task_nums = $("#tbody").children().length;
+                        $("#task_nums").text(`${task_nums} 件`);
+
                     }
                     $('.btn_delete').click(function () {
 

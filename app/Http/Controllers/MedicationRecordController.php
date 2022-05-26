@@ -61,7 +61,11 @@ class MedicationRecordController extends Controller
                 ->where('patient_id', $patient_id)
                 ->get();
 
-            $result = ['task_list' => $task_list, 'patient_id' => $patient_id];
+            $result = [
+                'task_list' => $task_list,
+                'patient_id' => $patient_id,
+                'task_nums' => count($task_list),
+            ];
 
             return view('pages.medicationManagement.taskList', $result);
         } catch (\Exception $exception) {
