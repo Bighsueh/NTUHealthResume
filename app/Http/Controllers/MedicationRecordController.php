@@ -179,6 +179,13 @@ class MedicationRecordController extends Controller
                     'updated_at' => Carbon::now(),
                 ]);
 
+            //新增進度資料
+            $patient_no = $request->session()->get('patient_no');
+            $task_type = 'medication_record';
+            $report_id = $request->session()->get('user_id');
+            $content = '編輯藥師回饋';
+            $this->progressService->add_progress_data($patient_no, $task_type, $report_id, $content,$task_id);
+
             return 'success';
         } catch (\Exception $exception) {
             return $exception;
@@ -681,6 +688,13 @@ class MedicationRecordController extends Controller
                     'other_information_modal_textarea' => $this->get_value_from_first_row($form_data, 'other_information_modal_textarea'),
                     'updated_at' => Carbon::now(),
                 ]);
+
+                //新增進度資料
+                $patient_no = $request->session()->get('patient_no');
+                $task_type = 'medication_record';
+                $report_id = $request->session()->get('user_id');
+                $content = '編輯其他資訊';
+                $this->progressService->add_progress_data($patient_no, $task_type, $report_id, $content,$task_id);
 
             return 'success';
         } catch (Exception $exception) {
