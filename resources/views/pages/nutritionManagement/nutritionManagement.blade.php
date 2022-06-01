@@ -189,9 +189,9 @@
                     </table>
 
                     {{--        手機版面            --}}
-                    <div class="grid min-w-full sm:hidden">
+                    <div class="grid min-w-full mobile-table sm:hidden">
                         @foreach($queries as $query)
-                            <div class="border border-teal-700 rounded  grid my-3 p-1" id="tbody_sm">
+                            <div class="border border-teal-700 rounded  tbody_sm grid my-3 p-1">
                                     <div class="grid grid-cols-2 my-2 text-center">
                                         <div>
                                             姓名
@@ -258,6 +258,7 @@
             },
             success:function (res) {
                 $('#tbody tr').remove();
+                $('.tbody_sm').remove();
                 if(res.length > 0){
                     // console.log(res);
                     var url = "{{route('get_orderList')}}";
@@ -282,6 +283,25 @@
                             '</a>' + '</td>';
                         $('#tbody').append(
                             '<tr class="text-gray-700 items-center">' +patient_id+patient_name+sex+id_number + order_list +'</tr>'
+                        )
+                        // 手機版面
+                        let patient_name_mobile =  '<div class="grid grid-cols-2 my-2 text-center">'+ '<div>'+ '姓名'+'</div>' + '<div>'+row['patient_name']+'</div>'+ '</div>'
+                        let sex_mobile = ""
+                        if(row['id_number'].substring(1,2) =='1') {
+                            sex_mobile =  '<div class="grid grid-cols-2 my-2 text-center">'+'<div>'+'性別'+'</div>'+'<div>'+ '男生'+'</div>' + '</div>'
+                        }
+                        else{
+                            sex_mobile =  '<div class="grid grid-cols-2 my-2 text-center">'+ '<div>'+'性別'+'</div>' + '<div>'+ '女生'+'</div>'+ '</div>'
+                        }
+                        let id_number_mobile =  '<div class="grid grid-cols-2 my-2 text-center">'+ '<div>'+ '身分證字號'+'</div>' + '<div>'+row['id_number']+'</div>'+ '</div>'
+                        let orderList_mobile =  '<div class="grid my-2 text-center">'+
+                            `<a href="${url}?id=${row['patient_id']}"
+                               class="bg-transparent border border-teal-700 text-teal-700 mx-1
+                               hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
+                             檢視餐序` + '</a>'  +'</div>'
+
+                        $('.mobile-table').append(
+                            '<div class="border border-teal-700 rounded  tbody_sm grid my-3 p-1">'+patient_name_mobile + sex_mobile + id_number_mobile+orderList_mobile  +'</div>'
                         )
 
                     })
