@@ -17,10 +17,10 @@
 
                         <select class=" bg-transparent  border-none w-1/6 text-gray-700 mr-3 py-1 px-2  leading-tight focus:outline-none "
                                 id="search_from">
-                            <option value="id">ID</option>
-                            <option value="meal_order">餐序狀態</option>
+                            <option value="meal_name">菜色</option>
+                            <option value="quantity">份量</option>
                             <option value="created_at">餐序建立日期</option>
-                            <option value="updated_at">最後異動時間</option>
+
                         </select>
 
                         <button type="button" class="mx-4 flex-shrink-0 bg-teal-700 hover:bg-teal-500
@@ -234,15 +234,77 @@
                     </div>
                 </div>
             </div>
-            <div class="grid">
+            {{--     餐序列表       --}}
+            <div class="grid hidden sm:grid">
                 <div class="flex justify-between ">
                     <p class="mx-4 my-2 justify-self-start font-bold text-xl">餐序列表</p>
                 </div>
-                <div class="overflow-y-scroll h-7/8 ">
+
+                <div class="overflow-y-scroll h-7/8 orderList-content">
                     @foreach($order_lists as $order_list)
                         <div class="flex ">
                             <!--單筆藥歷共通項目-->
                             <div class="content-between grid rounded m-2 flex-none bg-gray-50 p-4 w-1/6">
+                                <div class="mb-2">
+                                    <p>建立時間：</p>
+                                    <p>{{$order_list->created_at}}</p>
+                                </div>
+                                {{--task_id--}}
+                                <div hidden class="task_id">{{$order_list->id}}</div>
+                                <a class="btn-open-order-list-detail-modal col-span-1 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 x-4 rounded"
+                                   data-bs-toggle="modal" data-bs-target="#dietLog">
+                                    詳細內容
+                                </a>
+                            </div>
+
+                            <!--單筆餐序列向-->
+                            <div class="rounded m-2 flex-auto bg-gray-50 p-4">
+                                <table class="divide-y divide-gray-200 min-w-full">
+                                    <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col"
+                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                            餐序
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                            菜色
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                            份量
+                                        </th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody class="divide-y divide-gray-200">
+
+                                    @foreach($order_list->diet_logs as $diet_log)
+                                        <tr>
+                                            <td class="text-left px-6">{{$order_list->meal_order}}</td>
+                                            <td class="text-left px-6">{{$diet_log->meal_name}}</td>
+                                            <td class="text-left px-6">{{$diet_log->quantity}}</td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+
+            {{--  手機版面          --}}
+            <div class="grid sm:hidden">
+                <div class="flex justify-between ">
+                    <p class="mx-4 my-2 justify-self-start font-bold text-xl">餐序列表</p>
+                </div>
+                <div class="overflow-y-scroll h-7/8 orderList-content">
+                    @foreach($order_lists as $order_list)
+                        <div class="flex overflow-x-scroll">
+                            <!--單筆藥歷共通項目-->
+                            <div class="content-between grid rounded m-2 flex-none bg-gray-50 p-4 w-2/6">
                                 <div class="mb-2">
                                     <p>建立時間：</p>
                                     <p>{{$order_list->created_at}}</p>
@@ -401,61 +463,15 @@
                     search_from:$('#search_from').val()
                 },
                 success:function (res) {
-                    $('#tbody tr').remove();
-                    if(res.length > 0){
-                        // console.log(res);
-                        var del_url = '{{route('delete_orderList')}}'
-                        var check_url = '{{route('get_dietLog')}}'
-                        res.forEach(function (row) {
-                            let id = '<td class="px-6 py-4 whitespace-nowrap">' + row['id'] + '</td>';
-                            let meal_order = '<td class="px-6 py-4 whitespace-nowrap">' + row['meal_order'] + '</td>';
-                            let created_at = '<td class="px-6 py-4 whitespace-nowrap">' + row['created_at'] + '</td>';
-                            let updated_at = '<td class="px-6 py-4 whitespace-nowrap">' + row['updated_at'] + '</td>';
+                    $(".orderList-content").children().remove();
+                        console.log(res)
+                    res.forEach(function (row){
+                        if(row["diet_logs"] != null)
+                        {
 
-                            let change = '<td class="px-6 py-4 whitespace-nowrap">' +
-                                `<a href="#"
-                               class="bg-transparent border border-teal-700 text-teal-700
-                                      hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded btn-patch"
-                                      data-bs-toggle="modal" data-bs-target="#orderListPatch" value="${row['id']}">
-                                修改` +
-                                '</a>' + '</td>';
-
-                            let del = '<td class="px-6 py-4 whitespace-nowrap">' +
-                                `<a href="${del_url}?id=${row['id']}"
-                               class="bg-transparent border border-teal-700 text-teal-700
-                                           hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
-                                刪除` +
-                                '</a>' + '</td>';
-                            let check = '<td class="px-6 py-4 whitespace-nowrap">' +
-                                `<a href="${check_url}?task_id=${row['id']}&patient_id=${row['patient_id']}"
-                               class="bg-transparent border border-teal-700 text-teal-700
-                                           hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
-                                查看` +
-                                '</a>' + '</td>';
-                            $('#tbody').append(
-                                '<tr class="text-gray-700 items-center">' + id + meal_order + created_at + updated_at + change + del + check +'</tr>'
-                            )
-
-                        })
-                        $('.btn-patch').click(function (){
-                            let url  = '{{route('post_orderList_patch_page')}}'
-                            // alert($(this).attr("value"))
-                            $.ajax({
-                                url : url,
-                                method : "post",
-                                data:{
-                                    "_token":"{{csrf_token()}}",
-                                    "id":$(this).attr("value"),
-                                },
-                                success:function(res){
-                                    // console.log(res[0]);
-                                    $("#select").val(res[0]);
-                                    $("#p_orderList_id").val(res[1])
-                                }
-                            })
-                        })
-
-                    }
+                            $(".orderList-content").append();
+                        }
+                    })
 
                 }
             });
