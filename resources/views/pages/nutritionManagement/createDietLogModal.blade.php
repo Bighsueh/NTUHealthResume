@@ -57,14 +57,14 @@
                                 <!--飲食紀錄table content-->
                             </div>
                         </div>
-                        <div class="mx-2">
+                        <div class="mx-2 grid grid-cols-2 md:grid-cols-10">
                             <a id="btn_diet_log_add_row"
-                               class="mx-2 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-1 px-4 rounded">
+                               class="mx-2 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-1 px-2 rounded md:col-span-3 lg:col-span-2">
                                 新增飲食項目
                             </a>
                             <a id="btn_diet_log_reduce_row"
-                               class="mx-2 bg-transparent border border-red-700 text-red-700 hover:bg-red-700 hover:text-white text-center py-1 px-4 rounded">
-                                刪除最後一筆項目
+                               class="mx-2 bg-transparent border border-red-700 text-red-700 hover:bg-red-700 hover:text-white text-center py-1 px-2 rounded md:col-span-3 lg:col-span-2">
+                                刪除最後一筆
                             </a>
                         </div>
                     </div>
