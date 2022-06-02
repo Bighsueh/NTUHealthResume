@@ -186,6 +186,14 @@
 
             update_data();
         })
+
+        //查看全部用藥紀錄
+        $("#btn_all_medication_records").click(function (){
+            let url = `{{route('medicaion_records_get_medication_list')}}?patient_id=${patient_id}`;
+
+            document.location.href = url;
+        })
+
         function update_data() {
             $.ajax({
                 url:"{{route('get_medication_management_task')}}",
@@ -232,7 +240,7 @@
                     }
                     $('.btn_delete').click(function () {
 
-                        task_delete($(this).attr("value"));
+                        task_delete($(this).attr("value"));f
                     })
                     get_detail_page()
                 }

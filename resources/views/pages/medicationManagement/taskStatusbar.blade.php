@@ -32,7 +32,7 @@
                 </div>
                 <div class="mx-2 px-5 grid grid-cols-2 ">
                     <p class="col-span-1 text-xl text-gray-600 col-span-2">全部用藥紀錄</p>
-                    <a class="px-6 col-span-1 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 x-4 rounded">
+                    <a id="btn_all_medication_records" class="px-6 col-span-1 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 x-4 rounded">
                         查看
                     </a>
                 </div>

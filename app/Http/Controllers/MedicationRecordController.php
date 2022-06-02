@@ -723,4 +723,44 @@ class MedicationRecordController extends Controller
             return $exception;
         }
     }
+
+    public function get_medication_list(Request $request)
+    {
+        $task_id = $request->get('task_id');
+
+        $patient_id = $request->get('patient_id');
+
+        //利用patient_id取得patient_no
+        $patient_info = DB::table('patients')
+            ->where('patient_id', $patient_id)
+            ->select('patient_no','patient_id')
+            ->first();
+
+        //藥歷列表
+        $medication_records =
+            DB::table('medication_records')
+                ->where('patient_no',$patient_info->patient_no)
+                ->get();
+
+        foreach ($medication_records as $row) {
+            $record_id = $row->record_id;
+
+            $row->record_detail =
+                DB::table('medication_record_detail')
+                    ->where('record_id', $record_id)
+                    ->get();
+        }
+
+        $result = [
+            'task_id' => $task_id,
+            'patient_info' => $patient_info,
+            'medication_records' => $medication_records,
+        ];
+
+        return View('pages.medicationManagement.medicationList',$result);
+    }
+
+
+
+
 }

@@ -65,6 +65,9 @@ Route::group(['prefix' => 'medication_management', 'middleware' => ['login']], f
     Route::get('/get_medication_records_example', [MedicationRecordController::class, 'get_medication_records_excel_example'])
         ->name('get_medication_records_example');
 
+    //列出該病患所有藥歷列表
+    Route::get('/get_medication_list',[MedicationRecordController::class,'get_medication_list'])
+        ->name('medicaion_records_get_medication_list');
 
     //儲存藥歷詳細記錄Modal
     Route::post('/store_record_detail', [MedicationRecordController::class, 'store_medication_record_detail'])
