@@ -170,11 +170,11 @@
                 <div class="flex justify-between ">
                     <p class="mx-4 my-2 justify-self-start font-bold text-xl">藥歷列表</p>
                 </div>
-                <div class="overflow-y-scroll h-screen">
+                <div class="overflow-y-scroll h-screen ">
                     @foreach($medication_records as $row)
-                        <div class="flex ">
+                        <div class="flex overflow-x-scroll">
                             <!--單筆藥歷共通項目-->
-                            <div class="content-between grid rounded m-2 flex-none bg-gray-50 p-4 w-1/6">
+                            <div class="content-between grid rounded m-2 flex-none bg-gray-50 p-4 lg:w-1/6 md:w-2/6">
                                 <div class="mb-2">
                                     <p>開方日期：</p>
                                     <p>{{$row->redate}}</p>
