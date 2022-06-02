@@ -79,7 +79,8 @@
                 <div class="flex">
                     <!--數據欄位-->
                     <div class="rounded m-2 flex-1 bg-gray-50 p-4">
-                        <table class="divide-y divide-gray-200 min-w-full">
+                        {{--                        <table class="divide-y divide-gray-200 min-w-full">--}}
+                        <table class="divide-y divide-gray-200 min-w-full hidden sm:table" id="tbody">
                             <thead class="bg-gray-50">
                             <tr>
                                 <th scope="col"
@@ -137,6 +138,49 @@
                                 </tr>
                             @endforeach
                             </tbody>
+
+                            {{--        手機版面            --}}
+                            <div class="grid min-w-full sm:hidden" id="mobile_container">
+                                @foreach($task_list as $row)
+                                    <div class="border border-teal-700 rounded  grid my-3 p-1" id="tbody_sm">
+                                        <div class="grid grid-cols-2 my-2 text-center">
+                                            <div>
+                                                任務狀態
+                                            </div>
+                                            <div>
+                                                {{isset($row->status) ? $row->status : '-'}}
+                                            </div>
+                                        </div>
+                                        <div class="grid grid-cols-2 my-2 text-center">
+                                            <div>
+                                                任務建立日期
+                                            </div>
+                                            <div>
+                                                {{isset($row->created_at) ? $row->created_at : '-'}}
+                                            </div>
+                                        </div>
+                                        <div class="grid grid-cols-2 my-2 text-center">
+                                            <div>
+                                                任務結案日期
+                                            </div>
+                                            <div>
+                                                {{isset($row->finish_date) ? $row->finish_date : '-'}}
+                                            </div>
+                                        </div>
+                                        <div class="grid my-2 text-center">
+                                            <a href="{{route('get_medication_management_task_detail_page',['task_id'=>$row->task_id])}}"
+                                               class="bg-transparent border border-teal-700 text-teal-700 mx-1 mobile_view
+                                               hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
+                                                檢視任務
+                                            </a>
+                                            <a class="bg-transparent border border-red-700 text-red-700 mx-1 btn_delete mobile_delete hidden
+                                                        hover:bg-red-700 hover:text-white text-center py-2 px-4 rounded">
+                                                刪除任務
+                                            </a>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
                         </table>
                     </div>
                 </div>
@@ -178,17 +222,18 @@
 
 
         $('.btn_delete_task').click(function () {
-            if(is_delete_mode==true){
-                is_delete_mode=false
-            }else{
-                is_delete_mode=true;
+            if (is_delete_mode == true) {
+                is_delete_mode = false
+            } else {
+                is_delete_mode = true;
             }
 
             update_data();
+
         })
 
         //查看全部用藥紀錄
-        $("#btn_all_medication_records").click(function (){
+        $("#btn_all_medication_records").click(function () {
             let url = `{{route('medicaion_records_get_medication_list')}}?patient_id=${patient_id}`;
 
             document.location.href = url;
@@ -196,42 +241,101 @@
 
         function update_data() {
             $.ajax({
-                url:"{{route('get_medication_management_task')}}",
-                method:'GET',
-                data:{
-                    search_time:$('#search_parameter').val()
+                url: "{{route('get_medication_management_task')}}",
+                method: 'GET',
+                data: {
+                    search_time: $('#search_parameter').val()
                 },
-                success:function (res) {
+                success: function (res) {
                     $('#tbody tr').remove();
+                    let mobile_container = $("#mobile_container");
+                    mobile_container.children().remove();
 
                     console.log(res);
-                    if(res.length > 0){
+                    if (res.length > 0) {
                         let thread = 0;
+                        $(".mobile_delete").toggleClass('hidden');
+                        $(".mobile_view").toggleClass('hidden');
+
 
                         res.forEach(function (row) {
-                            let task_id = '<td class="px-6 py-4 whitespace-nowrap">'+ (thread +=1) + '</td>';
-                            let task_status = '<td class="px-6 py-4 whitespace-nowrap">'+row['status']+'</td>';
-                            let task_created_at =  '<td class="px-6 py-4 whitespace-nowrap">'+row['created_at']+'</td>';
-                            let task_finish_date =  '<td class="px-6 py-4 whitespace-nowrap">'+row['finish_date']+'</td>';
-                            let task_updated_at =  '<td class="px-6 py-4 whitespace-nowrap">'+row['updated_at']+'</td>';
+                            let task_id = '<td class="px-6 py-4 whitespace-nowrap">' + (thread += 1) + '</td>';
+                            let task_status = '<td class="px-6 py-4 whitespace-nowrap">' + row['status'] + '</td>';
+                            let task_created_at = '<td class="px-6 py-4 whitespace-nowrap">' + row['created_at'] + '</td>';
+                            let task_finish_date = '<td class="px-6 py-4 whitespace-nowrap">' + row['finish_date'] + '</td>';
+                            let task_updated_at = '<td class="px-6 py-4 whitespace-nowrap">' + row['updated_at'] + '</td>';
                             let setting_btn = '<td class="px-6 py-4 whitespace-nowrap">';
-                            if (is_delete_mode==true){
-                                setting_btn += `<button  class="bg-transparent border border-red-700 text-red-700 hover:bg-red-700 hover:text-white text-center py-2 px-4 rounded btn_delete" value="`+row['task_id']+`"> 刪除 </button>`;
+                            if (is_delete_mode == true) {
+                                setting_btn += `<button  class="bg-transparent border border-red-700 text-red-700 hover:bg-red-700 hover:text-white text-center py-2 px-4 rounded btn_delete" value="` + row['task_id'] + `"> 刪除 </button>`;
 
-                            }else {
+                            } else {
                                 {{--setting_btn += ` <a href="{{route('get_medication_management_task_detail_page',['task_id'=>$row->task_id])}}"--}}
-                                {{--           class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded ">--}}
-                                {{--            查看--}}
-                                {{--        </a>`;--}}
-                                setting_btn += `<button class="bg-transparent border border-teal-700 text-teal-700
+                                    {{--           class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded ">--}}
+                                    {{--            查看--}}
+                                    {{--        </a>`;--}}
+                                    setting_btn += `<button class="bg-transparent border border-teal-700 text-teal-700
                                                     hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded
-                                                       btn_get_detail_page " value="`+row['task_id']+`">查看</button>`;
+                                                       btn_get_detail_page " value="` + row['task_id'] + `">查看</button>`;
                             }
                             setting_btn += '</td>';
                             $('#tbody').append(
-                                '<tr>'+task_id+task_status+task_created_at+task_finish_date+task_updated_at+ setting_btn +'</tr>'
+                                '<tr>' + task_id + task_status + task_created_at + task_finish_date + task_updated_at + setting_btn + '</tr>'
                             )
+
+                            //手機介面
+                            let mobile_button = "";
+                            if (is_delete_mode) {
+                                mobile_button = `
+                                <a href="{{route('get_medication_management_task_detail_page')}}?task_id=${row['task_id']}"
+                                    class="bg-transparent border border-teal-700 text-teal-700 mx-1 mobile_view
+                                    hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">
+                                    檢視任務
+                                </a>`;
+                            }else {
+                                mobile_button = `
+                                <a class="bg-transparent border border-red-700 text-red-700 mx-1 btn_delete mobile_delete
+                                   hover:bg-red-700 hover:text-white text-center py-2 px-4 rounded">
+                                       刪除任務
+                                </a>
+                                `;
+                            }
+
+                            //add row
+                            let mobile_row = `
+                            <div class="border border-teal-700 rounded  grid my-3 p-1" id="tbody_sm">
+                                <div class="grid grid-cols-2 my-2 text-center">
+                                    <div>
+                                        任務狀態
+                                    </div>
+                                    <div>
+                                        ${row['status']}
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 my-2 text-center">
+                                    <div>
+                                        任務建立日期
+                                    </div>
+                                    <div>
+                                        ${row['created_at']}
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 my-2 text-center">
+                                    <div>
+                                        任務結案日期
+                                    </div>
+                                    <div>
+                                         ${row['finish_date']}
+                                    </div>
+                                </div>
+                                <div class="grid my-2 text-center">
+                                    ${mobile_button}
+                                </div>
+                            </div>
+                        `;
+                            mobile_container.append(mobile_row);
+
                         })
+
 
                         //更新任務統計數量
                         let task_nums = $("#tbody").children().length;
@@ -240,30 +344,31 @@
                     }
                     $('.btn_delete').click(function () {
 
-                        task_delete($(this).attr("value"));f
+                        task_delete($(this).attr("value"));
+                        f
                     })
                     get_detail_page()
                 }
             });
         }
 
-        function get_detail_page(){
+        function get_detail_page() {
             $('.btn_get_detail_page').click(function () {
                 let task_id = $(this).attr("value");
                 // window.alert(task_id);
                 $.ajax({
-                    url:"{{route('get_push_task_id')}}",
-                    method:'get',
-                    data:{
-                        'task_id' :task_id
+                    url: "{{route('get_push_task_id')}}",
+                    method: 'get',
+                    data: {
+                        'task_id': task_id
                     },
-                    success:function (res) {
+                    success: function (res) {
                         //取得task_id
                         let task_id = res;
 
-                        window.location.href=`{{route('get_medication_management_task_detail_page')}}?task_id=${task_id}&patient_id=${patient_id}`
+                        window.location.href = `{{route('get_medication_management_task_detail_page')}}?task_id=${task_id}&patient_id=${patient_id}`
 
-                    },error:function (res){
+                    }, error: function (res) {
 
                     }
                 })
@@ -280,12 +385,12 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url:"{{route('delete_medication_management_task')}}",
-                        method:'GET',
-                        data:{
-                            task_id:task_id
+                        url: "{{route('delete_medication_management_task')}}",
+                        method: 'GET',
+                        data: {
+                            task_id: task_id
                         },
-                        success:function (res) {
+                        success: function (res) {
                             Swal.fire('刪除成功', '', 'success');
                             update_data();
                         }
@@ -299,7 +404,6 @@
         $('#btn_search').click(function () {
             update_data();
         })
-
 
 
     </script>
