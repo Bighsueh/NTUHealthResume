@@ -14,6 +14,16 @@
                         <input
                             class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
                             type="text" placeholder="請輸入欲查詢資料" id="search_parameter">
+
+{{--                        <select class=" bg-transparent  border-none w-1/6 text-gray-700 mr-3 py-1 px-2  leading-tight focus:outline-none "--}}
+{{--                                id="search_from">--}}
+{{--                                                        <option value="patient_id">ID</option>--}}
+{{--                            <option value="status">任務狀態</option>--}}
+{{--                            <option value="created_at">任務建立日期</option>--}}
+{{--                            <option value="finish_date">任務結案日期</option>--}}
+{{--                            <option value="updated_at">最後異動時間</option>--}}
+{{--                        </select>--}}
+
                         <button
                             class="mx-4 flex-shrink-0 bg-teal-700 hover:bg-teal-500 border-teal-700 hover:border-teal-500 text-sm border-4 text-white py-1 px-2 rounded"
                             type="button" id="btn_search">
@@ -239,7 +249,7 @@
             document.location.href = url;
         })
 
-        function update_data() {
+        function update_data(is_search=false) {
             $.ajax({
                 url: "{{route('get_medication_management_task')}}",
                 method: 'GET',
@@ -262,7 +272,12 @@
                             let task_id = '<td class="px-6 py-4 whitespace-nowrap">' + (thread += 1) + '</td>';
                             let task_status = '<td class="px-6 py-4 whitespace-nowrap">' + row['status'] + '</td>';
                             let task_created_at = '<td class="px-6 py-4 whitespace-nowrap">' + row['created_at'] + '</td>';
-                            let task_finish_date = '<td class="px-6 py-4 whitespace-nowrap">' + row['finish_date'] + '</td>';
+                            let task_finish_date = '<td class="px-6 py-4 whitespace-nowrap">' ;
+                            if(row['finish_date']==null){
+                                task_finish_date +='</td>';
+                            }else {
+                                task_finish_date +=row['finish_date']+'</td>';
+                            }
                             let task_updated_at = '<td class="px-6 py-4 whitespace-nowrap">' + row['updated_at'] + '</td>';
                             let setting_btn = '<td class="px-6 py-4 whitespace-nowrap">';
                             if (is_delete_mode == true) {

@@ -394,6 +394,95 @@ class MedicationRecordController extends Controller
 
     }
 
+    //取得藥歷列表資訊、查詢(taskDetail.blade)
+    function get_medication_data(Request $request){
+        try{
+            $task_id = $request->get('task_id');
+
+            $patient_id = $request->get('patient_id');
+
+
+            //利用patient_id取得patient_no
+            $patient_info = DB::table('patients')
+                ->where('patient_id', $patient_id)
+                ->select('patient_no','patient_id')
+                ->first();
+
+            //藥歷列表
+            $medication_records =
+                DB::table('medication_records')
+                    ->get();
+
+            //藥師回饋單
+            $pharmacist_feedback =
+                DB::table('pharmacist_feedback')
+                    ->where('task_id', $task_id)
+                    ->first();
+
+            //醫師回饋單
+            $doctor_feedback =
+                DB::table('other_information')
+                    ->where('task_id', $task_id)
+                    ->first();
+
+            $search_from = $request->search_from;
+            $search_data = $request->search_data;
+            $count = 0;
+            if($search_from!='trade_name'&&$search_from!='generic_name'){
+                $medication_records =
+                    DB::table('medication_records')
+                        ->where($request->search_from,'like','%'.$search_data.'%')
+                        ->get();
+
+                foreach ($medication_records as $row) {
+                    $record_id = $row->record_id;
+
+                    $row->record_detail =
+                        DB::table('medication_record_detail')
+                            ->where('record_id', $record_id)
+                            ->get();
+                    $count = $count + 1;
+                }
+
+            }else{
+
+
+                foreach ($medication_records as $row) {
+                    $record_id = $row->record_id;
+
+
+                    $record_detail =
+                        DB::table('medication_record_detail')
+                            ->where($request->search_from,'like','%'.$search_data.'%')
+                            ->where('record_id', $record_id)
+                            ->get();
+                    if(count($record_detail)==0){
+                        unset($medication_records[$count]);
+                    }else{
+                        $row->record_detail =
+                            DB::table('medication_record_detail')
+                                ->where('record_id', $record_id)
+                                ->get();
+                        $count = $count + 1;
+                    }
+
+                }
+
+            }
+            $result = [
+                'task_id' => $task_id,
+                'patient_info' => $patient_info,
+                'medication_records' => $medication_records,
+                'pharmacist_feedback' => $pharmacist_feedback,
+                'doctor_feedback' => $doctor_feedback,
+            ];
+
+            return  $result;
+        }catch (Exception $exception) {
+            return $exception;
+        }
+    }
+
     //建立藥物紀錄
     public function create_medication_record(Request $request)
     {

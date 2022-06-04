@@ -15,6 +15,9 @@
                         <input
                             class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
                             type="text" placeholder="請輸入欲查詢資料">
+
+
+
                         <button
                             class="mx-4 flex-shrink-0 bg-teal-700 hover:bg-teal-500 border-teal-700 hover:border-teal-500 text-sm border-4 text-white py-1 px-2 rounded"
                             type="button">

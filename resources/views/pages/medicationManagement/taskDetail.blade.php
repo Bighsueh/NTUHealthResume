@@ -15,10 +15,29 @@
                         </svg>
                         <input
                             class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
-                            type="text" placeholder="請輸入欲查詢資料">
+                            id="input_search" type="text" placeholder="請輸入欲查詢資料">
+
+                        <select class=" bg-transparent  border-none w-1/6 text-gray-700 mr-3 py-1 px-2  leading-tight focus:outline-none "
+                                id="search_from">
+                            <option value="date_of_examination">
+                                就醫日期</option>
+                            <option value="redate">
+                                開方日期</option>
+                            <option value="pres_hosp">
+                                處方醫院</option>
+                            <option value="disp_hosp">
+                                調劑醫院</option>
+                            <option value="trade_name">
+                                藥品名稱</option>
+                            <option value="generic_name">
+                                藥品成分</option>
+                        </select>
+
+
                         <button
                             class="mx-4 flex-shrink-0 bg-teal-700 hover:bg-teal-500 border-teal-700 hover:border-teal-500 text-sm border-4 text-white py-1 px-2 rounded"
-                            type="button">
+                            type="button"
+                            id="btn_search">
                             <p class="mx-4">
                                 搜尋
                             </p>
@@ -170,9 +189,9 @@
                 <div class="flex justify-between ">
                     <p class="mx-4 my-2 justify-self-start font-bold text-xl">藥歷列表</p>
                 </div>
-                <div class="overflow-y-scroll h-screen ">
+                <div class="overflow-y-scroll h-screen tbody">
                     @foreach($medication_records as $row)
-                        <div class="flex overflow-x-scroll">
+                        <div class="flex overflow-x-scroll big_row">
                             <!--單筆藥歷共通項目-->
                             <div class="content-between grid rounded m-2 flex-none bg-gray-50 p-4 lg:w-1/6 md:w-2/6">
                                 <div class="mb-2">
@@ -256,5 +275,109 @@
         $('#btn-medication-record-excel').click(function () {
             open_medicationRecordsExcelModal();
         })
+
+        updata_task_detail_data();
+        //查詢按鈕click
+        $('#btn_search').click(function () {
+            if($('#input_search').val() == ''){
+                window.location.reload();
+            }else{
+                updata_task_detail_data(true);
+            }
+       })
+
+        //查詢、取得表格資料
+        function updata_task_detail_data(is_search=false) {
+            $.ajax({
+                url:"{{route('get_medication_detail_data')}}",
+                method:'POST',
+                data:{
+                    "_token": "{{csrf_token()}}",
+                    'task_id':{{$task_id}},
+                    'is_search':is_search,
+                    'search_data' :$('#input_search').val() ,
+                    'search_from':$('#search_from').val(),
+                    'patient_id':{{$patient_info->patient_id}}
+                },success:function (res) {
+                    $('.tbody .big_row').remove();
+                    console.log(res['medication_records']);
+                    console.log(res['medication_records'].length);
+                    if(res['medication_records'].length > 0){
+                        res['medication_records'].forEach(function (row) {
+                                let row_record =
+                                    `                 <div class="flex overflow-x-scroll big_row">
+                            <!--單筆藥歷共通項目-->
+                            <div class="content-between grid rounded m-2 flex-none bg-gray-50 p-4 lg:w-1/6 md:w-2/6">
+                                <div class="mb-2">
+                                    <p>開方日期：</p>
+                                    <p>${row['redate']}</p>
+                                </div>
+                                <div hidden class="record_id">${row['record_id']}</div>
+                                <a class="btn-open-medication-record-detail-modal col-span-1 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 x-4 rounded"
+                                   data-bs-toggle="modal" data-bs-target="#medicationRecordDetailModel">
+                                    詳細內容
+                                </a>
+                            </div>
+
+                            <!--單筆藥歷藥品列向-->
+                            <div class="rounded m-2 flex-auto bg-gray-50 p-4">
+                                <table class="divide-y divide-gray-200 min-w-full">
+                                    <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col"
+                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                            藥品名稱
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                            藥品成分
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                            單位劑量
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                            顆、包數或CC數
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                            每日劑量
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                            頻率
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-200">`;
+
+                            row['record_detail'].forEach(function (detail_row) {
+                                row_record +=`<tr>
+                                            <td class="text-left px-6">${detail_row['trade_name']}</td>
+                                            <td class="text-left px-6">${detail_row['generic_name']}</td>
+                                            <td class="text-left px-6">${detail_row['dose_per_unit']}</td>
+                                            <td class="text-left px-6">${detail_row['dose']}</td>
+                                            <td class="text-left px-6">${detail_row['daily_dose']}</td>
+                                            <td class="text-left px-6">${detail_row['freq']}</td>
+                                        </tr>`;
+                            })
+
+                            row_record +=`</tbody>
+                                </table>
+                            </div>
+                        </div>`;
+
+
+                            $('.tbody').append(row_record);
+                            }
+
+                        )
+                    }
+                }
+
+            })
+        }
+
     </script>
 @endsection
