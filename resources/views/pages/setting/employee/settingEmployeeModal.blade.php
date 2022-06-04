@@ -173,39 +173,69 @@
 
     //儲存功能
     function store_edit_employee(){
-        $.ajax({
-            url:"{{route('store_edit_employee')}}",
-            method:'get',
-            data:{
-                employee_id:id,
-                employee_no:$('#edit_employee_no').val(),
-                employee_name:$('#edit_employee_name').val(),
-                employee_account:$('#edit_employee_account').val(),
-                employee_password:$('#edit_employee_password').val(),
-                job_title:$('#edit_job_title').val(),
-                department:$('#edit_department').val(),
-                admin:$('#edit_admin').val(),
-                open_main_task:$('#edit_open_main_task').val(),
-                add_doctor_reply:$('#edit_add_doctor_reply').val(),
-                add_pharmacist_reply:$('#edit_add_pharmacist_reply').val(),
-                close_main_task:$('#edit_close_main_task').val(),
-                add_diet_log:$('#edit_add_diet_log').val(),
-                add_nutritionist:$('#edit_add_nutritionist').val(),
-                manage_employee:$('#edit_manage_employee').val(),
-                manage_patient:$('#edit_manage_patient').val()
-            },
-            success:function (res){
-                // window.alert(res)
-                Swal.fire(res, '', 'success');
-                window.location.reload();
-            },error:function (res){
-                Swal.fire({
-                    icon:'error',
-                    title:'儲存失敗',
-                    confirmButton:'#8CD4F5'
-                });
-            }
-        })
+        if(check_edit_null()==false){
+            Swal.fire({
+                icon:'error',
+                title:'有空白欄位',
+                confirmButton:'#8CD4F5'
+            });
+        }else{
+            $.ajax({
+                url:"{{route('store_edit_employee')}}",
+                method:'get',
+                data:{
+                    employee_id:id,
+                    employee_no:$('#edit_employee_no').val(),
+                    employee_name:$('#edit_employee_name').val(),
+                    employee_account:$('#edit_employee_account').val(),
+                    employee_password:$('#edit_employee_password').val(),
+                    job_title:$('#edit_job_title').val(),
+                    department:$('#edit_department').val(),
+                    admin:$('#edit_admin').val(),
+                    open_main_task:$('#edit_open_main_task').val(),
+                    add_doctor_reply:$('#edit_add_doctor_reply').val(),
+                    add_pharmacist_reply:$('#edit_add_pharmacist_reply').val(),
+                    close_main_task:$('#edit_close_main_task').val(),
+                    add_diet_log:$('#edit_add_diet_log').val(),
+                    add_nutritionist:$('#edit_add_nutritionist').val(),
+                    manage_employee:$('#edit_manage_employee').val(),
+                    manage_patient:$('#edit_manage_patient').val()
+                },
+                success:function (res){
+                    // window.alert(res)
+                    Swal.fire(res, '', 'success');
+                    window.location.reload();
+                },error:function (res){
+                    Swal.fire({
+                        icon:'error',
+                        title:'儲存失敗',
+                        confirmButton:'#8CD4F5'
+                    });
+                }
+            })
+        }
+
+    }
+
+    function check_edit_null() {
+        if($('#edit_employee_no').val()==''){
+            return false;
+        }
+        if($('#edit_employee_name').val()==''){
+            return false;
+        }
+        if($('#edit_employee_account').val()==''){
+            return false;
+        }
+        if($('#edit_employee_password').val()==''){
+            return false;
+        }
+        if($('#edit_job_title').val()==''){
+            return false;
+        }
+        if($('#edit_department').val()==''){
+            return false;
+        }
     }
 
     //刪除按鈕click

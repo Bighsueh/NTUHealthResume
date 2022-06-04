@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use function Psy\debug;
+use Illuminate\Support\Facades\Log;
 
 class EmployeeController extends Controller
 {
@@ -95,9 +97,16 @@ class EmployeeController extends Controller
 
     function get_employee_data(Request $request){
        try{
-            $data = DB::table('employees')
-                ->where($request->search_from,'like','%'.$request->search_data.'%')
-                ->get();
+
+           if($request->is_search===true){
+               $data = DB::table('employees')
+                   ->where($request->search_from,'like','%'.$request->search_data.'%')
+                   ->get();
+           }else{
+               $data = DB::table('employees')
+                   ->get();
+           }
+
             return $data;
        }catch (Exception $exception){
            return $exception;

@@ -135,23 +135,24 @@
         //隱私功能(顯示資訊按鈕)
         let privacy_mode = true;
 
-        update_patient_data();
+        update_patient_data(false);
 
         //查詢按鈕click
         $('#btn_search').click(function () {
             if($('#input_search').val() == ''){
                 window.location.reload();
             }else{
-                update_patient_data();
+                update_patient_data(true);
             }
         })
 
         //table刷新、查詢
-        function update_patient_data(){
+        function update_patient_data(is_search){
             $.ajax({
                 url:"{{route('get_patient_data')}}",
                 method:'get',
                 data:{
+                    is_search:is_search,
                     search_data :$('#input_search').val() ,
                     search_from:$('#search_from').val()
                 },
@@ -159,49 +160,25 @@
                     $('#tbody tr').remove();
                     if(res.length > 0){
                         let thead = 0;
-                        if(privacy_mode){
-                            res.forEach(function (row) {
-                                thead +=1;
-                                let patient_id = '<td class="px-6 py-4 whitespace-nowrap">'+thead+'</td>';
-                                let patient_no = '<td class="px-6 py-4 whitespace-nowrap">'+row['patient_no'].substr(0,3)+"***"+'</td>';
-                                let patient_name = '<td class="px-6 py-4 whitespace-nowrap">'+row['patient_name']+'</td>';
-                                let place = '<td class="px-6 py-4 whitespace-nowrap">'+row['place'].substr(0,3)+"***"+'</td>';
-                                let id_number = '<td class="px-6 py-4 whitespace-nowrap">'+row['id_number'].substr(0,3)+"***"+'</td>';
-                                let patient_bd = '<td class="px-6 py-4 whitespace-nowrap">'+row['patient_bd'].substr(0,2)+"***"+'</td>';
-                                let close_date = '<td class="px-6 py-4 whitespace-nowrap">'+row['close_date']+'</td>';
-                                let setting_btn = `<td class="px-6 py-4 whitespace-nowrap">
+                        res.forEach(function (row) {
+                            thead +=1;
+                            let patient_id = '<td class="px-6 py-4 whitespace-nowrap">'+thead+'</td>';
+                            let patient_no = '<td class="px-6 py-4 whitespace-nowrap">'+string_maker(row['patient_no'])+'</td>';
+                            let patient_name = '<td class="px-6 py-4 whitespace-nowrap">'+string_maker(row['patient_name'],true)+'</td>';
+                            let place = '<td class="px-6 py-4 whitespace-nowrap">'+string_maker(row['place'])+'</td>';
+                            let id_number = '<td class="px-6 py-4 whitespace-nowrap">'+string_maker(row['id_number'])+'</td>';
+                            let patient_bd = '<td class="px-6 py-4 whitespace-nowrap">'+string_maker(row['patient_bd'])+'</td>';
+                            let close_date = '<td class="px-6 py-4 whitespace-nowrap">'+string_maker(row['close_date'],true)+'</td>';
+                            let setting_btn = `<td class="px-6 py-4 whitespace-nowrap">
                                     <button type="button" class="bg-teal-700
                                      hover:bg-teal-500 border-teal-700 hover:border-teal-500 text-sm
                                      border-4 text-white py-1 px-3 rounded btn_patient" value="`+row['patient_id']+`"
                                     >修改</button>`+
-                                    '</td>';
-                                $('#tbody').append(
-                                    '<tr>'+patient_id+patient_no+patient_name+place+id_number+patient_bd+close_date+setting_btn+'</tr>'
-                                )
-                            })
-                        }else {
-                            res.forEach(function (row) {
-                                thead +=1;
-                                let patient_id = '<td class="px-6 py-4 whitespace-nowrap">'+thead+'</td>';
-                                let patient_no = '<td class="px-6 py-4 whitespace-nowrap">'+row['patient_no']+'</td>';
-                                let patient_name = '<td class="px-6 py-4 whitespace-nowrap">'+row['patient_name']+'</td>';
-                                let place = '<td class="px-6 py-4 whitespace-nowrap">'+row['place']+'</td>';
-                                let id_number = '<td class="px-6 py-4 whitespace-nowrap">'+row['id_number']+'</td>';
-                                let patient_bd = '<td class="px-6 py-4 whitespace-nowrap">'+row['patient_bd']+'</td>';
-                                let close_date = '<td class="px-6 py-4 whitespace-nowrap">'+row['close_date']+'</td>';
-                                let setting_btn = `<td class="px-6 py-4 whitespace-nowrap">
-                                    <button type="button" class="bg-teal-700
-                                     hover:bg-teal-500 border-teal-700 hover:border-teal-500 text-sm
-                                     border-4 text-white py-1 px-3 rounded btn_patient" value="`+row['patient_id']+`"
-                                    >修改</button>`+
-                                    '</td>';
-                                $('#tbody').append(
-                                    '<tr>'+patient_id+patient_no+patient_name+place+id_number+patient_bd+close_date+setting_btn+'</tr>'
-                                )
-                            })
-                        }
-
-
+                                '</td>';
+                            $('#tbody').append(
+                                '<tr>'+patient_id+patient_no+patient_name+place+id_number+patient_bd+close_date+setting_btn+'</tr>'
+                            )
+                        })
                         $('.btn_patient').click(function () {
                             open_settingPatientModal($(this).attr('value'));
                         })
@@ -231,6 +208,23 @@
 
         update_patient_data();
     })
+        //隱私資料處理
+        function string_maker(word,is_nomal=false) {
+            if(is_nomal){
+                if(word==null){
+                    return '';
+                }else {return word}
 
+            }else {
+                if(word==null){
+                    return '';
+                }else if(privacy_mode){
+                    return word.substr(0,3)+'***';
+                }else {
+                    return word;
+                }
+            }
+
+        }
     </script>
 @endsection

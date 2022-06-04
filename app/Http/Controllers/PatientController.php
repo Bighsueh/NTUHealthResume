@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Log;
 
 class PatientController extends Controller
 {
@@ -17,9 +18,15 @@ class PatientController extends Controller
 
     function get_patient_data(Request $request){
         try{
-            $patient = DB::table('patients')
-                ->where($request->search_from,'like','%'.$request->search_data.'%')
-                ->get();
+            if($request->is_search === true){
+                $patient = DB::table('patients')
+                    ->where($request->search_from,'like','%'.$request->search_data.'%')
+                    ->get();
+            }else{
+                $patient = DB::table('patients')
+                    ->get();
+            }
+//            Log::debug(count($patient));
 
             return $patient;
         }catch (Exception $exception){

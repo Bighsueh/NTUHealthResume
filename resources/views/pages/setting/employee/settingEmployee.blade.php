@@ -138,35 +138,38 @@
     </div>
     <script>
 
-        update_data();
+        update_data(false);
 
         //查詢按鈕
         $('#btn_search').click(function (){
             if($('#input_search').val() == ''){
                 window.location.reload();
             }else {
-                update_data();
+
+                update_data(true);
             }
         })
 
         //table刷新、查詢
-        function update_data() {
+        function update_data(is_search) {
 
             $.ajax({
                url:"{{route('get_employee_data')}}",
                 method:'get',
                 data:{
-                   search_data :$('#input_search').val() ,
+                    is_search:is_search,
+                   search_data :$('#input_search').val(),
                     search_from:$('#search_from').val()
                 },
                 success:function (res) {
                     $('#tbody tr').remove();
+                    console.log(res);
                     let thead = 0
                     if(res.length > 0){
                         res.forEach(function (row) {
                             thead += 1;
                             let employee_id = '<td class="px-6 py-4 whitespace-nowrap">' + thead + '</td>';
-                            let employee_no = '<td class="px-6 py-4 whitespace-nowrap">' + row['employee_no'] + '</td>';
+                            let employee_no = '<td class="px-6 py-4 whitespace-nowrap">'+row['employee_no']+'</td>';
                             let employee_name = '<td class="px-6 py-4 whitespace-nowrap">' + row['employee_name'] + '</td>';
                             let employee_account = '<td class="px-6 py-4 whitespace-nowrap">' + row['employee_account'] + '</td>';
                             let employee_password = '<td class="px-6 py-4 whitespace-nowrap">' + row['employee_password'] + '</td>';

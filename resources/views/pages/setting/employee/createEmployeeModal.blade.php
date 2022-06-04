@@ -107,6 +107,9 @@
     </div>
 </div>
 <script>
+
+
+
     //打開新增Modal
     function open_createEmployeeModal(){
         $('.btn_check').prop('checked',false);
@@ -123,40 +126,70 @@
 
     //新增功能
     function store_create_employee(){
+        if(check_create_null()==false){
+            Swal.fire({
+                icon:'error',
+                title:'有空白欄位',
+                confirmButton:'#8CD4F5'
+            });
+        }else {
+            $.ajax({
+                url:'{{route('store_create_employee')}}',
+                method:'get',
+                data:{
+                    employee_no:$('#create_employee_no').val(),
+                    employee_name:$('#create_employee_name').val(),
+                    employee_account:$('#create_employee_account').val(),
+                    employee_password:$('#create_employee_password').val(),
+                    job_title:$('#create_job_title').val(),
+                    department:$('#create_department').val(),
+                    admin:$('#create_admin').val(),
+                    open_main_task:$('#create_open_main_task').val(),
+                    add_doctor_reply:$('#create_add_doctor_reply').val(),
+                    add_pharmacist_reply:$('#create_add_pharmacist_reply').val(),
+                    close_main_task:$('#create_close_main_task').val(),
+                    add_diet_log:$('#create_add_diet_log').val(),
+                    add_nutritionist:$('#create_add_nutritionist').val(),
+                    manage_employee:$('#create_manage_employee').val(),
+                    manage_patient:$('#create_manage_patient').val()
+                },
+                success:function (res){
+                    // window.alert(res)
+                    Swal.fire('新增成功', '', 'success');
+                    window.location.reload();
+                },error:function (res){
+                    Swal.fire({
+                        icon:'error',
+                        title:'新增失敗',
+                        confirmButton:'#8CD4F5'
+                    });
+                }
+            })
+        }
 
-        $.ajax({
-            url:'{{route('store_create_employee')}}',
-            method:'get',
-            data:{
-                employee_no:$('#create_employee_no').val(),
-                employee_name:$('#create_employee_name').val(),
-                employee_account:$('#create_employee_account').val(),
-                employee_password:$('#create_employee_password').val(),
-                job_title:$('#create_job_title').val(),
-                department:$('#create_department').val(),
-                admin:$('#create_admin').val(),
-                open_main_task:$('#create_open_main_task').val(),
-                add_doctor_reply:$('#create_add_doctor_reply').val(),
-                add_pharmacist_reply:$('#create_add_pharmacist_reply').val(),
-                close_main_task:$('#create_close_main_task').val(),
-                add_diet_log:$('#create_add_diet_log').val(),
-                add_nutritionist:$('#create_add_nutritionist').val(),
-                manage_employee:$('#create_manage_employee').val(),
-                manage_patient:$('#create_manage_patient').val()
-            },
-            success:function (res){
-                // window.alert(res)
-                Swal.fire('新增成功', '', 'success');
-                window.location.reload();
-            },error:function (res){
-                Swal.fire({
-                    icon:'error',
-                    title:'新增失敗',
-                    confirmButton:'#8CD4F5'
-                });
-            }
-        })
     }
+
+    function check_create_null() {
+        if($('#create_employee_no').val()==''){
+            return false;
+        }
+        if($('#create_employee_name').val()==''){
+            return false;
+        }
+        if($('#create_employee_account').val()==''){
+            return false;
+        }
+        if($('#create_employee_password').val()==''){
+            return false;
+        }
+        if($('#create_job_title').val()==''){
+            return false;
+        }
+        if($('#create_department').val()==''){
+            return false;
+        }
+    }
+
     //權限checkbox
     $('.btn_check').change(function () {
         this.value = (Number(this.checked));
@@ -171,7 +204,6 @@
             $('.btn_check').prop('checked',true);
             $('.btn_check').val(1);
         }
-
     })
 
 
