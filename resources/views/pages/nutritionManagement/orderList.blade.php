@@ -300,7 +300,7 @@
                 <div class="flex justify-between ">
                     <p class="mx-4 my-2 justify-self-start font-bold text-xl">餐序列表</p>
                 </div>
-                <div class="overflow-y-scroll h-7/8 orderList-content">
+                <div class="overflow-y-scroll h-7/8 orderList-content-mobile">
                     @foreach($order_lists as $order_list)
                         <div class="flex overflow-x-scroll">
                             <!--單筆藥歷共通項目-->
@@ -381,56 +381,116 @@
                 },
                 success:function (res) {
                     $(".orderList-content").children().remove();
+                    $(".orderList-content-mobile").children().remove();
                     let count = 0
                     res.forEach(function (row){
                         if(row["diet_logs"] != null)
                         {
                             count += 1
+                            //電腦版面
                             $(".orderList-content").append(`
-                            <div class="flex overflow-x-scroll">
-                                <div class="content-between grid rounded m-2 flex-none bg-gray-50 p-4 w-2/6">
-                                    <div class="mb-2">
-                                        <p>建立時間：</p>
-                                        <p>${row["created_at"]}</p>
+                                <div class="flex ">
+                                    <!--單筆藥歷共通項目-->
+                                    <div class="content-between grid rounded m-2 flex-none bg-gray-50 p-4 w-1/6">
+                                        <div class="mb-2">
+                                            <p>建立時間：</p>
+                                            <p>${row["created_at"]}</p>
+                                        </div>
+                                        <div hidden class="task_id">${row["id"]}</div>
+                                        <a class="btn-open-order-list-detail-modal col-span-1 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 x-4 rounded"
+                                           data-bs-toggle="modal" data-bs-target="#dietLog">
+                                            詳細內容
+                                        </a>
+                                    </div>
+
+                                    <!--單筆餐序列向-->
+                                    <div class="rounded m-2 flex-auto bg-gray-50 p-4">
+                                        <table class="divide-y divide-gray-200 min-w-full">
+                                            <thead class="bg-gray-50">
+                                                <tr>
+                                                    <th scope="col"
+                                                        class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                                        餐序
+                                                    </th>
+                                                    <th scope="col"
+                                                        class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                                        菜色
+                                                    </th>
+                                                    <th scope="col"
+                                                        class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                                        份量
+                                                    </th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody id="tbody${count}" class="divide-y divide-gray-200">
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
-                            <div hidden class="task_id">${row["id"]}</div>
-                                <a class="btn-open-order-list-detail-modal col-span-1 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 x-4 rounded"
-                                   data-bs-toggle="modal" data-bs-target="#dietLog">
-                                    詳細內容
-                                </a>
-                            </div>
-
-                            <!--單筆餐序列向-->
-                            <div class="rounded m-2 flex-auto bg-gray-50 p-4">
-                                <table class="divide-y divide-gray-200 min-w-full">
-                                    <thead class="bg-gray-50">
-                                    <tr>
-                                        <th scope="col"
-                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                            餐序
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                            菜色
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                            份量
-                                        </th>
-                                    </tr>
-                                    </thead>
-
-                                    <tbody class="divide-y divide-gray-200" id="tbody${count}">
-
-
-                                    </tbody>
-                                </table>
-                            </div>
-                            </div>
                             `);
+
+
+                            // 手機版面
+                            $(".orderList-content-mobile").append(`
+                                <div class="flex overflow-x-scroll">
+                                    <div class="content-between grid rounded m-2 flex-none bg-gray-50 p-4 w-2/6">
+                                        <div class="mb-2">
+                                            <p>建立時間：</p>
+                                            <p>${row["created_at"]}</p>
+                                        </div>
+                                        <div hidden class="task_id">${row["id"]}</div>
+                                        <a class="btn-open-order-list-detail-modal col-span-1 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 x-4 rounded"
+                                           data-bs-toggle="modal" data-bs-target="#dietLog">
+                                            詳細內容
+                                        </a>
+                                    </div>
+
+                                    <!--單筆餐序列向-->
+                                    <div class="rounded m-2 flex-auto bg-gray-50 p-4">
+                                        <table class="divide-y divide-gray-200 min-w-full">
+                                            <thead class="bg-gray-50">
+                                                <tr>
+                                                    <th scope="col"
+                                                        class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                                        餐序
+                                                    </th>
+                                                    <th scope="col"
+                                                        class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                                        菜色
+                                                    </th>
+                                                    <th scope="col"
+                                                        class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                                        份量
+                                                    </th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody class="divide-y divide-gray-200" id="tbody-mobile${count}">
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            `);
+
+                            //
                             row["diet_logs"].forEach(function(diet_log){
                                 tbody_name = "#tbody" + count
+                                tbody_name_mobile = "#tbody-mobile" + count
+                                // 電腦
                                 $(tbody_name).append(`
+                                    <tr>
+                                        <td class="text-left px-6">${row["meal_order"]}</td>
+                                        <td class="text-left px-6">${diet_log["meal_name"]}</td>
+                                        <td class="text-left px-6">${diet_log["quantity"]}</td>
+                                    </tr>
+                                `)
+                                // 手機
+                                $(tbody_name_mobile).append(`
                                     <tr>
                                         <td class="text-left px-6">${row["meal_order"]}</td>
                                         <td class="text-left px-6">${diet_log["meal_name"]}</td>
@@ -440,9 +500,7 @@
                             })
                         }
                     })
-
-
-
+                    set_listener()
                 }
             });
 
