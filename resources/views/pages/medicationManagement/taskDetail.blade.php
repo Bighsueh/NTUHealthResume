@@ -393,8 +393,8 @@
                         )
                     }
 
-
                     open_medication_record_detail_modal();
+
                 }
 
             });

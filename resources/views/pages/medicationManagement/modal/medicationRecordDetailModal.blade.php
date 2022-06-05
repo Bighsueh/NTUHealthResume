@@ -99,7 +99,7 @@
     </div>
 </div>
 <script>
-    $(function () {
+    // $(function () {
         //原資料
         let record_id;
         let origin_record_detail_data;
@@ -308,6 +308,6 @@
             let image_length = $("#medeicationRecordDetailImageList").children().length;
             $('#medicationRecordDetailNum').text(`第 ${image_index + 1} 張，共 ${image_length} 張圖片`)
         }
-    });
+    // });
 
 </script>
