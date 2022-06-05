@@ -427,48 +427,68 @@ class MedicationRecordController extends Controller
 
             $search_from = $request->search_from;
             $search_data = $request->search_data;
-            $count = 0;
-            if($search_from!='trade_name'&&$search_from!='generic_name'){
-                $medication_records =
+
+
+
+
+            $records_id =
                     DB::table('medication_records')
-                        ->where($request->search_from,'like','%'.$search_data.'%')
+                        ->where('medication_records.patient_no', $patient_info->patient_no)
+                        ->LeftJoin('medication_record_detail','medication_records.record_id','=','medication_record_detail.record_id')
+                        ->where(function($medication_records) use ($search_from,$search_data){
+                            $medication_records
+                                ->orWhere($search_from, 'like', '%' . $search_data . '%')
+                            ;
+                        })
                         ->get();
 
-                foreach ($medication_records as $row) {
-                    $record_id = $row->record_id;
+            $medication_records = [];
+            $row_id = -1;
+            foreach ($records_id as $row) {
+                if($row_id == $row->record_id){
+                    continue;
+                }else{
+//                    Log::debug($row->record_id);
+                    $row_id = $row->record_id;
+                    $record = DB::table('medication_records')
+                        ->where('medication_records.record_id', $row->record_id)
+                        ->LeftJoin('medication_record_detail','medication_records.record_id','=','medication_record_detail.record_id')
+                        ->get();
+                    Log::debug($record);
+                    foreach($record as $row){
+                        ;
+                        array_push($medication_records,[
+                            'record_id'=>$row->record_id,
+                            'date_of_examination'=>$row->date_of_examination,
+                            'redate'=>$row->redate,
+                            'pres_hosp'=>$row->pres_hosp,
+                            'disp_hosp'=>$row->disp_hosp,
+                            'images'=>$row->images,
+                            'created_at'=>$row->created_at,
+                            'updated_at'=>$row->updated_at,
+                            'detail_id'=>$row->detail_id,
+                            'trade_name'=>$row->trade_name,
+                            'generic_name'=>$row->generic_name,
+                            'dose'=>$row->dose,
+                            'dose_per_unit'=>$row->dose_per_unit,
+                            'daily_dose'=>$row->daily_dose,
+                            'freq'=>$row->freq
 
-                    $row->record_detail =
-                        DB::table('medication_record_detail')
-                            ->where('record_id', $record_id)
-                            ->get();
-                    $count = $count + 1;
-                }
-
-            }else{
-
-
-                foreach ($medication_records as $row) {
-                    $record_id = $row->record_id;
-
-
-                    $record_detail =
-                        DB::table('medication_record_detail')
-                            ->where($request->search_from,'like','%'.$search_data.'%')
-                            ->where('record_id', $record_id)
-                            ->get();
-                    if(count($record_detail)==0){
-                        unset($medication_records[$count]);
-                    }else{
-                        $row->record_detail =
-                            DB::table('medication_record_detail')
-                                ->where('record_id', $record_id)
-                                ->get();
-                        $count = $count + 1;
+                        ]);
                     }
 
                 }
-
             }
+
+
+
+
+//            Log::debug($medication_records);
+
+
+
+
+
             $result = [
                 'task_id' => $task_id,
                 'patient_info' => $patient_info,
@@ -477,6 +497,7 @@ class MedicationRecordController extends Controller
                 'doctor_feedback' => $doctor_feedback,
             ];
 
+//            dd($result);
             return  $result;
         }catch (Exception $exception) {
             return $exception;

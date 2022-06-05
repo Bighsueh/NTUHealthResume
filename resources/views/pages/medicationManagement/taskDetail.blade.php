@@ -301,10 +301,18 @@
                 },success:function (res) {
                     $('.tbody .big_row').remove();
                     console.log(res['medication_records']);
+
                     console.log(res['medication_records'].length);
+                    let detail = res['medication_records'];
+                    let record_id = -1;
                     if(res['medication_records'].length > 0){
                         res['medication_records'].forEach(function (row) {
-                                let row_record =
+                            if(row['record_id'] == record_id){
+                                return;
+                            }else{
+                                record_id = row['record_id'];
+                            }
+                            let row_record =
                                     `                 <div class="flex overflow-x-scroll big_row">
                             <!--單筆藥歷共通項目-->
                             <div class="content-between grid rounded m-2 flex-none bg-gray-50 p-4 lg:w-1/6 md:w-2/6">
@@ -352,8 +360,9 @@
                                     </thead>
                                     <tbody class="divide-y divide-gray-200">`;
 
-                            row['record_detail'].forEach(function (detail_row) {
-                                row_record +=`<tr>
+                            detail.forEach(function (detail_row) {
+                                if(record_id == detail_row['record_id']){
+                                    row_record +=`<tr>
                                             <td class="text-left px-6">${detail_row['trade_name']}</td>
                                             <td class="text-left px-6">${detail_row['generic_name']}</td>
                                             <td class="text-left px-6">${detail_row['dose_per_unit']}</td>
@@ -361,6 +370,7 @@
                                             <td class="text-left px-6">${detail_row['daily_dose']}</td>
                                             <td class="text-left px-6">${detail_row['freq']}</td>
                                         </tr>`;
+                                }
                             })
 
                             row_record +=`</tbody>
