@@ -105,6 +105,8 @@
         let origin_record_detail_data;
         let image_index = 0;
 
+        open_medication_record_detail_modal();
+
         //藥品項目列表容器
         let medication_record_detail_list = $('#medication_record_detail_list');
 
