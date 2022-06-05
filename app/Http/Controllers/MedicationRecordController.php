@@ -428,71 +428,84 @@ class MedicationRecordController extends Controller
             $search_from = $request->search_from;
             $search_data = $request->search_data;
 
+            if($request->is_search === true){
+//                $records_id =
+//                    DB::table('medication_records')
+//                        ->where('medication_records.patient_no', $patient_info->patient_no)
+//                        ->LeftJoin('medication_record_detail','medication_records.record_id','=','medication_record_detail.record_id')
+//                        ->where(function($medication_records) use ($search_from,$search_data){
+//                            $medication_records
+//                                ->orWhere($search_from, 'like', '%' . $search_data . '%')
+//                            ;
+//                        })
+//                        ->get();
+//
+//                $medication_records = [];
+//                $medication_records_detail = [];
+//                $row_id = -1;
+//                foreach ($records_id as $row) {
+//                    if($row_id == $row->record_id){
+//                        continue;
+//                    }else{
+////                    Log::debug($row->record_id);
+//                        $row_id = $row->record_id;
+//                        $record = DB::table('medication_records')
+//                            ->where('record_id', $row->record_id)
+//                            ->get();
+//                    }
+//                }
+            }else{
 
+                $record = DB::table('medication_records')
+                    ->where('patient_no', $patient_info->patient_no )
+                    ->get();
 
-
-            $records_id =
-                    DB::table('medication_records')
-                        ->where('medication_records.patient_no', $patient_info->patient_no)
-                        ->LeftJoin('medication_record_detail','medication_records.record_id','=','medication_record_detail.record_id')
-                        ->where(function($medication_records) use ($search_from,$search_data){
-                            $medication_records
-                                ->orWhere($search_from, 'like', '%' . $search_data . '%')
-                            ;
-                        })
-                        ->get();
-
-            $medication_records = [];
-            $row_id = -1;
-            foreach ($records_id as $row) {
-                if($row_id == $row->record_id){
-                    continue;
-                }else{
-//                    Log::debug($row->record_id);
-                    $row_id = $row->record_id;
-                    $record = DB::table('medication_records')
-                        ->where('medication_records.record_id', $row->record_id)
-                        ->LeftJoin('medication_record_detail','medication_records.record_id','=','medication_record_detail.record_id')
-                        ->get();
-                    Log::debug($record);
-                    foreach($record as $row){
-                        ;
-                        array_push($medication_records,[
-                            'record_id'=>$row->record_id,
-                            'date_of_examination'=>$row->date_of_examination,
-                            'redate'=>$row->redate,
-                            'pres_hosp'=>$row->pres_hosp,
-                            'disp_hosp'=>$row->disp_hosp,
-                            'images'=>$row->images,
-                            'created_at'=>$row->created_at,
-                            'updated_at'=>$row->updated_at,
-                            'detail_id'=>$row->detail_id,
-                            'trade_name'=>$row->trade_name,
-                            'generic_name'=>$row->generic_name,
-                            'dose'=>$row->dose,
-                            'dose_per_unit'=>$row->dose_per_unit,
-                            'daily_dose'=>$row->daily_dose,
-                            'freq'=>$row->freq
-
-                        ]);
-                    }
-
-                }
             }
 
 
 
+//            Log::debug($detail);
+            foreach($record as $row){
+                $record_id = $row->record_id;
 
-//            Log::debug($medication_records);
+                array_push($medication_records,[
+                    'record_id'=>$row->record_id,
+                    'date_of_examination'=>$row->date_of_examination,
+                    'redate'=>$row->redate,
+                    'pres_hosp'=>$row->pres_hosp,
+                    'disp_hosp'=>$row->disp_hosp,
+                    'images'=>$row->images,
+                    'created_at'=>$row->created_at,
+                    'updated_at'=>$row->updated_at,
+                ]);
 
+                $detail = DB::table('medication_record_detail')
+                    ->where('record_id',$record_id)
+                    ->get();
 
+                foreach ($detail as $detial_row){
 
+                    if($detial_row->record_id === $record_id){
 
+                        array_push($medication_records_detail,[
+                            'detail_id'=>$detial_row->detail_id,
+                            'trade_name'=>$detial_row->trade_name,
+                            'generic_name'=>$detial_row->generic_name,
+                            'dose'=>$detial_row->dose,
+                            'dose_per_unit'=>$detial_row->dose_per_unit,
+                            'daily_dose'=>$detial_row->daily_dose,
+                            'freq'=>$detial_row->freq
+                        ]);
+                    }
+                }
+
+            }
 
             $result = [
                 'task_id' => $task_id,
                 'patient_info' => $patient_info,
                 'medication_records' => $medication_records,
+                'medication_records_detail' => $medication_records_detail,
                 'pharmacist_feedback' => $pharmacist_feedback,
                 'doctor_feedback' => $doctor_feedback,
             ];

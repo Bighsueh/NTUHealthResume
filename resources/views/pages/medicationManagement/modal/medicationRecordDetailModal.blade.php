@@ -110,10 +110,6 @@
         //藥品項目列表容器
         let medication_record_detail_list = $('#medication_record_detail_list');
 
-        function get_record_detail_modal_data() {
-
-        }
-
         //點擊詳細內容按鈕時自動帶入欄位資訊
         function open_medication_record_detail_modal(){
             //"詳細內容"按鈕
