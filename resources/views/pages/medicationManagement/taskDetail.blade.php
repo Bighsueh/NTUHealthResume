@@ -283,17 +283,18 @@
             open_medicationRecordsExcelModal();
         })
 
-        updata_task_detail_data();
+        updata_task_detail_data(0);
         //查詢按鈕click
         $('#btn_search').click(function () {
             if ($('#input_search').val() == '') {
                 window.location.reload();
             } else {
-                updata_task_detail_data(true);
+                updata_task_detail_data(1);
             }
         })
         //查詢、取得表格資料
-        function updata_task_detail_data(is_search = false) {
+        function updata_task_detail_data(is_search) {
+
             $.ajax({
                 url: "{{route('get_medication_detail_data')}}",
                 method: 'POST',
@@ -366,7 +367,7 @@
                                     </thead>
                                     <tbody class="divide-y divide-gray-200">`;
                                 if(res['medication_records_detail'].length > 0){
-                                    detail.forEach(function (detail_row) {
+                                    res['medication_records_detail'].forEach(function (detail_row) {
                                         if (record_id == detail_row['record_id']) {
                                             row_record += `<tr>
                                             <td class="text-left px-6">${detail_row['trade_name']}</td>
@@ -393,7 +394,7 @@
                     }
 
 
-                    // open_medication_record_detail_modal();
+                    open_medication_record_detail_modal();
                 }
 
             });

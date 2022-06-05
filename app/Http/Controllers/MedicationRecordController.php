@@ -103,7 +103,7 @@ class MedicationRecordController extends Controller
             //利用patient_id取得patient_no
             $patient_info = DB::table('patients')
                 ->where('patient_id', $patient_id)
-                ->select('patient_no','patient_id')
+                ->select('patient_no', 'patient_id')
                 ->first();
 
             //藥歷列表
@@ -150,17 +150,17 @@ class MedicationRecordController extends Controller
     //取得藥師回饋單內容
     public function get_pharmacist_feedback_data(Request $request)
     {
-        try{
+        try {
             //task_id
             $task_id = $request->get('task_id');
 
             //依task_id查詢指定的pharmacist_feedback資料
             $feedback_data = DB::table('pharmacist_feedback')
-                ->where('task_id',$task_id)
+                ->where('task_id', $task_id)
                 ->first();
 
             return $feedback_data;
-        }catch (Exception $exception){
+        } catch (Exception $exception) {
             return $exception;
         }
     }
@@ -188,7 +188,7 @@ class MedicationRecordController extends Controller
             $task_type = 'medication_record';
             $report_id = $request->session()->get('user_id');
             $content = '編輯藥師回饋';
-            $this->progressService->add_progress_data($patient_no, $task_type, $report_id, $content,$task_id);
+            $this->progressService->add_progress_data($patient_no, $task_type, $report_id, $content, $task_id);
 
             return 'success';
         } catch (\Exception $exception) {
@@ -304,13 +304,12 @@ class MedicationRecordController extends Controller
             $search = $request->search_time;
             $patient_id = Session::get('patient_id');
 
-            $data = DB::table('patient_tasks')->where('patient_id',$patient_id)
-                ->where(function($data) use ($search,$patient_id){
+            $data = DB::table('patient_tasks')->where('patient_id', $patient_id)
+                ->where(function ($data) use ($search, $patient_id) {
                     $data
                         ->orWhere('created_at', 'like', '%' . $search . '%')
                         ->orWhere('updated_at', 'like', '%' . $search . '%')
-                        ->orWhere('finish_date', 'like', '%' . $search . '%')
-                        ;
+                        ->orWhere('finish_date', 'like', '%' . $search . '%');
                 })->get();
 
             return $data;
@@ -395,8 +394,9 @@ class MedicationRecordController extends Controller
     }
 
     //取得藥歷列表資訊、查詢(taskDetail.blade)
-    function get_medication_data(Request $request){
-        try{
+    function get_medication_data(Request $request)
+    {
+        try {
             $task_id = $request->get('task_id');
 
             $patient_id = $request->get('patient_id');
@@ -405,7 +405,7 @@ class MedicationRecordController extends Controller
             //利用patient_id取得patient_no
             $patient_info = DB::table('patients')
                 ->where('patient_id', $patient_id)
-                ->select('patient_no','patient_id')
+                ->select('patient_no', 'patient_id')
                 ->first();
 
             //藥歷列表
@@ -429,53 +429,74 @@ class MedicationRecordController extends Controller
             $search_from = $request->search_from;
             //搜尋資料
             $search_data = $request->search_data;
-            $medication_records = [];
-            $medication_records_detail = [];
+
+            $is_search = $request->is_search;
+
+            $record = '';
 
             //是否為搜尋
-            if($request->is_search === true){
+            if ($is_search == 1) {
+                $patient_no = $patient_info->patient_no;
+                Log::debug($search_from);
+                Log::debug($search_data);
+                $record = DB::table('medication_records')
+                    ->where('medication_records.patient_no', $patient_no)
+                    ->LeftJoin('medication_record_detail', 'medication_records.record_id', '=', 'medication_record_detail.record_id')
+                    ->where(function ($record) use ($search_from, $search_data) {
+                        $record
+                            ->orWhere($search_from, 'like', '%' .  $search_data . '%');
+                    })->get();
 
-            }else{
 
+
+            } else {
 
                 $record = DB::table('medication_records')
-                    ->where('patient_no', $patient_info->patient_no )
+                    ->where('patient_no', $patient_info->patient_no)
                     ->get();
             }
 
-
+            $medication_records = [];
+            $medication_records_detail = [];
 
             //填入record 資料
-            foreach($record as $row){
-                $record_id = $row->record_id;
+            $row_id = -1;
+            foreach ($record as $row) {
+                if($row_id === $row->record_id){
+                    continue;
+                }else{
+                    Log::debug($row->record_id);
+                    $row_id = $row->record_id;
+                    $record_id = $row->record_id;
 
-                array_push($medication_records,[
-                    'record_id'=>$row->record_id,
-                    'date_of_examination'=>$row->date_of_examination,
-                    'redate'=>$row->redate,
-                    'pres_hosp'=>$row->pres_hosp,
-                    'disp_hosp'=>$row->disp_hosp,
-                    'images'=>$row->images,
-                    'created_at'=>$row->created_at,
-                    'updated_at'=>$row->updated_at,
-                ]);
-
-                $detail = DB::table('medication_record_detail')
-                    ->where('record_id',$record_id)
-                    ->get();
-
-                foreach ($detail as $detial_row){
-                    array_push($medication_records_detail,[
-                        'record_id'=>$detial_row->record_id,
-                        'trade_name'=>$detial_row->trade_name,
-                        'dose_per_unit'=>$detial_row->dose_per_unit,
-                        'dose'=>$detial_row->dose,
-                        'daily_dose'=>$detial_row->daily_dose,
-                        'freq'=>$detial_row->freq
+                    array_push($medication_records, [
+                        'record_id' => $row->record_id,
+                        'date_of_examination' => $row->date_of_examination,
+                        'redate' => $row->redate,
+                        'pres_hosp' => $row->pres_hosp,
+                        'disp_hosp' => $row->disp_hosp,
+                        'images' => $row->images,
+                        'created_at' => $row->created_at,
+                        'updated_at' => $row->updated_at,
                     ]);
+
+                    $detail = DB::table('medication_record_detail')
+                        ->where('record_id', $record_id)
+                        ->get();
+
+                    foreach ($detail as $detial_row) {
+
+                        array_push($medication_records_detail, [
+                            'record_id' => $detial_row->record_id,
+                            'trade_name' => $detial_row->trade_name,
+                            'generic_name' => $detial_row->generic_name,
+                            'dose_per_unit' => $detial_row->dose_per_unit,
+                            'dose' => $detial_row->dose,
+                            'daily_dose' => $detial_row->daily_dose,
+                            'freq' => $detial_row->freq
+                        ]);
+                    }
                 }
-
-
             }
 
             $result = [
@@ -488,8 +509,8 @@ class MedicationRecordController extends Controller
             ];
 
 //            dd($result);
-            return  $result;
-        }catch (Exception $exception) {
+            return $result;
+        } catch (Exception $exception) {
             return $exception;
         }
     }
@@ -793,12 +814,12 @@ class MedicationRecordController extends Controller
                     'updated_at' => Carbon::now(),
                 ]);
 
-                //新增進度資料
-                $patient_no = $request->session()->get('patient_no');
-                $task_type = 'medication_record';
-                $report_id = $request->session()->get('user_id');
-                $content = '編輯其他資訊';
-                $this->progressService->add_progress_data($patient_no, $task_type, $report_id, $content,$task_id);
+            //新增進度資料
+            $patient_no = $request->session()->get('patient_no');
+            $task_type = 'medication_record';
+            $report_id = $request->session()->get('user_id');
+            $content = '編輯其他資訊';
+            $this->progressService->add_progress_data($patient_no, $task_type, $report_id, $content, $task_id);
 
             return 'success';
         } catch (Exception $exception) {
@@ -833,13 +854,13 @@ class MedicationRecordController extends Controller
         //利用patient_id取得patient_no
         $patient_info = DB::table('patients')
             ->where('patient_id', $patient_id)
-            ->select('patient_no','patient_id')
+            ->select('patient_no', 'patient_id')
             ->first();
 
         //藥歷列表
         $medication_records =
             DB::table('medication_records')
-                ->where('patient_no',$patient_info->patient_no)
+                ->where('patient_no', $patient_info->patient_no)
                 ->get();
 
         foreach ($medication_records as $row) {
@@ -857,10 +878,8 @@ class MedicationRecordController extends Controller
             'medication_records' => $medication_records,
         ];
 
-        return View('pages.medicationManagement.medicationList',$result);
+        return View('pages.medicationManagement.medicationList', $result);
     }
-
-
 
 
 }
