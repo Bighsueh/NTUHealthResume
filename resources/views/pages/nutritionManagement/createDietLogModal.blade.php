@@ -88,20 +88,20 @@
     </div>
 </div>
 <script>
-    $(function () {
+
+
         //原資料
         let task_id;
         let origin_record_detail_data;
-        let image_index = 0;
-
+        let nutrition_image_index = 0;
         //藥品項目列表容器
         let order_list_detail_list = $('#order_list_detail_list');
-        function set_listener()
+        //點擊詳細內容按鈕時自動帶入欄位資訊
+        function open_order_list()
         {
-            let btn_detail = $(".btn-open-order-list-detail-modal")
+            let btn_detail = $(".btn-open-order-list-detail-modal");
             btn_detail.off('click');
-            //點擊詳細內容按鈕時自動帶入欄位資訊
-            $(".btn-open-order-list-detail-modal").on('click',function () {
+            btn_detail.on('click',function () {
                 let url = "{{route('post_orderList_detail')}}";
                 task_id = $(this).parent().find('.task_id').text();
 
@@ -152,7 +152,7 @@
                     `);
 
                         })
-                        set_image_list(image_index);
+                        set_image_list(nutrition_image_index);
 
                     },
                     error: function (res) {
@@ -168,73 +168,6 @@
             })
         }
 
-
-        //點擊詳細內容按鈕時自動帶入欄位資訊
-        $(".btn-open-order-list-detail-modal").on('click',function () {
-            let url = "{{route('post_orderList_detail')}}";
-            task_id = $(this).parent().find('.task_id').text();
-
-            $.ajax({
-                url: url,
-                method: 'post',
-                data: {
-                    '_token': "{{csrf_token()}}",
-                    'task_id': task_id,
-                },
-                success: function (res) {
-                    let order_list = res[0];
-                    let diet_log = res[1];
-                    let image_urls = res[2];
-                    //圖片容器
-                    let image_list = $('#medeicationRecordDetailImageList');
-                    // console.log(image_urls)
-                    //取得資料以後先將藥歷資訊塞入資料
-                    $('#created_date').val(order_list['created_at']);
-                    $('#updated_date').val(order_list['updated_at']);
-
-                    //將資料暫存
-                    // origin_record_detail_data = record_detail_data;
-                    //再將藥品項目帶入
-                    //先刪除資料
-                    order_list_detail_list.children().remove();
-                    //再插入資料
-                    $.each(diet_log, function (index, value) {
-                        // console.log(value);
-                        (value['remark'] == null)? value['remark'] = "" :value['remark'];
-                        order_list_detail_list.append(`
-                        <div class=" gap-2 grid grid-cols-4">
-                            <input class="bg-gray-100 my-1 text-left rounded block" value="${value['meal_name']}"/>
-                            <input class="bg-gray-100 my-1 text-left rounded block" value="${value['quantity']}"/>
-                            <input class="bg-gray-100 my-1 text-left rounded block" value="${value['remark']}"/>
-                        </div>
-                    `)
-                    })
-
-                    //在將圖片路徑更新上去
-                    //先清空原有圖片
-                    image_list.children().remove();
-
-                    //寫入回傳的圖片
-                    $.each(image_urls, function (index, value) {
-                        image_list.append(`
-                        <img class="object-fill w-fit rounded" src="${value}">
-                    `);
-
-                    })
-                    set_image_list(image_index);
-
-                },
-                error: function (res) {
-                    // console.log(res);
-                    Swal.fire({
-                        icon: 'error',
-                        title: '連線錯誤，無法取得資料',
-                        text: res,
-                        confirmButtonColor: '#8CD4F5'
-                    })
-                }
-            })
-        })
 
         //新增藥品項目
         $("#btn_diet_log_add_row").on('click',function () {
@@ -255,16 +188,16 @@
         //換下一張圖片
         $('#medicationRecordDetailNext').on('click',function () {
             let image_length = $("#medeicationRecordDetailImageList").children().length;
-            image_index = (image_index + 1) % image_length;
-            set_image_list(image_index);
+            nutrition_image_index = (nutrition_image_index + 1) % image_length;
+            set_image_list(nutrition_image_index);
         });
 
         //換上一張圖片
         $('#medicationRecordDetailPrev').on('click',function () {
             let image_length = $("#medeicationRecordDetailImageList").children().length;
-            image_index = (image_index - 1) % image_length;
-            if (image_index + 1 <= 0) image_index += image_length;
-            set_image_list(image_index);
+            nutrition_image_index = (nutrition_image_index - 1) % image_length;
+            if (nutrition_image_index + 1 <= 0) nutrition_image_index += image_length;
+            set_image_list(nutrition_image_index);
         });
 
         // 儲存並關閉
@@ -339,13 +272,11 @@
         });
 
 
-        function set_image_list(image_index) {
-            $('#medeicationRecordDetailImageList img').eq(image_index).siblings().hide();
-            $('#medeicationRecordDetailImageList img').eq(image_index).show();
+        function set_image_list(nutrition_image_index) {
+            $('#medeicationRecordDetailImageList img').eq(nutrition_image_index).siblings().hide();
+            $('#medeicationRecordDetailImageList img').eq(nutrition_image_index).show();
 
             let image_length = $("#medeicationRecordDetailImageList").children().length;
-            $('#medicationRecordDetailNum').text(`第 ${image_index + 1} 張，共 ${image_length} 張圖片`)
+            $('#medicationRecordDetailNum').text(`第 ${nutrition_image_index + 1} 張，共 ${image_length} 張圖片`)
         }
-    });
-
 </script>

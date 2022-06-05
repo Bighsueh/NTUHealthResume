@@ -497,14 +497,15 @@
                                         <td class="text-left px-6">${diet_log["quantity"]}</td>
                                     </tr>
                                 `)
+                                open_order_list()
                             })
                         }
                     })
-                    set_listener()
+
                 }
             });
-
+            open_order_list()
         }
-
+        open_order_list()
     </script>
 @endsection
