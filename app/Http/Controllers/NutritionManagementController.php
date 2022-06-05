@@ -116,9 +116,10 @@ class NutritionManagementController extends Controller
                 {
                     $row->diet_logs=DB::table('diet_log')->where('task_id',$row->id)->get();
                 }
+                else{
+                    $row->diet_logs=null;
+                }
             }
-
-//            dd($order_lists);
             return $order_lists;
         }catch (\Throwable $e){
             report($e);

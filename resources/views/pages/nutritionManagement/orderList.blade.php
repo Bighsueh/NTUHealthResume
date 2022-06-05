@@ -353,89 +353,6 @@
                     @endforeach
                 </div>
             </div>
-
-
-
-{{--            <div class="grid">--}}
-{{--                <div class="flex justify-between ">--}}
-{{--                    <p class="mx-4 my-2 justify-self-start font-bold text-xl">餐序列表</p>--}}
-{{--                </div>--}}
-{{--                <div class="rounded m-2 flex-auto bg-gray-50 p-4 overflow-scroll">--}}
-{{--                    <table class="divide-y divide-gray-200 min-w-full">--}}
-{{--                        <thead class="bg-gray-50">--}}
-{{--                        <tr>--}}
-{{--                            <th scope="col"--}}
-{{--                                class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">--}}
-{{--                                #--}}
-{{--                            </th>--}}
-{{--                            <th scope="col"--}}
-{{--                                class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">--}}
-{{--                                餐序狀態--}}
-{{--                            </th>--}}
-{{--                            <th scope="col"--}}
-{{--                                class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">--}}
-{{--                                餐序建立日期--}}
-{{--                            </th>--}}
-{{--                            <th scope="col"--}}
-{{--                                class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">--}}
-{{--                                最後異動時間--}}
-{{--                            </th>--}}
-{{--                            <th scope="col"--}}
-{{--                                class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">--}}
-{{--                                修改內容--}}
-{{--                            </th>--}}
-{{--                            <th scope="col"--}}
-{{--                                class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">--}}
-{{--                                刪除內容--}}
-{{--                            </th>--}}
-{{--                            <th scope="col"--}}
-{{--                                class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">--}}
-{{--                                餐序詳情--}}
-{{--                            </th>--}}
-{{--                        </tr>--}}
-{{--                        </thead>--}}
-{{--                        <tbody class="divide-y divide-gray-200" id="tbody">--}}
-{{--                        @foreach($queries as $query)--}}
-{{--                            <tr>--}}
-{{--                                <td class="px-6 py-4 whitespace-nowrap">--}}
-{{--                                    {{$query->id}}--}}
-{{--                                </td>--}}
-{{--                                <td class="px-6 py-4 whitespace-nowrap">--}}
-{{--                                    {{$query->meal_order}}--}}
-{{--                                </td>--}}
-{{--                                <td class="px-6 py-4 whitespace-nowrap">--}}
-{{--                                    {{$query->created_at}}--}}
-{{--                                </td>--}}
-{{--                                <td class="px-6 py-4 whitespace-nowrap">--}}
-{{--                                    {{$query->updated_at}}--}}
-{{--                                </td>--}}
-{{--                                <td class="px-6 py-4 whitespace-nowrap">--}}
-{{--                                    <a href="#"--}}
-{{--                                       class="bg-transparent border border-teal-700 text-teal-700--}}
-{{--                                               hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded btn-patch"--}}
-{{--                                       value="{{$query->id}}"--}}
-{{--                                       data-bs-toggle="modal" data-bs-target="#orderListPatch">--}}
-{{--                                        修改--}}
-{{--                                    </a>--}}
-{{--                                </td>--}}
-{{--                                <td class="px-6 py-4 whitespace-nowrap">--}}
-{{--                                    <a href="{{route('delete_orderList',['id' => $query->id])}}"--}}
-{{--                                       class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">--}}
-{{--                                        刪除--}}
-{{--                                    </a>--}}
-{{--                                </td>--}}
-{{--                                <td class="px-6 py-4 whitespace-nowrap">--}}
-{{--                                    <a href="{{route('get_dietLog',['task_id'=>$query->id,'patient_id'=>$id])}}"--}}
-{{--                                       class="bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-4 rounded">--}}
-{{--                                        查看--}}
-{{--                                    </a>--}}
-{{--                                </td>--}}
-{{--                            </tr>--}}
-{{--                        @endforeach--}}
-{{--                        </tbody>--}}
-{{--                    </table>--}}
-{{--                </div>--}}
-{{--            </div>--}}
         </div>
     </div>
     @include('pages.nutritionManagement.createDietLogModal')
@@ -464,14 +381,67 @@
                 },
                 success:function (res) {
                     $(".orderList-content").children().remove();
-                        console.log(res)
+                    let count = 0
                     res.forEach(function (row){
                         if(row["diet_logs"] != null)
                         {
+                            count += 1
+                            $(".orderList-content").append(`
+                            <div class="flex overflow-x-scroll">
+                                <div class="content-between grid rounded m-2 flex-none bg-gray-50 p-4 w-2/6">
+                                    <div class="mb-2">
+                                        <p>建立時間：</p>
+                                        <p>${row["created_at"]}</p>
+                                </div>
+                            <div hidden class="task_id">${row["id"]}</div>
+                                <a class="btn-open-order-list-detail-modal col-span-1 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 x-4 rounded"
+                                   data-bs-toggle="modal" data-bs-target="#dietLog">
+                                    詳細內容
+                                </a>
+                            </div>
 
-                            $(".orderList-content").append();
+                            <!--單筆餐序列向-->
+                            <div class="rounded m-2 flex-auto bg-gray-50 p-4">
+                                <table class="divide-y divide-gray-200 min-w-full">
+                                    <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col"
+                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                            餐序
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                            菜色
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                            份量
+                                        </th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody class="divide-y divide-gray-200" id="tbody${count}">
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            </div>
+                            `);
+                            row["diet_logs"].forEach(function(diet_log){
+                                tbody_name = "#tbody" + count
+                                $(tbody_name).append(`
+                                    <tr>
+                                        <td class="text-left px-6">${row["meal_order"]}</td>
+                                        <td class="text-left px-6">${diet_log["meal_name"]}</td>
+                                        <td class="text-left px-6">${diet_log["quantity"]}</td>
+                                    </tr>
+                                `)
+                            })
                         }
                     })
+
+
 
                 }
             });
