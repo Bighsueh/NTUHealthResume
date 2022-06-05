@@ -425,46 +425,27 @@ class MedicationRecordController extends Controller
                     ->where('task_id', $task_id)
                     ->first();
 
+            //搜尋欄位
             $search_from = $request->search_from;
+            //搜尋資料
             $search_data = $request->search_data;
+            $medication_records = [];
+            $medication_records_detail = [];
 
+            //是否為搜尋
             if($request->is_search === true){
-//                $records_id =
-//                    DB::table('medication_records')
-//                        ->where('medication_records.patient_no', $patient_info->patient_no)
-//                        ->LeftJoin('medication_record_detail','medication_records.record_id','=','medication_record_detail.record_id')
-//                        ->where(function($medication_records) use ($search_from,$search_data){
-//                            $medication_records
-//                                ->orWhere($search_from, 'like', '%' . $search_data . '%')
-//                            ;
-//                        })
-//                        ->get();
-//
-//                $medication_records = [];
-//                $medication_records_detail = [];
-//                $row_id = -1;
-//                foreach ($records_id as $row) {
-//                    if($row_id == $row->record_id){
-//                        continue;
-//                    }else{
-////                    Log::debug($row->record_id);
-//                        $row_id = $row->record_id;
-//                        $record = DB::table('medication_records')
-//                            ->where('record_id', $row->record_id)
-//                            ->get();
-//                    }
-//                }
+
             }else{
+
 
                 $record = DB::table('medication_records')
                     ->where('patient_no', $patient_info->patient_no )
                     ->get();
-
             }
 
 
 
-//            Log::debug($detail);
+            //填入record 資料
             foreach($record as $row){
                 $record_id = $row->record_id;
 
@@ -484,20 +465,16 @@ class MedicationRecordController extends Controller
                     ->get();
 
                 foreach ($detail as $detial_row){
-
-                    if($detial_row->record_id === $record_id){
-
-                        array_push($medication_records_detail,[
-                            'detail_id'=>$detial_row->detail_id,
-                            'trade_name'=>$detial_row->trade_name,
-                            'generic_name'=>$detial_row->generic_name,
-                            'dose'=>$detial_row->dose,
-                            'dose_per_unit'=>$detial_row->dose_per_unit,
-                            'daily_dose'=>$detial_row->daily_dose,
-                            'freq'=>$detial_row->freq
-                        ]);
-                    }
+                    array_push($medication_records_detail,[
+                        'record_id'=>$detial_row->record_id,
+                        'trade_name'=>$detial_row->trade_name,
+                        'dose_per_unit'=>$detial_row->dose_per_unit,
+                        'dose'=>$detial_row->dose,
+                        'daily_dose'=>$detial_row->daily_dose,
+                        'freq'=>$detial_row->freq
+                    ]);
                 }
+
 
             }
 
