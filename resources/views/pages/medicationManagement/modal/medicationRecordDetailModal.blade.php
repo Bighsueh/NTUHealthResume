@@ -113,40 +113,45 @@
         }
 
         //點擊詳細內容按鈕時自動帶入欄位資訊
-        $(".btn-open-medication-record-detail-modal").click(function () {
-            let url = "{{route('get_medication_management_record_data')}}";
-            record_id = $(this).parent().find('.record_id').text();
+        function open_medication_record_detail_modal(){
+            //"詳細內容"按鈕
+            let target_button = $(".btn-open-medication-record-detail-modal");
+            target_button.off('click');
 
-            $.ajax({
-                url: url,
-                method: 'post',
-                data: {
-                    '_token': "{{csrf_token()}}",
-                    'record_id': record_id,
-                },
-                success: function (res) {
-                    let record_data = res['record_data'];
-                    let record_detail_data = res['record_detail_data'];
-                    let image_urls = res['image_urls'];
+            target_button.on('click',function () {
+                let url = "{{route('get_medication_management_record_data')}}";
+                record_id = $(this).parent().find('.record_id').text();
 
-                    //圖片容器
-                    let image_list = $('#medeicationRecordDetailImageList');
+                $.ajax({
+                    url: url,
+                    method: 'post',
+                    data: {
+                        '_token': "{{csrf_token()}}",
+                        'record_id': record_id,
+                    },
+                    success: function (res) {
+                        let record_data = res['record_data'];
+                        let record_detail_data = res['record_detail_data'];
+                        let image_urls = res['image_urls'];
 
-                    //取得資料以後先將藥歷資訊塞入資料
-                    $('#medication_record_detail_date_of_examination').val(record_data['date_of_examination']);
-                    $('#medication_record_detail_redate').val(record_data['redate']);
-                    $('#medication_record_detail_pres_hosp').val(record_data['pres_hosp']);
-                    $('#medication_record_detail_disp_hosp').val(record_data['disp_hosp']);
+                        //圖片容器
+                        let image_list = $('#medeicationRecordDetailImageList');
+
+                        //取得資料以後先將藥歷資訊塞入資料
+                        $('#medication_record_detail_date_of_examination').val(record_data['date_of_examination']);
+                        $('#medication_record_detail_redate').val(record_data['redate']);
+                        $('#medication_record_detail_pres_hosp').val(record_data['pres_hosp']);
+                        $('#medication_record_detail_disp_hosp').val(record_data['disp_hosp']);
 
 
-                    //將資料暫存
-                    origin_record_detail_data = record_detail_data;
-                    //再將藥品項目帶入
-                    //先刪除資料
-                    medication_record_detail_list.children().remove();
-                    //再插入資料
-                    $.each(record_detail_data, function (index, value) {
-                        medication_record_detail_list.append(`
+                        //將資料暫存
+                        origin_record_detail_data = record_detail_data;
+                        //再將藥品項目帶入
+                        //先刪除資料
+                        medication_record_detail_list.children().remove();
+                        //再插入資料
+                        $.each(record_detail_data, function (index, value) {
+                            medication_record_detail_list.append(`
                         <div class=" gap-2 grid grid-cols-4">
                             <input class="bg-gray-100 my-1 text-left rounded block" value="${value['trade_name']}"/>
                             <input class="bg-gray-100 my-1 text-left rounded block" value="${value['generic_name']}"/>
@@ -154,33 +159,35 @@
                             <input class="bg-gray-100 my-1 text-left rounded block" value="${value['freq']}"/>
                         </div>
                     `)
-                    })
+                        })
 
-                    //在將圖片路徑更新上去
-                    //先清空原有圖片
-                    image_list.children().remove();
+                        //在將圖片路徑更新上去
+                        //先清空原有圖片
+                        image_list.children().remove();
 
-                    //寫入回傳的圖片
-                    $.each(image_urls, function (index, value) {
-                        image_list.append(`
+                        //寫入回傳的圖片
+                        $.each(image_urls, function (index, value) {
+                            image_list.append(`
                         <img class="object-fill w-fit rounded" src="${value}">
                     `);
 
-                    })
-                    set_image_list(image_index);
+                        })
+                        set_image_list(image_index);
 
-                },
-                error: function (res) {
-                    console.log(res);
-                    Swal.fire({
-                        icon: 'error',
-                        title: '連線錯誤，無法取得資料',
-                        text: res,
-                        confirmButtonColor: '#8CD4F5'
-                    })
-                }
+                    },
+                    error: function (res) {
+                        console.log(res);
+                        Swal.fire({
+                            icon: 'error',
+                            title: '連線錯誤，無法取得資料',
+                            text: res,
+                            confirmButtonColor: '#8CD4F5'
+                        })
+                    }
+                })
             })
-        })
+        }
+
 
         //新增藥品項目
         $("#btn_medication_record_add_row").click(function () {
