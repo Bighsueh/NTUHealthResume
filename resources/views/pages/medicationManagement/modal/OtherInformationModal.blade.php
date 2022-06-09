@@ -36,16 +36,6 @@
                                            id="bmi" />
                                 </div>
                                 <div class="mx-2 mb-1">
-                                    <a class="mx-1">過往病史：</a>
-                                    <input class="border boder-gray-300 mx-1 text-left"
-                                           id="Diagnosis" name="Diagnosis" value=""/>
-                                </div>
-                                <div class="mx-2 mb-1">
-                                    <a class="mx-1">手術史：</a>
-                                    <input class="border boder-gray-300 mx-1 text-left"
-                                           id="Surgery" name="Surgery" value=""/>
-                                </div>
-                                <div class="mx-2 mb-1">
                                     <a class="mx-1">血紅素：</a>
                                     <input class="border boder-gray-300 mx-1 text-left"
                                            id="Hb" name="Hb" value=""/>
@@ -105,10 +95,27 @@
                                     <input class="border boder-gray-300 mx-1 text-left"
                                            id="HDL" name="HDL" value=""/>
                                 </div>
+                            </div>
+                            <div class="grid grid-cols-2 mb-2">
+                                <div class="mx-2 mb-1">
+                                    <a class="mx-1">過往病史：</a>
+                                    <input class="border boder-gray-300 mx-1 text-left"
+                                           id="Diagnosis" name="Diagnosis" value=""/>
+                                </div>
+                                <div class="mx-2 mb-1">
+                                    <a class="mx-1">手術史：</a>
+                                    <input class="border boder-gray-300 mx-1 text-left "
+                                           id="Surgery" name="Surgery" value=""/>
+                                </div>
                                 <div class="mx-2 mb-1">
                                     <a class="mx-1">跌倒史：</a>
                                     <input class="border boder-gray-300 mx-1 text-left"
                                            id="Fall" name="Fall" value=""/>
+                                </div>
+                                <div class="mx-2 mb-1">
+                                    <a class="mx-1">其他：</a>
+                                    <input class="border boder-gray-300 mx-1 text-left"
+                                           id="Other" name="Other" value=""/>
                                 </div>
                             </div>
                         </div>
@@ -396,6 +403,7 @@
         $("#UA").val(data['UA']);
         $("#HDL").val(data['HDL']);
         $("#Fall").val(data['Fall']);
+        $("#Other").val(data['Other']);
 
         //服藥認知與依從性
         //Question 1

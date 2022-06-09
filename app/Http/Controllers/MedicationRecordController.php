@@ -805,6 +805,7 @@ class MedicationRecordController extends Controller
                     'UA' => $this->get_value_from_first_row($form_data, 'UA'),
                     'HDL' => $this->get_value_from_first_row($form_data, 'HDL'),
                     'Fall' => $this->get_value_from_first_row($form_data, 'Fall'),
+                    'Other' => $this->get_value_from_first_row($form_data, 'Other'),
                     'medication_adherence_1' => $this->get_value_from_first_row($form_data, 'medication_adherence_1[]'),
                     'medication_adherence_2' => $this->get_value_from_first_row($form_data, 'medication_adherence_2[]'),
                     'medication_adherence_3' => $this->get_value_from_first_row($form_data, 'medication_adherence_3[]'),

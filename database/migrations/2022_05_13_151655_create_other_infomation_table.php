@@ -33,6 +33,7 @@ class CreateOtherInfomationTable extends Migration
             $table->string('UA')->nullable();
             $table->string('HDL')->nullable();
             $table->string('Fall')->nullable();
+            $table->string('Other')->nullable();
             $table->string('medication_adherence_1')->nullable();
             $table->string('medication_adherence_2')->nullable();
             $table->string('medication_adherence_3')->nullable();
