@@ -189,7 +189,7 @@
                                 </div>
                                 <div class="grid grid-cols-2">
                                     <div class="mx-2 mb-1">
-                                        <a class="mx-1">4. 主述藥物相關副作用：</a>
+                                        <a class="mx-1">5. 誰幫忙處理服藥問題：</a>
                                         <div class="flex justify-start mx-8 grid grid-cols-3">
                                             <div class="form-check form-check-inline mb-2">
                                                 <input
@@ -267,7 +267,7 @@
                                         </div>
                                     </div>
                                     <div class="mx-2 mb-1">
-                                        <a class="mx-1">5. 誰幫忙處理服藥問題：</a>
+                                        <a class="mx-1">4. 主述藥物相關副作用：</a>
                                         <textarea
                                             class="
                                         otehr-info-modal-textarea
