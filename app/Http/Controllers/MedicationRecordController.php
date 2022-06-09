@@ -700,7 +700,6 @@ class MedicationRecordController extends Controller
 //        Log::debug('previewExcell');
         try {//
             $importdata = Excel::toArray(new previewExcelImport(), $file);
-
             $data = $importdata[0];
 //            Log::debug($data);
             return $data;

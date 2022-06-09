@@ -79,7 +79,7 @@
             contentType: false,
             processData: false,
             success: function (res) {
-
+                console.log(res);
                 open_previewExcelModal(res);
                 // if (res === 'success') {
                 //     Swal.fire({

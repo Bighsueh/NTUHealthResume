@@ -138,98 +138,51 @@
     function open_previewExcelModal(res) {
         data = res;
         $('#tbody tr').remove();
-        let count = 0;
+        let count = 1;
         if(data.length > 0){
-            // window.alert(data.length);
+            data =  set_String(data)
+            console.log(data)
             data.forEach(function (row) {
-                if(count != 0){
-                    if(row[0]==null){
-                        $('#tbody').append(`
-                        <tr class="tr_row">
-                            <td>
-                                <button class="bg-red-400  px-2 my-1 text-white text-left rounded block btn_delete_row" >-</button>
-                            </td>
-                            <td>
-                                <button class="bg-blue-400  px-2 my-1 text-white text-left rounded block btn_creat_row" >+</button>
-                            </td>
-                            <td>
-                                <input class="bg-gray-100 my-1 text-left rounded block hidden" value="${row[0]}"/>
-                            </td>
-                            <td>
-                                <input class="bg-gray-100 my-1 text-left rounded block hidden" value="${row[1]}"/>
-                            </td>
-                            <td>
-                                <input class="bg-gray-100 my-1 text-left rounded block hidden" value="${row[2]}"/>
-                            </td>
-                            <td>
-                                <input class="bg-gray-100 my-1 text-left rounded block hidden" value="${row[3]}"/>
-                            </td>
-                            <td>
-                                <input class="bg-gray-100 my-1 text-left rounded block" value="${row[4]}"/>
-                            </td>
-                            <td>
-                                <input class="bg-gray-100 my-1 text-left rounded block" value="${row[5]}"/>
-                            </td>
-                            <td>
-                                <input class="bg-gray-100 my-1 text-left rounded block" value="${row[6]}"/>
-                            </td>
-                            <td>
-                                <input class="bg-gray-100 my-1 text-left rounded block" value="${row[7]}"/>
-                            </td>
-                            <td>
-                                <input class="bg-gray-100 my-1 text-left rounded block" value="${row[8]}"/>
-                            </td>
-                            <td>
-                                <input class="bg-gray-100 my-1 text-left rounded block" value="${row[9]}"/>
-                            </td>
+                    $('#tbody').append(`
+                    <tr class="tr_row">
+                        <td>
+                            <button class="bg-red-400  px-2 my-1 text-white text-left rounded block btn_delete_row" >-</button>
                         </td>
-                    `)
-                    }else{
-                        $('#tbody').append(`
-                        <tr class="tr_row">
-                            <td>
-                                <button class="bg-red-400  px-2 my-1 text-white text-left rounded block btn_delete_row" >-</button>
-                            </td>
-                            <td>
-                                <button class="bg-blue-400  px-2 my-1 text-white text-left rounded block btn_creat_row" >+</button>
-                            </td>
-                            <td>
-                                <input class="bg-gray-100 my-1 text-left rounded block" value="${row[0]}"/>
-                            </td>
-                            <td>
-                                <input class="bg-gray-100 my-1 text-left rounded block" value="${row[1]}"/>
-                            </td>
-                            <td>
-                                <input class="bg-gray-100 my-1 text-left rounded block" value="${row[2]}"/>
-                            </td>
-                            <td>
-                                <input class="bg-gray-100 my-1 text-left rounded block" value="${row[3]}"/>
-                            </td>
-                            <td>
-                                <input class="bg-gray-100 my-1 text-left rounded block" value="${row[4]}"/>
-                            </td>
-                            <td>
-                                <input class="bg-gray-100 my-1 text-left rounded block" value="${row[5]}"/>
-                            </td>
-                            <td>
-                                <input class="bg-gray-100 my-1 text-left rounded block" value="${row[6]}"/>
-                            </td>
-                            <td>
-                                <input class="bg-gray-100 my-1 text-left rounded block" value="${row[7]}"/>
-                            </td>
-                            <td>
-                                <input class="bg-gray-100 my-1 text-left rounded block" value="${row[8]}"/>
-                            </td>
-                            <td>
-                                <input class="bg-gray-100 my-1 text-left rounded block" value="${row[9]}"/>
-                            </td>
+                        <td>
+                            <button class="bg-blue-400  px-2 my-1 text-white text-left rounded block btn_creat_row" >+</button>
                         </td>
-                    `)
-                    }
-
-                }
-
-                count +=1;
+                        <td>
+                            <input class="bg-gray-100 my-1 text-left rounded block" value="${row[0]}"/>
+                        </td>
+                        <td>
+                            <input class="bg-gray-100 my-1 text-left rounded block" value="${row[1]}"/>
+                        </td>
+                        <td>
+                            <input class="bg-gray-100 my-1 text-left rounded block" value="${row[2]}"/>
+                        </td>
+                        <td>
+                            <input class="bg-gray-100 my-1 text-left rounded block" value="${row[3]}"/>
+                        </td>
+                        <td>
+                            <input class="bg-gray-100 my-1 text-left rounded block" value="${row[4]}"/>
+                        </td>
+                        <td>
+                            <input class="bg-gray-100 my-1 text-left rounded block" value="${row[5]}"/>
+                        </td>
+                        <td>
+                            <input class="bg-gray-100 my-1 text-left rounded block" value="${row[6]}"/>
+                        </td>
+                        <td>
+                            <input class="bg-gray-100 my-1 text-left rounded block" value="${row[7]}"/>
+                        </td>
+                        <td>
+                            <input class="bg-gray-100 my-1 text-left rounded block" value="${row[8]}"/>
+                        </td>
+                        <td>
+                            <input class="bg-gray-100 my-1 text-left rounded block" value="${row[9]}"/>
+                        </td>
+                    </tr>
+                `);
             })
         }
 
@@ -237,6 +190,36 @@
 
         set_listener();
 
+    }
+    //excel 匯入字串預處理
+    function set_String(ary_str)
+    {
+        let new_ary_str = [];
+        let count = 3;
+        // 跑整筆ary
+        for (let i = 0; i < ary_str.length / 3 ; i ++) {
+            let row = []
+            // 跑一筆ary的資料
+            for (let j = 0; j < 12; j++) {
+
+                var s = "";
+                // 往下取兩筆資料
+                for (let z = count - 3; z < count; z++) {
+                    // 字串串接
+                    if (ary_str[z][j] != null) {
+                        s+=ary_str[z][j]+"\n"
+                    }
+                }
+                // 去\n
+                s = s.substring(0, s.length - 1);
+                // 將一整筆ary推進去
+                row.push(s);
+            }
+            new_ary_str.push(row)
+            count += 3;
+        }
+        console.log(new_ary_str)
+        return new_ary_str
     }
     function set_listener() {
         let btn_delete_row = $('.btn_delete_row');
@@ -259,16 +242,16 @@
                                 <button class="bg-blue-400  px-2 my-1 text-white text-left rounded block btn_creat_row" >+</button>
                             </td>
                             <td>
-                                <input class="bg-gray-100 my-1 text-left rounded block hidden" value="null"/>
+                                <input class="bg-gray-100 my-1 text-left rounded block" value="null"/>
                             </td>
                             <td>
-                                <input class="bg-gray-100 my-1 text-left rounded block hidden" value="null"/>
+                                <input class="bg-gray-100 my-1 text-left rounded block" value="null"/>
                             </td>
                             <td>
-                                <input class="bg-gray-100 my-1 text-left rounded block hidden" value="null"/>
+                                <input class="bg-gray-100 my-1 text-left rounded block" value="null"/>
                             </td>
                             <td>
-                                <input class="bg-gray-100 my-1 text-left rounded block hidden" value="null"/>
+                                <input class="bg-gray-100 my-1 text-left rounded block" value="null"/>
                             </td>
                             <td>
                                 <input class="bg-gray-100 my-1 text-left rounded block" value=""/>
@@ -294,8 +277,6 @@
         })
 
     }
-
-
     //儲存
     $('#btn_store_import').click(function () {
         let records_data = [];
