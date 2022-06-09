@@ -22,13 +22,18 @@
                             <div class="grid grid-cols-3 mb-2">
                                 <div class="mx-2 mb-1">
                                     <a class="mx-1">體重：</a>
-                                    <input class="border boder-gray-300 mx-1 text-left"
+                                    <input class="border boder-gray-300 mx-1 text-left bmi-cal"
                                            id="Weight" name="Weight" value=""/>
                                 </div>
                                 <div class="mx-2 mb-1">
                                     <a class="mx-1">身高：</a>
-                                    <input class="border boder-gray-300 mx-1 text-left"
+                                    <input class="border boder-gray-300 mx-1 text-left bmi-cal"
                                            id="Height" name="Height" value=""/>
+                                </div>
+                                <div class="mx-2 mb-1">
+                                    <a class="mx-1">BMI：</a>
+                                    <a class="border boder-gray-300 mx-1 text-left"
+                                           id="bmi" ></a>
                                 </div>
                                 <div class="mx-2 mb-1">
                                     <a class="mx-1">過往病史：</a>
@@ -317,7 +322,6 @@
 </div>
 <script>
     $(function () {
-
         //儲存醫師回覆的內容
         $('#btn-other-info-save').click(function () {
             store_other_information_data();
@@ -326,10 +330,29 @@
         //開啟Modal
         $("#btn_other_information").click(function () {
             get_other_information_data()
-            // set_doctor_comment_data();
 
         })
+
+        $(".bmi-cal").on('keyup', function () {
+            cal_bmi();
+        })
     })
+
+    //bmi計算功能
+    function cal_bmi() {
+        let bmi;
+        let height = $("#Height").val();
+        let weight = $("#Weight").val();
+
+        //檢查身高單位(>100判定為公分)
+        if (height > 100) {
+            height = height / 100
+        }
+
+        //計算bmi
+        bmi = Math.round(weight / (height * height) * 100) / 100;
+        $('#bmi').val(bmi);
+    }
 
     //取得其他資訊欄位
     function get_other_information_data() {
@@ -354,7 +377,7 @@
     }
 
     //將取得的欄位資訊填入modal
-    function set_other_information_data(data){
+    function set_other_information_data(data) {
         //檢測數值
         $("#Weight").val(data['Weight']);
         $("#Height").val(data['Height']);
@@ -386,6 +409,9 @@
         $('#drug_side_effect_text').val(data['drug_side_effect_text']);
         //Questoin 5
         $('#other_information_modal_textarea').val(data['other_information_modal_textarea']);
+
+        //計算bmi
+        cal_bmi()
     }
 
     //儲存其他資訊欄位
