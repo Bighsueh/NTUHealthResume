@@ -120,6 +120,14 @@
         $('#createPatientModal').modal('show');
     }
     function store_create_patient(){
+        if($('#create_patient_no').val()==''){
+            Swal.fire({
+                icon:'error',
+                title:'病患編號不能為空',
+                confirmButton:'#8CD4F5'
+            });
+            return;
+        }
         $.ajax({
             url:'{{route('store_create_patient')}}',
             method:'get',
@@ -159,6 +167,9 @@
         $('#create_weight').val('')
         $('#create_height').val('')
     }
+
+
+
 
 
 </script>

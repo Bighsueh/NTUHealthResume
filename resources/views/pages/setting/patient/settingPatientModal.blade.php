@@ -83,122 +83,6 @@
                             </div>
                         </div>
                     </div>
-{{--                    <div class="flex px-1 py-1">--}}
-{{--                            <p class="mx-4 my-2 justify-self-start font-bold text-xl">社篩資訊</p>--}}
-{{--                            <table class="">--}}
-{{--                                <tr>--}}
-{{--                                    <td>--}}
-{{--                                        <lable class="mx-2">--}}
-{{--                                            社篩診斷--}}
-{{--                                        </lable>--}}
-{{--                                    </td>--}}
-{{--                                    <td>--}}
-{{--                                        <input value="" class="border-teal-700 border-b py-1 px-20">--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                                <tr>--}}
-{{--                                    <td>--}}
-{{--                                        <lable class="mx-2">--}}
-{{--                                            手術史--}}
-{{--                                        </lable>--}}
-{{--                                    </td>--}}
-{{--                                    <td>--}}
-{{--                                        <input value="" class="border-teal-700 border-b py-1 px-20">--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                                <tr>--}}
-{{--                                    <td>--}}
-{{--                                        <lable class="mx-2">--}}
-{{--                                            血紅素--}}
-{{--                                        </lable>--}}
-{{--                                    </td>--}}
-{{--                                    <td>--}}
-{{--                                        <input value="" class="border-teal-700 border-b py-1 px-20">--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                                <tr>--}}
-{{--                                    <td>--}}
-{{--                                        <lable class="mx-2">--}}
-{{--                                            白蛋白--}}
-{{--                                        </lable>--}}
-{{--                                    </td>--}}
-{{--                                    <td>--}}
-{{--                                        <input value="" class="border-teal-700 border-b py-1 px-20">--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                                <tr>--}}
-{{--                                    <td>--}}
-{{--                                        <lable class="mx-2">--}}
-{{--                                            肝功能指數--}}
-{{--                                        </lable>--}}
-{{--                                    </td>--}}
-{{--                                    <td>--}}
-{{--                                        <input value="" class="border-teal-700 border-b py-1 px-20">--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                                <tr>--}}
-{{--                                    <td>--}}
-{{--                                        <lable class="mx-2">--}}
-{{--                                            腎功能指數--}}
-{{--                                        </lable>--}}
-{{--                                    </td>--}}
-{{--                                    <td>--}}
-{{--                                        <input value="" class="border-teal-700 border-b py-1 px-20">--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                                <tr>--}}
-{{--                                    <td>--}}
-{{--                                        <lable class="mx-2">--}}
-{{--                                            血糖--}}
-{{--                                        </lable>--}}
-{{--                                    </td>--}}
-{{--                                    <td>--}}
-{{--                                        <input value="" class="border-teal-700 border-b py-1 px-20">--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                                <tr>--}}
-{{--                                    <td>--}}
-{{--                                        <lable class="mx-2">--}}
-{{--                                            總膽固醇--}}
-{{--                                        </lable>--}}
-{{--                                    </td>--}}
-{{--                                    <td>--}}
-{{--                                        <input value="" class="border-teal-700 border-b py-1 px-20">--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                                <tr>--}}
-{{--                                    <td>--}}
-{{--                                        <lable class="mx-2">--}}
-{{--                                            低密度膽固醇--}}
-{{--                                        </lable>--}}
-{{--                                    </td>--}}
-{{--                                    <td>--}}
-{{--                                        <input value="" class="border-teal-700 border-b py-1 px-20">--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                                <tr>--}}
-{{--                                    <td>--}}
-{{--                                        <lable class="mx-2">--}}
-{{--                                            尿酸--}}
-{{--                                        </lable>--}}
-{{--                                    </td>--}}
-{{--                                    <td>--}}
-{{--                                        <input value="" class="border-teal-700 border-b py-1 px-20">--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                                <tr>--}}
-{{--                                    <td>--}}
-{{--                                        <lable class="mx-2">--}}
-{{--                                            跌倒史--}}
-{{--                                        </lable>--}}
-{{--                                    </td>--}}
-{{--                                    <td>--}}
-{{--                                        <input value="" class="border-teal-700 border-b py-1 px-20">--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                            </table>--}}
-{{--                    </div>--}}
-
                 </div>
 
             </div>
@@ -257,6 +141,14 @@
 
     //儲存功能
     function store_edit_patient() {
+        if($('#edit_patient_no').val()==''){
+            Swal.fire({
+                icon:'error',
+                title:'病患編號不能為空',
+                confirmButton:'#8CD4F5'
+            });
+            return;
+        }
        $.ajax({
            url:"{{route('store_edit_patient')}}",
            mothed:'get',
