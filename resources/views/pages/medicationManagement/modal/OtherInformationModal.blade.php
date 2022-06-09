@@ -32,8 +32,8 @@
                                 </div>
                                 <div class="mx-2 mb-1">
                                     <a class="mx-1">BMI：</a>
-                                    <a class="border boder-gray-300 mx-1 text-left"
-                                           id="bmi" ></a>
+                                    <input class="border boder-gray-300 mx-1 text-left"
+                                           id="bmi" />
                                 </div>
                                 <div class="mx-2 mb-1">
                                     <a class="mx-1">過往病史：</a>
