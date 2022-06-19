@@ -269,15 +269,17 @@
     @include('pages.medicationManagement.modal.OtherInformationModal')
     @include('pages.medicationManagement.modal.medicationRecordsExcelModal')
     @include('pages.medicationManagement.modal.previewExcelModal')
+    @include('pages.medicationManagement.modal.pharmacistAnalysisModal')
     <script>
         let patient_no = "{{$patient_info->patient_no}}";
         $('#btn-progress-status').click(function () {
-            Swal.fire({
-                icon: 'error',
-                title: '錯誤',
-                text: '此功能尚未開放',
-                confirmButtonColor: '#8CD4F5'
-            })
+            // Swal.fire({
+            //     icon: 'error',
+            //     title: '錯誤',
+            //     text: '此功能尚未開放',
+            //     confirmButtonColor: '#8CD4F5'
+            // })
+            open_pharmacist_Analysis_Modal();
         })
         $('#btn-medication-record-excel').click(function () {
             open_medicationRecordsExcelModal();
