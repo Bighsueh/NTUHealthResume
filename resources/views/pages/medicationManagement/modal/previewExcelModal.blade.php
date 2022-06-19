@@ -31,19 +31,19 @@
                             </th>
                             <th scope="col"
                                 class="px-3 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                就醫日
-                            </th>
-                            <th scope="col"
-                                class="px-3 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                開方日期
-                            </th>
-                            <th scope="col"
-                                class="px-3 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
                                 處方醫院
                             </th>
                             <th scope="col"
                                 class="px-3 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                調劑醫院
+                                診斷
+                            </th>
+                            <th scope="col"
+                                class="px-3 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                ATC3名稱
+                            </th>
+                            <th scope="col"
+                                class="px-3 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                                藥物學名
                             </th>
                             <th scope="col"
                                 class="px-3 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
@@ -51,23 +51,23 @@
                             </th>
                             <th scope="col"
                                 class="px-3 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                藥品成分
+                                天數
                             </th>
                             <th scope="col"
                                 class="px-3 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                單位劑量
+                                總量
                             </th>
                             <th scope="col"
                                 class="px-3 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                顆、包數或c.c.
+                                就醫日期
                             </th>
                             <th scope="col"
                                 class="px-3 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                每日劑量
+                                -
                             </th>
                             <th scope="col"
                                 class="px-3 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                頻率
+                                餘藥
                             </th>
                         </tr>
                         </thead>
@@ -284,17 +284,13 @@
         $.each(tbody_children, function (index, value){
             let list_tr = tbody_children.eq(index).children();
             // window.alert(list_tr.eq(0).children().val());
+            // trade_name 商品名
             let push_row = {
-                'date_of_examination':list_tr.eq(2).children().val(),
-                'redate':list_tr.eq(3).children().val(),
-                'pres_hosp':list_tr.eq(4).children().val(),
-                'disp_hosp':list_tr.eq(5).children().val(),
+                'pres_hosp':list_tr.eq(2).children().val(),
                 'trade_name':list_tr.eq(6).children().val(),
-                'generic_name':list_tr.eq(7).children().val(),
+                'freq':list_tr.eq(7).children().val(),
                 'dose':list_tr.eq(8).children().val(),
-                'dose_per_unit':list_tr.eq(9).children().val(),
-                'daily_dose':list_tr.eq(10).children().val(),
-                'freq':list_tr.eq(11).children().val()
+                'date_of_examination':list_tr.eq(9).children().val(),
             }
             records_data.push(push_row);
         });

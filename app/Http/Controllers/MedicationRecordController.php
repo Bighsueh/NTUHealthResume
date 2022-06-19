@@ -654,19 +654,14 @@ class MedicationRecordController extends Controller
                         ->insert([
                             'date_of_examination' => $row['date_of_examination'],
                             'patient_no' => $patient->patient_no,
-                            'redate' => $row['redate'],
                             'pres_hosp' => $row['pres_hosp'],
-                            'disp_hosp' => $row['disp_hosp'],
                             'created_at' => $now_time,
                             'updated_at' => $now_time
                         ]);
                     $last_record_id = DB::table('medication_records')
                         ->where('created_at', $now_time)
-                        ->where('patient_no', $patient->patient_no)
                         ->where('date_of_examination', $row['date_of_examination'])
-                        ->where('redate', $row['redate'])
                         ->where('pres_hosp', $row['pres_hosp'])
-                        ->where('disp_hosp', $row['disp_hosp'])
                         ->first()->record_id;
                 }
 //                Log::debug($last_record_id);
@@ -674,10 +669,7 @@ class MedicationRecordController extends Controller
                     ->insert([
                         'record_id' => $last_record_id,
                         'trade_name' => $row['trade_name'],
-                        'generic_name' => $row['generic_name'],
                         'dose' => $row['dose'],
-                        'dose_per_unit' => $row['dose_per_unit'],
-                        'daily_dose' => $row['daily_dose'],
                         'freq' => $row['freq'],
                         'created_at' => $now_time,
                         'updated_at' => $now_time
