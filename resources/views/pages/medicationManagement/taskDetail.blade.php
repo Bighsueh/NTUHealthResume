@@ -104,19 +104,19 @@
                             </div>
                             <div class="mx-2 grid grid-cols-1 w-full">
                                 <p class="text-xl text-gray-600 px-2">新增藥歷</p>
-                                <div class="grid grid-cols-2 w-full">
-                                    <div
-                                        id="btn-create-medication-record"
-                                        data-bs-toggle="modal" data-bs-target="#createMedicationRecordModel"
-                                        class="mx-1 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 rounded">
-                                        手動操作
-                                    </div>
+                                <div class="grid grid-cols-1 w-full">
+{{--                                    <div--}}
+{{--                                        id="btn-create-medication-record"--}}
+{{--                                        data-bs-toggle="modal" data-bs-target="#createMedicationRecordModel"--}}
+{{--                                        class="mx-1 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 rounded">--}}
+{{--                                        手動操作--}}
+{{--                                    </div>--}}
                                     <div
                                         id="btn-medication-record-excel"
                                         {{--                                    data-bs-toggle="modal" data-bs-target="#"--}}
                                         {{--                                        onclick="location.href='{{route('export_medication_records_excel')}}';"--}}
                                         class="mx-1 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 rounded btn-medication-record-excel">
-                                        Excel操作
+                                        操作
                                     </div>
                                 </div>
 
@@ -179,7 +179,7 @@
                                 </svg>
                             </div>
                             <div class="mx-2 px-5 grid grid-cols-1 ">
-                                <p class="col-span-1 text-xl text-gray-600">案件狀態</p>
+                                <p class="col-span-1 text-xl text-gray-600">案件追蹤</p>
                                 <a
                                     id="btn-progress-status"
                                     class="col-span-1 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 x-4 rounded">
