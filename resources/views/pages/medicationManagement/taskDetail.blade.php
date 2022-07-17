@@ -91,7 +91,7 @@
             <!--數據統計-->
             <div class="grid">
                 <p class="mx-4 my-2 justify-self-start font-bold text-xl">功能操作</p>
-                <div class="grid lg:grid-cols-2 2xl:grid-cols-4">
+                <div class="grid lg:grid-cols-2 2xl:grid-cols-5">
                     <!--數據欄位-->
                     <div class="rounded m-2 flex-1 bg-gray-50 p-4">
                         {{--                        <div class="flex items-center md:mx-4 md:px-5 my-2">--}}
@@ -179,9 +179,31 @@
                                 </svg>
                             </div>
                             <div class="mx-2 px-5 grid grid-cols-1 ">
-                                <p class="col-span-1 text-xl text-gray-600">案件追蹤</p>
+                                <p class="col-span-1 text-xl text-gray-600">藥師評論</p>
                                 <a
                                     id="btn-progress-status"
+                                    class="col-span-1 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 x-4 rounded">
+                                    操作
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--數據欄位-->
+                    <div class="rounded m-2 flex-1 bg-gray-50 p-4">
+                        {{--                        <div class="flex items-center md:mx-4 md:px-5 my-2">--}}
+                        <div class="flex items-center xl:mx-4 lg:px-5 my-2 content-around">
+                            <div class="flex grid">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 justify-self-end text-gray-600"
+                                     fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                          d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            <div class="mx-2 px-5 grid grid-cols-1 ">
+                                <p class="col-span-1 text-xl text-gray-600">案件追蹤</p>
+                                <a
+                                    data-bs-toggle="modal" data-bs-target="#caseTrackingModal"
+{{--                                    id="btn-progress-status"--}}
                                     class="col-span-1 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 x-4 rounded">
                                     查看
                                 </a>
@@ -270,6 +292,7 @@
     @include('pages.medicationManagement.modal.medicationRecordsExcelModal')
     @include('pages.medicationManagement.modal.previewExcelModal')
     @include('pages.medicationManagement.modal.pharmacistAnalysisModal')
+    @include('pages.medicationManagement.modal.caseTrackingModal')
     <script>
         let patient_no = "{{$patient_info->patient_no}}";
         $('#btn-progress-status').click(function () {
