@@ -44,6 +44,15 @@
                     下載空白範例檔
                 </div>
 
+                <div class="mx-1  py-2 "></div>
+                <div
+                    id="btn-create-medication-record"
+                    data-bs-toggle="modal" data-bs-target="#createMedicationRecordModel"
+                    class="mx-1  bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 rounded ">
+                    手動操作
+                </div>
+
+
             </div>
 
 
