@@ -139,7 +139,7 @@ class MedicationRecordController extends Controller
                 'pharmacist_feedback' => $pharmacist_feedback,
                 'doctor_feedback' => $doctor_feedback,
             ];
-
+//            dd($result);
             return view('pages.medicationManagement.taskDetail', $result);
         } catch (\Exception $exception) {
             return $exception;
@@ -439,13 +439,16 @@ class MedicationRecordController extends Controller
                 $patient_no = $patient_info->patient_no;
                 Log::debug($search_from);
                 Log::debug($search_data);
+                //以就醫日期排序
                 $record = DB::table('medication_records')
                     ->where('medication_records.patient_no', $patient_no)
                     ->LeftJoin('medication_record_detail', 'medication_records.record_id', '=', 'medication_record_detail.record_id')
                     ->where(function ($record) use ($search_from, $search_data) {
                         $record
                             ->orWhere($search_from, 'like', '%' .  $search_data . '%');
-                    })->get();
+                    })
+                    ->orderBy('redate')
+                    ->get();
 
 
 
@@ -453,6 +456,7 @@ class MedicationRecordController extends Controller
 
                 $record = DB::table('medication_records')
                     ->where('patient_no', $patient_info->patient_no)
+                    ->orderBy('redate')
                     ->get();
             }
 
@@ -479,9 +483,10 @@ class MedicationRecordController extends Controller
                         'created_at' => $row->created_at,
                         'updated_at' => $row->updated_at,
                     ]);
-
+                    //以藥品名排序
                     $detail = DB::table('medication_record_detail')
                         ->where('record_id', $record_id)
+                        ->orderBy('trade_name')
                         ->get();
 
                     foreach ($detail as $detial_row) {
@@ -498,7 +503,29 @@ class MedicationRecordController extends Controller
                     }
                 }
             }
+            // 算需要合併的欄位數
+            $rowspan_count = array();
+            $count_row = 0;
+            $pre_row = 0;
+            $current_row = 0;
+            foreach ($medication_records_detail as $md)
+            {
+                $current_row = $md["record_id"];
+                if ($pre_row == 0) {
+                    $pre_row = $current_row;
+                    $count_row += 1;
+                } elseif ($pre_row == $current_row) {
+                    $count_row += 1;
+                } elseif ($pre_row != $current_row) {
+                    $count_row += 1;
+                    $rowspan_count[] = $count_row;
+                    $pre_row = $current_row;
+                    $count_row = 1;
+                }
+            }
+            $rowspan_count[] = $count_row+1;
 
+//            dd($rowspan_count);
             $result = [
                 'task_id' => $task_id,
                 'patient_info' => $patient_info,
@@ -506,9 +533,9 @@ class MedicationRecordController extends Controller
                 'medication_records_detail' => $medication_records_detail,
                 'pharmacist_feedback' => $pharmacist_feedback,
                 'doctor_feedback' => $doctor_feedback,
+                'rowspan_count' => $rowspan_count,
             ];
-
-//            dd($result);
+//            dd($medication_records_detail);
             return $result;
         } catch (Exception $exception) {
             return $exception;
@@ -654,6 +681,7 @@ class MedicationRecordController extends Controller
                         ->insert([
                             'date_of_examination' => $row['date_of_examination'],
                             'patient_no' => $patient->patient_no,
+                            'redate' => $row['redate'],
                             'pres_hosp' => $row['pres_hosp'],
                             'created_at' => $now_time,
                             'updated_at' => $now_time

@@ -218,7 +218,76 @@
                 <div class="flex justify-between ">
                     <p class="mx-4 my-2 justify-self-start font-bold text-xl">藥歷列表</p>
                 </div>
-                <div class="overflow-y-scroll h-screen tbody">
+                <table class="table">
+                    <thead class="text-center  border-gray-700 border-b">
+                    <tr>
+                        <th scope="col"
+                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                            #
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                            開方日期
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                            藥品名稱
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                            藥品成分
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                            單位劑量
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                            顆、包數或CC數
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                            每日劑量
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+                            頻率
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-center tbody">
+
+                    </tbody>
+                </table>
+{{--                <thead class="bg-gray-50">--}}
+{{--                <tr>--}}
+{{--                    <th scope="col"--}}
+{{--                        class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">--}}
+{{--                        藥品名稱--}}
+{{--                    </th>--}}
+{{--                    <th scope="col"--}}
+{{--                        class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">--}}
+{{--                        藥品成分--}}
+{{--                    </th>--}}
+{{--                    <th scope="col"--}}
+{{--                        class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">--}}
+{{--                        單位劑量--}}
+{{--                    </th>--}}
+{{--                    <th scope="col"--}}
+{{--                        class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">--}}
+{{--                        顆、包數或CC數--}}
+{{--                    </th>--}}
+{{--                    <th scope="col"--}}
+{{--                        class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">--}}
+{{--                        每日劑量--}}
+{{--                    </th>--}}
+{{--                    <th scope="col"--}}
+{{--                        class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">--}}
+{{--                        頻率--}}
+{{--                    </th>--}}
+{{--                </tr>--}}
+{{--                </thead>--}}
+{{--                <div class="overflow-y-scroll h-screen tbody">--}}
 {{--                    @foreach($medication_records as $row)--}}
 {{--                        <div class="flex overflow-x-scroll big_row">--}}
 {{--                            <!--單筆藥歷共通項目-->--}}
@@ -281,7 +350,7 @@
 {{--                            </div>--}}
 {{--                        </div>--}}
 {{--                    @endforeach--}}
-                </div>
+{{--                </div>--}}
             </div>
         </div>
     </div>
@@ -337,6 +406,7 @@
                     console.log(res['medication_records_detail']);
                     let detail = res['medication_records'];
                     let record_id = -1;
+                    let c = 0;
                     if (res['medication_records'].length > 0) {
                         res['medication_records'].forEach(function (row) {
                                 if (row['record_id'] == record_id) {
@@ -344,72 +414,101 @@
                                 } else {
                                     record_id = row['record_id'];
                                 }
-                                let row_record =
-                                    `                 <div class="flex overflow-x-scroll big_row">
-                            <!--單筆藥歷共通項目-->
-                            <div class="content-between grid rounded m-2 flex-none bg-gray-50 p-4 lg:w-1/6 md:w-2/6">
-                                <div class="mb-2">
-                                    <p>開方日期：</p>
-                                    <p>${row['redate']}</p>
-                                </div>
-                                <div hidden class="record_id">${row['record_id']}</div>
-                                <a class="btn-open-medication-record-detail-modal col-span-1 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 x-4 rounded"
-                                   data-bs-toggle="modal" data-bs-target="#medicationRecordDetailModel">
-                                    詳細內容
-                                </a>
-                            </div>
-
-                            <!--單筆藥歷藥品列向-->
-                            <div class="rounded m-2 flex-auto bg-gray-50 p-4">
-                                <table class="divide-y divide-gray-200 min-w-full">
-                                    <thead class="bg-gray-50">
-                                    <tr>
-                                        <th scope="col"
-                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                            藥品名稱
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                            藥品成分
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                            單位劑量
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                            顆、包數或CC數
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                            每日劑量
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
-                                            頻率
-                                        </th>
+                                // console.log(row['record_detail'].length)
+                                let row_record =`
+                                    <tr class="py-2">
+                                        <div hidden class="record_id">${row['record_id']}</div>
+                                        <td rowspan="${res['rowspan_count'][c]}">
+                                            <a class="btn-open-medication-record-detail-modal col-span-1 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 px-2 x-4 rounded"
+                                               data-bs-toggle="modal" data-bs-target="#medicationRecordDetailModel">
+                                                詳細內容
+                                            </a>
+                                        </td>
+                                        <td rowspan="${res['rowspan_count'][c]}">${row['redate']}</td>
                                     </tr>
-                                    </thead>
-                                    <tbody class="divide-y divide-gray-200">`;
+                                `;
+                                c+=1
                                 if(res['medication_records_detail'].length > 0){
-                                    res['medication_records_detail'].forEach(function (detail_row) {
-                                        if (record_id == detail_row['record_id']) {
-                                            row_record += `<tr>
-                                            <td class="text-left px-6">${detail_row['trade_name']}</td>
-                                            <td class="text-left px-6">${detail_row['generic_name']}</td>
-                                            <td class="text-left px-6">${detail_row['dose_per_unit']}</td>
-                                            <td class="text-left px-6">${detail_row['dose']}</td>
-                                            <td class="text-left px-6">${detail_row['daily_dose']}</td>
-                                            <td class="text-left px-6">${detail_row['freq']}</td>
-                                        </tr>`;
-                                        }
-                                    })
+                                       res['medication_records_detail'].forEach(function (detail_row) {
+                                           if (record_id == detail_row['record_id']) {
+                                               row_record += `<tr class="py-2">
+                                               <td class="text-left px-6">${detail_row['trade_name']}</td>
+                                               <td class="text-left px-6">${detail_row['generic_name']}</td>
+                                               <td class="text-left px-6">${detail_row['dose_per_unit']}</td>
+                                               <td class="text-left px-6">${detail_row['dose']}</td>
+                                               <td class="text-left px-6">${detail_row['daily_dose']}</td>
+                                               <td class="text-left px-6">${detail_row['freq']}</td>
+                                           </tr>`;
+                                           }
+                                       })
                                 }
 
-                                row_record += `</tbody>
-                                </table>
-                            </div>
-                        </div>`;
+         //                            `                 <div class="flex overflow-x-scroll big_row">
+         //                    單筆藥歷共通項目
+         //                    <div class="content-between grid rounded m-2 flex-none bg-gray-50 p-4 lg:w-1/6 md:w-2/6">
+         //                        <div class="mb-2">
+         //                            <p>開方日期：</p>
+         //                            <p>${row['redate']}</p>
+         //                        </div>
+         //                        <div hidden class="record_id">${row['record_id']}</div>
+         //                        <a class="btn-open-medication-record-detail-modal col-span-1 bg-transparent border border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white text-center py-2 x-4 rounded"
+         //                           data-bs-toggle="modal" data-bs-target="#medicationRecordDetailModel">
+         //                            詳細內容
+         //                        </a>
+         //                    </div>
+         //
+         //                    <!--單筆藥歷藥品列向-->
+         //                    <div class="rounded m-2 flex-auto bg-gray-50 p-4">
+         //                        <table class="divide-y divide-gray-200 min-w-full">
+         // 改面修改先註解起來
+         //                            <thead class="bg-gray-50">
+         //                            <tr>
+         //                                <th scope="col"
+         //                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+         //                                    藥品名稱
+         //                                </th>
+         //                                <th scope="col"
+         //                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+         //                                    藥品成分
+         //                                </th>
+         //                                <th scope="col"
+         //                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+         //                                    單位劑量
+         //                                </th>
+         //                                <th scope="col"
+         //                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+         //                                    顆、包數或CC數
+         //                                </th>
+         //                                <th scope="col"
+         //                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+         //                                    每日劑量
+         //                                </th>
+         //                                <th scope="col"
+         //                                    class="px-6 py-1 text-left font-medium text-gray-500 text-nowrap whitespace-nowrap tracking-wider">
+         //                                    頻率
+         //                                </th>
+         //                            </tr>
+         //                            </thead>
+         //                            <tbody class="divide-y divide-gray-200">`;
+         //                        if(res['medication_records_detail'].length > 0){
+         //                            res['medication_records_detail'].forEach(function (detail_row) {
+         //                                if (record_id == detail_row['record_id']) {
+         //                                    row_record += `<tr>
+         //                                    <td class="text-left px-6">${detail_row['trade_name']}</td>
+         //                                    <td class="text-left px-6">${detail_row['generic_name']}</td>
+         //                                    <td class="text-left px-6">${detail_row['dose_per_unit']}</td>
+         //                                    <td class="text-left px-6">${detail_row['dose']}</td>
+         //                                    <td class="text-left px-6">${detail_row['daily_dose']}</td>
+         //                                    <td class="text-left px-6">${detail_row['freq']}</td>
+         //                                </tr>`;
+         //                                }
+         //                            })
+         //                        }
+         //
+         //                        row_record += `</tbody>
+         //                        </table>
+         //                    </div>
+         //                </div>`;
 
 
                                 $('.tbody').append(row_record);

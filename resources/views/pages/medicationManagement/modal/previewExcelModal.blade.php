@@ -286,6 +286,8 @@
             // window.alert(list_tr.eq(0).children().val());
             // trade_name 商品名
             let push_row = {
+                //開方日期先放就醫日
+                'redate':list_tr.eq(9).children().val(),
                 'pres_hosp':list_tr.eq(2).children().val(),
                 'trade_name':list_tr.eq(6).children().val(),
                 'freq':list_tr.eq(7).children().val(),
